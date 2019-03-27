@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Profile>Reach</Profile>
+  <Platform>DesktopGL</Platform>
+  <Config />
+  <SourceFiles>
+    <File>/home/martin/Documentos/Projectos/C#/VirtusPecto/Content/Creatures/Creature0.png</File>
+    <File>/home/martin/Documentos/Projectos/C#/VirtusPecto/Content/Creatures/Creature1.png</File>
+    <File>/home/martin/Documentos/Projectos/C#/VirtusPecto/Content/Creatures/Creature2.png</File>
+    <File>/home/martin/Documentos/Projectos/C#/VirtusPecto/Content/Logo.png</File>
+    <File>/home/martin/Documentos/Projectos/C#/VirtusPecto/Content/Sprite0_0.png</File>
+    <File>/home/martin/Documentos/Projectos/C#/VirtusPecto/Content/Sprite0_1.png</File>
+    <File>/home/martin/Documentos/Projectos/C#/VirtusPecto/Content/Sprite0_2.png</File>
+    <File>/home/martin/Documentos/Projectos/C#/VirtusPecto/Content/Sprite0_3.png</File>
+    <File>/home/martin/Documentos/Projectos/C#/VirtusPecto/Content/Sprite1.png</File>
+    <File>/home/martin/Documentos/Projectos/C#/VirtusPecto/Content/Sprite2.png</File>
+    <File>/home/martin/Documentos/Projectos/C#/VirtusPecto/Content/Sprite3_0.png</File>
+    <File>/home/martin/Documentos/Projectos/C#/VirtusPecto/Content/Sprite3_1.png</File>
+    <File>/home/martin/Documentos/Projectos/C#/VirtusPecto/Content/Sprite4.png</File>
+    <File>/home/martin/Documentos/Projectos/C#/VirtusPecto/Content/SpriteFont.spritefont</File>
+    <File>/home/martin/Documentos/Projectos/C#/VirtusPecto/Content/SpriteFontTemPlate.spritefont</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>

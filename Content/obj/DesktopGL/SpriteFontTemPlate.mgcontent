@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SourceFile>/home/martin/Documentos/Projectos/C#/VirtusPecto/VirtusPecto/Content/SpriteFontTemPlate.spritefont</SourceFile>
+  <SourceTime>2018-07-23T22:30:15.256505-03:00</SourceTime>
+  <DestFile>/home/martin/Documentos/Projectos/C#/VirtusPecto/VirtusPecto/Content/bin/DesktopGL/SpriteFontTemPlate.xnb</DestFile>
+  <DestTime>2018-10-29T21:56:40.2501-03:00</DestTime>
+  <Importer>FontDescriptionImporter</Importer>
+  <ImporterTime>2018-07-23T17:04:29.892081-03:00</ImporterTime>
+  <Processor>FontDescriptionProcessor</Processor>
+  <ProcessorTime>2018-07-23T17:04:29.892081-03:00</ProcessorTime>
+  <Parameters>
+    <Key>PremultiplyAlpha</Key>
+    <Value>True</Value>
+  </Parameters>
+  <Parameters>
+    <Key>TextureFormat</Key>
+    <Value>Compressed</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>
