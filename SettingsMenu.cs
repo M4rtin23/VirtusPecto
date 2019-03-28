@@ -16,7 +16,7 @@ namespace VirtusPecto.Desktop{
         public float AspectRatio = 16/9f;
         public SettingsMenu(int ln){
             lastRoom = ln;
-            ShowDescription = new CardDescription(0, 0);
+            ShowDescription = new CardDescription();
             SetJoystick = new Joystick(0, 0);
             SetAspectRatio = new AspectBox(0, 0);
             SetFullscreen = new Fullscreen(0, 0);
@@ -24,15 +24,15 @@ namespace VirtusPecto.Desktop{
         }
         public void Update(){
             SetAspectRatio.BoxPosition = new Vector2(graphics.PreferredBackBufferWidth / 4 - 64,  graphics.PreferredBackBufferHeight / 2);
-            ShowDescription.Position = new Vector2(graphics.PreferredBackBufferWidth * 2/4 - 64,  graphics.PreferredBackBufferHeight / 3 * 2);
-            SetFullscreen.Position = new Vector2(graphics.PreferredBackBufferWidth * 3/4 - 64,  graphics.PreferredBackBufferHeight / 2);
-            SetJoystick.Position = new Vector2(graphics.PreferredBackBufferWidth * 3/4 - 64,  graphics.PreferredBackBufferHeight / 3 * 2);
+            ShowDescription.SetPosition(graphics.PreferredBackBufferWidth * 2/4 - 64,  graphics.PreferredBackBufferHeight / 3 * 2);
+            SetFullscreen.SetPosition(graphics.PreferredBackBufferWidth * 3/4 - 64,  graphics.PreferredBackBufferHeight / 2);
+            SetJoystick.SetPosition(graphics.PreferredBackBufferWidth * 3/4 - 64,  graphics.PreferredBackBufferHeight / 3 * 2);
             ResolutionBox.BoxPosition = new Vector2(graphics.PreferredBackBufferWidth * 2/4 - 64, graphics.PreferredBackBufferHeight / 2);
             ShowDescription.Collision();
             SetAspectRatio.Collision();
             ResolutionBox.Collision();
 			SetFullscreen.Collision();
-            SetJoystick.Update();
+            SetJoystick.Collision();
             if(Back.Intersects(mouse.GetCollision) && /*Mouse.GetState().LeftButton == ButtonState.Pressed*/IsClicking){
                 LevelNumber = lastRoom;
                 Settings = null;
