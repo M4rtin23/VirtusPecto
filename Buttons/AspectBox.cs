@@ -88,3 +88,11 @@ namespace VirtusPecto.Desktop{
 		}
     }
 }
+/*
+			Ratios[1] = 16/10f;
+			Ratios[2] = 4/3f;
+			Ratios[3] = 5/4f;
+
+
+
+ */

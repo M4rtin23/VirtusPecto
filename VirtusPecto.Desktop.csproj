@@ -62,6 +62,7 @@
     <Compile Include="Lobby.cs" />
     <Compile Include="Buttons\AspectBox.cs" />
     <Compile Include="Buttons\TickBox.cs" />
+    <Compile Include="Buttons\OptionBox.cs" />
     <Compile Include="Buttons\PlayButton.cs" />
     <Compile Include="Buttons\SettingsButton.cs" />
     <Compile Include="Buttons\WindowBox.cs" />

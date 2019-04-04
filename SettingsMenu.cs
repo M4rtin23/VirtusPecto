@@ -20,14 +20,14 @@ namespace VirtusPecto.Desktop{
             SetJoystick = new Joystick(0, 0);
             SetAspectRatio = new AspectBox(0, 0);
             SetFullscreen = new Fullscreen(0, 0);
-            ResolutionBox = new WindowBox(0, 0);
+            ResolutionBox = new WindowBox();
         }
         public void Update(){
             SetAspectRatio.BoxPosition = new Vector2(graphics.PreferredBackBufferWidth / 4 - 64,  graphics.PreferredBackBufferHeight / 2);
             ShowDescription.SetPosition(graphics.PreferredBackBufferWidth * 2/4 - 64,  graphics.PreferredBackBufferHeight / 3 * 2);
             SetFullscreen.SetPosition(graphics.PreferredBackBufferWidth * 3/4 - 64,  graphics.PreferredBackBufferHeight / 2);
             SetJoystick.SetPosition(graphics.PreferredBackBufferWidth * 3/4 - 64,  graphics.PreferredBackBufferHeight / 3 * 2);
-            ResolutionBox.BoxPosition = new Vector2(graphics.PreferredBackBufferWidth * 2/4 - 64, graphics.PreferredBackBufferHeight / 2);
+            ResolutionBox.SetPosition(graphics.PreferredBackBufferWidth * 2/4 - 64, graphics.PreferredBackBufferHeight / 2);
             ShowDescription.Collision();
             SetAspectRatio.Collision();
             ResolutionBox.Collision();
