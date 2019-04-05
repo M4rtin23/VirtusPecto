@@ -46,16 +46,16 @@ namespace VirtusPecto.Desktop{
                 //     Button2.SetPosition(graphics.PreferredBackBufferWidth/3, (float)graphics.PreferredBackBufferHeight/2.1f);
                 //     ExitRectangle = new Rectangle((graphics.PreferredBackBufferWidth / 3), (int)((float)graphics.PreferredBackBufferHeight / 1.85f), 128, 32);
                 //     break;
-                // case 3:
-                //     Button1.SetPosition(graphics.PreferredBackBufferWidth/2-52, (float)graphics.PreferredBackBufferHeight/2.4f);
-                //     Button2.SetPosition(graphics.PreferredBackBufferWidth/2-64, (float)graphics.PreferredBackBufferHeight/2.1f);
-                //     ExitRectangle = new Rectangle((graphics.PreferredBackBufferWidth / 2)-48, (int)((float)graphics.PreferredBackBufferHeight / 1.85f), 128, 32);
-                //     break;
-                case 1:
-                    Button1.SetPosition(graphics.PreferredBackBufferWidth/2 - 128, (float)graphics.PreferredBackBufferHeight/2.4f);
-                    Button2.SetPosition(graphics.PreferredBackBufferWidth/2 - 128, (float)graphics.PreferredBackBufferHeight/2.1f);
-                    ExitRectangle = new Rectangle((graphics.PreferredBackBufferWidth / 2 - 128), (int)((float)graphics.PreferredBackBufferHeight / 1.85f), 128, 32);
-                    break;
+                 case 1:
+                     Button1.SetPosition(graphics.PreferredBackBufferWidth/2-52, (float)graphics.PreferredBackBufferHeight/2.4f);
+                     Button2.SetPosition(graphics.PreferredBackBufferWidth/2-64, (float)graphics.PreferredBackBufferHeight/2.1f);
+                     ExitRectangle = new Rectangle((graphics.PreferredBackBufferWidth / 2)-48, (int)((float)graphics.PreferredBackBufferHeight / 1.85f), 128, 32);
+                     break;
+            //    case 1:
+            //        Button1.SetPosition(graphics.PreferredBackBufferWidth/2 - 128, (float)graphics.PreferredBackBufferHeight/2.4f);
+            //        Button2.SetPosition(graphics.PreferredBackBufferWidth/2 - 128, (float)graphics.PreferredBackBufferHeight/2.1f);
+            //        ExitRectangle = new Rectangle((graphics.PreferredBackBufferWidth / 2 - 128), (int)((float)graphics.PreferredBackBufferHeight / 1.85f), 128, 32);
+            //        break;
             }
 			LogoPosition = new Vector2(graphics.PreferredBackBufferWidth / 2f - 220, 128);
 		}

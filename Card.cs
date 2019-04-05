@@ -56,8 +56,12 @@ namespace VirtusPecto.Desktop{
             float rot = ((float)addedY)/256f * (number-1);
             spriteBatch.Draw(SpriteIndex, Position, null, color, rot, SpriteIndex.Bounds.Size.ToVector2()/2, 1,SpriteEffects.None, 1);
 			spriteBatch.Draw(Content.Sprite, new Vector2(Position.X, Position.Y), new Rectangle(2 * 128, 0, 128, 128), Color.White, rot, new Vector2(64,160), 1, SpriteEffects.None, 0);
-            if (GetCollision.Intersects(mouse.GetCollision) && IsDescriptionOn && !mouse.IsCreating){
-				spriteBatch.DrawString(Font, Content.Description, mouse.Position-new Vector2(0, 96), Color.White);
+            if (GetCollision.Intersects(mouse.GetCollision) && !mouse.IsCreating){
+                if(IsDescriptionOn){
+				    spriteBatch.DrawString(Font, Content.Description, mouse.Position-new Vector2(0, 96), Color.White);
+                }else{
+                    spriteBatch.DrawString(Font, Content.Name, mouse.Position-new Vector2(-8, 0), Color.White);
+                }
 			}
         }
     }

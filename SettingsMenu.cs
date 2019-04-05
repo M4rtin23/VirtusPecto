@@ -13,17 +13,17 @@ namespace VirtusPecto.Desktop{
         public CardDescription ShowDescription;
         private Rectangle Back = new Rectangle(0, 0, Sprite3[1].Width, Sprite3[1].Height);
         private int lastRoom;
-        public float AspectRatio = 16/9f;
+        public Vector2 AspectRatio = new Vector2(16f, 9f);
         public SettingsMenu(int ln){
             lastRoom = ln;
             ShowDescription = new CardDescription();
             SetJoystick = new Joystick(0, 0);
-            SetAspectRatio = new AspectBox(0, 0);
+            SetAspectRatio = new AspectBox();
             SetFullscreen = new Fullscreen(0, 0);
             ResolutionBox = new WindowBox();
         }
         public void Update(){
-            SetAspectRatio.BoxPosition = new Vector2(graphics.PreferredBackBufferWidth / 4 - 64,  graphics.PreferredBackBufferHeight / 2);
+            SetAspectRatio.SetPosition(graphics.PreferredBackBufferWidth / 4 - 64,  graphics.PreferredBackBufferHeight / 2);
             ShowDescription.SetPosition(graphics.PreferredBackBufferWidth * 2/4 - 64,  graphics.PreferredBackBufferHeight / 3 * 2);
             SetFullscreen.SetPosition(graphics.PreferredBackBufferWidth * 3/4 - 64,  graphics.PreferredBackBufferHeight / 2);
             SetJoystick.SetPosition(graphics.PreferredBackBufferWidth * 3/4 - 64,  graphics.PreferredBackBufferHeight / 3 * 2);

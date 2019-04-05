@@ -7,8 +7,6 @@ using static VirtusPecto.Desktop.Game1;
 namespace VirtusPecto.Desktop{
     public class WindowBox : OptionBox{
         public WindowBox(){
-            OptionsNumber = 8;
-            number = 6;
             name = "Window Size";
             Options[0].Y = 1200;
             Options[1].Y = 1080;
@@ -29,12 +27,17 @@ namespace VirtusPecto.Desktop{
         }
         protected override void update(){
             for (int i = 0; i < OptionsNumber; i++){
-            	Options[i].X = (float)Math.Ceiling(Settings.AspectRatio * Options[i].Y);
+            	Options[i].X = (float)Math.Ceiling(Settings.AspectRatio.X / Settings.AspectRatio.Y * Options[i].Y);
 			}
         }
         protected override string drawOptions(int i){
             string a = " "+Convert.ToString(Options[i].X) + " X " + Convert.ToString(Options[i].Y);
             return a;
         }
+        protected override string currentOption(){
+            string a = " "+Convert.ToString(graphics.PreferredBackBufferWidth) + " X " + Convert.ToString(graphics.PreferredBackBufferHeight);
+            return a;
+        }
+
     }
 }

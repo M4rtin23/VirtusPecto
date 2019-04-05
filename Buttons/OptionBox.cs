@@ -14,7 +14,7 @@ namespace VirtusPecto.Desktop{
 		public Color[] Colors;
 		public bool isActivated;
 		public int OptionsNumber;
-        protected int number;
+        //protected int number;
 
         public OptionBox(){
             OptionsNumber = n();
@@ -40,6 +40,9 @@ namespace VirtusPecto.Desktop{
         protected virtual string drawOptions(int i){
             return null;
         }
+        protected virtual string currentOption(){
+            return null;
+        }
 		public void Collision() {
             hitbox = new Rectangle((int)Position.X, (int)Position.Y, 128, 32);
         //Don't be lazy and change it.
@@ -58,7 +61,6 @@ namespace VirtusPecto.Desktop{
 					if (mouse.GetCollision.Intersects(r)){
 						if (/*mouse.GetMouseState.LeftButton == ButtonState.Pressed*/IsClicking){
                             action(i);
-                            number = i;
                             isActivated = false;
 						}
 						Colors[i] = Color.LightBlue;
@@ -70,7 +72,7 @@ namespace VirtusPecto.Desktop{
 		}
 		public void Draw() {
 			spriteBatch.Draw(Sprite2, Position, color);
-            spriteBatch.DrawString(Font, drawOptions(number), Position, Color.White);
+            spriteBatch.DrawString(Font, currentOption(), Position, Color.White);
 			spriteBatch.DrawString(Font, name, new Vector2(Position.X, Position.Y - 32), Color.White);
 
 			if (isActivated) {
