@@ -26,7 +26,7 @@ namespace VirtusPecto.Desktop{
             Cards = new Card[3];
 		}
 		public void Creation() {
-			ToSpriteIndex(Sprite0, Player1.SpriteIndex,4);
+			Player1.SpriteIndex = Sprite0;
 			Cards[0] = new Card(0, Color.Red);
 			Cards[1] = new Card(1, Color.Green);
 			Cards[2] = new Card(2, Color.DarkBlue);
@@ -55,8 +55,6 @@ namespace VirtusPecto.Desktop{
             }
 		}
 		public void Draw() {
-            spriteBatch.DrawString(Font, Convert.ToString(Enemy1.Length), new Vector2(0, 256), Color.White);
-            //spriteBatch.DrawString(Font, Convert.ToString(Enemy1[2].GetHashCode()), new Vector2(0, 224), Color.White);
 			for (int i = 0; i < Fireballs.Length;i++){
 				if (Fireballs[i] != null){
 					Fireballs[i].Draw();

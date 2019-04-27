@@ -10,7 +10,7 @@ namespace VirtusPecto.Desktop{
 	public class Card{
 		public Texture2D SpriteIndex;
 		public Rectangle GetCollision;
-		public Vector2 Origin, Position;
+		public Vector2 Position;
 		public CardContent Content;
 		private int number;
 		private int addedY;
@@ -22,25 +22,28 @@ namespace VirtusPecto.Desktop{
 			Content = Levels.Player1.Slot[n];
 			addedY = 128;
 			SpriteIndex = Game1.Sprite1;
-			Origin = new Vector2(SpriteIndex.Width / 2, SpriteIndex.Height / 2);
 			Position = new Vector2(0,0);
 			GetCollision = new Rectangle((int)Position.X, (int)Position.Y, SpriteIndex.Width, SpriteIndex.Height);
 		}
 		public void Update() {
-			GetCollision = new Rectangle((int)(Position.X-Origin.X), (int)(Position.Y-Origin.Y), SpriteIndex.Width, SpriteIndex.Height);
+			GetCollision = new Rectangle((int)(Position.X-SpriteIndex.Width/2), (int)(Position.Y-SpriteIndex.Height/2), SpriteIndex.Width, SpriteIndex.Height);
 			Position.Y = graphics.PreferredBackBufferHeight + addedY  - 64*(1-Math.Abs(number-1)) - 32;
 			Position.X = graphics.PreferredBackBufferWidth / 2 + SpriteIndex.Width * (number-1);
             //Position.X = graphics.PreferredBackBufferWidth * (number+1) / 4;
 			if (!mouse.IsCreating && Levels.Creature1 == null){
 				if (GetCollision.Intersects(mouse.GetCollision)){
-					addedY = 0;
+                    if(addedY > 0){
+                        addedY -= 16;
+                    }
 					if (/*Mouse.GetState().LeftButton == ButtonState.Pressed*/IsClicking){
 						addedY = 128;
 						mouse.number = number;
 						mouse.IsCreating = true;
 					}
 				}else{
-					addedY = 128;
+                    if(addedY < 128){
+                        addedY += 16;
+                    }
 				}
 			}else{
 				addedY = 128;
@@ -58,7 +61,9 @@ namespace VirtusPecto.Desktop{
 			spriteBatch.Draw(Content.Sprite, new Vector2(Position.X, Position.Y), new Rectangle(2 * 128, 0, 128, 128), Color.White, rot, new Vector2(64,160), 1, SpriteEffects.None, 0);
             if (GetCollision.Intersects(mouse.GetCollision) && !mouse.IsCreating){
                 if(IsDescriptionOn){
-				    spriteBatch.DrawString(Font, Content.Description, mouse.Position-new Vector2(0, 96), Color.White);
+                    string description = Content.Name + "*Atk: " + Content.Atk+"*HP: "+Content.HP+"*Speed: "+ Content.Spd;
+                    description = description.Replace("*", System.Environment.NewLine);
+				    spriteBatch.DrawString(Font, description, mouse.Position-new Vector2(0, 96), Color.White);
                 }else{
                     spriteBatch.DrawString(Font, Content.Name, mouse.Position-new Vector2(-8, 0), Color.White);
                 }

@@ -30,7 +30,7 @@ namespace VirtusPecto.Desktop{
 			SetTarget();
         }
 		public void Update() {
-			Hitbox = new Rectangle((int)Position.X,(int) Position.Y,128,128);
+            Hitbox = new Rectangle((int) Position.X - 64+32, (int) Position.Y - 64, 128-32, 128);
 			//CreatureTime--;
 			//Standing code.
             // if (CreatureTime == 0){
@@ -78,6 +78,7 @@ namespace VirtusPecto.Desktop{
 		}
         
 		public void Draw() {
+            DrawRectangle(spriteBatch, Sprite2, Hitbox, Color.White);
             spriteBatch.Draw(SpriteIndex, Position, new Rectangle((int)ImageIndex*128, 0, 128, 128), Color.White, 0, new Vector2(64, 64), new Vector2(1, 1), effect, 1f/Position.Y);
 		    spriteBatch.DrawString(Font, Convert.ToString(CreatureTime), new Vector2(0, 64), Color.White);
 		}

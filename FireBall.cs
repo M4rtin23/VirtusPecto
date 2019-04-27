@@ -4,22 +4,30 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using static VirtusPecto.Desktop.Level;
 using static VirtusPecto.Desktop.Game1;
+using static GameMaker.MakerObject;
 
 namespace VirtusPecto.Desktop{    
 	public class FireBall{
 		private bool isDangerous;
 		public Vector2 Position;
 		public Rectangle GetCollision;
-        private float hspeed, vspeed; 
+        private float imageIndex;
+        private float hspeed, vspeed;
+        private float rotation;
 		//True = emited by the enemy && False = emited by de user
 		public FireBall(bool emiter, Vector2 initialPosition, float hs, float vs){
 			isDangerous = emiter;
 			Position = initialPosition;
             vspeed = vs;
             hspeed = hs;
+            rotation = (float)CalculateDirection(hspeed, vspeed);
     	}
 		public void Update() {
-			GetCollision = new Rectangle((int)Position.X,(int) Position.Y, 128, 128);         
+            imageIndex+=0.25f;
+            if (imageIndex > 3){
+                imageIndex = 0;
+            }
+			GetCollision = new Rectangle((int)Position.X - 32,(int) Position.Y - 32, 96, 96);         
 			Position.X += hspeed;
             Position.Y += vspeed;
 			if (isDangerous) {
@@ -43,7 +51,8 @@ namespace VirtusPecto.Desktop{
 			}
 		}
 		public void Draw() {
-            spriteBatch.Draw(Sprite0[0], Position, new Rectangle(0, 0, 128, 128), Color.Red, 0, new Vector2(64, 64), new Vector2(1, 1),/* effect*/SpriteEffects.None, 1f/Position.Y);
+            DrawRectangle(spriteBatch, Sprite2, GetCollision, Color.White);
+            spriteBatch.Draw(Sprite5, Position, new Rectangle(0, 128 * (int)imageIndex, 128, 128), Color.White, (180-rotation)/180*(float)Math.PI, new Vector2(64, 64), new Vector2(1, 1),/* effect*/SpriteEffects.None, 1f/Position.Y);
 		}
   	}
 }

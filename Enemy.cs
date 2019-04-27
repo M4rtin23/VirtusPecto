@@ -13,15 +13,15 @@ namespace VirtusPecto.Desktop{
 		private SpriteEffects effect = SpriteEffects.None;
 		//public float ImageIndex;
         public Enemy(int x,int y){
-			SpriteIndex = Sprite0[0];
+			SpriteIndex = Sprite0;
 			Position = new Vector2(x, y);
 		}
 		public void Update() {
-			GetCollision = new Rectangle((int)Position.X,(int) Position.Y, 128, 128);
+            GetCollision = new Rectangle((int) Position.X - 32, (int) Position.Y - 64, 96, 128);
 		}
 		public void Draw() {
+            GameMaker.MakerObject.DrawRectangle(spriteBatch, Sprite2, GetCollision, Color.White);
             spriteBatch.Draw(SpriteIndex, Position, new Rectangle(0, 0, 128, 128), Color.White, 0, new Vector2(64, 64), new Vector2(1, 1), effect, 1f/Position.Y);
-            
 		}
 		public void Follow(Vector2 objPosition, Vector2 selfPosition){
             if (objPosition.X - 64 > Position.X){

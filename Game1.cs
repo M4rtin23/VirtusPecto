@@ -9,11 +9,12 @@ namespace VirtusPecto.Desktop{
 		public static GraphicsDeviceManager graphics;
 		public static SpriteBatch spriteBatch;
 		public static Texture2D Logo;
-		public static Texture2D[] Sprite0;
-		public static Texture2D   Sprite1;
-		public static Texture2D   Sprite2;
-		public static Texture2D[] Sprite3;
-		public static Texture2D   Sprite4;
+		public static Texture2D Sprite0;
+		public static Texture2D Sprite1;
+		public static Texture2D Sprite2;
+		public static Texture2D Sprite3;
+		public static Texture2D Sprite4;
+        public static Texture2D Sprite5;
 		public static Texture2D[] CreatureSprite;
 
 		public static PauseMenu Pause;
@@ -41,8 +42,6 @@ namespace VirtusPecto.Desktop{
             Content.RootDirectory = "Content";
 			IsMouseVisible = true;
 			mouse = new GameMouse();
-			Sprite0 = new Texture2D[4];
-			Sprite3 = new Texture2D[2];
 			StartMenu = new Lobby();
 			CreatureSprite = new Texture2D[3];
 	    }
@@ -54,14 +53,15 @@ namespace VirtusPecto.Desktop{
         protected override void LoadContent(){
 		    spriteBatch = new SpriteBatch(GraphicsDevice);
 			Logo = Content.Load<Texture2D>("Logo");
-			Sprite_Load(Sprite0, nameof(Sprite0), 4);
+            Sprite0 = Content.Load<Texture2D>("Sprite0");
 			Sprite1 = Content.Load<Texture2D>("Sprite1");
 			Sprite2 = Content.Load<Texture2D>("Sprite2");
-			Sprite_Load(Sprite3, nameof(Sprite3), 2);
+			Sprite3 = Content.Load<Texture2D>("Sprite3");
 			Sprite4 = Content.Load<Texture2D>("Sprite4");
+            Sprite5 = Content.Load<Texture2D>("Sprite5");
 			Font = Content.Load<SpriteFont>("SpriteFontTemPlate");
 			Font2 = Content.Load<SpriteFont>("SpriteFont");
-			for (int i = 0; i < 3; i++){
+			for (int i = 0; i < CreatureSprite.Length; i++){
 				CreatureSprite[i] = Content.Load<Texture2D>("Creatures/Creature"+ Convert.ToString(i));
 			}
 			GetCreatureDatabase = new CreatureDatabase();
@@ -154,11 +154,6 @@ namespace VirtusPecto.Desktop{
 		public void Sprite_Load(Texture2D[] loaderSprite,string name,int sprNmb) {
 			for (int i = 0; i < sprNmb; i++){
 				loaderSprite[i] = Content.Load<Texture2D>(name + "_" + i);
-			}
-		}
-		public static void ToSpriteIndex(Texture2D[] sprite, Texture2D[] spriteIndex,int sprNmb) {
-			for (int i = 0; i < sprNmb; i++){
-				spriteIndex[i] = sprite[i];
 			}
 		}
     }
