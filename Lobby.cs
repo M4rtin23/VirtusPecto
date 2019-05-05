@@ -13,6 +13,7 @@ namespace VirtusPecto.Desktop{
         private Rectangle ExitRectangle;
         int g = 0;
         public Lobby(){
+            BackGroundColor = Color.Black;
 			Button1 = new PlayButton(graphics.PreferredBackBufferWidth/4, (int)((float)graphics.PreferredBackBufferHeight/2.4f));
 			Button2 = new SettingsButton(graphics.PreferredBackBufferWidth/4, (int)((float)graphics.PreferredBackBufferHeight/2.11f));
 			ExitRectangle = new Rectangle((graphics.PreferredBackBufferWidth / 2)-48, (int)((float)graphics.PreferredBackBufferHeight / 1.85f), 128, 32);

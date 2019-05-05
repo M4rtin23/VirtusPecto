@@ -33,7 +33,7 @@ namespace VirtusPecto.Desktop{
 		private void keyboard() {
 			animationSpeed = 0;
 			if (Keyboard.GetState().IsKeyDown(Keys.Space)) {
-				CreateFireBall(gt, false, Position,(float) CalculateAngle(Position, Game1.mouse.Position));
+				CreateFireBall(gt, false, Position,(float) CalculateAngle(Position, Game1.mouse.MPosition));
                 //Levels.Enemy1[0] = new Enemy(100, 100);
 			}
 			if (Keyboard.GetState().IsKeyDown(Keys.L)) {
@@ -64,7 +64,7 @@ namespace VirtusPecto.Desktop{
             //gamePad();
             gameStrick();
             if (GamePad.GetState(PlayerIndex.One).Buttons.RightShoulder == ButtonState.Pressed) {
-				CreateFireBall(gt, false, Position,(float) CalculateAngle(Position, Game1.mouse.Position));
+				CreateFireBall(gt, false, Position,(float) CalculateAngle(Position, Game1.mouse.MPosition));
 			}
             if (GamePad.GetState(PlayerIndex.One).Buttons.X == ButtonState.Pressed) {
                 mouse.number = 0;
@@ -131,10 +131,9 @@ namespace VirtusPecto.Desktop{
             }
         }
 		public void Draw(){
-            DrawRectangle(spriteBatch, Sprite2, GetCollision, Color.White);
-            spriteBatch.Draw(SpriteIndex, Position, new Rectangle(128 * (int)imageIndex, 0, 128, 128), Color.White, 0, new Vector2(64, 64), new Vector2(1, 1), effect, 1f/Position.Y);
-			spriteBatch.DrawString(Font, Convert.ToString(Convert.ToDouble(gt.TotalGameTime.Milliseconds)), new Vector2(0, 40), Color.White);
-//            spriteBatch.DrawString(Font, GetData(0), new Vector2(0, 72), Color.White);
+            //DrawRectangle(spriteBatch, Sprite2, GetCollision, Color.White);
+            spriteBatch.Draw(SpriteIndex, Position, new Rectangle(128 * (int)imageIndex, 0, 128, 128), Color.White, 0, new Vector2(64, 64), new Vector2(1, 1), effect, 0);
+//            spriteBatch.DrawString(Font,  ""+GetData(0).Atk , new Vector2(0, 72), Color.White);
 		}
 		public void CreateFireBall(GameTime gt, bool isEnemy, Vector2 Position, float d){
 			if(gt.TotalGameTime.Milliseconds % 1000 == 0){

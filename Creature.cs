@@ -60,6 +60,7 @@ namespace VirtusPecto.Desktop{
                 }
             }else{
                 Follow(Levels.Player1.Position, Position, 128);
+                SetTarget();
             }
             
             if(hspeed != 0 || vspeed != 0){
@@ -78,8 +79,8 @@ namespace VirtusPecto.Desktop{
 		}
         
 		public void Draw() {
-            DrawRectangle(spriteBatch, Sprite2, Hitbox, Color.White);
-            spriteBatch.Draw(SpriteIndex, Position, new Rectangle((int)ImageIndex*128, 0, 128, 128), Color.White, 0, new Vector2(64, 64), new Vector2(1, 1), effect, 1f/Position.Y);
+            //DrawRectangle(spriteBatch, Sprite2, Hitbox, Color.White);
+            spriteBatch.Draw(SpriteIndex, Position, new Rectangle((int)ImageIndex*128, 0, 128, 128), Color.White, 0, new Vector2(64, 64), new Vector2(1, 1), effect, 0);
 		    spriteBatch.DrawString(Font, Convert.ToString(CreatureTime), new Vector2(0, 64), Color.White);
 		}
 		private void Follow(Vector2 objPosition, Vector2 selfPosition, float hitboxSize){

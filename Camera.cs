@@ -6,9 +6,10 @@ using static VirtusPecto.Desktop.Game1;
 
 namespace VirtusPecto.Desktop{
     public class Camera{
-        public static Matrix Transform;
-        public void Follow(Vector2 o) {
-            Transform = Matrix.CreateTranslation(-o.X-128,  -o.Y, 0)*Matrix.CreateTranslation(graphics.PreferredBackBufferWidth/2, graphics.PreferredBackBufferHeight/2,0);
+//        public static Matrix Transform;
+        public static Matrix Follow(Vector2 o) {
+            //Transform = 
+            return Matrix.CreateTranslation(-o.X,  -o.Y, 0)*Matrix.CreateTranslation(graphics.PreferredBackBufferWidth/2, graphics.PreferredBackBufferHeight/2,0);
         }
     }
 }

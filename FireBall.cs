@@ -51,8 +51,8 @@ namespace VirtusPecto.Desktop{
 			}
 		}
 		public void Draw() {
-            DrawRectangle(spriteBatch, Sprite2, GetCollision, Color.White);
-            spriteBatch.Draw(Sprite5, Position, new Rectangle(0, 128 * (int)imageIndex, 128, 128), Color.White, (180-rotation)/180*(float)Math.PI, new Vector2(64, 64), new Vector2(1, 1),/* effect*/SpriteEffects.None, 1f/Position.Y);
+            //DrawRectangle(spriteBatch, Sprite2, GetCollision, Color.White);
+            spriteBatch.Draw(Sprite5, Position, new Rectangle(0, 128 * (int)imageIndex, 128, 128), Color.White, (180-rotation)/180*(float)Math.PI, new Vector2(64, 64), new Vector2(1, 1),/* effect*/SpriteEffects.None, 0);
 		}
   	}
 }

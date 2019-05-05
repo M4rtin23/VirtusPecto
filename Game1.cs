@@ -32,6 +32,8 @@ namespace VirtusPecto.Desktop{
         public static GameControl Joy;
         public static bool IsJoy;
         public static bool IsDescriptionOn = true;
+        public static Matrix Mat;
+        private Vector2 matrixPosition;
 
 		public Game1(){
 			IsPaused = false;
@@ -72,6 +74,11 @@ namespace VirtusPecto.Desktop{
 		}
         
         protected override void Update(GameTime gameTime){
+            if(LevelNumber == 1){
+                Mat = Camera.Follow(Levels.Player1.Position);
+            }
+            matrixPosition = - new Vector2(Mat.M41, Mat.M42);
+            mouse.SetMPosition(matrixPosition);
             if(IsJoy){
                 if(Joy == null){
                     Joy = new GameControl();
@@ -132,13 +139,20 @@ namespace VirtusPecto.Desktop{
 
         protected override void Draw(GameTime gameTime){
 			GraphicsDevice.Clear(BackGroundColor);
-			spriteBatch.Begin();
-			switch(LevelNumber){
+            if(LevelNumber == 1){
+                Mat = Camera.Follow(Levels.Player1.Position);
+                spriteBatch.Begin(transformMatrix: Mat);
+                Levels?.Draw();
+                spriteBatch.End();
+            }
+            spriteBatch.Begin();
+            switch(LevelNumber){
 				case 0:
 	    			StartMenu?.Draw();
 					break;
 				case 1:
-					Levels?.Draw();
+                    Levels.DrawScreen();
+//					Levels?.Draw();
 					break;
 				case 2:
     				Settings?.Draw();
@@ -150,11 +164,5 @@ namespace VirtusPecto.Desktop{
 			spriteBatch.End();
 			base.Draw(gameTime);
         }
-
-		public void Sprite_Load(Texture2D[] loaderSprite,string name,int sprNmb) {
-			for (int i = 0; i < sprNmb; i++){
-				loaderSprite[i] = Content.Load<Texture2D>(name + "_" + i);
-			}
-		}
     }
 }

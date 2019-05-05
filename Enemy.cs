@@ -17,11 +17,11 @@ namespace VirtusPecto.Desktop{
 			Position = new Vector2(x, y);
 		}
 		public void Update() {
-            GetCollision = new Rectangle((int) Position.X - 32, (int) Position.Y - 64, 96, 128);
+            GetCollision = new Rectangle((int) Position.X - 32 + 16, (int) Position.Y - 64 + 16, 96 - 16, 128 - 16);
 		}
 		public void Draw() {
-            GameMaker.MakerObject.DrawRectangle(spriteBatch, Sprite2, GetCollision, Color.White);
-            spriteBatch.Draw(SpriteIndex, Position, new Rectangle(0, 0, 128, 128), Color.White, 0, new Vector2(64, 64), new Vector2(1, 1), effect, 1f/Position.Y);
+            //GameMaker.MakerObject.DrawRectangle(spriteBatch, Sprite2, GetCollision, Color.White);
+            spriteBatch.Draw(SpriteIndex, Position, new Rectangle(0, 0, 128, 128), Color.White, 0, new Vector2(64, 64), new Vector2(1, 1), effect, 0);
 		}
 		public void Follow(Vector2 objPosition, Vector2 selfPosition){
             if (objPosition.X - 64 > Position.X){

@@ -8,7 +8,7 @@ using static VirtusPecto.Desktop.Level;
 namespace VirtusPecto.Desktop{
 	public class GameMouse{
 		public MouseState GetMouseState;
-		public Vector2 Position;
+		public Vector2 Position, MPosition;
 		public Rectangle GetCollision;
 		public bool IsCreating;
 		public int number;
@@ -16,6 +16,9 @@ namespace VirtusPecto.Desktop{
 		public GameMouse(){
 			GetMouseState = new MouseState();
 		}
+        public void SetMPosition(Vector2 m){
+            MPosition = Position + m;
+        }
 		public void Update(){
 			GetMouseState = Mouse.GetState();
 			if (Keyboard.GetState().IsKeyDown(Keys.Q)){
@@ -36,7 +39,7 @@ namespace VirtusPecto.Desktop{
 			if (/*Mouse.GetState().LeftButton == ButtonState.Pressed*/ IsClicking){
                 for(int i = 0; i < 3; i++){
     				if (number == i && !mouse.GetCollision.Intersects(Levels.Cards[i].GetCollision)){
-	    				Levels.Creature1 = new Creature(Levels.Cards[i].Content, new Vector2(Position.X, Position.Y - 32));
+	    				Levels.Creature1 = new Creature(Levels.Cards[i].Content, MPosition - new Vector2(0, 32));
                     }
                 }
 				number = -1;
