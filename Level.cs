@@ -6,6 +6,7 @@ using static VirtusPecto.Desktop.Game1;
 
 namespace VirtusPecto.Desktop{
     public class Level{
+        public BackGround Background;
 		public Player Player1;
 		public Enemy[] Enemy1;
 		public Card[] Cards;
@@ -15,6 +16,7 @@ namespace VirtusPecto.Desktop{
 		public FireBall[] Fireballs;
         public GameTime Gametime;
 		public Level(int EnemyQuantity){
+            Background = new BackGround(back);
 			Fireballs = new FireBall[0];
 			Enemy1 = new Enemy[EnemyQuantity];
 			for (int i = 0; i < Enemy1.Length; i++){
@@ -58,6 +60,7 @@ namespace VirtusPecto.Desktop{
             }
 		}
 		public void Draw() {
+            Background.Draw();
 			for (int i = 0; i < Fireballs.Length;i++){
 				if (Fireballs[i] != null){
 					Fireballs[i].Draw();
@@ -72,6 +75,11 @@ namespace VirtusPecto.Desktop{
 			}
 		}
         public void DrawScreen(){
+            if(Creature1 != null){
+                spriteBatch.DrawString(Font, ""+Creature1.Position, new Vector2(32, 32), Color.White);
+                spriteBatch.DrawString(Font, ""+Creature1.GetHashCode(), new Vector2(32, 64), Color.White);
+                spriteBatch.DrawString(Font, ""+Player1.Position, new Vector2(32, 96), Color.White);
+            }
             for(int i = 0; i < 3; i++){
 			    Cards[i].Draw();
             }

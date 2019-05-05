@@ -16,6 +16,7 @@ namespace VirtusPecto.Desktop{
 		public static Texture2D Sprite4;
         public static Texture2D Sprite5;
 		public static Texture2D[] CreatureSprite;
+        public static Texture2D back;
 
 		public static PauseMenu Pause;
         public static SettingsMenu Settings;
@@ -33,7 +34,7 @@ namespace VirtusPecto.Desktop{
         public static bool IsJoy;
         public static bool IsDescriptionOn = true;
         public static Matrix Mat;
-        private Vector2 matrixPosition;
+        private static Vector2 matrixPosition;
 
 		public Game1(){
 			IsPaused = false;
@@ -61,6 +62,7 @@ namespace VirtusPecto.Desktop{
 			Sprite3 = Content.Load<Texture2D>("Sprite3");
 			Sprite4 = Content.Load<Texture2D>("Sprite4");
             Sprite5 = Content.Load<Texture2D>("Sprite5");
+            back = Content.Load<Texture2D>("bg1");
 			Font = Content.Load<SpriteFont>("SpriteFontTemPlate");
 			Font2 = Content.Load<SpriteFont>("SpriteFont");
 			for (int i = 0; i < CreatureSprite.Length; i++){
@@ -152,7 +154,7 @@ namespace VirtusPecto.Desktop{
 					break;
 				case 1:
                     Levels.DrawScreen();
-//					Levels?.Draw();
+					//Levels?.Draw();
 					break;
 				case 2:
     				Settings?.Draw();
@@ -163,6 +165,9 @@ namespace VirtusPecto.Desktop{
 			}
 			spriteBatch.End();
 			base.Draw(gameTime);
+        }
+        public static Vector2 GetMatrix(){
+            return matrixPosition;
         }
     }
 }

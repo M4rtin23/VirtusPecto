@@ -27,7 +27,7 @@ namespace VirtusPecto.Desktop{
 			Slot = new CardContent[3];
 			for(int i = 0; i < 3; i++){
 //				Slot[i] = CreatureDatabase.Creatures[i];
-				Slot[i] = CreatureDatabase.GetData(i);
+				Slot[i] = CreatureDatabase.GetData(2-i);
 			}
 		}
 		private void keyboard() {
