@@ -8,12 +8,10 @@ namespace VirtusPecto.Desktop{
     public class Fullscreen : TickBox{
 		public Fullscreen(int x, int y){
             name = "Fullscreen";
-            state = graphics.IsFullScreen;
+            state = IsFullScreen();
 		}
         protected override void action(){
-		    graphics.IsFullScreen = state;
-	    	graphics.ApplyChanges();
-
+            Fullscreen(state);
         }
     }
 }

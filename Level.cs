@@ -16,6 +16,7 @@ namespace VirtusPecto.Desktop{
 		public FireBall[] Fireballs;
         public GameTime Gametime;
 		public Level(int EnemyQuantity){
+            Gametime = new GameTime();
             Background = new BackGround(back);
 			Fireballs = new FireBall[0];
 			Enemy1 = new Enemy[EnemyQuantity];
@@ -55,39 +56,39 @@ namespace VirtusPecto.Desktop{
 			Player1.Update(gameTime);
 			Creature1?.Update();
             if(gameTime.TotalGameTime.Milliseconds % 1000 == 0){
-                FitFireball();
+                //FitFireball();
                 //FitEnemy();
             }
 		}
-		public void Draw() {
-            Background.Draw();
+		public void Draw(SpriteBatch sprBt) {
+            Background.Draw(Gametime, sprBt);
 			for (int i = 0; i < Fireballs.Length;i++){
 				if (Fireballs[i] != null){
-					Fireballs[i].Draw();
+					Fireballs[i].Draw(sprBt);
 				}
 			}
-			Creature1?.Draw();
-			Player1.Draw();
+			Creature1?.Draw(sprBt);
+			Player1.Draw(sprBt);
 			for (int i = 0; i < Enemy1.Length; i++){
 				if (Enemy1[i] != null){
-					Enemy1[i].Draw();
+					Enemy1[i].Draw(sprBt);
 				}
 			}
 		}
-        public void DrawScreen(){
+        public void DrawScreen(SpriteBatch sprBt){
             if(Creature1 != null){
-                spriteBatch.DrawString(Font, ""+Creature1.Position, new Vector2(32, 32), Color.White);
-                spriteBatch.DrawString(Font, ""+Creature1.GetHashCode(), new Vector2(32, 64), Color.White);
-                spriteBatch.DrawString(Font, ""+Player1.Position, new Vector2(32, 96), Color.White);
+                sprBt.DrawString(Font, ""+Creature1.Position, new Vector2(32, 32), Color.White);
+                sprBt.DrawString(Font, ""+Creature1.GetHashCode(), new Vector2(32, 64), Color.White);
+                sprBt.DrawString(Font, ""+Player1.Position, new Vector2(32, 96), Color.White);
             }
             for(int i = 0; i < 3; i++){
-			    Cards[i].Draw();
+			    Cards[i].Draw(sprBt);
             }
             if (mouse.IsCreating && !Game1.IsPaused) {
-				spriteBatch.Draw(Sprite4, mouse.Position, new Rectangle(0, 0, 252, 252), Color.White, 0, new Vector2(64+60, 96+60), new Vector2(1, 1), SpriteEffects.None, 0);
-				spriteBatch.Draw(Cards[mouse.number].Content.Sprite, mouse.Position, new Rectangle(256, 0, 128, 128), Color.White, 0, new Vector2(64, 96), new Vector2(1, 1), SpriteEffects.None, 0);
+				sprBt.Draw(Sprite4, mouse.Position, new Rectangle(0, 0, 252, 252), Color.White, 0, new Vector2(64+60, 96+60), new Vector2(1, 1), SpriteEffects.None, 0);
+				sprBt.Draw(Cards[mouse.number].Content.Sprite, mouse.Position, new Rectangle(256, 0, 128, 128), Color.White, 0, new Vector2(64, 96), new Vector2(1, 1), SpriteEffects.None, 0);
 			}
-            toolBar.Draw();
+            toolBar.Draw(sprBt);
         }
         public void FitFireball(){
             FireBall[] a;

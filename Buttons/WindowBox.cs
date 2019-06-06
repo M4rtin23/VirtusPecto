@@ -21,9 +21,7 @@ namespace VirtusPecto.Desktop{
             return 8;
         }
         protected override void action(int i){
-            graphics.PreferredBackBufferWidth = (int)Options[i].X;
-            graphics.PreferredBackBufferHeight = (int)Options[i].Y;
-            graphics.ApplyChanges();
+            SetWindowSize(Options[i]);
         }
         protected override void update(){
             for (int i = 0; i < OptionsNumber; i++){
@@ -35,7 +33,7 @@ namespace VirtusPecto.Desktop{
             return a;
         }
         protected override string currentOption(){
-            string a = " "+Convert.ToString(graphics.PreferredBackBufferWidth) + " X " + Convert.ToString(graphics.PreferredBackBufferHeight);
+            string a = " "+Convert.ToString(Width()) + " X " + Convert.ToString(Height());
             return a;
         }
 

@@ -3,11 +3,12 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using static VirtusPecto.Desktop.Level;
+using static GameMaker.MakerObject;
 
 namespace VirtusPecto.Desktop{
 	public class Game1 : Game{
-		public static GraphicsDeviceManager graphics;
-		public static SpriteBatch spriteBatch;
+		private static GraphicsDeviceManager graphics;
+		private SpriteBatch spriteBatch;
 		public static Texture2D Logo;
 		public static Texture2D Sprite0;
 		public static Texture2D Sprite1;
@@ -35,6 +36,7 @@ namespace VirtusPecto.Desktop{
         public static bool IsDescriptionOn = true;
         public static Matrix Mat;
         private static Vector2 matrixPosition;
+        public static GameTime GT;
 
 		public Game1(){
 			IsPaused = false;
@@ -46,7 +48,7 @@ namespace VirtusPecto.Desktop{
 			IsMouseVisible = true;
 			mouse = new GameMouse();
 			StartMenu = new Lobby();
-			CreatureSprite = new Texture2D[3];
+			CreatureSprite = new Texture2D[6];
 	    }
 
         protected override void Initialize(){
@@ -62,7 +64,7 @@ namespace VirtusPecto.Desktop{
 			Sprite3 = Content.Load<Texture2D>("Sprite3");
 			Sprite4 = Content.Load<Texture2D>("Sprite4");
             Sprite5 = Content.Load<Texture2D>("Sprite5");
-            back = Content.Load<Texture2D>("bg1");
+            back = Content.Load<Texture2D>("BG");
 			Font = Content.Load<SpriteFont>("SpriteFontTemPlate");
 			Font2 = Content.Load<SpriteFont>("SpriteFont");
 			for (int i = 0; i < CreatureSprite.Length; i++){
@@ -76,6 +78,7 @@ namespace VirtusPecto.Desktop{
 		}
         
         protected override void Update(GameTime gameTime){
+            GT = gameTime;
             if(LevelNumber == 1){
                 Mat = Camera.Follow(Levels.Player1.Position);
             }
@@ -144,30 +147,49 @@ namespace VirtusPecto.Desktop{
             if(LevelNumber == 1){
                 Mat = Camera.Follow(Levels.Player1.Position);
                 spriteBatch.Begin(transformMatrix: Mat);
-                Levels?.Draw();
+                Levels?.Draw(spriteBatch);
                 spriteBatch.End();
             }
             spriteBatch.Begin();
+            DrawTriangle(spriteBatch, Sprite2, new Vector2(20, 20), new Vector2(400,2), new Vector2(2,400));
             switch(LevelNumber){
 				case 0:
-	    			StartMenu?.Draw();
+	    			StartMenu?.Draw(spriteBatch);
 					break;
 				case 1:
-                    Levels.DrawScreen();
+                    Levels.DrawScreen(spriteBatch);
 					//Levels?.Draw();
 					break;
 				case 2:
-    				Settings?.Draw();
+    				Settings?.Draw(spriteBatch);
 					break;
 			}
 			if (IsPaused){
-				Pause?.Draw();
+				Pause?.Draw(spriteBatch);
 			}
 			spriteBatch.End();
 			base.Draw(gameTime);
         }
         public static Vector2 GetMatrix(){
             return matrixPosition;
+        }
+        public static int Width(){
+            return graphics.PreferredBackBufferWidth;
+        }
+        public static int Height(){
+            return graphics.PreferredBackBufferHeight;
+        }
+        public static bool IsFullScreen(){
+            return graphics.IsFullScreen;
+        }
+        public static void SetWindowSize(Vector2 size){
+            graphics.PreferredBackBufferWidth = (int)size.X;
+            graphics.PreferredBackBufferHeight = (int)size.Y;
+            graphics.ApplyChanges();
+        }
+        public static void Fullscreen(bool state){
+            graphics.IsFullScreen = state;
+	    	graphics.ApplyChanges();
         }
     }
 }

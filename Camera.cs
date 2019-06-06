@@ -9,7 +9,7 @@ namespace VirtusPecto.Desktop{
 //        public static Matrix Transform;
         public static Matrix Follow(Vector2 o) {
             //Transform = 
-            return Matrix.CreateTranslation(-o.X,  -o.Y, 0)*Matrix.CreateTranslation(graphics.PreferredBackBufferWidth/2, graphics.PreferredBackBufferHeight/2,0);
+            return Matrix.CreateTranslation(-o.X,  -o.Y, 0)*Matrix.CreateTranslation(Width()/2, Height()/2,0);
         }
     }
 }

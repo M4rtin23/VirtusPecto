@@ -24,11 +24,11 @@ namespace VirtusPecto.Desktop{
             ResolutionBox = new WindowBox();
         }
         public void Update(){
-            SetAspectRatio.SetPosition(graphics.PreferredBackBufferWidth / 4 - 64,  graphics.PreferredBackBufferHeight / 2);
-            ShowDescription.SetPosition(graphics.PreferredBackBufferWidth * 2/4 - 64,  graphics.PreferredBackBufferHeight / 3 * 2);
-            SetFullscreen.SetPosition(graphics.PreferredBackBufferWidth * 3/4 - 64,  graphics.PreferredBackBufferHeight / 2);
-            SetJoystick.SetPosition(graphics.PreferredBackBufferWidth * 3/4 - 64,  graphics.PreferredBackBufferHeight / 3 * 2);
-            ResolutionBox.SetPosition(graphics.PreferredBackBufferWidth * 2/4 - 64, graphics.PreferredBackBufferHeight / 2);
+            SetAspectRatio.SetPosition(Width() / 4 - 64,  Height() / 2);
+            ShowDescription.SetPosition(Width() * 2/4 - 64,  Height() / 3 * 2);
+            SetFullscreen.SetPosition(Width() * 3/4 - 64,  Height() / 2);
+            SetJoystick.SetPosition(Width() * 3/4 - 64,  Height() / 3 * 2);
+            ResolutionBox.SetPosition(Width() * 2/4 - 64, Height() / 2);
             ShowDescription.Collision();
             SetAspectRatio.Collision();
             ResolutionBox.Collision();
@@ -40,13 +40,13 @@ namespace VirtusPecto.Desktop{
                 Settings = null;
             }
         }
-        public void Draw(){
-            spriteBatch.Draw(Sprite3, new Vector2(0, 0), Color.White);
-            ShowDescription.Draw();
-            SetAspectRatio.Draw();
-            ResolutionBox.Draw();
-			SetFullscreen.Draw();
-            SetJoystick.Draw();
+        public void Draw(SpriteBatch sprBt){
+            sprBt.Draw(Sprite3, new Vector2(0, 0), Color.White);
+            ShowDescription.Draw(sprBt);
+            SetAspectRatio.Draw(sprBt);
+            ResolutionBox.Draw(sprBt);
+			SetFullscreen.Draw(sprBt);
+            SetJoystick.Draw(sprBt);
         }
     }
 }

@@ -50,9 +50,9 @@ namespace VirtusPecto.Desktop{
 				Levels.Player1.Health -= 10;
 			}
 		}
-		public void Draw() {
+		public void Draw(SpriteBatch sprBt) {
             //DrawRectangle(spriteBatch, Sprite2, GetCollision, Color.White);
-            spriteBatch.Draw(Sprite5, Position, new Rectangle(0, 128 * (int)imageIndex, 128, 128), Color.White, (180-rotation)/180*(float)Math.PI, new Vector2(64, 64), new Vector2(1, 1),/* effect*/SpriteEffects.None, 0);
+            sprBt.Draw(Sprite5, Position, new Rectangle(0, 128 * (int)imageIndex, 128, 128), Color.White, (180-rotation)/180*(float)Math.PI, new Vector2(64, 64), new Vector2(1, 1),/* effect*/SpriteEffects.None, 0);
 		}
   	}
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SourceFile>/home/martin/Documentos/Projectos/C#/VirtusPecto/Content/Sprite1.png</SourceFile>
-  <SourceTime>2018-07-14T20:41:04-03:00</SourceTime>
+  <SourceTime>2019-05-12T13:22:02.116998-03:00</SourceTime>
   <DestFile>/home/martin/Documentos/Projectos/C#/VirtusPecto/Content/bin/DesktopGL/Content/Sprite1.xnb</DestFile>
-  <DestTime>2019-02-21T12:02:09.514024-03:00</DestTime>
+  <DestTime>2019-05-12T13:22:09.784892-03:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2019-01-06T20:42:32.118904-03:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

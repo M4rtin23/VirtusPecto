@@ -70,16 +70,16 @@ namespace VirtusPecto.Desktop{
 				}
 			}
 		}
-		public void Draw() {
-			spriteBatch.Draw(Sprite2, Position, color);
-            spriteBatch.DrawString(Font, currentOption(), Position, Color.White);
-			spriteBatch.DrawString(Font, name, new Vector2(Position.X, Position.Y - 32), Color.White);
+		public void Draw(SpriteBatch sprBt) {
+			sprBt.Draw(Sprite2, Position, color);
+            sprBt.DrawString(Font, currentOption(), Position, Color.White);
+			sprBt.DrawString(Font, name, new Vector2(Position.X, Position.Y - 32), Color.White);
 
 			if (isActivated) {
 				color = Color.LightGray;
 				for (int i = 0; i < OptionsNumber; i++){
-					spriteBatch.Draw(Sprite2, new Vector2(Position.X, Position.Y+(1+i)*32), Colors[i]);
-					spriteBatch.DrawString(Font, drawOptions(i), new Vector2(Position.X, Position.Y + (i+1) * 32), Color.White);
+					sprBt.Draw(Sprite2, new Vector2(Position.X, Position.Y+(1+i)*32), Colors[i]);
+					sprBt.DrawString(Font, drawOptions(i), new Vector2(Position.X, Position.Y + (i+1) * 32), Color.White);
 				}
 			}else{
 				color = Color.DarkGray;

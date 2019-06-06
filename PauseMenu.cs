@@ -11,10 +11,10 @@ namespace VirtusPecto.Desktop{
 		public Rectangle ContinueRectangle, MainMenuRectangle, ExitRectangle;
 		public Color ContinueColor, MainMenuColor, ExitColor;
 		public PauseMenu(){
-			settings = new SettingsButton((graphics.PreferredBackBufferWidth/2)-48,graphics.PreferredBackBufferHeight/2);
-			ContinueRectangle = new Rectangle((graphics.PreferredBackBufferWidth / 2) - 48, (graphics.PreferredBackBufferHeight / 2) - 48 * 2, 128, 32);
-			MainMenuRectangle = new Rectangle((graphics.PreferredBackBufferWidth / 2) - 48, (graphics.PreferredBackBufferHeight / 2) - 48, 128, 32);
-			ExitRectangle = new Rectangle((graphics.PreferredBackBufferWidth / 2) - 48, (graphics.PreferredBackBufferHeight / 2) + 48, 128, 32);
+			settings = new SettingsButton((Width()/2)-48,Height()/2);
+			ContinueRectangle = new Rectangle((Width() / 2) - 48, (Height() / 2) - 48 * 2, 128, 32);
+			MainMenuRectangle = new Rectangle((Width() / 2) - 48, (Height() / 2) - 48, 128, 32);
+			ExitRectangle = new Rectangle((Width() / 2) - 48, (Height() / 2) + 48, 128, 32);
 		}
 		public void Update() {
 			settings.Collision();
@@ -47,13 +47,13 @@ namespace VirtusPecto.Desktop{
                 ExitColor = Color.White;            
             }
 		}
-		public void Draw() {
-			spriteBatch.Draw(Sprite2, new Vector2((graphics.PreferredBackBufferWidth / 2), graphics.PreferredBackBufferHeight / 2), new Rectangle(0, 0, 128, 32), Color.Black, 0, new Vector2(64, 16), new Vector2(2, 10), SpriteEffects.None, 0);
-			spriteBatch.DrawString(Font, "Continue", new Vector2((graphics.PreferredBackBufferWidth / 2)-48, (graphics.PreferredBackBufferHeight / 2)-48*2), ContinueColor);
-			spriteBatch.DrawString(Font, "Main Menu", new Vector2((graphics.PreferredBackBufferWidth / 2) - 48, (graphics.PreferredBackBufferHeight / 2) - 48), MainMenuColor);
-            settings.SetPosition((graphics.PreferredBackBufferWidth/2)-48,graphics.PreferredBackBufferHeight/2);
-			settings.Draw();
-			spriteBatch.DrawString(Font, "Exit", new Vector2((graphics.PreferredBackBufferWidth / 2)-48, (graphics.PreferredBackBufferHeight / 2)+48), ExitColor);
+		public void Draw(SpriteBatch sprBt) {
+			sprBt.Draw(Sprite2, new Vector2((Width() / 2), Height() / 2), new Rectangle(0, 0, 128, 32), Color.Black, 0, new Vector2(64, 16), new Vector2(2, 10), SpriteEffects.None, 0);
+			sprBt.DrawString(Font, "Continue", new Vector2((Width() / 2)-48, (Height() / 2)-48*2), ContinueColor);
+			sprBt.DrawString(Font, "Main Menu", new Vector2((Width() / 2) - 48, (Height() / 2) - 48), MainMenuColor);
+            settings.SetPosition((Width()/2)-48,Height()/2);
+			settings.Draw(sprBt);
+			sprBt.DrawString(Font, "Exit", new Vector2((Width() / 2)-48, (Height() / 2)+48), ExitColor);
 		}
     }
 }

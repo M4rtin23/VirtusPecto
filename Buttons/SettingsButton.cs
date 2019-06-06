@@ -36,8 +36,8 @@ namespace VirtusPecto.Desktop{
                 WordColor = Color.White;
             }
         }
-        public void Draw(){
-            spriteBatch.DrawString(Font, "Settings", position, WordColor);
+        public void Draw(SpriteBatch sprBt){
+            sprBt.DrawString(Font, "Settings", position, WordColor);
         }
     }
 }

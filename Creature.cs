@@ -4,10 +4,10 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using static VirtusPecto.Desktop.Level;
 using static VirtusPecto.Desktop.Game1;
-using GameMaker;
+using static GameMaker.MakerObject;
 
 namespace VirtusPecto.Desktop{
-	public class Creature:MakerObject{
+	public class Creature{
 		public Vector2 Position;
 		public Texture2D SpriteIndex;
 		public double ImageIndex, AnimationSpeed;
@@ -18,7 +18,8 @@ namespace VirtusPecto.Desktop{
 		private float dir;
 		private int targetDefiner = -1, lowestDistance = -1;
         private bool followPlayer;
-		public Rectangle Hitbox;
+		public Rectangle Hitbox, r;
+        int time;
 		//public int hspeed, vspeed;
 
 		public Creature(CardContent content,Vector2 pos){
@@ -30,6 +31,9 @@ namespace VirtusPecto.Desktop{
 			SetTarget();
         }
 		public void Update() {
+            if(time - GT.TotalGameTime.Minutes > 4){
+                SetTarget();
+            }
             Hitbox = new Rectangle((int) Position.X - 64+32, (int) Position.Y - 64, 128-32, 128);
 			//CreatureTime--;
 			//Standing code.
@@ -45,8 +49,8 @@ namespace VirtusPecto.Desktop{
             //Behaviors.
             if(!followPlayer){
 		        Follow(Target, Position, 128 + dist);
-                if(hspeed == 0 && vspeed == 0 && dist > 0){
-                    Levels.Player1.CreateFireBall(Levels.Gametime, false, Position, (float)CalculateAngle(Position, Target));
+                if(hspeed == 0 && vspeed == 0 && dist > 0 && dist > CalculateDistance(Position, Target)/2){
+                    Levels.Player1.CreateFireBall(Levels.Gametime, false, Position, (float)CalculateAngle(Position, Target), 0);
                 }
                 if (targetDefiner != -1){
                     if (Levels.Enemy1[targetDefiner] == null){
@@ -67,7 +71,7 @@ namespace VirtusPecto.Desktop{
                 AnimationSpeed = 0.125;
             }
 			ImageIndex += AnimationSpeed;         
-			if (ImageIndex > 3){
+			if (ImageIndex >= 4){
                 ImageIndex = 0;
                 AnimationSpeed = 0;
             }
@@ -78,15 +82,18 @@ namespace VirtusPecto.Desktop{
 	        Position.Y += vspeed;
 		}
         
-		public void Draw() {
+		public void Draw(SpriteBatch sprBt) {
             //DrawRectangle(spriteBatch, Sprite2, Hitbox, Color.White);
-            spriteBatch.Draw(SpriteIndex, Position, new Rectangle((int)ImageIndex*128, 0, 128, 128), Color.White, 0, new Vector2(64, 64), new Vector2(1, 1), effect, 0);
+            sprBt.Draw(SpriteIndex, Position, new Rectangle((int)ImageIndex*128, 0, 128, 128), Color.White, 0, new Vector2(64, 64), new Vector2(1, 1), effect, 0);
 		}
 		private void Follow(Vector2 objPosition, Vector2 selfPosition, float hitboxSize){
 			AnimationSpeed = 0;
 			if(CalculateDistance(selfPosition, objPosition) > hitboxSize && (selfPosition.X != objPosition.X && selfPosition.Y != objPosition.Y)){
             	dir = (float) CalculateAngle(selfPosition, objPosition);
-				vspeed = (float) CalculateVspeed(maxSpeed, dir);
+				if(Hitbox.Intersects(Levels.Player1.GetCollision)){
+                    dir = dir -90;
+                }
+                vspeed = (float) CalculateVspeed(maxSpeed, dir);
 				hspeed = (float) CalculateHspeed(maxSpeed, dir);
 			}else{
 				vspeed = 0;
@@ -132,6 +139,7 @@ namespace VirtusPecto.Desktop{
 			}
             //Sets the target.
 			if (targetDefiner != -1){
+                time = GT.TotalGameTime.Minutes;
                 Target = Levels.Enemy1[targetDefiner].Position;
                 followPlayer = false;
             }else{

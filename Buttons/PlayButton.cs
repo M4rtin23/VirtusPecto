@@ -73,11 +73,11 @@ namespace VirtusPecto.Desktop{
 				}
 			}
 		}
-		public void Draw() {
-			spriteBatch.DrawString(Font, "Start", position, WordColor);
+		public void Draw(SpriteBatch sprBt) {
+			sprBt.DrawString(Font, "Start", position, WordColor);
 			if (isActivated) {
-				HardnessBox.Draw();
-				spriteBatch.DrawString(Font, "Play", PlayPosition,PlayColor);
+				HardnessBox.Draw(sprBt);
+				sprBt.DrawString(Font, "Play", PlayPosition,PlayColor);
 			}
 		}
     }
