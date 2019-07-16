@@ -17,7 +17,7 @@ namespace VirtusPecto.Desktop{
         public GameTime Gametime;
 		public Level(int EnemyQuantity){
             Gametime = new GameTime();
-            Background = new BackGround(back);
+            Background = new BackGround(Back);
 			Fireballs = new FireBall[0];
 			Enemy1 = new Enemy[EnemyQuantity];
 			for (int i = 0; i < Enemy1.Length; i++){
@@ -34,8 +34,7 @@ namespace VirtusPecto.Desktop{
 			Cards[1] = new Card(1, Color.Green);
 			Cards[2] = new Card(2, Color.DarkBlue);
 		}
-		public void Update(GameTime gameTime) {
-            Gametime = gameTime;
+		public void Update() {
 			if (Keyboard.GetState().IsKeyDown(Keys.N)) {
 	            Enemy1[0] = new Enemy((int)Player1.Position.X,(int) Player1.Position.Y);
             }
@@ -53,15 +52,15 @@ namespace VirtusPecto.Desktop{
 			for (int i = 0; i < Enemy1.Length; i++){
 				Enemy1[i]?.Update();
 			}
-			Player1.Update(gameTime);
+			Player1.Update();
 			Creature1?.Update();
-            if(gameTime.TotalGameTime.Milliseconds % 1000 == 0){
+            if(GT.TotalGameTime.Milliseconds % 1000 == 0){
                 //FitFireball();
                 //FitEnemy();
             }
 		}
 		public void Draw(SpriteBatch sprBt) {
-            Background.Draw(Gametime, sprBt);
+            Background.Draw(sprBt);
 			for (int i = 0; i < Fireballs.Length;i++){
 				if (Fireballs[i] != null){
 					Fireballs[i].Draw(sprBt);
@@ -86,14 +85,14 @@ namespace VirtusPecto.Desktop{
             }
             if (mouse.IsCreating && !Game1.IsPaused) {
 				sprBt.Draw(Sprite4, mouse.Position, new Rectangle(0, 0, 252, 252), Color.White, 0, new Vector2(64+60, 96+60), new Vector2(1, 1), SpriteEffects.None, 0);
-				sprBt.Draw(Cards[mouse.number].Content.Sprite, mouse.Position, new Rectangle(256, 0, 128, 128), Color.White, 0, new Vector2(64, 96), new Vector2(1, 1), SpriteEffects.None, 0);
+				sprBt.Draw(Cards[mouse.Number].Content.Sprite, mouse.Position, new Rectangle(256, 0, 128, 128), Color.White, 0, new Vector2(64, 96), new Vector2(1, 1), SpriteEffects.None, 0);
 			}
             toolBar.Draw(sprBt);
         }
         public void FitFireball(){
             FireBall[] a;
             int o = 0;
-            //Search number of non-null elements.
+            //Search Number of non-null elements.
             for(int i = 0;i < Fireballs.Length; i++){
                 if(Fireballs[i] != null){
                     o++;
@@ -116,7 +115,7 @@ namespace VirtusPecto.Desktop{
         public void FitEnemy(){
             Enemy[] a;
             int o = 0;
-            //Search number of non-null elements.
+            //Search Number of non-null elements.
             for(int i = 0;i < Enemy1.Length; i++){
                 if(Enemy1[i] != null){
                     o++;

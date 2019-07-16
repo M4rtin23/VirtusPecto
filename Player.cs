@@ -9,7 +9,6 @@ using static VirtusPecto.Desktop.CreatureDatabase;
 
 namespace VirtusPecto.Desktop{
 	public class Player{
-		private GameTime gt;
 		public Vector2 Position;
         //private Vector2 origin;
         public Texture2D SpriteIndex;
@@ -21,7 +20,6 @@ namespace VirtusPecto.Desktop{
 		public float Health = 100, Mana = 100;
 		public CardContent[] Slot;
 		public Player(){
-			gt = new GameTime();
 			Position = new Vector2(64, 64);
 			Slot = new CardContent[3];
 			for(int i = 0; i < 3; i++){
@@ -35,7 +33,7 @@ namespace VirtusPecto.Desktop{
                 usePower();
 			}
 			if (Keyboard.GetState().IsKeyDown(Keys.L)) {
-				CreateFireBall(gt, true, Levels.Enemy1[1].Position, 0, 0);
+				CreateFireBall(true, Levels.Enemy1[1].Position, 0, 0);
 			}
             if (Keyboard.GetState().IsKeyDown(Keys.S)){
                 vspeed = 4;
@@ -65,15 +63,15 @@ namespace VirtusPecto.Desktop{
                 usePower();
 			}
             if (GamePad.GetState(PlayerIndex.One).Buttons.X == ButtonState.Pressed) {
-                mouse.number = 0;
+                mouse.Number = 0;
                 mouse.IsCreating = true;
 			}
             if (GamePad.GetState(PlayerIndex.One).Buttons.Y == ButtonState.Pressed) {
-                mouse.number = 1;
+                mouse.Number = 1;
                 mouse.IsCreating = true;
 			}
             if (GamePad.GetState(PlayerIndex.One).Buttons.B == ButtonState.Pressed) {
-                mouse.number = 2;
+                mouse.Number = 2;
                 mouse.IsCreating = true;
 			}
         }
@@ -112,8 +110,7 @@ namespace VirtusPecto.Desktop{
             }
         }
 
-		public void Update(GameTime gameTime){
-			gt = gameTime;
+		public void Update(){
 			GetCollision = new Rectangle((int) Position.X - 64 +32, (int) Position.Y - 64, 128-32, 128);
 			imageIndex += animationSpeed;
 			Position.X += hspeed;
@@ -128,14 +125,20 @@ namespace VirtusPecto.Desktop{
 				animationSpeed = 0;
             }
         }
+        float t = 0;
 		public void Draw(SpriteBatch sprBt){
             //DrawRectangle(spriteBatch, Sprite2, GetCollision, Color.White);
 //            spriteBatch.DrawString(Font,  ""+GetData(0).Atk , new Vector2(0, 72), Color.White);
             //DrawRectangle(spriteBatch, Sprite2, new Rectangle(GetCollision.Location-(GetCollision.Size.ToVector2()).ToPoint(), (GetCollision.Size.ToVector2()*2).ToPoint()), Color.White);
             sprBt.Draw(SpriteIndex, Position, new Rectangle(128 * (int)imageIndex, 0, 128, 128), Color.White, 0, new Vector2(64, 64), new Vector2(1, 1), effect, 0);
+            float x, y;
+            t+=0.125f;
+            x = Position.X + (float)SqrCos(t)*100;
+            y = Position.Y + (float)SqrSin(t)*100;
+            sprBt.Draw(Sprite2, new Vector2(x, y), Color.White);
         }
-		public void CreateFireBall(GameTime gt, bool isEnemy, Vector2 Position, float d, float v){
-			if(gt.TotalGameTime.Milliseconds % 1000 == 0){
+		public void CreateFireBall(bool isEnemy, Vector2 Position, float d, float v){
+			if(GT.TotalGameTime.Milliseconds % 1000 == 0){
 				Array.Resize(ref Levels.Fireballs, Levels.Fireballs.Length+1);
 				Levels.Fireballs[Levels.Fireballs.Length-1] = new FireBall(isEnemy, Position, (float)CalculateHspeed(6, d), (float)CalculateVspeed(6, d));
                 v -= 10;
@@ -154,7 +157,7 @@ namespace VirtusPecto.Desktop{
             sprBt.Draw(Sprite2, pos, null, color, r, new Vector2(0 ,16), new Vector2(s, 1/32f*size), SpriteEffects.None, 0);
         }
         private void usePower(){
-			CreateFireBall(gt, false, Position,(float) CalculateAngle(Position, Game1.mouse.MPosition), Mana);
+			CreateFireBall(false, Position,(float) CalculateAngle(Position, Game1.mouse.MPosition), Mana);
         }
     }
 }

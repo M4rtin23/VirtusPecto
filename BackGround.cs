@@ -12,7 +12,7 @@ namespace VirtusPecto.Desktop{
             backGround = texture;
             position = new Vector2(0, 0);
         }
-        public void Draw(GameTime gt, SpriteBatch sprBt){
+        public void Draw(SpriteBatch sprBt){
             Vector2 windowSize = new Vector2(Width(),Height());
             int width = backGround.Width/4, height = backGround.Height;
             int x1 = (int)Math.Ceiling((decimal)Width()/width);
@@ -23,7 +23,7 @@ namespace VirtusPecto.Desktop{
                     position.Y = (height*((int)(Levels.Player1.Position.Y/height))) + height * y;
                     int i;
                     if((position.X * position.Y) % 7 == 1){
-                        i = (int)((Math.Sin(position.X + position.Y) + 1) * gt.TotalGameTime.Milliseconds) % 1200;
+                        i = (int)((Math.Sin(position.X + position.Y) + 1) * GT.TotalGameTime.Milliseconds) % 1200;
                         i = i/400+1;
                     }else{
                         i = 0;

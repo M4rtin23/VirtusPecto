@@ -11,7 +11,7 @@ namespace VirtusPecto.Desktop{
 		public Vector2 Position, MPosition;
 		public Rectangle GetCollision;
 		public bool IsCreating;
-		public int number;
+		public int Number;
 
 		public GameMouse(){
 			GetMouseState = new MouseState();
@@ -30,19 +30,19 @@ namespace VirtusPecto.Desktop{
             if(Game1.Levels == null){
                 IsCreating = false;
             }
-			if (IsCreating && /*Mouse.GetState().LeftButton == ButtonState.Pressed*/ IsClicking&& !Game1.IsPaused && Game1.Levels != null){
-				OnCreation(number);
+			if (IsCreating &&  IsClicking&& !Game1.IsPaused && Game1.Levels != null){
+				OnCreation(Number);
 				IsCreating = false;
 			}
 		}
-		public void OnCreation(int number){
-			if (/*Mouse.GetState().LeftButton == ButtonState.Pressed*/ IsClicking){
+		public void OnCreation(int Number){
+			if ( IsClicking){
                 for(int i = 0; i < 3; i++){
-    				if (number == i && !mouse.GetCollision.Intersects(Levels.Cards[i].GetCollision)){
+    				if (Number == i && !mouse.GetCollision.Intersects(Levels.Cards[i].GetCollision)){
 	    				Levels.Creature1 = new Creature(Levels.Cards[i].Content, MPosition - new Vector2(0, 32));
                     }
                 }
-				number = -1;
+				Number = -1;
 			}
 		}
 	}

@@ -14,7 +14,7 @@ namespace VirtusPecto.Desktop{
 		public Color[] Colors;
 		public bool isActivated;
 		public int OptionsNumber;
-        //protected int number;
+        //protected int Number;
 
         public OptionBox(){
             OptionsNumber = n();

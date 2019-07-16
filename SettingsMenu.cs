@@ -34,7 +34,7 @@ namespace VirtusPecto.Desktop{
             ResolutionBox.Collision();
 			SetFullscreen.Collision();
             SetJoystick.Collision();
-            if(Back.Intersects(mouse.GetCollision) && /*Mouse.GetState().LeftButton == ButtonState.Pressed*/IsClicking){
+            if(Back.Intersects(mouse.GetCollision) && IsClicking){
                 BackGroundColor = Color.DarkGreen;
                 LevelNumber = lastRoom;
                 Settings = null;
