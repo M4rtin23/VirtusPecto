@@ -17,26 +17,8 @@
     <File>/home/martin/Documentos/Projectos/C#/VirtusPecto/Content/Sprite2.png</File>
     <File>/home/martin/Documentos/Projectos/C#/VirtusPecto/Content/Sprite3.png</File>
     <File>/home/martin/Documentos/Projectos/C#/VirtusPecto/Content/Sprite4.png</File>
-    <File>/home/martin/Documentos/Projectos/C#/VirtusPecto/Content/Sprite5 (4).png</File>
+    <File>/home/martin/Documentos/Projectos/C#/VirtusPecto/Content/Sprite5.png</File>
     <File>/home/martin/Documentos/Projectos/C#/VirtusPecto/Content/SpriteFont.spritefont</File>
     <File>/home/martin/Documentos/Projectos/C#/VirtusPecto/Content/SpriteFontTemPlate.spritefont</File>
   </SourceFiles>
-  <DestFiles>
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-    <File>Sprite5.png</File>
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
-  </DestFiles>
 </SourceFileCollection>

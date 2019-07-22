@@ -3,10 +3,10 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using static VirtusPecto.Desktop.Level;
-using static GameMaker.MakerObject;
+using static GameBuilder.Builder;
 
 namespace VirtusPecto.Desktop{
-	public class Game1 : Game{
+	public class Game1 : GameBuilder.Game1{
 		//System.
         private static GraphicsDeviceManager graphics;
 		private SpriteBatch spriteBatch;
@@ -50,7 +50,7 @@ namespace VirtusPecto.Desktop{
 			graphics = new GraphicsDeviceManager(this);
 			graphics.PreferredBackBufferWidth = 1366;
             graphics.PreferredBackBufferHeight = 768;
-            Content.RootDirectory = "Content";
+            //Content.RootDirectory = "Content";
 			IsMouseVisible = true;
 			mouse = new GameMouse();
 			StartMenu = new Lobby();
@@ -58,11 +58,12 @@ namespace VirtusPecto.Desktop{
 	    }
 
         protected override void Initialize(){
+
 			base.Initialize();
         }
   
         protected override void LoadContent(){
-		    spriteBatch = new SpriteBatch(GraphicsDevice);
+            spriteBatch = new SpriteBatch(GraphicsDevice);
 			Logo = Content.Load<Texture2D>("Logo");
             Sprite0 = Content.Load<Texture2D>("Sprite0");
 			Sprite1 = Content.Load<Texture2D>("Sprite1");

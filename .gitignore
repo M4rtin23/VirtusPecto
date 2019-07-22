@@ -1,9 +1,5 @@
-bin/
-Game/
-obj/
-Properties/
 .vscode/
-app.manifest
-Compile.sh
-Compile v2.sh
-Content/
+bin/
+obj/
+Content/bin/
+Content/obj/

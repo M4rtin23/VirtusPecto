@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using static VirtusPecto.Desktop.Level;
 using static VirtusPecto.Desktop.Game1;
-using static GameMaker.MakerObject;
+using static GameBuilder.Builder;
 
 namespace VirtusPecto.Desktop{
 	public class Creature{
@@ -18,7 +18,7 @@ namespace VirtusPecto.Desktop{
 		private float dir;
 		private int targetDefiner = -1, lowestDistance = -1;
         private bool followPlayer;
-		public Rectangle Hitbox, r;
+		public Rectangle Hitbox/* , r*/;
         int time;
 		//public int hspeed, vspeed;
 

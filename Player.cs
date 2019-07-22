@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using static VirtusPecto.Desktop.Game1;
 using static VirtusPecto.Desktop.Level;
-using static GameMaker.MakerObject;
+using static GameBuilder.Builder;
 using static VirtusPecto.Desktop.CreatureDatabase;
 
 namespace VirtusPecto.Desktop{
@@ -122,11 +122,11 @@ namespace VirtusPecto.Desktop{
             }
             if (imageIndex >= 4){
                 imageIndex = 0;
-				animationSpeed = 0;
             }
         }
         float t = 0;
 		public void Draw(SpriteBatch sprBt){
+            DrawTriangle(sprBt, new Vector2(0, 0),new Vector2(500, 0),new Vector2(250,250));
             //DrawRectangle(spriteBatch, Sprite2, GetCollision, Color.White);
 //            spriteBatch.DrawString(Font,  ""+GetData(0).Atk , new Vector2(0, 72), Color.White);
             //DrawRectangle(spriteBatch, Sprite2, new Rectangle(GetCollision.Location-(GetCollision.Size.ToVector2()).ToPoint(), (GetCollision.Size.ToVector2()*2).ToPoint()), Color.White);
