@@ -10,7 +10,8 @@ namespace VirtusPecto.Desktop{
         public Rectangle GetCollision;
         public Vector2 position;
         public Color WordColor;
-		
+		bool checker;
+
         public SettingsButton(int x, int y){
             position = new Vector2(x, y);
             GetCollision = new Rectangle((int)position.X, (int)position.Y, 128, 32);
@@ -24,12 +25,15 @@ namespace VirtusPecto.Desktop{
             GetCollision = new Rectangle((int)position.X, (int)position.Y, 128, 32);            
             if (GetCollision.Intersects(mouse.GetCollision)){
                 WordColor = Color.Red;
-				if (/*mouse.GetMouseState.LeftButton == ButtonState.Pressed*/IsClicking){
-					System.Threading.Thread.Sleep(50);
+                if(IsClicking){
+                    checker = true;
+                }
+				if (/*mouse.GetMouseState.LeftButton == ButtonState.Pressed*/!IsClicking && checker){
                     Settings = new SettingsMenu(LevelNumber);
                     IsPaused = false;
                     LevelNumber = 2;
 					Button1.isActivated = false;
+                    checker = false;
                 }
             }
             else{

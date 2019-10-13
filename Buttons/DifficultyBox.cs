@@ -16,6 +16,7 @@ namespace VirtusPecto.Desktop{
         public bool isActivated;
         public int OptionsNumber;
 		public string Difficulty;
+        bool checker;
 
         public DifficultyBox(int x, int y){
             BoxSprite = Sprite2;
@@ -39,11 +40,18 @@ namespace VirtusPecto.Desktop{
 		}
 		public void Collision(){
             GetCollision = new Rectangle((int)BoxPosition.X, (int)BoxPosition.Y, 128, 32);
-            if(IsClicking && isActivated){
+            if(isActivated){
             }
-            if (GetCollision.Intersects(mouse.GetCollision) && IsClicking){
-                isActivated = !isActivated;
-                System.Threading.Thread.Sleep(50);
+            if (GetCollision.Intersects(mouse.GetCollision)){
+                if(IsClicking){
+                    checker = true;
+                }
+                if(!IsClicking && checker){
+                    isActivated = !isActivated;
+                    checker = false;
+                }
+            }else{
+                checker = false;
             }
             
             if (isActivated){

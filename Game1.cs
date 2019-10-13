@@ -10,13 +10,14 @@ namespace VirtusPecto.Desktop{
 		//System.
         private static GraphicsDeviceManager graphics;
 		private SpriteBatch spriteBatch;
-		public static Color BackGroundColor;
 		public static CreatureDatabase GetCreatureDatabase;
 		public static GameMouse mouse;
         private static Vector2 matrixPosition;
-        public static GameControl Joy;
+        public static GameControl Joystick;
         public static Matrix Mat;
 		public static GameTime GT;
+        public static Keys[] TheKeys = {Keys.W, Keys.A, Keys.S, Keys.D, Keys.Space, Keys.Escape, Keys.D1, Keys.D2, Keys.D3};
+        public static Buttons[] TheButtons = {Buttons.DPadUp, Buttons.DPadLeft, Buttons.DPadDown, Buttons.DPadRight, Buttons.RightShoulder, Buttons.Start, Buttons.X, Buttons.Y, Buttons.B};
 
         //Textures.
 		public static Texture2D Logo;
@@ -35,8 +36,9 @@ namespace VirtusPecto.Desktop{
 		public static int LevelNumber;
         public static bool WannaExit;
         public static bool IsClicking;
-        public static bool IsJoy;
+        public static bool IsJoystick;
         public static bool IsDescriptionOn = true;
+        bool checker;
 
         //Rooms.
 		public static Lobby StartMenu;
@@ -46,23 +48,23 @@ namespace VirtusPecto.Desktop{
 
 		public Game1(){
 			IsPaused = false;
-			BackGroundColor = Color.Black;
 			graphics = new GraphicsDeviceManager(this);
 			graphics.PreferredBackBufferWidth = 1366;
             graphics.PreferredBackBufferHeight = 768;
-            //Content.RootDirectory = "Content";
+            Content.RootDirectory = "Content";
 			IsMouseVisible = true;
 			mouse = new GameMouse();
-			StartMenu = new Lobby();
 			CreatureSprite = new Texture2D[6];
 	    }
 
         protected override void Initialize(){
-
 			base.Initialize();
+            StartMenu = new Lobby();
+
         }
   
         protected override void LoadContent(){
+            Back = Content.Load<Texture2D>("BG");
             spriteBatch = new SpriteBatch(GraphicsDevice);
 			Logo = Content.Load<Texture2D>("Logo");
             Sprite0 = Content.Load<Texture2D>("Sprite0");
@@ -71,7 +73,6 @@ namespace VirtusPecto.Desktop{
 			Sprite3 = Content.Load<Texture2D>("Sprite3");
 			Sprite4 = Content.Load<Texture2D>("Sprite4");
             Sprite5 = Content.Load<Texture2D>("Sprite5");
-            Back = Content.Load<Texture2D>("BG");
 			Font = Content.Load<SpriteFont>("SpriteFontTemPlate");
 			Font2 = Content.Load<SpriteFont>("SpriteFont");
 			for (int i = 0; i < CreatureSprite.Length; i++){
@@ -79,51 +80,17 @@ namespace VirtusPecto.Desktop{
 			}
 			GetCreatureDatabase = new CreatureDatabase();
 		}
-  
-        protected override void UnloadContent(){
-			
-		}
-        
         protected override void Update(GameTime gameTime){
             GT = gameTime;
-            if(LevelNumber == 1){
-                Mat = Camera.Follow(Levels.Player1.Position);
-            }
-            matrixPosition = - new Vector2(Mat.M41, Mat.M42);
-            mouse.SetMPosition(matrixPosition);
-            if(IsJoy){
-                if(Joy == null){
-                    Joy = new GameControl();
-                }
-            }else{
-                Joy = null;
-            }
-            Joy?.Update();
-            if(Mouse.GetState().LeftButton == ButtonState.Pressed){
-                IsClicking = true;
-            }else if(GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed && Joy != null){
-                IsClicking = true;
-            }else{
-                IsClicking = false;
-            }
-			if (GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape)){
-				IsPaused = !IsPaused;
-                System.Threading.Thread.Sleep(70);
-			}
-            if(GamePad.GetState(PlayerIndex.One).Buttons.BigButton == ButtonState.Pressed){
-                IsJoy = true;
-            }
+            matrix();
+            joystick();
+            pause();
+            mouse.Update();
+
             if(WannaExit){
                 Exit();
             }
-			if (Keyboard.GetState().IsKeyDown(Keys.Enter)) {
-				//Window.IsBorderless = true;
-				graphics.ApplyChanges();
-			}
-			if (!IsPaused) {
-				Pause = null;
-			}
-			mouse.Update();
+
 			switch(LevelNumber){
                 case 0:
                     StartMenu?.Update();
@@ -139,34 +106,26 @@ namespace VirtusPecto.Desktop{
                     IsPaused = false;
                     break;
             }
-        	if (IsPaused) {
-				if (Pause == null) {
-					Pause = new PauseMenu();
-				}
-				Pause?.Update();    
-            }
+        	
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime){
-			GraphicsDevice.Clear(BackGroundColor);
+			GraphicsDevice.Clear(Color.Black);
             if(LevelNumber == 1){
                 Mat = Camera.Follow(Levels.Player1.Position);
                 spriteBatch.Begin(transformMatrix: Mat);
                 Levels?.Draw(spriteBatch);
                 spriteBatch.End();
             }
-            spriteBatch.Begin();
-            //DrawTriangle(spriteBatch, Sprite2, new Vector2(Width()/2, 0), new Vector2(Width()/4,Height()/2), new Vector2(Width()/4*3,Height()/2));
-            //DrawTriangle(spriteBatch, Sprite2, new Vector2(Width()/2, 0), new Vector2(Width()/2-225,Height()/2), new Vector2(Width()/2+225,Height()/2));
 
+            spriteBatch.Begin();
             switch(LevelNumber){
 				case 0:
 	    			StartMenu?.Draw(spriteBatch);
 					break;
 				case 1:
                     Levels.DrawScreen(spriteBatch);
-					//Levels?.Draw();
 					break;
 				case 2:
     				Settings?.Draw(spriteBatch);
@@ -178,8 +137,7 @@ namespace VirtusPecto.Desktop{
 			spriteBatch.End();
 			base.Draw(gameTime);
         }
-
-
+        
         public static Vector2 GetMatrix(){
             return matrixPosition;
         }
@@ -201,6 +159,50 @@ namespace VirtusPecto.Desktop{
             graphics.IsFullScreen = state;
 	    	graphics.ApplyChanges();
         }
-
+        public static bool IsPressing(int index){
+            if(!IsJoystick){
+                return Keyboard.GetState().IsKeyDown(TheKeys[index]);
+            }else{
+                return GamePad.GetState(PlayerIndex.One).IsButtonDown(TheButtons[index]);
+            }
+        }
+        private void joystick(){
+            if(GamePad.GetState(PlayerIndex.One).Buttons.BigButton == ButtonState.Pressed){
+                IsJoystick = true;
+            }
+            if(IsJoystick){
+                if(Joystick == null){
+                    Joystick = new GameControl();
+                }
+            }else{
+                Joystick = null;
+            }
+            Joystick?.Update();
+        }
+        private void pause(){
+            if (IsPressing(5)){
+                checker = true;
+			}
+			if (!IsPressing(5) && checker){
+				IsPaused = !IsPaused;
+                checker = false;
+			}
+            if (!IsPaused) {
+				Pause = null;
+			}
+            if (IsPaused) {
+				if (Pause == null) {
+					Pause = new PauseMenu();
+				}
+				Pause?.Update();    
+            }
+        }
+        private void matrix(){
+            if(LevelNumber == 1){
+                Mat = Camera.Follow(Levels.Player1.Position);
+            }
+            matrixPosition = - new Vector2(Mat.M41, Mat.M42);
+            mouse.SetMPosition(matrixPosition);
+        }
     }
 }

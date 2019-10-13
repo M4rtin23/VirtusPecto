@@ -25,7 +25,6 @@ namespace VirtusPecto.Desktop{
 			}
 			toolBar = new ToolBar();
 			Player1 = new Player();
-			BackGroundColor = Color.DarkGreen;
             Cards = new Card[3];
 		}
 		public void Creation() {
@@ -60,7 +59,7 @@ namespace VirtusPecto.Desktop{
             }
 		}
 		public void Draw(SpriteBatch sprBt) {
-            Background.Draw(sprBt);
+            Background.Draw(sprBt, Player1.Position);
 			for (int i = 0; i < Fireballs.Length;i++){
 				if (Fireballs[i] != null){
 					Fireballs[i].Draw(sprBt);

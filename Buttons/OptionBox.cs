@@ -14,6 +14,7 @@ namespace VirtusPecto.Desktop{
 		public Color[] Colors;
 		public bool isActivated;
 		public int OptionsNumber;
+        bool checker;
         //protected int Number;
 
         public OptionBox(){
@@ -50,10 +51,15 @@ namespace VirtusPecto.Desktop{
         //Don't be lazy and change it.
             update();
 			if (hitbox.Intersects(mouse.GetCollision)){
-                if (/*mouse.GetMouseState.LeftButton == ButtonState.Pressed*/IsClicking){
-					isActivated = !isActivated;
-                    System.Threading.Thread.Sleep(50);
+                if(IsClicking){
+                    checker = true;
                 }
+                if (/*mouse.GetMouseState.LeftButton == ButtonState.Pressed*/!IsClicking && checker){
+					isActivated = !isActivated;
+                    checker = false;
+                }
+            }else{
+                checker = false;
             }
 			if (isActivated){
 				for (int i = 0; i < OptionsNumber; i++){

@@ -15,7 +15,6 @@ namespace VirtusPecto.Desktop{
         private int lastRoom;
         public Vector2 AspectRatio = new Vector2(16f, 9f);
         public SettingsMenu(int ln){
-            BackGroundColor = Color.Black;
             lastRoom = ln;
             ShowDescription = new CardDescription();
             SetJoystick = new Joystick(0, 0);
@@ -35,7 +34,6 @@ namespace VirtusPecto.Desktop{
 			SetFullscreen.Collision();
             SetJoystick.Collision();
             if(Back.Intersects(mouse.GetCollision) && IsClicking){
-                BackGroundColor = Color.DarkGreen;
                 LevelNumber = lastRoom;
                 Settings = null;
             }

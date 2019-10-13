@@ -8,13 +8,13 @@ namespace VirtusPecto.Desktop{
     public class Joystick : TickBox{
         public Joystick(float x, float y){
             name = "Joystick";
-            state = IsJoy;
+            state = IsJoystick;
         }
         protected override void update(){
             if(GamePad.GetState(PlayerIndex.One).Buttons.BigButton == ButtonState.Pressed){
                 state = true;
             }
-            IsJoy = state;
+            IsJoystick = state;
         }
     }
 }

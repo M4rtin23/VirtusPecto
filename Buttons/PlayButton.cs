@@ -15,6 +15,7 @@ namespace VirtusPecto.Desktop{
 		public Vector2 PlayPosition;
 		public Rectangle PlayRectangle;
 		public Color PlayColor;
+        bool checker;
 
         public PlayButton(int x, int y){
 			position = new Vector2(x, y);
@@ -33,9 +34,12 @@ namespace VirtusPecto.Desktop{
 			GetCollision = new Rectangle((int)position.X,(int)position.Y,64,32);            
 			if (GetCollision.Intersects(mouse.GetCollision)){
 				WordColor = Color.Red;
-				if (/*mouse.GetMouseState.LeftButton == ButtonState.Pressed*/IsClicking) {
+                if(IsClicking){
+                    checker = true;
+                }
+				if (/*mouse.GetMouseState.LeftButton == ButtonState.Pressed*/!IsClicking && checker) {
 					isActivated = !isActivated;
-					System.Threading.Thread.Sleep(50);
+                    checker = false;
 				}
 			}
 			else {

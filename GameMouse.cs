@@ -20,6 +20,13 @@ namespace VirtusPecto.Desktop{
             MPosition = Position + m;
         }
 		public void Update(){
+            if(Mouse.GetState().LeftButton == ButtonState.Pressed){
+                IsClicking = true;
+            }else if(GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed && Game1.Joystick != null){
+                IsClicking = true;
+            }else{
+                IsClicking = false;
+            }
 			GetMouseState = Mouse.GetState();
 			if (Keyboard.GetState().IsKeyDown(Keys.Q)){
 				Mouse.SetPosition((int)Levels.Player1.Position.X,(int) Levels.Player1.Position.Y);

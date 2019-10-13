@@ -9,15 +9,21 @@ namespace VirtusPecto.Desktop{
         protected string name;
 		protected Vector2 position;
 		public bool state;
+        bool checker;
 		public void Collision() {
             update();
 			if (mouse.GetCollision.Intersects(new Rectangle((int)position.X,(int) position.Y, 32, 32))) {
-				if (/*mouse.GetMouseState.LeftButton == ButtonState.Pressed*/IsClicking) {
+                if(IsClicking){
+                    checker = true;
+                }
+        		if (/*mouse.GetMouseState.LeftButton == ButtonState.Pressed*/!IsClicking && checker) {
                     state = !state;
 					action();
-                    System.Threading.Thread.Sleep(50);
+                    checker = false;
 				}
-			}
+			}else{
+                checker = false;
+            }
 		}
         public void SetPosition(float x, float y){
             position = new Vector2(x, y);

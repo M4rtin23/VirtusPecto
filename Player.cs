@@ -27,69 +27,46 @@ namespace VirtusPecto.Desktop{
 				Slot[i] = CreatureDatabase.GetData(5-i);
 			}
 		}
-		private void keyboard() {
-			animationSpeed = 0;
-			if (Keyboard.GetState().IsKeyDown(Keys.Space)) {
-                usePower();
-			}
-			if (Keyboard.GetState().IsKeyDown(Keys.L)) {
+        private void gameControl(){
+            if (Keyboard.GetState().IsKeyDown(Keys.L)) {
 				CreateFireBall(true, Levels.Enemy1[1].Position, 0, 0);
 			}
-            if (Keyboard.GetState().IsKeyDown(Keys.S)){
-                vspeed = 4;
-				animationSpeed = 0.125f;
-            }else if (Keyboard.GetState().IsKeyDown(Keys.W)){
-                vspeed = -4;
-				animationSpeed = 0.125f;
-			}else{
-				vspeed = 0;
-			}	
-			if (Keyboard.GetState().IsKeyDown(Keys.D)){
-				hspeed = 4;
-				animationSpeed = 0.125f;
-				effect = SpriteEffects.None;
-            }else if (Keyboard.GetState().IsKeyDown(Keys.A)){
-				hspeed = -4;
-				animationSpeed = 0.125f;
-				effect = SpriteEffects.FlipHorizontally;
-			}else{
-				hspeed = 0;
-			}
-		}
-        private void gameControl(){
-            //gamePad();
-            gameStrick();
-            if (GamePad.GetState(PlayerIndex.One).Buttons.RightShoulder == ButtonState.Pressed) {
+            gamePad();
+            if(IsJoystick){
+                gameStick();
+            }
+            if (IsPressing(4)) {
                 usePower();
 			}
-            if (GamePad.GetState(PlayerIndex.One).Buttons.X == ButtonState.Pressed) {
+            if (IsPressing(6)) {
                 mouse.Number = 0;
                 mouse.IsCreating = true;
 			}
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Y == ButtonState.Pressed) {
+            if (IsPressing(7)) {
                 mouse.Number = 1;
                 mouse.IsCreating = true;
 			}
-            if (GamePad.GetState(PlayerIndex.One).Buttons.B == ButtonState.Pressed) {
+            if (IsPressing(8)) {
                 mouse.Number = 2;
                 mouse.IsCreating = true;
 			}
         }
         private void gamePad() {
-            if (GamePad.GetState(PlayerIndex.One).DPad.Down == ButtonState.Pressed){
+            animationSpeed = 0;
+            if (IsPressing(2)){
                 vspeed = 4;
 				animationSpeed = 0.125f;
-            }else if (GamePad.GetState(PlayerIndex.One).DPad.Up == ButtonState.Pressed){
+            }else if (IsPressing(0)){
                 vspeed = -4;
 				animationSpeed = 0.125f;
 			}else{
 				vspeed = 0;
 			}	
-			if (GamePad.GetState(PlayerIndex.One).DPad.Right == ButtonState.Pressed){
+			if (IsPressing(3)){
 				hspeed = 4;
 				animationSpeed = 0.125f;
 				effect = SpriteEffects.None;
-            }else if (GamePad.GetState(PlayerIndex.One).DPad.Left == ButtonState.Pressed){
+            }else if (IsPressing(1)){
 				hspeed = -4;
 				animationSpeed = 0.125f;
 				effect = SpriteEffects.FlipHorizontally;
@@ -97,7 +74,7 @@ namespace VirtusPecto.Desktop{
 				hspeed = 0;
 			}
 		}
-        private void gameStrick(){
+        private void gameStick(){
             hspeed = GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X * (4);
             vspeed = GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.Y * (-4);
             if(hspeed != 0 || vspeed != 0){
@@ -115,27 +92,17 @@ namespace VirtusPecto.Desktop{
 			imageIndex += animationSpeed;
 			Position.X += hspeed;
 			Position.Y += vspeed;
-            if(IsJoy){
-                gameControl();
-            }else{
-                keyboard();
-            }
+            gameControl();
             if (imageIndex >= 4){
                 imageIndex = 0;
             }
         }
-        float t = 0;
 		public void Draw(SpriteBatch sprBt){
-            DrawTriangle(sprBt, new Vector2(0, 0),new Vector2(500, 0),new Vector2(250,250));
+            //DrawTriangle(sprBt, new Vector2(0, 0),new Vector2(500, 0),new Vector2(250,250));
             //DrawRectangle(spriteBatch, Sprite2, GetCollision, Color.White);
 //            spriteBatch.DrawString(Font,  ""+GetData(0).Atk , new Vector2(0, 72), Color.White);
             //DrawRectangle(spriteBatch, Sprite2, new Rectangle(GetCollision.Location-(GetCollision.Size.ToVector2()).ToPoint(), (GetCollision.Size.ToVector2()*2).ToPoint()), Color.White);
             sprBt.Draw(SpriteIndex, Position, new Rectangle(128 * (int)imageIndex, 0, 128, 128), Color.White, 0, new Vector2(64, 64), new Vector2(1, 1), effect, 0);
-            float x, y;
-            t+=0.125f;
-            x = Position.X + (float)SqrCos(t)*100;
-            y = Position.Y + (float)SqrSin(t)*100;
-            sprBt.Draw(Sprite2, new Vector2(x, y), Color.White);
         }
 		public void CreateFireBall(bool isEnemy, Vector2 Position, float d, float v){
 			if(GT.TotalGameTime.Milliseconds % 1000 == 0){
