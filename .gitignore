@@ -1,8 +1,10 @@
 .vscode/
 bin/
 obj/
-Content/bin/
-Content/obj/
+Content/bin
+Content/obj
+Content/bin/DesktopGL
+Content/obj/DesktopGL
 **/bin/
 **/obj/
 Compile\ v2.sh
