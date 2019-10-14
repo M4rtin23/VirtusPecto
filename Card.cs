@@ -9,7 +9,7 @@ using static VirtusPecto.Desktop.CreatureDatabase;
 namespace VirtusPecto.Desktop{
 	public class Card{
 		public Texture2D SpriteIndex;
-		public Rectangle GetCollision;
+		public Rectangle Hitbox;
 		public Vector2 Position;
 		public CardContent Content;
 		private int Number;
@@ -23,15 +23,15 @@ namespace VirtusPecto.Desktop{
 			addedY = 128;
 			SpriteIndex = Game1.Sprite1;
 			Position = new Vector2(0,0);
-			GetCollision = new Rectangle((int)Position.X, (int)Position.Y, SpriteIndex.Width, SpriteIndex.Height);
+			Hitbox = new Rectangle((int)Position.X, (int)Position.Y, SpriteIndex.Width, SpriteIndex.Height);
 		}
 		public void Update() {
-			GetCollision = new Rectangle((int)(Position.X-SpriteIndex.Width/2), (int)(Position.Y-SpriteIndex.Height/2), SpriteIndex.Width, SpriteIndex.Height);
+			Hitbox = new Rectangle((int)(Position.X-SpriteIndex.Width/2), (int)(Position.Y-SpriteIndex.Height/2), SpriteIndex.Width, SpriteIndex.Height);
 			Position.Y = Height() + addedY  - 64*(1-Math.Abs(Number-1)) - 32;
 			Position.X = Width() / 2 + SpriteIndex.Width * (Number-1);
             //Position.X = Width() * (Number+1) / 4;
 			if (!mouse.IsCreating && Levels.Creature1 == null /*Levels.Player1.Mana >= 50*/){
-				if (GetCollision.Intersects(mouse.GetCollision)){
+				if (Hitbox.Intersects(mouse.Hitbox)){
                     if(addedY > 0){
                         addedY -= 16;
                     }
@@ -59,7 +59,7 @@ namespace VirtusPecto.Desktop{
             float rot = ((float)addedY)/256f * (Number-1);
             sprBt.Draw(SpriteIndex, Position, null, color, rot, SpriteIndex.Bounds.Size.ToVector2()/2, 1,SpriteEffects.None, 1);
 			sprBt.Draw(Content.Sprite, new Vector2(Position.X, Position.Y), new Rectangle(2 * 128, 0, 128, 128), Color.White, rot, new Vector2(64,160), 1, SpriteEffects.None, 0);
-            if (GetCollision.Intersects(mouse.GetCollision) && !mouse.IsCreating){
+            if (Hitbox.Intersects(mouse.Hitbox) && !mouse.IsCreating){
                 if(IsDescriptionOn){
                     string description = Content.Name + "*Atk: " + Content.Atk+"*HP: "+Content.HP+"*Speed: "+ Content.Spd;
                     description = description.Replace("*", System.Environment.NewLine);

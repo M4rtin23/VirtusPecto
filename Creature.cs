@@ -7,20 +7,14 @@ using static VirtusPecto.Desktop.Game1;
 using static GameBuilder.Builder;
 
 namespace VirtusPecto.Desktop{
-	public class Creature{
-		public Vector2 Position;
-		public Texture2D SpriteIndex;
-		public double ImageIndex, AnimationSpeed;
+	public class Creature : GameBuilder.ObjectBuilder{
 		public int CreatureTime = 360;
-		protected SpriteEffects effect;
 		private Vector2 Target;
-		private float vspeed, hspeed, maxSpeed, dist;
+		private float maxSpeed, dist;
 		private float dir;
 		private int targetDefiner = -1, lowestDistance = -1;
         private bool followPlayer;
-		public Rectangle Hitbox/* , r*/;
         int time;
-		//public int hspeed, vspeed;
 
 		public Creature(CardContent content,Vector2 pos){
 			Hitbox = new Rectangle((int)pos.X,(int) pos.Y,128,128);
@@ -30,7 +24,7 @@ namespace VirtusPecto.Desktop{
 			Position = pos;
 			SetTarget();
         }
-		public void Update() {
+		public override void Update() {
             if(time - GT.TotalGameTime.Minutes > 4){
                 SetTarget();
             }
@@ -49,7 +43,7 @@ namespace VirtusPecto.Desktop{
             //Behaviors.
             if(!followPlayer){
 		        Follow(Target, Position, 128 + dist);
-                if(hspeed == 0 && vspeed == 0 && dist > 0 && dist > CalculateDistance(Position, Target)/2){
+                if(speed.X == 0 && speed.Y == 0 && dist > 0 && dist > CalculateDistance(Position, Target)/2){
                     Levels.Player1.CreateFireBall(false, Position, (float)CalculateAngle(Position, Target), 0);
                 }
                 if (targetDefiner != -1){
@@ -66,58 +60,47 @@ namespace VirtusPecto.Desktop{
                 Follow(Levels.Player1.Position, Position, 128);
                 SetTarget();
             }
-            
-            if(hspeed != 0 || vspeed != 0){
-                AnimationSpeed = 0.125;
+            if(speed == Vector2.Zero){
+                imageIndex = 2;
+            }else{
+                animationSpeed = 0.125f;                
             }
-			ImageIndex += AnimationSpeed;         
-			if (ImageIndex >= 4){
-                ImageIndex = 0;
-                AnimationSpeed = 0;
-            }
-            if(hspeed == 0 && vspeed == 0){
-                ImageIndex = 2;
-            }
-            Position.X += hspeed;
-	        Position.Y += vspeed;
+			animationImage(4);
+            base.Update();
 		}
         
-		public void Draw(SpriteBatch sprBt) {
+		public override void Draw(SpriteBatch sprBt) {
             //DrawRectangle(spriteBatch, Sprite2, Hitbox, Color.White);
-            sprBt.Draw(SpriteIndex, Position, new Rectangle((int)ImageIndex*128, 0, 128, 128), Color.White, 0, new Vector2(64, 64), new Vector2(1, 1), effect, 0);
-		}
+            stripToSprite(4);
+            center(4);
+            base.Draw(sprBt);
+        }
 		private void Follow(Vector2 objPosition, Vector2 selfPosition, float hitboxSize){
-			AnimationSpeed = 0;
 			if(CalculateDistance(selfPosition, objPosition) > hitboxSize && (selfPosition.X != objPosition.X && selfPosition.Y != objPosition.Y)){
             	dir = (float) CalculateAngle(selfPosition, objPosition);
-				if(Hitbox.Intersects(Levels.Player1.GetCollision)){
-                    dir = dir -90;
-                }
-                vspeed = (float) CalculateVspeed(maxSpeed, dir);
-				hspeed = (float) CalculateHspeed(maxSpeed, dir);
+                speed = CalculateVectorSpeed(maxSpeed, dir);
 			}else{
-				vspeed = 0;
-				hspeed = 0;
+				speed = Vector2.Zero;
 			}
 		}
 		public void Follow2(Vector2 Target, Vector2 Position, float hitboxSize){
 			if (Target.X - hitboxSize/2 > Position.X){
-                hspeed = maxSpeed;
+                speed.X = maxSpeed;
 			}
             else
             if (Target.X + hitboxSize/2 < Position.X){
-                hspeed = -maxSpeed;
+                speed.X = -maxSpeed;
             }else{
-                hspeed = 0;
+                speed.X = 0;
             }
 			if (Target.Y - hitboxSize/2 > Position.Y){
-                vspeed = maxSpeed;
+                speed.Y = maxSpeed;
             }
             else
             if (Target.Y + hitboxSize/2 < Position.Y){
-                vspeed = -maxSpeed;
+                speed.Y = -maxSpeed;
 			}else{
-                vspeed = 0;
+                speed.Y = 0;
             }
 		}
 		public void SetTarget(){

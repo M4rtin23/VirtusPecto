@@ -7,7 +7,7 @@ using static VirtusPecto.Desktop.Lobby;
 
 namespace VirtusPecto.Desktop{
     public class PlayButton{
-		public Rectangle GetCollision;
+		public Rectangle Hitbox;
 		private Vector2 position;
 		public Color WordColor;
 		public bool isActivated;
@@ -19,7 +19,7 @@ namespace VirtusPecto.Desktop{
 
         public PlayButton(int x, int y){
 			position = new Vector2(x, y);
-			GetCollision = new Rectangle((int)position.X,(int)position.Y,64,32);
+			Hitbox = new Rectangle((int)position.X,(int)position.Y,64,32);
 			PlayPosition = new Vector2(0, 0);
 			//HardnessBox = new DifficultyBox((int)position.X+128,(int)position.Y+44);
 			PlayRectangle = new Rectangle((int)PlayPosition.X,(int) PlayPosition.Y, 128, 32);
@@ -31,8 +31,8 @@ namespace VirtusPecto.Desktop{
 		public void Collision() {
 			PlayPosition = new Vector2(position.X + 256, position.Y);
 			PlayRectangle = new Rectangle((int)PlayPosition.X,(int) PlayPosition.Y, 128, 32);
-			GetCollision = new Rectangle((int)position.X,(int)position.Y,64,32);            
-			if (GetCollision.Intersects(mouse.GetCollision)){
+			Hitbox = new Rectangle((int)position.X,(int)position.Y,64,32);            
+			if (Hitbox.Intersects(mouse.Hitbox)){
 				WordColor = Color.Red;
                 if(IsClicking){
                     checker = true;
@@ -51,7 +51,7 @@ namespace VirtusPecto.Desktop{
                 }
                 HardnessBox.BoxPosition = position+ new Vector2(128, 0);
 				HardnessBox.Collision();
-				if (PlayRectangle.Intersects(mouse.GetCollision)) {
+				if (PlayRectangle.Intersects(mouse.Hitbox)) {
 					PlayColor = Color.Red;
 					if (/*mouse.GetMouseState.LeftButton == ButtonState.Pressed*/IsClicking) {
 						LevelNumber = 1;

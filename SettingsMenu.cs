@@ -33,7 +33,7 @@ namespace VirtusPecto.Desktop{
             ResolutionBox.Collision();
 			SetFullscreen.Collision();
             SetJoystick.Collision();
-            if(Back.Intersects(mouse.GetCollision) && IsClicking){
+            if(Back.Intersects(mouse.Hitbox) && IsClicking){
                 LevelNumber = lastRoom;
                 Settings = null;
             }

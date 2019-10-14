@@ -18,7 +18,7 @@ namespace VirtusPecto.Desktop{
 		}
 		public void Update() {
 			settings.Collision();
-			if (ContinueRectangle.Intersects(mouse.GetCollision)){
+			if (ContinueRectangle.Intersects(mouse.Hitbox)){
 				if (/*mouse.GetMouseState.LeftButton == ButtonState.Pressed*/IsClicking) {
 					IsPaused = false;
 				}
@@ -27,7 +27,7 @@ namespace VirtusPecto.Desktop{
 			else {
 				ContinueColor = Color.White;            
 			}
-			if (MainMenuRectangle.Intersects(mouse.GetCollision)){
+			if (MainMenuRectangle.Intersects(mouse.Hitbox)){
 				if (/*mouse.GetMouseState.LeftButton == ButtonState.Pressed*/IsClicking) {
                     Levels = null;
 					IsPaused = false;
@@ -38,7 +38,7 @@ namespace VirtusPecto.Desktop{
             }else {
                 MainMenuColor = Color.White;            
             }
-			if (ExitRectangle.Intersects(mouse.GetCollision)){
+			if (ExitRectangle.Intersects(mouse.Hitbox)){
 				ExitColor = Color.Red;
 				if (/*mouse.GetMouseState.LeftButton == ButtonState.Pressed*/IsClicking) {
 					WannaExit = true;

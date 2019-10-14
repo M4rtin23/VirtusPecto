@@ -7,52 +7,45 @@ using static VirtusPecto.Desktop.Game1;
 using static GameBuilder.Builder;
 
 namespace VirtusPecto.Desktop{    
-	public class FireBall{
+	public class FireBall : GameBuilder.ObjectBuilder{
 		private bool isDangerous;
-		public Vector2 Position;
-		public Rectangle GetCollision;
-        private float imageIndex;
-        private float hspeed, vspeed;
-        private float rotation;
 		//True = emited by the enemy && False = emited by de user
-		public FireBall(bool emiter, Vector2 initialPosition, float hs, float vs){
-			isDangerous = emiter;
+		public FireBall(bool emiter, Vector2 initialPosition, Vector2 speed){
+			SpriteIndex = Sprite5;
+            isDangerous = emiter;
 			Position = initialPosition;
-            vspeed = vs;
-            hspeed = hs;
-            rotation = (float)CalculateDirection(hspeed, vspeed);
+            this.speed = speed;
+            rot = MathHelper.ToRadians(180 - (float)CalculateDirection(speed.X, speed.Y));
     	}
-		public void Update() {
-            imageIndex+=0.25f;
-            if (imageIndex > 3){
-                imageIndex = 0;
-            }
-			GetCollision = new Rectangle((int)Position.X - 32,(int) Position.Y - 32, 96, 96);         
-			Position.X += hspeed;
-            Position.Y += vspeed;
+		public override void Update() {
+            animationSpeed = 0.25f;
+            animationImage(3);
+			Hitbox = new Rectangle((int)Position.X - 32,(int) Position.Y - 32, 96, 96);         
 			if (isDangerous) {
 				PlayerCollision();
 			}else{
 				EnemyCollision();
 			}
+            base.Update();
 		}
 		public void EnemyCollision() {
 			for (int i = 0; i < Levels.Enemy1.Length; i++) {
 				if (Levels.Enemy1[i] != null){
-					if (GetCollision.Intersects(Levels.Enemy1[i].GetCollision)){
+					if (Hitbox.Intersects(Levels.Enemy1[i].Hitbox)){
 						Levels.Enemy1[i] = null;
 					}
 				}
 			}
 		}
 		public void PlayerCollision() {
-			if (GetCollision.Intersects(Levels.Player1.GetCollision)) {
+			if (Hitbox.Intersects(Levels.Player1.Hitbox)) {
 				Levels.Player1.Health -= 10;
 			}
 		}
-		public void Draw(SpriteBatch sprBt) {
-            //DrawRectangle(spriteBatch, Sprite2, GetCollision, Color.White);
-            sprBt.Draw(Sprite5, Position, new Rectangle(0, 128 * (int)imageIndex, 128, 128), Color.White, (180-rotation)/180*(float)Math.PI, new Vector2(64, 64), new Vector2(1, 1),/* effect*/SpriteEffects.None, 0);
-		}
+		public override void Draw(SpriteBatch sprBt) {
+            center(4);
+            stripToSprite(4);
+            base.Draw(sprBt);
+        }
   	}
 }

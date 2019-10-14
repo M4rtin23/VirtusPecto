@@ -7,14 +7,14 @@ using static VirtusPecto.Desktop.Lobby;
 
 namespace VirtusPecto.Desktop{
     public class SettingsButton{
-        public Rectangle GetCollision;
+        public Rectangle Hitbox;
         public Vector2 position;
         public Color WordColor;
 		bool checker;
 
         public SettingsButton(int x, int y){
             position = new Vector2(x, y);
-            GetCollision = new Rectangle((int)position.X, (int)position.Y, 128, 32);
+            Hitbox = new Rectangle((int)position.X, (int)position.Y, 128, 32);
         }
         public void SetPosition(float x, float y){
             position.X = x;
@@ -22,8 +22,8 @@ namespace VirtusPecto.Desktop{
         }
 
         public void Collision(){
-            GetCollision = new Rectangle((int)position.X, (int)position.Y, 128, 32);            
-            if (GetCollision.Intersects(mouse.GetCollision)){
+            Hitbox = new Rectangle((int)position.X, (int)position.Y, 128, 32);            
+            if (Hitbox.Intersects(mouse.Hitbox)){
                 WordColor = Color.Red;
                 if(IsClicking){
                     checker = true;

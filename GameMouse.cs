@@ -9,7 +9,7 @@ namespace VirtusPecto.Desktop{
 	public class GameMouse{
 		public MouseState GetMouseState;
 		public Vector2 Position, MPosition;
-		public Rectangle GetCollision;
+		public Rectangle Hitbox;
 		public bool IsCreating;
 		public int Number;
 
@@ -33,7 +33,7 @@ namespace VirtusPecto.Desktop{
 			}
 			//Position = new Vector2(GetMouseState.X, GetMouseState.Y);
             Position = Mouse.GetState().Position.ToVector2();
-			GetCollision = new Rectangle((int)Position.X, (int)Position.Y, 1, 1);
+			Hitbox = new Rectangle((int)Position.X, (int)Position.Y, 1, 1);
             if(Game1.Levels == null){
                 IsCreating = false;
             }
@@ -45,7 +45,7 @@ namespace VirtusPecto.Desktop{
 		public void OnCreation(int Number){
 			if ( IsClicking){
                 for(int i = 0; i < 3; i++){
-    				if (Number == i && !mouse.GetCollision.Intersects(Levels.Cards[i].GetCollision)){
+    				if (Number == i && !mouse.Hitbox.Intersects(Levels.Cards[i].Hitbox)){
 	    				Levels.Creature1 = new Creature(Levels.Cards[i].Content, MPosition - new Vector2(0, 32));
                     }
                 }

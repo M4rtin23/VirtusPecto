@@ -6,7 +6,7 @@ using static VirtusPecto.Desktop.Game1;
 
 namespace VirtusPecto.Desktop{
     public class DifficultyBox{
-		public Rectangle GetCollision;
+		public Rectangle Hitbox;
         public Texture2D BoxSprite;
         public Vector2 BoxPosition;
         public Color color;
@@ -27,7 +27,7 @@ namespace VirtusPecto.Desktop{
             Colors = new Color[OptionsNumber];
             Rectangles = new Rectangle[OptionsNumber];
             BoxPosition = new Vector2(x,y);
-            GetCollision = new Rectangle((int)BoxPosition.X, (int)BoxPosition.Y, 128, 32);
+            Hitbox = new Rectangle((int)BoxPosition.X, (int)BoxPosition.Y, 128, 32);
 
 			Options[0] = "Easy";
 			Options[1] = "Normal";
@@ -39,10 +39,10 @@ namespace VirtusPecto.Desktop{
             }
 		}
 		public void Collision(){
-            GetCollision = new Rectangle((int)BoxPosition.X, (int)BoxPosition.Y, 128, 32);
+            Hitbox = new Rectangle((int)BoxPosition.X, (int)BoxPosition.Y, 128, 32);
             if(isActivated){
             }
-            if (GetCollision.Intersects(mouse.GetCollision)){
+            if (Hitbox.Intersects(mouse.Hitbox)){
                 if(IsClicking){
                     checker = true;
                 }
@@ -56,7 +56,7 @@ namespace VirtusPecto.Desktop{
             
             if (isActivated){
                 for (int i = 0; i < OptionsNumber; i++){
-                    if (mouse.GetCollision.Intersects(Rectangles[i])){
+                    if (mouse.Hitbox.Intersects(Rectangles[i])){
                         if (/*mouse.GetMouseState.LeftButton == ButtonState.Pressed*/IsClicking){
 							Difficulty = Options[i];
                             isActivated = false;
