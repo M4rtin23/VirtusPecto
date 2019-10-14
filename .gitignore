@@ -3,3 +3,7 @@ bin/
 obj/
 Content/bin/
 Content/obj/
+**/bin/
+**/obj/
+Compile\ v2.sh
+Compile.sh
