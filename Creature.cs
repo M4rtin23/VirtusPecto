@@ -11,7 +11,6 @@ namespace VirtusPecto.Desktop{
 		public int CreatureTime = 360;
 		private Vector2 Target;
 		private float maxSpeed, dist;
-		private float dir;
 		private int targetDefiner = -1, lowestDistance = -1;
         private bool followPlayer;
         int time;
@@ -42,7 +41,7 @@ namespace VirtusPecto.Desktop{
             }
             //Behaviors.
             if(!followPlayer){
-		        Follow(Target, Position, 128 + dist);
+		        speed = Follow(Target, Position, 128 + dist, maxSpeed);
                 if(speed.X == 0 && speed.Y == 0 && dist > 0 && dist > CalculateDistance(Position, Target)/2){
                     Levels.Player1.CreateFireBall(false, Position, (float)CalculateAngle(Position, Target), 0);
                 }
@@ -57,7 +56,7 @@ namespace VirtusPecto.Desktop{
                     SetTarget();
                 }
             }else{
-                Follow(Levels.Player1.Position, Position, 128);
+                speed = Follow(Levels.Player1.Position, Position, 128, maxSpeed);
                 SetTarget();
             }
             if(speed == Vector2.Zero){
@@ -75,14 +74,6 @@ namespace VirtusPecto.Desktop{
             center(4);
             base.Draw(sprBt);
         }
-		private void Follow(Vector2 objPosition, Vector2 selfPosition, float hitboxSize){
-			if(CalculateDistance(selfPosition, objPosition) > hitboxSize && (selfPosition.X != objPosition.X && selfPosition.Y != objPosition.Y)){
-            	dir = (float) CalculateAngle(selfPosition, objPosition);
-                speed = CalculateVectorSpeed(maxSpeed, dir);
-			}else{
-				speed = Vector2.Zero;
-			}
-		}
 		public void Follow2(Vector2 Target, Vector2 Position, float hitboxSize){
 			if (Target.X - hitboxSize/2 > Position.X){
                 speed.X = maxSpeed;
