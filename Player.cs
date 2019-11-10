@@ -26,7 +26,7 @@ namespace VirtusPecto.Desktop{
             if(IsJoystick){
                 gameStick();
             }
-            if (IsPressing(4)) {
+            if (IsPressing(4) && PowerButton.CanShoot()) {
                 usePower();
 			}
             if (IsPressing(6)) {
@@ -66,8 +66,7 @@ namespace VirtusPecto.Desktop{
 			}
 		}
         private void gameStick(){
-            speed.X = GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X * (4);
-            speed.Y = GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.Y * (-4);
+            speed = GamePad.GetState(PlayerIndex.One).ThumbSticks.Left * (4);
             if(speed.X != 0 || speed.Y != 0){
                 animationSpeed = 0.125f;
             }
@@ -97,11 +96,11 @@ namespace VirtusPecto.Desktop{
             base.Draw(sprBt);
         }
 		public void CreateFireBall(bool isEnemy, Vector2 Position, float d, float v){
-			if(GT.TotalGameTime.Milliseconds % 1000 == 0){
+		//	if(GT.TotalGameTime.Milliseconds % 1000 == 0){
 				Array.Resize(ref Levels.Fireballs, Levels.Fireballs.Length+1);
 				Levels.Fireballs[Levels.Fireballs.Length-1] = new FireBall(isEnemy, Position, CalculateVectorSpeed(6, d));
                 v -= 10;
-            }
+        //    }
 		}
         public void Lightning(Vector2 pos, Vector2 otherPos, float s, SpriteBatch sprBt){
             //float s = (float)(CalculateDistance(pos, otherPos))/128;
@@ -117,6 +116,9 @@ namespace VirtusPecto.Desktop{
         }
         private void usePower(){
 			CreateFireBall(false, Position,(float) CalculateAngle(Position, Game1.mouse.MPosition), Mana);
+        }
+        public float Dir(){
+            return (float)CalculateDirection(-speed.X, -speed.Y);
         }
     }
 }

@@ -27,6 +27,7 @@ namespace VirtusPecto.Desktop{
 		public static Texture2D Sprite3;
 		public static Texture2D Sprite4;
         public static Texture2D Sprite5;
+        public static Texture2D Power;
 		public static Texture2D[] CreatureSprite;
         public static Texture2D Back;
 		public static SpriteFont Font, Font2;
@@ -73,6 +74,7 @@ namespace VirtusPecto.Desktop{
 			Sprite3 = Content.Load<Texture2D>("Sprite3");
 			Sprite4 = Content.Load<Texture2D>("Sprite4");
             Sprite5 = Content.Load<Texture2D>("Sprite5");
+            Power = Content.Load<Texture2D>("Power");
 			Font = Content.Load<SpriteFont>("SpriteFontTemPlate");
 			Font2 = Content.Load<SpriteFont>("SpriteFont");
 			for (int i = 0; i < CreatureSprite.Length; i++){

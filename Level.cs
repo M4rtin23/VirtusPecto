@@ -15,7 +15,9 @@ namespace VirtusPecto.Desktop{
 		public ToolBar toolBar;
 		public FireBall[] Fireballs;
         public GameTime Gametime;
+        private PowerButton button;
 		public Level(int EnemyQuantity){
+            button = new PowerButton();
             Gametime = new GameTime();
             Background = new BackGround(Back);
 			Fireballs = new FireBall[0];
@@ -34,6 +36,7 @@ namespace VirtusPecto.Desktop{
 			Cards[2] = new Card(2, Color.DarkBlue);
 		}
 		public void Update() {
+            button.Update();
 			if (Keyboard.GetState().IsKeyDown(Keys.N)) {
 	            Enemy1[0] = new Enemy((int)Player1.Position.X,(int) Player1.Position.Y);
             }
@@ -74,6 +77,7 @@ namespace VirtusPecto.Desktop{
 			}
 		}
         public void DrawScreen(SpriteBatch sprBt){
+            button.Draw(sprBt);
             if(Creature1 != null){
                 sprBt.DrawString(Font, ""+Creature1.Position, new Vector2(32, 32), Color.White);
                 sprBt.DrawString(Font, ""+Creature1.GetHashCode(), new Vector2(32, 64), Color.White);

@@ -42,7 +42,7 @@ namespace VirtusPecto.Desktop{
             //Behaviors.
             if(!followPlayer){
 		        speed = Follow(Target, Position, 128 + dist, maxSpeed);
-                if(speed.X == 0 && speed.Y == 0 && dist > 0 && dist > CalculateDistance(Position, Target)/2){
+                if(speed.X == 0 && speed.Y == 0 && dist > 0 && dist > CalculateDistance(Position, Target)/2 && (GT.TotalGameTime.Milliseconds % 1000 == 0)){
                     Levels.Player1.CreateFireBall(false, Position, (float)CalculateAngle(Position, Target), 0);
                 }
                 if (targetDefiner != -1){
