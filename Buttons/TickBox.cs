@@ -12,11 +12,11 @@ namespace VirtusPecto.Desktop{
         bool checker;
 		public void Collision() {
             update();
-			if (mouse.Hitbox.Intersects(new Rectangle((int)position.X,(int) position.Y, 32, 32))) {
+			if (Mouse1.Hitbox.Intersects(new Rectangle((int)position.X,(int) position.Y, 32, 32))) {
                 if(IsClicking){
                     checker = true;
                 }
-        		if (/*mouse.GetMouseState.LeftButton == ButtonState.Pressed*/!IsClicking && checker) {
+        		if (/*Mouse1.GetMouseState.LeftButton == ButtonState.Pressed*/!IsClicking && checker) {
                     state = !state;
 					action();
                     checker = false;

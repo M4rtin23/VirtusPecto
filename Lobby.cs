@@ -31,9 +31,9 @@ namespace VirtusPecto.Desktop{
             }
 			Button1.Collision();
 			Button2.Collision();
-            if (ExitRectangle.Intersects(mouse.Hitbox)){
+            if (ExitRectangle.Intersects(Mouse1.Hitbox)){
 				ExitColor = Color.Red;
-				if (/*mouse.GetMouseState.LeftButton == ButtonState.Pressed*/IsClicking) {
+				if (/*Mouse1.GetMouseState.LeftButton == ButtonState.Pressed*/IsClicking) {
 					WannaExit = true;
 				}
             }else {

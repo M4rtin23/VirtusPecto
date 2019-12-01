@@ -50,11 +50,11 @@ namespace VirtusPecto.Desktop{
         //Don't be lazy and change it.
         //Don't be lazy and change it.
             update();
-			if (hitbox.Intersects(mouse.Hitbox)){
+			if (hitbox.Intersects(Mouse1.Hitbox)){
                 if(IsClicking){
                     checker = true;
                 }
-                if (/*mouse.GetMouseState.LeftButton == ButtonState.Pressed*/!IsClicking && checker){
+                if (/*Mouse1.GetMouseState.LeftButton == ButtonState.Pressed*/!IsClicking && checker){
 					isActivated = !isActivated;
                     checker = false;
                 }
@@ -64,8 +64,8 @@ namespace VirtusPecto.Desktop{
 			if (isActivated){
 				for (int i = 0; i < OptionsNumber; i++){
                     Rectangle r = new Rectangle((int)Position.X, (int)Position.Y + (1 + i)*32, 128, 32);
-					if (mouse.Hitbox.Intersects(r)){
-						if (/*mouse.GetMouseState.LeftButton == ButtonState.Pressed*/IsClicking){
+					if (Mouse1.Hitbox.Intersects(r)){
+						if (/*Mouse1.GetMouseState.LeftButton == ButtonState.Pressed*/IsClicking){
                             action(i);
                             isActivated = false;
 						}

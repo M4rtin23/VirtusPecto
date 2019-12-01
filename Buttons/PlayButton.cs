@@ -32,12 +32,12 @@ namespace VirtusPecto.Desktop{
 			PlayPosition = new Vector2(position.X + 256, position.Y);
 			PlayRectangle = new Rectangle((int)PlayPosition.X,(int) PlayPosition.Y, 128, 32);
 			Hitbox = new Rectangle((int)position.X,(int)position.Y,64,32);            
-			if (Hitbox.Intersects(mouse.Hitbox)){
+			if (Hitbox.Intersects(Mouse1.Hitbox)){
 				WordColor = Color.Red;
                 if(IsClicking){
                     checker = true;
                 }
-				if (/*mouse.GetMouseState.LeftButton == ButtonState.Pressed*/!IsClicking && checker) {
+				if (/*Mouse1.GetMouseState.LeftButton == ButtonState.Pressed*/!IsClicking && checker) {
 					isActivated = !isActivated;
                     checker = false;
 				}
@@ -51,10 +51,10 @@ namespace VirtusPecto.Desktop{
                 }
                 HardnessBox.BoxPosition = position+ new Vector2(128, 0);
 				HardnessBox.Collision();
-				if (PlayRectangle.Intersects(mouse.Hitbox)) {
+				if (PlayRectangle.Intersects(Mouse1.Hitbox)) {
 					PlayColor = Color.Red;
-					if (/*mouse.GetMouseState.LeftButton == ButtonState.Pressed*/IsClicking) {
-						LevelNumber = 1;
+					if (/*Mouse1.GetMouseState.LeftButton == ButtonState.Pressed*/IsClicking) {
+                        Game1.GoToLevel(1);
                         switch(HardnessBox.Difficulty){
                             case "Easy":
 				        		Levels = new Level(0);

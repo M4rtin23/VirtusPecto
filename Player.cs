@@ -30,16 +30,16 @@ namespace VirtusPecto.Desktop{
                 usePower();
 			}
             if (IsPressing(6)) {
-                mouse.Number = 0;
-                mouse.IsCreating = true;
+                Mouse1.Number = 0;
+                Mouse1.IsCreating = true;
 			}
             if (IsPressing(7)) {
-                mouse.Number = 1;
-                mouse.IsCreating = true;
+                Mouse1.Number = 1;
+                Mouse1.IsCreating = true;
 			}
             if (IsPressing(8)) {
-                mouse.Number = 2;
-                mouse.IsCreating = true;
+                Mouse1.Number = 2;
+                Mouse1.IsCreating = true;
 			}
         }
         private void gameArrow() {
@@ -115,7 +115,7 @@ namespace VirtusPecto.Desktop{
             sprBt.Draw(Sprite2, pos, null, color, r, new Vector2(0 ,16), new Vector2(s, 1/32f*size), SpriteEffects.None, 0);
         }
         private void usePower(){
-			CreateFireBall(false, Position,(float) CalculateAngle(Position, Game1.mouse.MPosition), Mana);
+			CreateFireBall(false, Position,(float) CalculateAngle(Position, Game1.Mouse1.MPosition), Mana);
         }
         public float Dir(){
             return (float)CalculateDirection(-speed.X, -speed.Y);

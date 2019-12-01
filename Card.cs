@@ -30,15 +30,15 @@ namespace VirtusPecto.Desktop{
 			Position.Y = Height() + addedY  - 64*(1-Math.Abs(Number-1)) - 32;
 			Position.X = Width() / 2 + SpriteIndex.Width * (Number-1);
             //Position.X = Width() * (Number+1) / 4;
-			if (!mouse.IsCreating && Levels.Creature1 == null /*Levels.Player1.Mana >= 50*/){
-				if (Hitbox.Intersects(mouse.Hitbox)){
+			if (!Mouse1.IsCreating && Levels.Creature1 == null /*Levels.Player1.Mana >= 50*/){
+				if (Hitbox.Intersects(Mouse1.Hitbox)){
                     if(addedY > 0){
                         addedY -= 16;
                     }
 					if (IsClicking){
 						addedY = 128;
-						mouse.Number = Number;
-						mouse.IsCreating = true;
+						Mouse1.Number = Number;
+						Mouse1.IsCreating = true;
 					}
 				}else{
                     if(addedY < 128){
@@ -50,7 +50,7 @@ namespace VirtusPecto.Desktop{
 			}
 		}
 		public void Draw(SpriteBatch sprBt){
-			if (!mouse.IsCreating && Levels.Creature1 == null){
+			if (!Mouse1.IsCreating && Levels.Creature1 == null){
 				color = cardColor;
 			}
 			else {
@@ -59,13 +59,13 @@ namespace VirtusPecto.Desktop{
             float rot = ((float)addedY)/256f * (Number-1);
             sprBt.Draw(SpriteIndex, Position, null, color, rot, SpriteIndex.Bounds.Size.ToVector2()/2, 1,SpriteEffects.None, 1);
 			sprBt.Draw(Content.Sprite, new Vector2(Position.X, Position.Y), new Rectangle(2 * 128, 0, 128, 128), Color.White, rot, new Vector2(64,160), 1, SpriteEffects.None, 0);
-            if (Hitbox.Intersects(mouse.Hitbox) && !mouse.IsCreating){
+            if (Hitbox.Intersects(Mouse1.Hitbox) && !Mouse1.IsCreating){
                 if(IsDescriptionOn){
                     string description = Content.Name + "*Atk: " + Content.Atk+"*HP: "+Content.HP+"*Speed: "+ Content.Spd;
                     description = description.Replace("*", System.Environment.NewLine);
-				    sprBt.DrawString(Font, description, mouse.Position-new Vector2(0, 96), Color.White);
+				    sprBt.DrawString(Font, description, Mouse1.Position-new Vector2(0, 96), Color.White);
                 }else{
-                    sprBt.DrawString(Font, Content.Name, mouse.Position-new Vector2(-8, 0), Color.White);
+                    sprBt.DrawString(Font, Content.Name, Mouse1.Position-new Vector2(-8, 0), Color.White);
                 }
 			}
             sprBt.DrawString(Font, "50", Position,Color.White,rot, new Vector2(-92, 188), 1,SpriteEffects.None, 0); 

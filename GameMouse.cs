@@ -45,7 +45,7 @@ namespace VirtusPecto.Desktop{
 		public void OnCreation(int Number){
 			if ( IsClicking){
                 for(int i = 0; i < 3; i++){
-    				if (Number == i && !mouse.Hitbox.Intersects(Levels.Cards[i].Hitbox)){
+    				if (Number == i && !Mouse1.Hitbox.Intersects(Levels.Cards[i].Hitbox)){
 	    				Levels.Creature1 = new Creature(Levels.Cards[i].Content, MPosition - new Vector2(0, 32));
                     }
                 }

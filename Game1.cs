@@ -11,7 +11,7 @@ namespace VirtusPecto.Desktop{
         private static GraphicsDeviceManager graphics;
 		private SpriteBatch spriteBatch;
 		public static CreatureDatabase GetCreatureDatabase;
-		public static GameMouse mouse;
+		public static GameMouse Mouse1;
         private static Vector2 matrixPosition;
         public static GameControl Joystick;
         public static Matrix Mat;
@@ -35,11 +35,12 @@ namespace VirtusPecto.Desktop{
         //States.
 		public static bool IsPaused;
 		public static int LevelNumber;
+        public static int PreviousLevel;
         public static bool WannaExit;
         public static bool IsClicking;
         public static bool IsJoystick;
         public static bool IsDescriptionOn = true;
-        bool checker;
+        private bool checker;
 
         //Rooms.
 		public static Lobby StartMenu;
@@ -48,20 +49,18 @@ namespace VirtusPecto.Desktop{
         public static PauseMenu Pause;
 
 		public Game1(){
-			IsPaused = false;
 			graphics = new GraphicsDeviceManager(this);
 			graphics.PreferredBackBufferWidth = 1366;
             graphics.PreferredBackBufferHeight = 768;
             Content.RootDirectory = "Content";
 			IsMouseVisible = true;
-			mouse = new GameMouse();
+			Mouse1 = new GameMouse();
 			CreatureSprite = new Texture2D[6];
 	    }
 
         protected override void Initialize(){
 			base.Initialize();
             StartMenu = new Lobby();
-
         }
   
         protected override void LoadContent(){
@@ -87,7 +86,7 @@ namespace VirtusPecto.Desktop{
             matrix();
             joystick();
             pause();
-            mouse.Update();
+            Mouse1.Update();
 
             if(WannaExit){
                 Exit();
@@ -204,7 +203,16 @@ namespace VirtusPecto.Desktop{
                 Mat = Camera.Follow(Levels.Player1.Position);
             }
             matrixPosition = - new Vector2(Mat.M41, Mat.M42);
-            mouse.SetMPosition(matrixPosition);
+            Mouse1.SetMPosition(matrixPosition);
+        }
+        public static void GoToLevel(int level){
+            if(level != LevelNumber){
+                PreviousLevel = LevelNumber;
+                LevelNumber = level;
+            }
+        }
+        public static void GoToPrevious(){
+            GoToLevel(PreviousLevel);
         }
     }
 }

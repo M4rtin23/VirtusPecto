@@ -41,7 +41,7 @@ namespace VirtusPecto.Desktop{
 	            Enemy1[0] = new Enemy((int)Player1.Position.X,(int) Player1.Position.Y);
             }
 			// if(Enemy1.Length >= 3 && Enemy1[2] != null){
-            //     Enemy1[2].Position = mouse.Position;
+            //     Enemy1[2].Position = Mouse1.Position;
             // }
 			for (int i = 0; i < Fireballs.Length; i++) {
 				if (Fireballs[i] != null){
@@ -86,9 +86,9 @@ namespace VirtusPecto.Desktop{
             for(int i = 0; i < 3; i++){
 			    Cards[i].Draw(sprBt);
             }
-            if (mouse.IsCreating && !Game1.IsPaused) {
-				sprBt.Draw(Sprite4, mouse.Position, new Rectangle(0, 0, 252, 252), Color.White, 0, new Vector2(64+60, 96+60), new Vector2(1, 1), SpriteEffects.None, 0);
-				sprBt.Draw(Cards[mouse.Number].Content.Sprite, mouse.Position, new Rectangle(256, 0, 128, 128), Color.White, 0, new Vector2(64, 96), new Vector2(1, 1), SpriteEffects.None, 0);
+            if (Mouse1.IsCreating && !Game1.IsPaused) {
+				sprBt.Draw(Sprite4, Mouse1.Position, new Rectangle(0, 0, 252, 252), Color.White, 0, new Vector2(64+60, 96+60), new Vector2(1, 1), SpriteEffects.None, 0);
+				sprBt.Draw(Cards[Mouse1.Number].Content.Sprite, Mouse1.Position, new Rectangle(256, 0, 128, 128), Color.White, 0, new Vector2(64, 96), new Vector2(1, 1), SpriteEffects.None, 0);
 			}
             toolBar.Draw(sprBt);
         }
@@ -138,5 +138,20 @@ namespace VirtusPecto.Desktop{
             //Copies the second array to the original.
             Enemy1 = a;
         }
+        public void DestroyEnemy(){
+            for(int i = 0; i < Enemy1.Length; i++){
+                if(Enemy1[i]?.GetHealth() <= 0){
+                    Enemy1[i] = null;
+                }
+            }
+        }
+        public void DestroyFireball(){
+            for(int i = 0; i < Fireballs.Length; i++){
+                if(Fireballs[i] != null && !Fireballs[i].GetState()){
+                    Fireballs[i] = null;
+                }
+            }
+        }
+
 	}
 }

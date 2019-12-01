@@ -12,10 +12,8 @@ namespace VirtusPecto.Desktop{
         public Joystick SetJoystick;
         public CardDescription ShowDescription;
         private Rectangle Back = new Rectangle(0, 0, Sprite3.Width/2, Sprite3.Height);
-        private int lastRoom;
         public Vector2 AspectRatio = new Vector2(16f, 9f);
-        public SettingsMenu(int ln){
-            lastRoom = ln;
+        public SettingsMenu(){
             ShowDescription = new CardDescription();
             SetJoystick = new Joystick(0, 0);
             SetAspectRatio = new AspectBox();
@@ -33,8 +31,8 @@ namespace VirtusPecto.Desktop{
             ResolutionBox.Collision();
 			SetFullscreen.Collision();
             SetJoystick.Collision();
-            if(Back.Intersects(mouse.Hitbox) && IsClicking){
-                LevelNumber = lastRoom;
+            if(Back.Intersects(Mouse1.Hitbox) && IsClicking){
+                GoToPrevious();
                 Settings = null;
             }
         }

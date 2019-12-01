@@ -23,15 +23,15 @@ namespace VirtusPecto.Desktop{
 
         public void Collision(){
             Hitbox = new Rectangle((int)position.X, (int)position.Y, 128, 32);            
-            if (Hitbox.Intersects(mouse.Hitbox)){
+            if (Hitbox.Intersects(Mouse1.Hitbox)){
                 WordColor = Color.Red;
                 if(IsClicking){
                     checker = true;
                 }
-				if (/*mouse.GetMouseState.LeftButton == ButtonState.Pressed*/!IsClicking && checker){
-                    Settings = new SettingsMenu(LevelNumber);
+				if (/*Mouse1.GetMouseState.LeftButton == ButtonState.Pressed*/!IsClicking && checker){
+                    Settings = new SettingsMenu();
                     IsPaused = false;
-                    LevelNumber = 2;
+                    GoToLevel(2);
 					Button1.isActivated = false;
                     checker = false;
                 }
