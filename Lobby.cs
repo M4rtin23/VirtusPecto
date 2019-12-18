@@ -10,7 +10,7 @@ namespace VirtusPecto.Desktop{
 		public static PlayButton Button1;
 		public static SettingsButton Button2;
 		public static Vector2 LogoPosition;
-        private Color ExitColor;
+        private int exitAlpha;
         private Rectangle ExitRectangle;
         int g = 0;
         bool checker;
@@ -18,7 +18,7 @@ namespace VirtusPecto.Desktop{
             Background = new BackGround(Back);
 			Button1 = new PlayButton(Width()/4, (int)((float)Height()/2.4f));
 			Button2 = new SettingsButton(Width()/4, (int)((float)Height()/2.11f));
-			ExitRectangle = new Rectangle((Width() / 2)-48, (int)((float)Height() / 1.85f), 128, 32);
+			ExitRectangle = new Rectangle((Width() / 2)-48, (int)((float)Height() / 1.85f), 48, 32);
             LogoPosition = new Vector2(Width()/4f, 128);
 		}
 		public void Update() {
@@ -32,12 +32,12 @@ namespace VirtusPecto.Desktop{
 			Button1.Collision();
 			Button2.Collision();
             if (ExitRectangle.Intersects(Mouse1.Hitbox)){
-				ExitColor = Color.Red;
+				exitAlpha = 64;
 				if (/*Mouse1.GetMouseState.LeftButton == ButtonState.Pressed*/IsClicking) {
 					WannaExit = true;
 				}
             }else {
-                ExitColor = Color.White;            
+                exitAlpha = 0;
             }
 //            Button1.SetPosition(Width()/4, (float)Height()/2.4f);
 //            Button2.SetPosition(Width()/4, (float)Height()/2.1f);
@@ -50,7 +50,7 @@ namespace VirtusPecto.Desktop{
                  case 1:
                      Button1.SetPosition(Width()/2-52, (float)Height()/2.4f);
                      Button2.SetPosition(Width()/2-64, (float)Height()/2.1f);
-                     ExitRectangle = new Rectangle((Width() / 2)-48, (int)((float)Height() / 1.85f), 128, 32);
+                     ExitRectangle = new Rectangle((Width() / 2)-48, (int)((float)Height() / 1.85f), 48, 32);
                      break;
             }
 			LogoPosition = new Vector2(Width() / 2f - 220, 128);
@@ -61,7 +61,8 @@ namespace VirtusPecto.Desktop{
 			sprBt.DrawString(Font2, "Virtus Pecto", new Vector2(LogoPosition.X, LogoPosition.Y), Color.White);
 			Button1.Draw(sprBt);
 			Button2.Draw(sprBt);
-			sprBt.DrawString(Font, "Exit", new Vector2(ExitRectangle.X, ExitRectangle.Y), ExitColor);
+            GameBuilder.Builder.DrawRectangle(sprBt, ExitRectangle, new Color(exitAlpha, exitAlpha, exitAlpha, exitAlpha));
+			sprBt.DrawString(Font, "Exit", new Vector2(ExitRectangle.X, ExitRectangle.Y), Color.White);
             sprBt.DrawString(Font,Convert.ToString(g%2), new Vector2(0, 0), Color.White);
 
 		}

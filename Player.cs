@@ -3,9 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using static VirtusPecto.Desktop.Game1;
-using static VirtusPecto.Desktop.Level;
 using static GameBuilder.Builder;
-using static VirtusPecto.Desktop.CreatureDatabase;
 
 namespace VirtusPecto.Desktop{
 	public class Player : GameBuilder.ObjectBuilder{
@@ -20,7 +18,7 @@ namespace VirtusPecto.Desktop{
 		}
         private void gameControl(){
             if (Keyboard.GetState().IsKeyDown(Keys.L)) {
-				CreateFireBall(true, Levels.Enemy1[1].Position, 0, 0);
+				Levels.CreateFireBall(true, Levels.Enemy1[1].Position, 0, 0);
 			}
             gameArrow();
             if(IsJoystick){
@@ -76,8 +74,10 @@ namespace VirtusPecto.Desktop{
                 effect = SpriteEffects.None;
             }
         }
-
+//        float i;
 		public override void Update(){
+            //i+=0.1f;
+//            Console.WriteLine(i + "     " + CalculateVectorSpeed(3, i));
 			Hitbox = new Rectangle((int) Position.X - 64 +32, (int) Position.Y - 64, 128-32, 128);
 			if(speed == Vector2.Zero){
                 imageIndex = 0;
@@ -91,17 +91,13 @@ namespace VirtusPecto.Desktop{
             //DrawRectangle(spriteBatch, Sprite2, Hitbox, Color.White);
 //            spriteBatch.DrawString(Font,  ""+GetData(0).Atk , new Vector2(0, 72), Color.White);
             //DrawRectangle(spriteBatch, Sprite2, new Rectangle(Hitbox.Location-(Hitbox.Size.ToVector2()).ToPoint(), (Hitbox.Size.ToVector2()*2).ToPoint()), Color.White);
+            DrawLine(Position-new Vector2(0, Height()), Levels.GetClosest(Levels.Enemy1, Mouse1.MPosition), 5,Color.Blue, sprBt);
             stripToSprite(4);
             center(4);
             base.Draw(sprBt);
         }
-		public void CreateFireBall(bool isEnemy, Vector2 Position, float d, float v){
-		//	if(GT.TotalGameTime.Milliseconds % 1000 == 0){
-				Array.Resize(ref Levels.Fireballs, Levels.Fireballs.Length+1);
-				Levels.Fireballs[Levels.Fireballs.Length-1] = new FireBall(isEnemy, Position, CalculateVectorSpeed(6, d));
-                v -= 10;
-        //    }
-		}
+
+
         public void Lightning(Vector2 pos, Vector2 otherPos, float s, SpriteBatch sprBt){
             //float s = (float)(CalculateDistance(pos, otherPos))/128;
             s = s/128;
@@ -115,7 +111,7 @@ namespace VirtusPecto.Desktop{
             sprBt.Draw(Sprite2, pos, null, color, r, new Vector2(0 ,16), new Vector2(s, 1/32f*size), SpriteEffects.None, 0);
         }
         private void usePower(){
-			CreateFireBall(false, Position,(float) CalculateAngle(Position, Game1.Mouse1.MPosition), Mana);
+			Levels.CreateFireBall(false, Position,(float) CalculateAngle(Position, Game1.Mouse1.MPosition), Mana);
         }
         public float Dir(){
             return (float)CalculateDirection(-speed.X, -speed.Y);

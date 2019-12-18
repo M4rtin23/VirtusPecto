@@ -31,7 +31,7 @@ namespace VirtusPecto.Desktop{
 		}
 		public void EnemyCollision() {
 			for (int i = 0; i < Levels.Enemy1.Length; i++) {
-                if (Levels.Enemy1[i] != null && Levels.Enemy1[i].Hitbox.Intersects(Hitbox)){
+                if (isAlive && Levels.Enemy1[i] != null && Levels.Enemy1[i].Hitbox.Intersects(Hitbox)){
                     isAlive = false;
                     Levels.DestroyFireball();
                     Levels.Enemy1[i]?.AddHealth(-10);
@@ -39,7 +39,7 @@ namespace VirtusPecto.Desktop{
 			}
 		}
 		public void PlayerCollision() {
-			if (Hitbox.Intersects(Levels.Player1.Hitbox)) {
+			if (isAlive && Hitbox.Intersects(Levels.Player1.Hitbox)) {
                 isAlive = false;
                 Levels.DestroyFireball();
                 Levels.Player1.Health -= 10;

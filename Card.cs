@@ -30,7 +30,7 @@ namespace VirtusPecto.Desktop{
 			Position.Y = Height() + addedY  - 64*(1-Math.Abs(Number-1)) - 32;
 			Position.X = Width() / 2 + SpriteIndex.Width * (Number-1);
             //Position.X = Width() * (Number+1) / 4;
-			if (!Mouse1.IsCreating && Levels.Creature1 == null /*Levels.Player1.Mana >= 50*/){
+			if (!Mouse1.IsCreating && /*Levels.Creature1 == null */Levels.Player1.Mana >= 50){
 				if (Hitbox.Intersects(Mouse1.Hitbox)){
                     if(addedY > 0){
                         addedY -= 16;
@@ -50,12 +50,12 @@ namespace VirtusPecto.Desktop{
 			}
 		}
 		public void Draw(SpriteBatch sprBt){
-			if (!Mouse1.IsCreating && Levels.Creature1 == null){
+			//if (!Mouse1.IsCreating && Levels.Creature1 == null){
 				color = cardColor;
-			}
+			/*}
 			else {
 				color = Color.DarkGray;
-			}
+			}*/
             float rot = ((float)addedY)/256f * (Number-1);
             sprBt.Draw(SpriteIndex, Position, null, color, rot, SpriteIndex.Bounds.Size.ToVector2()/2, 1,SpriteEffects.None, 1);
 			sprBt.Draw(Content.Sprite, new Vector2(Position.X, Position.Y), new Rectangle(2 * 128, 0, 128, 128), Color.White, rot, new Vector2(64,160), 1, SpriteEffects.None, 0);

@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using static VirtusPecto.Desktop.Game1;
-using static VirtusPecto.Desktop.Level;
 
 namespace VirtusPecto.Desktop{
 	public class GameMouse{
@@ -46,7 +45,7 @@ namespace VirtusPecto.Desktop{
 			if ( IsClicking){
                 for(int i = 0; i < 3; i++){
     				if (Number == i && !Mouse1.Hitbox.Intersects(Levels.Cards[i].Hitbox)){
-	    				Levels.Creature1 = new Creature(Levels.Cards[i].Content, MPosition - new Vector2(0, 32));
+	    				Levels.CreateCreature(Levels.Cards[i].Content, MPosition - new Vector2(0, 32));
                     }
                 }
 				Number = -1;

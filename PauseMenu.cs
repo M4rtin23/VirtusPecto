@@ -9,7 +9,7 @@ namespace VirtusPecto.Desktop{
     public class PauseMenu{
 		public SettingsButton settings;
 		public Rectangle ContinueRectangle, MainMenuRectangle, ExitRectangle;
-		public Color ContinueColor, MainMenuColor, ExitColor;
+		private int continueAlpha, mainmenuAlpha, exitAlpha;
 		public PauseMenu(){
 			settings = new SettingsButton((Width()/2)-48,Height()/2);
 			ContinueRectangle = new Rectangle((Width() / 2) - 48, (Height() / 2) - 48 * 2, 128, 32);
@@ -22,10 +22,10 @@ namespace VirtusPecto.Desktop{
 				if (/*Mouse1.GetMouseState.LeftButton == ButtonState.Pressed*/IsClicking) {
 					IsPaused = false;
 				}
-				ContinueColor = Color.Red;
+				continueAlpha = 64;
 			}
 			else {
-				ContinueColor = Color.White;            
+                continueAlpha = 0;
 			}
 			if (MainMenuRectangle.Intersects(Mouse1.Hitbox)){
 				if (/*Mouse1.GetMouseState.LeftButton == ButtonState.Pressed*/IsClicking) {
@@ -34,26 +34,30 @@ namespace VirtusPecto.Desktop{
 					StartMenu = new Lobby();
                     GoToLevel(0);
 				}
-				MainMenuColor = Color.Red;
+				mainmenuAlpha = 64;
             }else {
-                MainMenuColor = Color.White;            
+                mainmenuAlpha = 0;            
             }
 			if (ExitRectangle.Intersects(Mouse1.Hitbox)){
-				ExitColor = Color.Red;
+				exitAlpha = 64;
 				if (/*Mouse1.GetMouseState.LeftButton == ButtonState.Pressed*/IsClicking) {
 					WannaExit = true;
 				}
             }else {
-                ExitColor = Color.White;            
+                exitAlpha = 0;            
             }
 		}
 		public void Draw(SpriteBatch sprBt) {
-			sprBt.Draw(Sprite2, new Vector2((Width() / 2), Height() / 2), new Rectangle(0, 0, 128, 32), Color.Black, 0, new Vector2(64, 16), new Vector2(2, 10), SpriteEffects.None, 0);
-			sprBt.DrawString(Font, "Continue", new Vector2((Width() / 2)-48, (Height() / 2)-48*2), ContinueColor);
-			sprBt.DrawString(Font, "Main Menu", new Vector2((Width() / 2) - 48, (Height() / 2) - 48), MainMenuColor);
+			//sprBt.Draw(Sprite2, new Vector2((Width() / 2), Height() / 2), new Rectangle(0, 0, 128, 32), new Color(0,0,0,128), 0, new Vector2(64, 16), new Vector2(2, 8), SpriteEffects.None, 0);
+            sprBt.Draw(Sprite1, new Vector2((Width() / 2), Height() / 2), null, new Color(0,0,0,128), 0, new Vector2(128, 160), new Vector2(1, 1), SpriteEffects.None, 0);
+            GameBuilder.Builder.DrawRectangle(sprBt, ContinueRectangle, new Color(continueAlpha,continueAlpha, continueAlpha, continueAlpha));
+            sprBt.DrawString(Font, "Continue", new Vector2((Width() / 2)-48, (Height() / 2)-48*2), Color.White);
+			GameBuilder.Builder.DrawRectangle(sprBt, MainMenuRectangle, new Color(mainmenuAlpha,mainmenuAlpha, mainmenuAlpha, mainmenuAlpha));
+			sprBt.DrawString(Font, "Main Menu", new Vector2((Width() / 2) - 48, (Height() / 2) - 48), Color.White);
             settings.SetPosition((Width()/2)-48,Height()/2);
 			settings.Draw(sprBt);
-			sprBt.DrawString(Font, "Exit", new Vector2((Width() / 2)-48, (Height() / 2)+48), ExitColor);
+			GameBuilder.Builder.DrawRectangle(sprBt, ExitRectangle, new Color(exitAlpha,exitAlpha, exitAlpha, exitAlpha));
+			sprBt.DrawString(Font, "Exit", new Vector2((Width() / 2)-48, (Height() / 2)+48), Color.White);
 		}
     }
 }

@@ -2,11 +2,9 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using static VirtusPecto.Desktop.Level;
-using static GameBuilder.Builder;
 
 namespace VirtusPecto.Desktop{
-	public class Game1 : GameBuilder.Game1{
+	public partial class Game1 : GameBuilder.Game1{
 		//System.
         private static GraphicsDeviceManager graphics;
 		private SpriteBatch spriteBatch;
@@ -27,6 +25,7 @@ namespace VirtusPecto.Desktop{
 		public static Texture2D Sprite3;
 		public static Texture2D Sprite4;
         public static Texture2D Sprite5;
+        public static Texture2D Menu;
         public static Texture2D Power;
 		public static Texture2D[] CreatureSprite;
         public static Texture2D Back;
@@ -64,6 +63,7 @@ namespace VirtusPecto.Desktop{
         }
   
         protected override void LoadContent(){
+            base.LoadContent();
             Back = Content.Load<Texture2D>("BG");
             spriteBatch = new SpriteBatch(GraphicsDevice);
 			Logo = Content.Load<Texture2D>("Logo");
@@ -73,6 +73,7 @@ namespace VirtusPecto.Desktop{
 			Sprite3 = Content.Load<Texture2D>("Sprite3");
 			Sprite4 = Content.Load<Texture2D>("Sprite4");
             Sprite5 = Content.Load<Texture2D>("Sprite5");
+            Menu = Content.Load<Texture2D>("menu0");
             Power = Content.Load<Texture2D>("Power");
 			Font = Content.Load<SpriteFont>("SpriteFontTemPlate");
 			Font2 = Content.Load<SpriteFont>("SpriteFont");
@@ -115,12 +116,12 @@ namespace VirtusPecto.Desktop{
 			GraphicsDevice.Clear(Color.Black);
             if(LevelNumber == 1){
                 Mat = Camera.Follow(Levels.Player1.Position);
-                spriteBatch.Begin(transformMatrix: Mat);
+                spriteBatch.Begin(transformMatrix: Mat, samplerState:  SamplerState.PointClamp, sortMode: SpriteSortMode.BackToFront);
                 Levels?.Draw(spriteBatch);
                 spriteBatch.End();
             }
 
-            spriteBatch.Begin();
+            spriteBatch.Begin(samplerState:  SamplerState.PointClamp);
             switch(LevelNumber){
 				case 0:
 	    			StartMenu?.Draw(spriteBatch);
@@ -137,82 +138,6 @@ namespace VirtusPecto.Desktop{
 			}
 			spriteBatch.End();
 			base.Draw(gameTime);
-        }
-        
-        public static Vector2 GetMatrix(){
-            return matrixPosition;
-        }
-        public static int Width(){
-            return graphics.PreferredBackBufferWidth;
-        }
-        public static int Height(){
-            return graphics.PreferredBackBufferHeight;
-        }
-        public static bool IsFullScreen(){
-            return graphics.IsFullScreen;
-        }
-        public static void SetWindowSize(Vector2 size){
-            graphics.PreferredBackBufferWidth = (int)size.X;
-            graphics.PreferredBackBufferHeight = (int)size.Y;
-            graphics.ApplyChanges();
-        }
-        public static void Fullscreen(bool state){
-            graphics.IsFullScreen = state;
-	    	graphics.ApplyChanges();
-        }
-        public static bool IsPressing(int index){
-            if(!IsJoystick){
-                return Keyboard.GetState().IsKeyDown(TheKeys[index]);
-            }else{
-                return GamePad.GetState(PlayerIndex.One).IsButtonDown(TheButtons[index]);
-            }
-        }
-        private void joystick(){
-            if(GamePad.GetState(PlayerIndex.One).Buttons.BigButton == ButtonState.Pressed){
-                IsJoystick = true;
-            }
-            if(IsJoystick){
-                if(Joystick == null){
-                    Joystick = new GameControl();
-                }
-            }else{
-                Joystick = null;
-            }
-            Joystick?.Update();
-        }
-        private void pause(){
-            if (IsPressing(5)){
-                checker = true;
-			}
-			if (!IsPressing(5) && checker){
-				IsPaused = !IsPaused;
-                checker = false;
-			}
-            if (!IsPaused) {
-				Pause = null;
-			}
-            if (IsPaused) {
-				if (Pause == null) {
-					Pause = new PauseMenu();
-				}
-				Pause?.Update();    
-            }
-        }
-        private void matrix(){
-            if(LevelNumber == 1){
-                Mat = Camera.Follow(Levels.Player1.Position);
-            }
-            matrixPosition = - new Vector2(Mat.M41, Mat.M42);
-            Mouse1.SetMPosition(matrixPosition);
-        }
-        public static void GoToLevel(int level){
-            if(level != LevelNumber){
-                PreviousLevel = LevelNumber;
-                LevelNumber = level;
-            }
-        }
-        public static void GoToPrevious(){
-            GoToLevel(PreviousLevel);
         }
     }
 }

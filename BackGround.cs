@@ -28,7 +28,7 @@ namespace VirtusPecto.Desktop{
                     }else{
                         i = 0;
                     }
-                    sprBt.Draw(backGround, position - windowSize/2, new Rectangle(i*128, 0, 128, 128), Color.White, 0, new Vector2(0, 0), new Vector2(1, 1), SpriteEffects.None, 0);
+                    sprBt.Draw(backGround, position - windowSize/2, new Rectangle(i*128, 0, 128, 128), Color.White, 0, new Vector2(0, 0), new Vector2(1, 1), SpriteEffects.None, 1);
                 }
             }
         }

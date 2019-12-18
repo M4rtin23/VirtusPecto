@@ -9,12 +9,12 @@ namespace VirtusPecto.Desktop{
     public class PlayButton{
 		public Rectangle Hitbox;
 		private Vector2 position;
-		public Color WordColor;
 		public bool isActivated;
+        private int transparency;
 		public DifficultyBox HardnessBox;
 		public Vector2 PlayPosition;
 		public Rectangle PlayRectangle;
-		public Color PlayColor;
+        private int playAlpha;
         bool checker;
 
         public PlayButton(int x, int y){
@@ -33,7 +33,7 @@ namespace VirtusPecto.Desktop{
 			PlayRectangle = new Rectangle((int)PlayPosition.X,(int) PlayPosition.Y, 128, 32);
 			Hitbox = new Rectangle((int)position.X,(int)position.Y,64,32);            
 			if (Hitbox.Intersects(Mouse1.Hitbox)){
-				WordColor = Color.Red;
+                transparency = 64;
                 if(IsClicking){
                     checker = true;
                 }
@@ -43,7 +43,7 @@ namespace VirtusPecto.Desktop{
 				}
 			}
 			else {
-				WordColor = Color.White;
+                transparency = 0;
 			}
 			if (isActivated) {
                 if(HardnessBox == null){
@@ -52,7 +52,7 @@ namespace VirtusPecto.Desktop{
                 HardnessBox.BoxPosition = position+ new Vector2(128, 0);
 				HardnessBox.Collision();
 				if (PlayRectangle.Intersects(Mouse1.Hitbox)) {
-					PlayColor = Color.Red;
+                    playAlpha = 64;
 					if (/*Mouse1.GetMouseState.LeftButton == ButtonState.Pressed*/IsClicking) {
                         Game1.GoToLevel(1);
                         switch(HardnessBox.Difficulty){
@@ -73,15 +73,17 @@ namespace VirtusPecto.Desktop{
 						StartMenu = null;
 					}
 				}else{
-					PlayColor = Color.White;
+                    playAlpha = 0;
 				}
 			}
 		}
 		public void Draw(SpriteBatch sprBt) {
-			sprBt.DrawString(Font, "Start", position, WordColor);
+            GameBuilder.Builder.DrawRectangle(sprBt, Hitbox, new Color(transparency, transparency, transparency, transparency));
+			sprBt.DrawString(Font, "Start", position, Color.White);
 			if (isActivated) {
 				HardnessBox.Draw(sprBt);
-				sprBt.DrawString(Font, "Play", PlayPosition,PlayColor);
+                GameBuilder.Builder.DrawRectangle(sprBt, PlayRectangle, new Color(playAlpha, playAlpha, playAlpha, playAlpha));
+				sprBt.DrawString(Font, "Play", PlayPosition, Color.White);
 			}
 		}
     }

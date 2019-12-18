@@ -1,29 +1,24 @@
-using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace VirtusPecto.Desktop{
     public class PowerButton{
         protected Rectangle hitbox;
         public Vector2 Position;
-		private Color color;
         static float timer;
         bool checker, state;
-        int alpha = 1;
         public PowerButton(){
         }
         public void Update(){
             Position = new Vector2(64, Game1.Height()-192);
             hitbox = new Rectangle(Position.ToPoint(), new Point(128));
             if(timer <= 0){
-                alpha = 1;
                 if(hitbox.Contains(Game1.Mouse1.Position)){
                     if(Game1.IsClicking){
                         checker = true;
                     }
                     if(checker && !Game1.IsClicking){
-                        Game1.Levels.Player1.CreateFireBall(false, Game1.Levels.Player1.Position, Game1.Levels.Player1.Dir(), 5);
+                        Game1.Levels.CreateFireBall(false, Game1.Levels.Player1.Position, Game1.Levels.Player1.Dir(), 5);
                         checker = false;
                         state = !state;
                         timer = 60;
@@ -33,7 +28,6 @@ namespace VirtusPecto.Desktop{
                 }
             }
             if(timer > 0){
-                alpha = 2;
                 timer--;
             }
         }
@@ -43,7 +37,7 @@ namespace VirtusPecto.Desktop{
             int a1 = (60-(int)timer)/60*128+128;
 //            sprBt.Draw(Game1.Power, Position, new Rectangle(0, 0, 128,128), new Color(255/alpha,255/alpha,255/alpha,255/alpha));
 //            sprBt.Draw(Game1.Power, Position, new Rectangle(128, 0, 128,128), new Color(255/alpha,255/alpha,255/alpha,255/alpha));
-            sprBt.Draw(Game1.Power, Position, new Rectangle(0, 0, 128,128), new Color(a,a,a,a));
+            sprBt.Draw(Game1.Power, Position, new Rectangle(0, 0, 128,128), new Color(16,16,16,a/2));
             sprBt.Draw(Game1.Power, Position, new Rectangle(128, 0, 128,128), new Color(a1,a1,a1,a1));
         }
         public float GetTimer(){

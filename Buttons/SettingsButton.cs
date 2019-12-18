@@ -9,12 +9,12 @@ namespace VirtusPecto.Desktop{
     public class SettingsButton{
         public Rectangle Hitbox;
         public Vector2 position;
-        public Color WordColor;
+        private int transparency = 0;
 		bool checker;
 
         public SettingsButton(int x, int y){
             position = new Vector2(x, y);
-            Hitbox = new Rectangle((int)position.X, (int)position.Y, 128, 32);
+            Hitbox = new Rectangle((int)position.X, (int)position.Y, 96, 32);
         }
         public void SetPosition(float x, float y){
             position.X = x;
@@ -22,9 +22,9 @@ namespace VirtusPecto.Desktop{
         }
 
         public void Collision(){
-            Hitbox = new Rectangle((int)position.X, (int)position.Y, 128, 32);            
+            Hitbox = new Rectangle((int)position.X, (int)position.Y, 96, 32);            
             if (Hitbox.Intersects(Mouse1.Hitbox)){
-                WordColor = Color.Red;
+                transparency = 64;
                 if(IsClicking){
                     checker = true;
                 }
@@ -37,11 +37,12 @@ namespace VirtusPecto.Desktop{
                 }
             }
             else{
-                WordColor = Color.White;
+                transparency = 0;
             }
         }
         public void Draw(SpriteBatch sprBt){
-            sprBt.DrawString(Font, "Settings", position, WordColor);
+            GameBuilder.Builder.DrawRectangle(sprBt, Hitbox, new Color(transparency,transparency,transparency,transparency));
+            sprBt.DrawString(Font, "Settings", position, Color.White);
         }
     }
 }
