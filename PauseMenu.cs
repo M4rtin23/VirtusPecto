@@ -29,7 +29,7 @@ namespace VirtusPecto.Desktop{
 			}
 			if (MainMenuRectangle.Intersects(Mouse1.Hitbox)){
 				if (/*Mouse1.GetMouseState.LeftButton == ButtonState.Pressed*/IsClicking) {
-                    Levels = null;
+                    Level1 = null;
 					IsPaused = false;
 					StartMenu = new Lobby();
                     GoToLevel(0);

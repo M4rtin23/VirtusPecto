@@ -57,19 +57,19 @@ namespace VirtusPecto.Desktop{
                         Game1.GoToLevel(1);
                         switch(HardnessBox.Difficulty){
                             case "Easy":
-				        		Levels = new Level(0);
+				        		Level1 = new Level(0);
                                 break;
                             case "Normal":
-		        				Levels = new Level(3);
+		        				Level1 = new Level(3);
                                 break;
                             case "Difficult":
-        						Levels = new Level(5);
+        						Level1 = new Level(5);
                                 break;
                             default:
-                                Levels = new Level(1);
+                                Level1 = new Level(1);
                                 break;
                         }
-                        Levels.Creation();
+                        Level1.Creation();
 						StartMenu = null;
 					}
 				}else{

@@ -28,15 +28,15 @@ namespace VirtusPecto.Desktop{
             }
 			GetMouseState = Mouse.GetState();
 			if (Keyboard.GetState().IsKeyDown(Keys.Q)){
-				Mouse.SetPosition((int)Levels.Player1.Position.X,(int) Levels.Player1.Position.Y);
+				Mouse.SetPosition((int)Level1.Player1.Position.X,(int) Level1.Player1.Position.Y);
 			}
 			//Position = new Vector2(GetMouseState.X, GetMouseState.Y);
             Position = Mouse.GetState().Position.ToVector2();
 			Hitbox = new Rectangle((int)Position.X, (int)Position.Y, 1, 1);
-            if(Game1.Levels == null){
+            if(Game1.Level1 == null){
                 IsCreating = false;
             }
-			if (IsCreating &&  IsClicking&& !Game1.IsPaused && Game1.Levels != null){
+			if (IsCreating &&  IsClicking&& !Game1.IsPaused && Game1.Level1 != null){
 				OnCreation(Number);
 				IsCreating = false;
 			}
@@ -44,8 +44,8 @@ namespace VirtusPecto.Desktop{
 		public void OnCreation(int Number){
 			if ( IsClicking){
                 for(int i = 0; i < 3; i++){
-    				if (Number == i && !Mouse1.Hitbox.Intersects(Levels.Cards[i].Hitbox)){
-	    				Levels.CreateCreature(Levels.Cards[i].Content, MPosition - new Vector2(0, 32));
+    				if (Number == i && !Mouse1.Hitbox.Intersects(Level1.Cards[i].Hitbox)){
+	    				Level1.CreateCreature(Level1.Cards[i].Content, MPosition - new Vector2(0, 32));
                     }
                 }
 				Number = -1;

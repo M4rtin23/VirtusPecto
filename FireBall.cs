@@ -7,11 +7,11 @@ using static VirtusPecto.Desktop.Game1;
 using static GameBuilder.Builder;
 
 namespace VirtusPecto.Desktop{    
-	public class FireBall : GameBuilder.ObjectBuilder{
+	public class Fireball : GameBuilder.ObjectBuilder{
 		private bool isDangerous;
         private bool isAlive = true;
 		//True = emited by the enemy && False = emited by de user
-		public FireBall(bool emiter, Vector2 initialPosition, Vector2 speed){
+		public Fireball(bool emiter, Vector2 initialPosition, Vector2 speed){
 			SpriteIndex = Sprite5;
             isDangerous = emiter;
 			Position = initialPosition;
@@ -30,19 +30,19 @@ namespace VirtusPecto.Desktop{
             base.Update();
 		}
 		public void EnemyCollision() {
-			for (int i = 0; i < Levels.Enemy1.Length; i++) {
-                if (isAlive && Levels.Enemy1[i] != null && Levels.Enemy1[i].Hitbox.Intersects(Hitbox)){
+			for (int i = 0; i < Level1.Enemy1.Length; i++) {
+                if (isAlive && Level1.Enemy1[i] != null && Level1.Enemy1[i].Hitbox.Intersects(Hitbox)){
                     isAlive = false;
-                    Levels.DestroyFireball();
-                    Levels.Enemy1[i]?.AddHealth(-10);
+                    Level1.DestroyFireball();
+                    Level1.Enemy1[i]?.AddHealth(-10);
                 }
 			}
 		}
 		public void PlayerCollision() {
-			if (isAlive && Hitbox.Intersects(Levels.Player1.Hitbox)) {
+			if (isAlive && Hitbox.Intersects(Level1.Player1.Hitbox)) {
                 isAlive = false;
-                Levels.DestroyFireball();
-                Levels.Player1.Health -= 10;
+                Level1.DestroyFireball();
+                Level1.Player1.Health -= 10;
 			}
 		}
 		public override void Draw(SpriteBatch sprBt) {

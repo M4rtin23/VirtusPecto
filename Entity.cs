@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using static VirtusPecto.Desktop.Game1;
+
 using static GameBuilder.Builder;
 
 namespace VirtusPecto.Desktop{
@@ -8,12 +9,24 @@ namespace VirtusPecto.Desktop{
         protected Vector2 target, startingPoint;
         protected int health = 100;
         protected float maxSpeed, dist;
-		protected int targetDefiner = -1, shortestDistance = -1;
-        protected bool followPlayer;
+		protected int targetDefined = -1;
+        protected bool isAttacking;
         protected int time;
 
+		public override void Update() {
+            Hitbox = new Rectangle((int) Position.X - 32, (int) Position.Y - 64, 128-64, 128);
+            Hitbox = new Rectangle((int) Position.X - 32, (int) Position.Y + 32, 128-64, 32);
+            animationImage(4);
+            lookAtTarget();
+            if(speed == Vector2.Zero){
+				imageIndex = 2;
+			}else{
+				animationSpeed = 0.125f;        
+			}
+            base.Update();
+        }
         public override void Draw(SpriteBatch sprBt) {
-            //DrawRectangle(spriteBatch, Sprite2, Hitbox, Color.White);
+            //DrawRectangle(sprBt, Hitbox, Color.White);
             center(4);
             stripToSprite(4);
             base.Draw(sprBt);
@@ -23,32 +36,15 @@ namespace VirtusPecto.Desktop{
             }
         }
 		public void SetTarget(Entity[] entities){
-			for (int i = 0; i < entities.Length; i++) {
-				//Sees if the Enemy exist.
-                if (entities[i] == null) {
-					continue;               
-				}
-                //Calculates a distance.
-				int enemyDistance = (int)CalculateDistance(entities[i].Position, Position);
-                //Compares  
-				if (shortestDistance == -1) {
-					shortestDistance = enemyDistance;               
-				}
-                //Determines the closest.
-				if (enemyDistance <= shortestDistance){
-					shortestDistance = enemyDistance;
-					targetDefiner = i;
-				}
-			}
-            //Sets the target.
-			if (targetDefiner != -1){
+			(Vector2, int) test = GetClosest(entities, Position);
+			if (test.Item2 != -1){
                 time = GT.TotalGameTime.Minutes;
-                target = entities[targetDefiner].Position;
-                followPlayer = false;
+                targetDefined = test.Item2;
+                target = entities[targetDefined].Position;
+                isAttacking = true;
             }else{
-                followPlayer = true;
+                isAttacking = false;
             }
-			shortestDistance = -1;
 		}
         protected void lookAtTarget(){
             if (CurrentTarget() > Position.X){
@@ -58,11 +54,11 @@ namespace VirtusPecto.Desktop{
             }
         }
         public void CheckTarget(Entity[] entities){
-            if (targetDefiner != -1){
-                if (entities[targetDefiner] == null){
-                    targetDefiner = -1;
+            if (targetDefined != -1){
+                if (entities[targetDefined] == null){
+                    targetDefined = -1;
                 }else{
-                    target = entities[targetDefiner].Position;
+                    target = entities[targetDefined].Position;
                 }
             }else{
                 SetTarget(entities);
@@ -70,7 +66,7 @@ namespace VirtusPecto.Desktop{
         }
         public float CurrentTarget(){
             float tr = 0;
-            if(followPlayer){
+            if(!isAttacking){
                 tr = startingPoint.X;
             }else{
                 tr = target.X;

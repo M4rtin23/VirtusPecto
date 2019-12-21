@@ -1,8 +1,5 @@
-using System;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using static VirtusPecto.Desktop.Level;
 using static GameBuilder.Builder;
 
 namespace VirtusPecto.Desktop{
@@ -68,7 +65,7 @@ namespace VirtusPecto.Desktop{
         }
         private void matrix(){
             if(LevelNumber == 1){
-                Mat = Camera.Follow(Levels.Player1.Position);
+                Mat = Camera.Follow(Level1.Player1.Position);
             }
             matrixPosition = - new Vector2(Mat.M41, Mat.M42);
             Mouse1.SetMPosition(matrixPosition);
@@ -81,6 +78,32 @@ namespace VirtusPecto.Desktop{
         }
         public static void GoToPrevious(){
             GoToLevel(PreviousLevel);
+        }
+        public static (Vector2, int) GetClosest(Entity[] entities, Vector2 pos){
+            float shortestDistance = -1;
+            int targetDefiner = -1;
+			for (int i = 0; i < entities.Length; i++) {
+				//Sees if the object indexed exists.
+                if (entities[i] == null) {
+					continue;               
+				}
+                //Calculates a distance.
+				int enemyDistance = (int)CalculateDistance(entities[i].Position, pos);
+                //Compares  
+				if (shortestDistance == -1) {
+					shortestDistance = enemyDistance;               
+				}
+                //Determines the closest.
+				if (enemyDistance <= shortestDistance){
+					shortestDistance = enemyDistance;
+					targetDefiner = i;
+				}
+			}
+            if (targetDefiner != -1){
+                return (entities[targetDefiner].Position, targetDefiner);
+            }else{
+                return (new Vector2((float)double.NaN, (float)double.NaN), -1);
+            }
         }
     }
 }

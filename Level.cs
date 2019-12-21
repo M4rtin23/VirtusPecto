@@ -13,14 +13,14 @@ namespace VirtusPecto.Desktop{
 		public Creature[] Creature1 = new Creature[0];
 		//public int Difficulty;
 		public ToolBar toolBar;
-		public FireBall[] Fireballs;
+		public Fireball[] Fireballs;
         public GameTime Gametime;
         private PowerButton button;
 		public Level(int EnemyQuantity){
             button = new PowerButton();
             Gametime = new GameTime();
             Background = new BackGround(Back);
-			Fireballs = new FireBall[0];
+			Fireballs = new Fireball[0];
 			Enemy1 = new Enemy[EnemyQuantity];
 			for (int i = 0; i < Enemy1.Length; i++){
 				Enemy1[i] = new Enemy(new Vector2(i*400,512));
@@ -30,7 +30,6 @@ namespace VirtusPecto.Desktop{
             Cards = new Card[3];
 		}
 		public void Creation() {
-			Player1.SpriteIndex = Sprite0;
 			Cards[0] = new Card(0, Color.Red);
 			Cards[1] = new Card(1, Color.Green);
 			Cards[2] = new Card(2, Color.DarkBlue);
@@ -89,7 +88,7 @@ namespace VirtusPecto.Desktop{
             toolBar.Draw(sprBt);
         }
         public void FitFireball(){
-            FireBall[] a;
+            Fireball[] a;
             int o = 0;
             //Search Number of non-null elements.
             for(int i = 0;i < Fireballs.Length; i++){
@@ -98,7 +97,7 @@ namespace VirtusPecto.Desktop{
                 }
             }
             //Set a second array.
-            a = new FireBall[o];
+            a = new Fireball[o];
             //Reuses it.
             o = 0;
             //Copies elements for one array to the other.
@@ -148,40 +147,13 @@ namespace VirtusPecto.Desktop{
                 }
             }
         }
-        public void CreateFireBall(bool isEnemy, Vector2 Position, float d, float v){
-            Array.Resize(ref Levels.Fireballs, Levels.Fireballs.Length+1);
-            Fireballs[Levels.Fireballs.Length-1] = new FireBall(isEnemy, Position, CalculateVectorSpeed(6, d));
-            v -= 10;
+        public void CreateFireball(bool isEnemy, Vector2 Position, float dir){
+            Array.Resize(ref Level1.Fireballs, Level1.Fireballs.Length+1);
+            Fireballs[Level1.Fireballs.Length-1] = new Fireball(isEnemy, Position, CalculateVectorSpeed(6, dir));
 		}
         public void CreateCreature(CardContent content, Vector2 pos){
-            Array.Resize(ref Levels.Creature1, Levels.Creature1.Length+1);
-            Creature1[Levels.Creature1.Length-1] = new Creature(content, pos);
+            Array.Resize(ref Level1.Creature1, Level1.Creature1.Length+1);
+            Creature1[Level1.Creature1.Length-1] = new Creature(content, pos);
 		}
-        public Vector2 GetClosest(Entity[] entities, Vector2 pos){
-            float shortestDistance = -1;
-            int targetDefiner = -1;
-			for (int i = 0; i < entities.Length; i++) {
-				//Sees if the object indexed exists.
-                if (entities[i] == null) {
-					continue;               
-				}
-                //Calculates a distance.
-				int enemyDistance = (int)CalculateDistance(entities[i].Position, pos);
-                //Compares  
-				if (shortestDistance == -1) {
-					shortestDistance = enemyDistance;               
-				}
-                //Determines the closest.
-				if (enemyDistance <= shortestDistance){
-					shortestDistance = enemyDistance;
-					targetDefiner = i;
-				}
-			}
-            if (targetDefiner != -1){
-                return entities[targetDefiner].Position;
-            }else{
-                return new Vector2((float)double.NaN, (float)double.NaN);
-            }
-        }
 	}
 }

@@ -1,5 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using static VirtusPecto.Desktop.Game1;
+
 
 namespace VirtusPecto.Desktop{
     public class PowerButton{
@@ -18,7 +20,7 @@ namespace VirtusPecto.Desktop{
                         checker = true;
                     }
                     if(checker && !Game1.IsClicking){
-                        Game1.Levels.CreateFireBall(false, Game1.Levels.Player1.Position, Game1.Levels.Player1.Dir(), 5);
+                        Game1.Level1.Player1.UsePower(Level1.Player1.GetPowerIndex());
                         checker = false;
                         state = !state;
                         timer = 60;
@@ -38,7 +40,7 @@ namespace VirtusPecto.Desktop{
 //            sprBt.Draw(Game1.Power, Position, new Rectangle(0, 0, 128,128), new Color(255/alpha,255/alpha,255/alpha,255/alpha));
 //            sprBt.Draw(Game1.Power, Position, new Rectangle(128, 0, 128,128), new Color(255/alpha,255/alpha,255/alpha,255/alpha));
             sprBt.Draw(Game1.Power, Position, new Rectangle(0, 0, 128,128), new Color(16,16,16,a/2));
-            sprBt.Draw(Game1.Power, Position, new Rectangle(128, 0, 128,128), new Color(a1,a1,a1,a1));
+            sprBt.Draw(Game1.Power, Position, new Rectangle(128*(Level1.Player1.GetPowerIndex()+1), 0, 128,128), new Color(a1,a1,a1,a1));
         }
         public float GetTimer(){
             return timer;

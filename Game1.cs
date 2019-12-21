@@ -43,7 +43,7 @@ namespace VirtusPecto.Desktop{
 
         //Rooms.
 		public static Lobby StartMenu;
-		public static Level Levels;
+		public static Level Level1;
         public static SettingsMenu Settings;
         public static PauseMenu Pause;
 
@@ -100,7 +100,7 @@ namespace VirtusPecto.Desktop{
                     break;
                 case 1:
                     if(!IsPaused){
-                        Levels?.Update();
+                        Level1?.Update();
                     }
                     break;
                 case 2:
@@ -115,9 +115,9 @@ namespace VirtusPecto.Desktop{
         protected override void Draw(GameTime gameTime){
 			GraphicsDevice.Clear(Color.Black);
             if(LevelNumber == 1){
-                Mat = Camera.Follow(Levels.Player1.Position);
+                Mat = Camera.Follow(Level1.Player1.Position);
                 spriteBatch.Begin(transformMatrix: Mat, samplerState:  SamplerState.PointClamp, sortMode: SpriteSortMode.BackToFront);
-                Levels?.Draw(spriteBatch);
+                Level1?.Draw(spriteBatch);
                 spriteBatch.End();
             }
 
@@ -127,7 +127,7 @@ namespace VirtusPecto.Desktop{
 	    			StartMenu?.Draw(spriteBatch);
 					break;
 				case 1:
-                    Levels.DrawScreen(spriteBatch);
+                    Level1.DrawScreen(spriteBatch);
 					break;
 				case 2:
     				Settings?.Draw(spriteBatch);

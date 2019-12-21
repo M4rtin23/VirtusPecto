@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using static VirtusPecto.Desktop.Game1;
+using static GameBuilder.Builder;
 
 namespace VirtusPecto.Desktop{
     public class Enemy : Entity{
@@ -8,21 +9,24 @@ namespace VirtusPecto.Desktop{
 			SpriteIndex = Sprite0;
 			Position = pos;
             maxSpeed = 3;
+            startingPoint = pos;
 		}
 		public override void Update() {
-            SetTarget(Levels.Creature1);
-            int h = Levels.Creature1.Length;
-            if(target == null && h > 0){
-                SetTarget(Levels.Creature1);    
-            }
-            Hitbox = new Rectangle((int) Position.X - 32 + 16, (int) Position.Y - 64 + 16, 96 - 16, 128 - 16);
+            SetTarget(Level1.Creature1);
             if(health <= 0){
-                Levels.DestroyEnemy();
-            }
-            if(h > 0){
-                followTarget();
-            }
-            CheckTarget(Levels.Creature1);
+                Level1.DestroyEnemy();
+            }            
+
+            if(isAttacking){
+				followTarget();
+				if(speed == Vector2.Zero && dist > 0 && dist > CalculateDistance(Position, target)/2 && (GT.TotalGameTime.Milliseconds % 1000 == 0)){
+					Level1.CreateFireball(false, Position, (float)CalculateAngle(Position, target));
+				}
+				CheckTarget(Level1.Creature1);
+			}else{
+				speed = Follow(startingPoint, Position, 0, maxSpeed);
+				SetTarget(Level1.Creature1);
+			}
             base.Update();
 		}
         public override void Draw(SpriteBatch sprBt){
