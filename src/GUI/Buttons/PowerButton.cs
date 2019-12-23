@@ -16,10 +16,9 @@ namespace VirtusPecto.Desktop{
             hitbox = new Rectangle(Position.ToPoint(), new Point(128));
             if(timer <= 0){
                 if(hitbox.Contains(Game1.Mouse1.Position)){
-                    if(Game1.IsClicking){
+                    if(Game1.IsClicking()){
                         checker = true;
-                    }
-                    if(checker && !Game1.IsClicking){
+                    }else if(checker){
                         Game1.Level1.Player1.UsePower(Level1.Player1.GetPowerIndex());
                         checker = false;
                         state = !state;

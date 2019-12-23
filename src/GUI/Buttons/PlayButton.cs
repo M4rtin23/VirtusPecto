@@ -34,10 +34,9 @@ namespace VirtusPecto.Desktop{
 			Hitbox = new Rectangle((int)position.X,(int)position.Y,64,32);            
 			if (Hitbox.Intersects(Mouse1.Hitbox)){
                 transparency = 64;
-                if(IsClicking){
+                if(IsClicking()){
                     checker = true;
-                }
-				if (/*Mouse1.GetMouseState.LeftButton == ButtonState.Pressed*/!IsClicking && checker) {
+                }else if(checker) {
 					isActivated = !isActivated;
                     checker = false;
 				}
@@ -53,7 +52,7 @@ namespace VirtusPecto.Desktop{
 				HardnessBox.Collision();
 				if (PlayRectangle.Intersects(Mouse1.Hitbox)) {
                     playAlpha = 64;
-					if (/*Mouse1.GetMouseState.LeftButton == ButtonState.Pressed*/IsClicking) {
+					if (IsClicking()) {
                         Game1.GoToLevel(1);
                         switch(HardnessBox.Difficulty){
                             case "Easy":

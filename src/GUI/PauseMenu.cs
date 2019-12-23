@@ -18,8 +18,9 @@ namespace VirtusPecto.Desktop{
 		}
 		public void Update() {
 			settings.Collision();
-			if (ContinueRectangle.Intersects(Mouse1.Hitbox)){
-				if (/*Mouse1.GetMouseState.LeftButton == ButtonState.Pressed*/IsClicking) {
+			#region continue
+            if (ContinueRectangle.Intersects(Mouse1.Hitbox)){
+				if (IsClicking()) {
 					IsPaused = false;
 				}
 				continueAlpha = 64;
@@ -27,8 +28,10 @@ namespace VirtusPecto.Desktop{
 			else {
                 continueAlpha = 0;
 			}
+            # endregion
+            #region main menu
 			if (MainMenuRectangle.Intersects(Mouse1.Hitbox)){
-				if (/*Mouse1.GetMouseState.LeftButton == ButtonState.Pressed*/IsClicking) {
+				if (IsClicking()) {
                     Level1 = null;
 					IsPaused = false;
 					StartMenu = new Lobby();
@@ -38,14 +41,17 @@ namespace VirtusPecto.Desktop{
             }else {
                 mainmenuAlpha = 0;            
             }
+            #endregion
+            #region exit
 			if (ExitRectangle.Intersects(Mouse1.Hitbox)){
 				exitAlpha = 64;
-				if (/*Mouse1.GetMouseState.LeftButton == ButtonState.Pressed*/IsClicking) {
+				if (IsClicking()) {
 					WannaExit = true;
 				}
             }else {
                 exitAlpha = 0;            
             }
+            #endregion
 		}
 		public void Draw(SpriteBatch sprBt) {
 			//sprBt.Draw(Sprite2, new Vector2((Width() / 2), Height() / 2), new Rectangle(0, 0, 128, 32), new Color(0,0,0,128), 0, new Vector2(64, 16), new Vector2(2, 8), SpriteEffects.None, 0);

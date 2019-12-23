@@ -25,10 +25,9 @@ namespace VirtusPecto.Desktop{
             Hitbox = new Rectangle((int)position.X, (int)position.Y, 96, 32);            
             if (Hitbox.Intersects(Mouse1.Hitbox)){
                 transparency = 64;
-                if(IsClicking){
+                if(IsClicking()){
                     checker = true;
-                }
-				if (/*Mouse1.GetMouseState.LeftButton == ButtonState.Pressed*/!IsClicking && checker){
+                }else if(checker){
                     Settings = new SettingsMenu();
                     IsPaused = false;
                     GoToLevel(2);

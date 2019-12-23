@@ -19,13 +19,6 @@ namespace VirtusPecto.Desktop{
             MPosition = Position + m;
         }
 		public void Update(){
-            if(Mouse.GetState().LeftButton == ButtonState.Pressed){
-                IsClicking = true;
-            }else if(GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed && Game1.Joystick != null){
-                IsClicking = true;
-            }else{
-                IsClicking = false;
-            }
 			GetMouseState = Mouse.GetState();
 			if (Keyboard.GetState().IsKeyDown(Keys.Q)){
 				Mouse.SetPosition((int)Level1.Player1.Position.X,(int) Level1.Player1.Position.Y);
@@ -36,13 +29,13 @@ namespace VirtusPecto.Desktop{
             if(Game1.Level1 == null){
                 IsCreating = false;
             }
-			if (IsCreating &&  IsClicking&& !Game1.IsPaused && Game1.Level1 != null){
+			if (IsCreating && IsClicking() && !Game1.IsPaused && Game1.Level1 != null){
 				OnCreation(Number);
 				IsCreating = false;
 			}
 		}
 		public void OnCreation(int Number){
-			if ( IsClicking){
+			if(IsClicking()){
                 for(int i = 0; i < 3; i++){
     				if (Number == i && !Mouse1.Hitbox.Intersects(Level1.Cards[i].Hitbox)){
 	    				Level1.CreateCreature(Level1.Cards[i].Content, MPosition - new Vector2(0, 32));

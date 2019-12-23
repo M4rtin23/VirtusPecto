@@ -105,5 +105,8 @@ namespace VirtusPecto.Desktop{
                 return (new Vector2((float)double.NaN, (float)double.NaN), -1);
             }
         }
+        public static bool IsClicking(){
+            return (Mouse.GetState().LeftButton == ButtonState.Pressed) || (GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed && Game1.Joystick != null);
+        }
     }
 }

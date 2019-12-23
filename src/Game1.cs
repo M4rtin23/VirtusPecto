@@ -36,7 +36,6 @@ namespace VirtusPecto.Desktop{
 		public static int LevelNumber;
         public static int PreviousLevel;
         public static bool WannaExit;
-        public static bool IsClicking;
         public static bool IsJoystick;
         public static bool IsDescriptionOn = true;
         private bool checker;
