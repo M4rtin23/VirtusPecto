@@ -31,7 +31,7 @@ namespace VirtusPecto.Desktop{
             ResolutionBox.Collision();
 			SetFullscreen.Collision();
             SetJoystick.Collision();
-            if(Back.Intersects(Mouse1.Hitbox) && IsClicking()){
+            if(Back.Contains(Mouse1.Position) && IsClicking()){
                 GoToPrevious();
                 Settings = null;
             }

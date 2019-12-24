@@ -31,7 +31,7 @@ namespace VirtusPecto.Desktop{
 			Position.X = Width() / 2 + SpriteIndex.Width * (number-1);
             //Position.X = Width() * (number+1) / 4;
 			if (!Mouse1.IsCreating && /*Level1.Creature1 == null */Level1.Player1.Mana >= 50){
-				if (Hitbox.Intersects(Mouse1.Hitbox)){
+				if (Hitbox.Contains(Mouse1.Position)){
                     if(addedY > 0){
                         addedY -= 16;
                     }
@@ -59,7 +59,7 @@ namespace VirtusPecto.Desktop{
             float rot = ((float)addedY)/256f * (number-1);
             sprBt.Draw(SpriteIndex, Position, null, color, rot, SpriteIndex.Bounds.Size.ToVector2()/2, 1,SpriteEffects.None, 1);
 			sprBt.Draw(Content.Sprite, new Vector2(Position.X, Position.Y), new Rectangle(2 * 128, 0, 128, 128), Color.White, rot, new Vector2(64,160), 1, SpriteEffects.None, 0);
-            if (Hitbox.Intersects(Mouse1.Hitbox) && !Mouse1.IsCreating){
+            if (Hitbox.Contains(Mouse1.Position) && !Mouse1.IsCreating){
                 if(IsDescriptionOn){
                     string description = Content.Name + "*Atk: " + Content.Atk+"*HP: "+Content.HP+"*Speed: "+ Content.Spd;
                     description = description.Replace("*", System.Environment.NewLine);

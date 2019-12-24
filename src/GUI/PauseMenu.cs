@@ -19,7 +19,7 @@ namespace VirtusPecto.Desktop{
 		public void Update() {
 			settings.Collision();
 			#region continue
-            if (ContinueRectangle.Intersects(Mouse1.Hitbox)){
+            if (ContinueRectangle.Contains(Mouse1.Position)){
 				if (IsClicking()) {
 					IsPaused = false;
 				}
@@ -30,7 +30,7 @@ namespace VirtusPecto.Desktop{
 			}
             # endregion
             #region main menu
-			if (MainMenuRectangle.Intersects(Mouse1.Hitbox)){
+			if (MainMenuRectangle.Contains(Mouse1.Position)){
 				if (IsClicking()) {
                     Level1 = null;
 					IsPaused = false;
@@ -43,7 +43,7 @@ namespace VirtusPecto.Desktop{
             }
             #endregion
             #region exit
-			if (ExitRectangle.Intersects(Mouse1.Hitbox)){
+			if (ExitRectangle.Contains(Mouse1.Position)){
 				exitAlpha = 64;
 				if (IsClicking()) {
 					WannaExit = true;

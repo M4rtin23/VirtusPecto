@@ -32,7 +32,7 @@ namespace VirtusPecto.Desktop{
 			PlayPosition = new Vector2(position.X + 256, position.Y);
 			PlayRectangle = new Rectangle((int)PlayPosition.X,(int) PlayPosition.Y, 128, 32);
 			Hitbox = new Rectangle((int)position.X,(int)position.Y,64,32);            
-			if (Hitbox.Intersects(Mouse1.Hitbox)){
+			if (Hitbox.Contains(Mouse1.Position)){
                 transparency = 64;
                 if(IsClicking()){
                     checker = true;
@@ -50,7 +50,7 @@ namespace VirtusPecto.Desktop{
                 }
                 HardnessBox.BoxPosition = position+ new Vector2(128, 0);
 				HardnessBox.Collision();
-				if (PlayRectangle.Intersects(Mouse1.Hitbox)) {
+				if (PlayRectangle.Contains(Mouse1.Position)) {
                     playAlpha = 64;
 					if (IsClicking()) {
                         Game1.GoToLevel(1);

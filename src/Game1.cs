@@ -91,7 +91,6 @@ namespace VirtusPecto.Desktop{
             if(WannaExit){
                 Exit();
             }
-
 			switch(LevelNumber){
                 case 0:
                     StartMenu?.Update();
