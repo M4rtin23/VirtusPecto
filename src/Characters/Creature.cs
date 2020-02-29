@@ -6,10 +6,10 @@ namespace VirtusPecto.Desktop{
 	public class Creature : Entity{
 		public Creature(CardContent content,Vector2 pos){
 			SpriteIndex = content.Sprite;
-            Position = pos;
+			Position = pos;
 			maxSpeed = content.Spd;
 			dist = content.Dist;
-            startingPoint = pos;
+			startingPoint = pos;
 			SetTarget(Level1.Enemy1);
 		}
 		public override void Update() {

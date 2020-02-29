@@ -7,22 +7,9 @@ namespace VirtusPecto.Desktop{
 		public static Vector2 GetMatrix(){
 			return matrixPosition;
 		}
-		public static int Width(){
-			return graphics.PreferredBackBufferWidth;
-		}
-		public static int Height(){
-			return graphics.PreferredBackBufferHeight;
-		}
-		public static bool IsFullScreen(){
-			return graphics.IsFullScreen;
-		}
 		public static void SetWindowSize(Vector2 size){
-			graphics.PreferredBackBufferWidth = (int)size.X;
-			graphics.PreferredBackBufferHeight = (int)size.Y;
-			graphics.ApplyChanges();
-		}
-		public static void Fullscreen(bool state){
-			graphics.IsFullScreen = state;
+			Width = (int)size.X;
+			Height = (int)size.Y;
 			graphics.ApplyChanges();
 		}
 		public static bool IsPressing(int index){
