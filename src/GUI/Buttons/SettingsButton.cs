@@ -25,7 +25,7 @@ namespace VirtusPecto.Desktop{
 			Hitbox = new Rectangle((int)position.X, (int)position.Y, 96, 32);            
 			if (Hitbox.Contains(Mouse1.Position)){
 				transparency = 64;
-				if(IsClicking()){
+				if(IsClicking){
 					checker = true;
 				}else if(checker){
 					Settings = new SettingsMenu();

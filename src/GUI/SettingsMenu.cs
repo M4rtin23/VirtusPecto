@@ -13,7 +13,7 @@ namespace VirtusPecto.Desktop{
 		public Joystick SetJoystick;
 		public CardDescription ShowDescription;
 		private Rectangle Back = new Rectangle(0, 0, Sprite3.Width/2, Sprite3.Height);
-		public Vector2 AspectRatio = new Vector2(16f, 9f);
+		public Vector2 AspectRatio{get => SetAspectRatio.Options[SetAspectRatio.Option];}
 		public SettingsMenu(){
 			ShowDescription = new CardDescription();
 			SetJoystick = new Joystick(0, 0);
@@ -32,7 +32,7 @@ namespace VirtusPecto.Desktop{
 			ResolutionBox.Collision();
 			SetFullscreen.Collision();
 			SetJoystick.Collision();
-			if(Back.Contains(Mouse1.Position) && IsClicking()){
+			if(Back.Contains(Mouse1.Position) && IsClicking){
 				GoToPrevious();
 				Settings = null;
 			}

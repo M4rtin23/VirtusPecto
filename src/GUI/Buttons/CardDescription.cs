@@ -6,12 +6,9 @@ using static VirtusPecto.Desktop.Game1;
 
 namespace VirtusPecto.Desktop{
 	public class CardDescription : TickBox{
+		protected override bool state{get => IsDescriptionOn; set => IsDescriptionOn = value;}
 		public CardDescription(){
-			state = IsDescriptionOn;
 			name = "Show Description";
-		}
-		protected override void update(){
-			IsDescriptionOn = state;
 		}
 	}
 }

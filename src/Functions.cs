@@ -4,6 +4,7 @@ using static GameBuilder.Builder;
 
 namespace VirtusPecto.Desktop{
 	public partial class Game1{
+		public static bool IsClicking {get => (Mouse.GetState().LeftButton == ButtonState.Pressed) || (GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed && Game1.Joystick != null);}
 		public static Vector2 GetMatrix(){
 			return matrixPosition;
 		}
@@ -91,9 +92,6 @@ namespace VirtusPecto.Desktop{
 			}else{
 				return (new Vector2((float)double.NaN, (float)double.NaN), -1);
 			}
-		}
-		public static bool IsClicking(){
-			return (Mouse.GetState().LeftButton == ButtonState.Pressed) || (GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed && Game1.Joystick != null);
 		}
 	}
 }

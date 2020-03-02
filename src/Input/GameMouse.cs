@@ -24,13 +24,13 @@ namespace VirtusPecto.Desktop{
 			if(Game1.Level1 == null){
 				IsCreating = false;
 			}
-			if (IsCreating && IsClicking() && !Game1.IsPaused && Game1.Level1 != null){
+			if (IsCreating && IsClicking && !Game1.IsPaused && Game1.Level1 != null){
 				OnCreation(Number);
 				IsCreating = false;
 			}
 		}
 		public void OnCreation(int Number){
-			if(IsClicking()){
+			if(IsClicking){
 				for(int i = 0; i < 3; i++){
 					if (Number == i && !Level1.Cards[i].Hitbox.Contains(Mouse1.Position)){
 						Level1.CreateCreature(Level1.Cards[i].Content, MPosition - new Vector2(0, 32));

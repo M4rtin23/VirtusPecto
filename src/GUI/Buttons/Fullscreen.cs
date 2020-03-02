@@ -7,12 +7,9 @@ using static GameBuilder.Game1;
 
 namespace VirtusPecto.Desktop{
 	public class Fullscreen : TickBox{
+		protected override bool state{get => IsFullscreen; set => IsFullscreen = value;}
 		public Fullscreen(int x, int y){
 			name = "Fullscreen";
-			state = IsFullscreen;
-		}
-		protected override void action(){
-			IsFullscreen = state;
 		}
 	}
 }

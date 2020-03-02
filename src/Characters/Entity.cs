@@ -30,8 +30,8 @@ namespace VirtusPecto.Desktop{
 			stripSprite(4);
 			base.Draw(batch);
 			if(health < 100){
-				batch.Draw(Sprite2, Position - new Vector2(64, 80), null, new Color(64, 64, 64, 128), 0, new Vector2(0, 0), new Vector2(1, 1/4f), SpriteEffects.None, 0);
-				batch.Draw(Sprite2, Position - new Vector2(64, 80), null, new Color(255, 0, 0, 128), 0, new Vector2(0, 0), new Vector2((float)health/100, 1/4f), SpriteEffects.None, 0);
+				batch.Draw(Sprite2, Position - new Vector2(64, 80), null, new Color(64, 64, 64, 150), 0, new Vector2(0, 0), new Vector2(1, 1/4f), SpriteEffects.None, 0.1f);
+				batch.Draw(Sprite2, Position - new Vector2(64, 80), null, new Color(255, 0, 0, 115), 0, new Vector2(0, 0), new Vector2((float)health/100, 1/4f), SpriteEffects.None, 0);
 			}
 		}
 		public void SetTarget(Entity[] entities){

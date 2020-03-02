@@ -34,7 +34,7 @@ namespace VirtusPecto.Desktop{
 			Button2.Collision();
 			if (ExitRectangle.Contains(Mouse1.Position)){
 				exitAlpha = 64;
-				if (IsClicking()) {
+				if (IsClicking) {
 					WannaExit = true;
 				}
 			}else {

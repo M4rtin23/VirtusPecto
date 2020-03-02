@@ -84,7 +84,6 @@ namespace VirtusPecto.Desktop{
 			
 
 			Hitbox = new GameBuilder.RectangleF((int) Position.X - 32, (int) Position.Y + 32, 128-64, 32);
-			collision(Level1.Creature1);
 			collision(Level1.Enemy1);
 			if(speed == Vector2.Zero){
 				imageIndex = 0;
@@ -92,7 +91,7 @@ namespace VirtusPecto.Desktop{
 			base.Update();
 		}
 		public override void Draw(SpriteBatch batch){
-			Hitbox.Draw(batch);
+			//Hitbox.Draw(batch);
 			//DrawRectangle(batch, Hitbox, Color.White);
 			//DrawTriangle(batch, new Vector2(0, 0),new Vector2(500, 0),new Vector2(250,250));
 			//DrawRectangle(spriteBatch, Sprite2, Hitbox, Color.White);
@@ -161,17 +160,6 @@ namespace VirtusPecto.Desktop{
 		public int GetPowerIndex(){
 			return powerIndex;
 		}
-		private void collision(Entity[] entities){
-			for(int i = 0; i<entities.Length; i++){
-				if(entities[i] != null){
-					if(PreCollisionX(entities[i].Hitbox) ){
-						speed.X = 0;
-					}
-					if(PreCollisionY(entities[i].Hitbox) ){
-						speed.Y = 0;
-					}
-				}
-			}
-		}
+		
 	}
 }

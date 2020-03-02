@@ -7,7 +7,9 @@ using static GameBuilder.Game1;
 
 namespace VirtusPecto.Desktop{
 	public class WindowBox : OptionBox{
+		Vector2 realOption{get => new Vector2(Options[Option].Y * Settings.AspectRatio.X/Settings.AspectRatio.Y, Options[Option].Y);}
 		public WindowBox(){
+			optionsNumber = 8;
 			name = "Window Size";
 			Options[0].Y = 1200;
 			Options[1].Y = 1080;
@@ -18,24 +20,14 @@ namespace VirtusPecto.Desktop{
 			Options[6].Y = 768;
 			Options[7].Y = 720;
 		}
-		protected override int n(){
-			return 8;
-		}
 		protected override void action(int i){
-			SetWindowSize(Options[i]);
-		}
-		protected override void update(){
-			for (int i = 0; i < OptionsNumber; i++){
-				Options[i].X = (float)Math.Ceiling(Settings.AspectRatio.X / Settings.AspectRatio.Y * Options[i].Y);
-			}
+			SetWindowSize(realOption);
 		}
 		protected override string drawOptions(int i){
-			string a = " "+Convert.ToString(Options[i].X) + " X " + Convert.ToString(Options[i].Y);
-			return a;
+			return " "+ (int)(Options[i].Y * Settings.AspectRatio.X/Settings.AspectRatio.Y) + " X " + Options[i].Y;
 		}
 		protected override string currentOption(){
-			string a = " "+Convert.ToString(Width) + " X " + Convert.ToString(Height);
-			return a;
+			return " "+ Width + " X " + Height;	
 		}
 
 	}

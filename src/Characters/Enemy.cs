@@ -15,7 +15,7 @@ namespace VirtusPecto.Desktop{
 			SetTarget(Level1.Creature1);
 			if(health <= 0){
 				Level1.DestroyEnemy();
-			}            
+			}
 
 			if(isAttacking){
 				followTarget();
@@ -27,6 +27,7 @@ namespace VirtusPecto.Desktop{
 				speed = Follow(startingPoint, Position, 0, maxSpeed);
 				SetTarget(Level1.Creature1);
 			}
+			collision0(new Player[]{Level1.Player1});
 			base.Update();
 		}
 		public override void Draw(SpriteBatch batch){

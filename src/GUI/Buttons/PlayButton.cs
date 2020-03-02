@@ -11,7 +11,7 @@ namespace VirtusPecto.Desktop{
 		private Vector2 position;
 		public bool isActivated;
 		private int transparency;
-		public DifficultyBox HardnessBox;
+		private DifficultyBox difficultyBox;
 		public Vector2 PlayPosition;
 		public Rectangle PlayRectangle;
 		private int playAlpha;
@@ -21,7 +21,6 @@ namespace VirtusPecto.Desktop{
 			position = new Vector2(x, y);
 			Hitbox = new Rectangle((int)position.X,(int)position.Y,64,32);
 			PlayPosition = new Vector2(0, 0);
-			//HardnessBox = new DifficultyBox((int)position.X+128,(int)position.Y+44);
 			PlayRectangle = new Rectangle((int)PlayPosition.X,(int) PlayPosition.Y, 128, 32);
 		}
 		public void SetPosition(float x, float y){
@@ -34,7 +33,7 @@ namespace VirtusPecto.Desktop{
 			Hitbox = new Rectangle((int)position.X,(int)position.Y,64,32);            
 			if (Hitbox.Contains(Mouse1.Position)){
 				transparency = 64;
-				if(IsClicking()){
+				if(IsClicking){
 					checker = true;
 				}else if(checker) {
 					isActivated = !isActivated;
@@ -45,29 +44,16 @@ namespace VirtusPecto.Desktop{
 				transparency = 0;
 			}
 			if (isActivated) {
-				if(HardnessBox == null){
-					HardnessBox = new DifficultyBox((int)position.X+128,(int)position.Y);
+				if(difficultyBox == null){
+					difficultyBox = new DifficultyBox((int)position.X+128,(int)position.Y);
 				}
-				HardnessBox.BoxPosition = position+ new Vector2(128, 0);
-				HardnessBox.Collision();
+				difficultyBox.SetPosition(position.X + 128, position.Y);
+				difficultyBox.Collision();
 				if (PlayRectangle.Contains(Mouse1.Position)) {
 					playAlpha = 64;
-					if (IsClicking()) {
+					if (IsClicking) {
 						Game1.GoToLevel(1);
-						switch(HardnessBox.Difficulty){
-							case "Easy":
-								Level1 = new Level(0);
-								break;
-							case "Normal":
-								Level1 = new Level(3);
-								break;
-							case "Difficult":
-								Level1 = new Level(5);
-								break;
-							default:
-								Level1 = new Level(1);
-								break;
-						}
+						Level1 = new Level((int)difficultyBox.Options[difficultyBox.Option].X);
 						Level1.Creation();
 						StartMenu = null;
 					}
@@ -80,7 +66,7 @@ namespace VirtusPecto.Desktop{
 			GameBuilder.Builder.DrawRectangle(batch, Hitbox, new Color(transparency, transparency, transparency, transparency));
 			batch.DrawString(Font, "Start", position, Color.White);
 			if (isActivated) {
-				HardnessBox.Draw(batch);
+				difficultyBox.Draw(batch);
 				GameBuilder.Builder.DrawRectangle(batch, PlayRectangle, new Color(playAlpha, playAlpha, playAlpha, playAlpha));
 				batch.DrawString(Font, "Play", PlayPosition, Color.White);
 			}

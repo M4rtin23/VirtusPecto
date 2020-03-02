@@ -36,7 +36,7 @@ namespace VirtusPecto.Desktop{
 					if(addedY > 0){
 						addedY -= 16;
 					}
-					if (IsClicking()){
+					if (IsClicking){
 						addedY = 128;
 						Mouse1.Number = number;
 						Mouse1.IsCreating = true;
