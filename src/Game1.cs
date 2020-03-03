@@ -6,9 +6,7 @@ using Microsoft.Xna.Framework.Input;
 namespace VirtusPecto.Desktop{
 	public partial class Game1 : GameBuilder.Game1{
 		//System.
-//        private static GraphicsDeviceManager graphics;
 		private SpriteBatch spriteBatch;
-		public static CreatureDatabase GetCreatureDatabase;
 		public static GameMouse Mouse1;
 		private static Vector2 matrixPosition;
 		public static GameControl Joystick;
@@ -79,7 +77,6 @@ namespace VirtusPecto.Desktop{
 			for (int i = 0; i < CreatureSprite.Length; i++){
 				CreatureSprite[i] = Content.Load<Texture2D>("Creatures/Creature"+ Convert.ToString(i));
 			}
-			GetCreatureDatabase = new CreatureDatabase();
 		}
 		protected override void Update(GameTime gameTime){
 			GT = gameTime;

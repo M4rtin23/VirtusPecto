@@ -5,7 +5,7 @@ using static VirtusPecto.Desktop.Game1;
 
 namespace VirtusPecto.Desktop{
 	public class PowerButton{
-		protected Rectangle hitbox;
+		protected Rectangle hitbox {get => new Rectangle(Position.ToPoint(), new Point(128));}
 		public Vector2 Position;
 		static float timer;
 		bool checker, state;
@@ -13,7 +13,6 @@ namespace VirtusPecto.Desktop{
 		}
 		public void Update(){
 			Position = new Vector2(64, Game1.Height-192);
-			hitbox = new Rectangle(Position.ToPoint(), new Point(128));
 			if(timer <= 0){
 				if(hitbox.Contains(Game1.Mouse1.Position)){
 					if(Game1.IsClicking){

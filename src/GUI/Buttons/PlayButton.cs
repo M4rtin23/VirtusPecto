@@ -7,21 +7,18 @@ using static VirtusPecto.Desktop.Lobby;
 
 namespace VirtusPecto.Desktop{
 	public class PlayButton{
-		public Rectangle Hitbox;
+		public Rectangle Hitbox{get => new Rectangle((int)position.X,(int)position.Y,128,32);}
 		private Vector2 position;
 		public bool isActivated;
 		private int transparency;
 		private DifficultyBox difficultyBox;
 		public Vector2 PlayPosition;
-		public Rectangle PlayRectangle;
+		public Rectangle PlayRectangle{get => new Rectangle((int)PlayPosition.X,(int) PlayPosition.Y, 128, 32);}
 		private int playAlpha;
 		bool checker;
 
 		public PlayButton(int x, int y){
-			position = new Vector2(x, y);
-			Hitbox = new Rectangle((int)position.X,(int)position.Y,64,32);
 			PlayPosition = new Vector2(0, 0);
-			PlayRectangle = new Rectangle((int)PlayPosition.X,(int) PlayPosition.Y, 128, 32);
 		}
 		public void SetPosition(float x, float y){
 			position.X = x;
@@ -29,8 +26,6 @@ namespace VirtusPecto.Desktop{
 		}
 		public void Collision() {
 			PlayPosition = new Vector2(position.X + 256, position.Y);
-			PlayRectangle = new Rectangle((int)PlayPosition.X,(int) PlayPosition.Y, 128, 32);
-			Hitbox = new Rectangle((int)position.X,(int)position.Y,64,32);            
 			if (Hitbox.Contains(Mouse1.Position)){
 				transparency = 64;
 				if(IsClicking){

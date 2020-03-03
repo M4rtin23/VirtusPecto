@@ -7,14 +7,13 @@ using static VirtusPecto.Desktop.Lobby;
 
 namespace VirtusPecto.Desktop{
 	public class SettingsButton{
-		public Rectangle Hitbox;
+		public Rectangle Hitbox{get => new Rectangle((int)position.X,(int)position.Y,128,32);}
 		public Vector2 position;
 		private int transparency = 0;
 		bool checker;
 
 		public SettingsButton(int x, int y){
-			position = new Vector2(x, y);
-			Hitbox = new Rectangle((int)position.X, (int)position.Y, 96, 32);
+			
 		}
 		public void SetPosition(float x, float y){
 			position.X = x;
@@ -22,7 +21,6 @@ namespace VirtusPecto.Desktop{
 		}
 
 		public void Collision(){
-			Hitbox = new Rectangle((int)position.X, (int)position.Y, 96, 32);            
 			if (Hitbox.Contains(Mouse1.Position)){
 				transparency = 64;
 				if(IsClicking){

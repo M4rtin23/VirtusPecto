@@ -7,7 +7,7 @@ using static VirtusPecto.Desktop.Game1;
 namespace VirtusPecto.Desktop{
 	public class OptionBox{
 		protected string name;
-		protected Rectangle hitbox;
+		protected Rectangle hitbox{get => new Rectangle((int)position.X,(int)position.Y,128,32);}
 		protected Vector2 position;
 		private Color color;
 		public Vector2[] Options;
@@ -29,7 +29,6 @@ namespace VirtusPecto.Desktop{
 			return drawOptions(Option);
 		}
 		public void Collision() {
-			hitbox = new Rectangle((int)position.X, (int)position.Y, 128, 32);
 			if (hitbox.Contains(Mouse1.Position)){
 				if(IsClicking){
 					checker = true;

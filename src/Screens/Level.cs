@@ -11,19 +11,16 @@ namespace VirtusPecto.Desktop{
 		public Enemy[] Enemy1;
 		public Card[] Cards;
 		public Creature[] Creature1 = new Creature[0];
-		//public int Difficulty;
 		public ToolBar toolBar;
 		public Fireball[] Fireballs;
-		public GameTime Gametime;
 		private PowerButton button;
 		public Level(int EnemyQuantity){
 			button = new PowerButton();
-			Gametime = new GameTime();
 			Background = new BackGround(Back);
 			Fireballs = new Fireball[0];
 			Enemy1 = new Enemy[EnemyQuantity];
 			for (int i = 0; i < Enemy1.Length; i++){
-				Enemy1[i] = new Enemy(new Vector2(i*400,512));
+				Enemy1[i] = new Enemy(new Vector2(i*400,new Random(i).Next(-500, 500)));
 			}
 			toolBar = new ToolBar();
 			Player1 = new Player();
