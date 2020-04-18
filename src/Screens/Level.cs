@@ -54,7 +54,7 @@ namespace VirtusPecto.Desktop{
 			}
 		}
 		public void Draw(SpriteBatch batch) {
-			Background.Draw(batch, Player1.Position);
+			Background.Draw(batch, Camera.pos);
 			for (int i = 0; i < Fireballs.Length;i++){
 				Fireballs[i]?.Draw(batch);
 			}
@@ -130,10 +130,15 @@ namespace VirtusPecto.Desktop{
 			//Copies the second array to the original.
 			return a;
 		}
-		public void DestroyEnemy(){
+		public void DestroyEntities(){
 			for(int i = 0; i < Enemy1.Length; i++){
 				if(Enemy1[i]?.GetHealth() <= 0){
 					Enemy1[i] = null;
+				}
+			}
+			for(int i = 0; i < Creature1.Length; i++){
+				if(Creature1[i]?.GetHealth() <= 0){
+					Creature1[i] = null;
 				}
 			}
 		}

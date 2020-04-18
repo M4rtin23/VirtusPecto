@@ -9,7 +9,7 @@ namespace VirtusPecto.Desktop{
 	public class Player : GameBuilder.ObjectBuilder{
 		public float Health = 100, Mana = 100;
 		public CardContent[] Slot;
-		private int powerIndex = 0;
+		private int powerIndex = 1;
 		public Player(){
 			SpriteIndex = Sprite0;
 			Position = new Vector2(64, 64);
@@ -88,6 +88,7 @@ namespace VirtusPecto.Desktop{
 			if(speed == Vector2.Zero){
 				imageIndex = 0;
 			}
+			if(GameBuilder.GameBase.IsInside(Position + speed))
 			base.Update();
 		}
 		public override void Draw(SpriteBatch batch){
@@ -146,7 +147,9 @@ namespace VirtusPecto.Desktop{
 		public void UsePower(int powerIndex){
 			switch(powerIndex){
 				case 1:
-					Level1.Enemy1[GetClosest(Level1.Enemy1, Mouse1.MPosition).Item2].AddHealth(-50);
+				try{
+					Level1.Enemy1?[GetClosest(Level1.Enemy1, Mouse1.MPosition).Item2].AddHealth(-50);
+				}catch{}
 					break;
 				case 0:
 					Level1.CreateFireball(false, Position,(float) CalculateAngle(Position, Game1.Mouse1.MPosition));

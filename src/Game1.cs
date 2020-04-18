@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace VirtusPecto.Desktop{
-	public partial class Game1 : GameBuilder.Game1{
+	public partial class Game1 : GameBuilder.GameBase{
 		//System.
 		private SpriteBatch spriteBatch;
 		public static GameMouse Mouse1;
@@ -110,7 +110,7 @@ namespace VirtusPecto.Desktop{
 		protected override void Draw(GameTime gameTime){
 			GraphicsDevice.Clear(Color.Black);
 			if(LevelNumber == 1){
-				Mat = Camera.Follow(Level1.Player1.Position);
+				Mat = Camera.LimitedFollow(Level1.Player1.Position);
 				spriteBatch.Begin(transformMatrix: Mat, samplerState:  SamplerState.PointClamp, sortMode: SpriteSortMode.BackToFront);
 				Level1?.Draw(spriteBatch);
 				spriteBatch.End();

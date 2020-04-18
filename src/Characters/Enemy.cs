@@ -5,34 +5,35 @@ using static GameBuilder.Builder;
 
 namespace VirtusPecto.Desktop{
 	public class Enemy : Entity{
+		bool o = false;
+		GameBuilder.RectangleF attacking{get => new GameBuilder.RectangleF(64*GameBuilder.Motion.VectorSpeed(1, MathHelper.ToRadians((float)CalculateAngle(Position, target)))+Position - Vector2.One*32, 64);}
 		public Enemy(Vector2 pos){
 			SpriteIndex = Sprite0;
 			Position = pos;
 			maxSpeed = 3;
 			startingPoint = pos;
+			dist = 33;
+			color1 = Color.Red;
 		}
 		public override void Update() {
-			SetTarget(Level1.Creature1);
-			if(health <= 0){
-				Level1.DestroyEnemy();
-			}
-
-			if(isAttacking){
-				followTarget();
-				if(speed == Vector2.Zero && dist > 0 && dist > CalculateDistance(Position, target)/2 && (GT.TotalGameTime.Milliseconds % 1000 == 0)){
-					Level1.CreateFireball(false, Position, (float)CalculateAngle(Position, target));
-				}
-				CheckTarget(Level1.Creature1);
-			}else{
-				speed = Follow(startingPoint, Position, 0, maxSpeed);
-				SetTarget(Level1.Creature1);
-			}
-			collision0(new Player[]{Level1.Player1});
+			enemy = Level1.Creature1;
+			SetTarget(enemy);
 			base.Update();
+			collision0(new Player[]{Level1.Player1});
+			collision0(Level1.Enemy1);
+			if(o){
+				if(attacking.Contains(target)){
+					Level1.Creature1[targetDefined].AddHealth(-10);
+				}
+			}
+			o = false;
 		}
 		public override void Draw(SpriteBatch batch){
 			base.Draw(batch);
 			batch.DrawString(Font, ""+target, new Vector2(0,512), Color.White);
+		}
+		protected override void attack(float angle){
+			o = true;
 		}
 	}
 }

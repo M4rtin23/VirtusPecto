@@ -8,6 +8,7 @@ namespace VirtusPecto.Desktop{
 		protected Rectangle hitbox {get => new Rectangle(Position.ToPoint(), new Point(128));}
 		public Vector2 Position;
 		static float timer;
+		public float Timer{get => timer; set => timer = value;}
 		bool checker, state;
 		public PowerButton(){
 		}
@@ -40,9 +41,9 @@ namespace VirtusPecto.Desktop{
 			batch.Draw(Game1.Power, Position, new Rectangle(0, 0, 128,128), new Color(16,16,16,a/2));
 			batch.Draw(Game1.Power, Position, new Rectangle(128*(Level1.Player1.GetPowerIndex()+1), 0, 128,128), new Color(a1,a1,a1,a1));
 		}
-		public float GetTimer(){
+		/*public float GetTimer(){
 			return timer;
-		}
+		}*/
 		public static bool IsCharged(){
 			return timer <= 0;
 		}

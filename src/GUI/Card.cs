@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using static VirtusPecto.Desktop.Game1;
 using static VirtusPecto.Desktop.Level;
 using static VirtusPecto.Desktop.CreatureDatabase;
-using static GameBuilder.Game1;
+using static GameBuilder.GameBase;
 
 namespace VirtusPecto.Desktop{
 	public class Card{

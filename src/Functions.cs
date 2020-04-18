@@ -53,7 +53,7 @@ namespace VirtusPecto.Desktop{
 		}
 		private void matrix(){
 			if(LevelNumber == 1){
-				Mat = Camera.Follow(Level1.Player1.Position);
+				Mat = Camera.Follow(Camera.pos);
 			}
 			matrixPosition = - new Vector2(Mat.M41, Mat.M42);
 			Mouse1.SetMPosition(matrixPosition);
@@ -67,7 +67,7 @@ namespace VirtusPecto.Desktop{
 		public static void GoToPrevious(){
 			GoToLevel(PreviousLevel);
 		}
-		public static (Vector2, int) GetClosest(Entity[] entities, Vector2 pos){
+		public static (Vector2, int) GetClosest(GameBuilder.ObjectBuilder[] entities, Vector2 pos){
 			float shortestDistance = -1;
 			int targetDefiner = -1;
 			for (int i = 0; i < entities.Length; i++) {
