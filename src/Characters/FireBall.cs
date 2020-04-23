@@ -1,8 +1,5 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using static VirtusPecto.Desktop.Level;
 using static VirtusPecto.Desktop.Game1;
 using static GameBuilder.Builder;
 using GameBuilder;
@@ -26,6 +23,7 @@ namespace VirtusPecto.Desktop{
 			Hitbox = new RectangleF((int)Position.X - 32,(int) Position.Y - 32, 96, 96);         
 			if (isDangerous) {
 				PlayerCollision();
+				CreatureCollision();
 			}else{
 				EnemyCollision();
 			}
@@ -40,6 +38,16 @@ namespace VirtusPecto.Desktop{
 				}
 			}
 		}
+		public void CreatureCollision() {
+			for (int i = 0; i < Level1.Creature1.Length; i++) {
+				if (isAlive && Level1.Creature1[i] != null && Level1.Creature1[i].Hitbox.Intersects(Hitbox)){
+					isAlive = false;
+					Level1.DestroyFireball();
+					Level1.Creature1[i]?.AddHealth(-10);
+				}
+			}
+		}
+
 		public void PlayerCollision() {
 			if (isAlive && Hitbox.Intersects(Level1.Player1.Hitbox)) {
 				isAlive = false;

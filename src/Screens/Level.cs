@@ -13,11 +13,13 @@ namespace VirtusPecto.Desktop{
 		public Creature[] Creature1 = new Creature[0];
 		public ToolBar toolBar;
 		public Fireball[] Fireballs;
+		public Particle[] Particles;
 		private PowerButton button;
 		public Level(int EnemyQuantity){
 			button = new PowerButton();
 			Background = new BackGround(Back);
 			Fireballs = new Fireball[0];
+			Particles = new Particle[0];
 			Enemy1 = new Enemy[EnemyQuantity];
 			for (int i = 0; i < Enemy1.Length; i++){
 				Enemy1[i] = new Enemy(new Vector2(i*400,new Random(i).Next(-500, 500)));
@@ -34,10 +36,14 @@ namespace VirtusPecto.Desktop{
 		public void Update() {
 			button.Update();
 			for (int i = 0; i < Fireballs.Length; i++) {
-				if (Fireballs[i] != null){
-					Fireballs[i].Update();
-				}
+//				if (Fireballs[i] != null){
+					Fireballs[i]?.Update();
+//				}
 			}
+			for (int i = 0; i < Particles.Length; i++) {
+				Particles[i]?.Update();
+			}
+
 			for(int i = 0; i < 3; i++){
 				Cards[i].Update();
 			}
@@ -50,13 +56,15 @@ namespace VirtusPecto.Desktop{
 			}
 			if(GT.TotalGameTime.Milliseconds % 1000 == 0){
 				FitFireball();
-				//FitEntity();
 			}
 		}
 		public void Draw(SpriteBatch batch) {
 			Background.Draw(batch, Camera.pos);
 			for (int i = 0; i < Fireballs.Length;i++){
 				Fireballs[i]?.Draw(batch);
+			}
+			for (int i = 0; i < Particles.Length; i++) {
+				Particles[i]?.Draw(batch);
 			}
 			for(int i = 0; i < Creature1.Length; i++){
 				Creature1[i]?.Draw(batch);
@@ -149,6 +157,34 @@ namespace VirtusPecto.Desktop{
 				}
 			}
 		}
+		public void DestroyParticle(){
+			for(int i = 0; i < Particles.Length; i++){
+				if(Particles[i] != null && !Particles[i].GetState()){
+					Particles[i] = null;
+				}
+			}
+			Particle[] a;
+			int o = 0;
+			//Search Number of non-null elements.
+			for(int i = 0;i < Particles.Length; i++){
+				if(Particles[i] != null){
+					o++;
+				}
+			}
+			//Set a second array.
+			a = new Particle[o];
+			//Reuses it.
+			o = 0;
+			//Copies elements for one array to the other.
+			for(int i = 0; i < Particles.Length; i++){
+				if(Particles[i] != null){
+					a[o] = Particles[i];
+					o++;
+				}
+			}
+			//Copies the second array to the original.
+			Particles = a;
+		}
 		public void CreateFireball(bool isEnemy, Vector2 Position, float dir){
 			Array.Resize(ref Level1.Fireballs, Level1.Fireballs.Length+1);
 			Fireballs[Level1.Fireballs.Length-1] = new Fireball(isEnemy, Position, CalculateVectorSpeed(6, dir));
@@ -156,6 +192,10 @@ namespace VirtusPecto.Desktop{
 		public void CreateCreature(CardContent content, Vector2 pos){
 			Array.Resize(ref Level1.Creature1, Level1.Creature1.Length+1);
 			Creature1[Level1.Creature1.Length-1] = new Creature(content, pos);
+		}
+		public void CreateParticle(Vector2 position, float seconds, int type){
+			Array.Resize(ref Level1.Particles, Level1.Particles.Length+1);
+			Particles[Level1.Particles.Length-1] = new Particle(position, 1, seconds, type);
 		}
 	}
 }

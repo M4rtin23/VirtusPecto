@@ -5,7 +5,7 @@ using static GameBuilder.Builder;
 using GameBuilder;
 
 namespace VirtusPecto.Desktop{
-	public class Entity : GameBuilder.ObjectBuilder{
+	public abstract class Entity : GameBuilder.ObjectBuilder{
 		protected Vector2 target, startingPoint;
 		protected int health = 100;
 		protected float dist;
@@ -14,6 +14,7 @@ namespace VirtusPecto.Desktop{
 		protected int time;
 		protected Color color1 = Color.Green;
 		protected Entity[] enemy;
+		protected int powerIndex = 0;
 		public override void Update() {
 			if(health <= 0){
 				Level1.DestroyEntities();
@@ -29,7 +30,7 @@ namespace VirtusPecto.Desktop{
 			base.Update();
 			if(isAttacking){
 				followTarget();
-				if(speed == Vector2.Zero && dist > 0 && dist > CalculateDistance(Position, target)/2 && (GT.TotalGameTime.Milliseconds % 1000 == 0)){
+				if(speed == Vector2.Zero && dist > 0 && /*dist > CalculateDistance(Position, target)/2 &&*/ (GT.TotalGameTime.Milliseconds % 1000 == 0)){
 					attack((float)CalculateAngle(Position, target));
 				}
 				CheckTarget(enemy);
@@ -100,7 +101,24 @@ namespace VirtusPecto.Desktop{
 			return startingPoint;
 		}
 		protected virtual void attack(float angle){
-
+			switch(powerIndex){
+				case 1:
+				try{
+					enemy?[targetDefined].AddHealth(-50);
+					Level1.CreateParticle(target, 0.4f, 0);
+				}catch{}
+					break;
+				case 0:
+					Level1.CreateFireball((color1 == Color.Red), Position,(float)angle);
+					break;
+				case 2:
+					Vector2 pos = 32*GameBuilder.Motion.VectorSpeed(1, MathHelper.ToRadians((float)CalculateAngle(Position, target)))+Position - Vector2.One*32;
+					if(new GameBuilder.RectangleF(pos, 64).Contains(target)){
+						Level1.CreateParticle(pos, 0.5f, 1);
+						enemy[targetDefined].AddHealth(-10);
+					}
+					break;
+			}
 		}
 	}
 }

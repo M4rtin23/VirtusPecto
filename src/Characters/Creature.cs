@@ -40,8 +40,5 @@ namespace VirtusPecto.Desktop{
 				speed.Y = 0;
 			}
 		}
-		protected override void attack(float angle){
-			Level1.CreateFireball(false, Position, angle);
-		}
 	}
 }

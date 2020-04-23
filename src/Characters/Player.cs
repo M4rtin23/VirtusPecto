@@ -77,19 +77,18 @@ namespace VirtusPecto.Desktop{
 			}
 		}
 		public override void Update(){
-			
+			Console.WriteLine(Level1.Particles.Length);
 			animationImage(4);
 			gameControl();
-			
-			
 
 			Hitbox = new GameBuilder.RectangleF((int) Position.X - 32, (int) Position.Y + 32, 128-64, 32);
 			collision(Level1.Enemy1);
 			if(speed == Vector2.Zero){
 				imageIndex = 0;
 			}
-			if(GameBuilder.GameBase.IsInside(Position + speed))
-			base.Update();
+			if(GameBuilder.GameBase.IsInside(Position + speed)){
+				base.Update();
+			}
 		}
 		public override void Draw(SpriteBatch batch){
 			//Hitbox.Draw(batch);
@@ -148,14 +147,19 @@ namespace VirtusPecto.Desktop{
 			switch(powerIndex){
 				case 1:
 				try{
-					Level1.Enemy1?[GetClosest(Level1.Enemy1, Mouse1.MPosition).Item2].AddHealth(-50);
+					int target = GetClosest(Level1.Enemy1, Mouse1.MPosition).Item2;
+					Level1.Enemy1?[target].AddHealth(-50);
+					Level1.CreateParticle(Level1.Enemy1[target].Position, 0.4f, 0);
 				}catch{}
 					break;
 				case 0:
 					Level1.CreateFireball(false, Position,(float) CalculateAngle(Position, Game1.Mouse1.MPosition));
 					break;
+				case 2:
+					Vector2 pos = 32*GameBuilder.Motion.VectorSpeed(1, MathHelper.ToRadians((float)CalculateAngle(Position, Mouse1.MPosition)))+Position - Vector2.One*32;
+					Level1.CreateParticle(pos, 0.5f, 1);
+					break;
 			}
-			
 		}
 		public float Dir(){
 			return (float)CalculateDirection(-speed.X, -speed.Y);

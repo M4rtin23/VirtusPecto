@@ -5,9 +5,7 @@ using static GameBuilder.Builder;
 namespace VirtusPecto.Desktop{
 	public partial class Game1{
 		public static bool IsClicking {get => (Mouse.GetState().LeftButton == ButtonState.Pressed) || (GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed && Game1.Joystick != null);}
-		public static Vector2 GetMatrix(){
-			return matrixPosition;
-		}
+		
 		public static void SetWindowSize(Vector2 size){
 			Width = (int)size.X;
 			Height = (int)size.Y;
@@ -50,13 +48,6 @@ namespace VirtusPecto.Desktop{
 				}
 				Pause?.Update();    
 			}
-		}
-		private void matrix(){
-			if(LevelNumber == 1){
-				Mat = Camera.Follow(Camera.pos);
-			}
-			matrixPosition = - new Vector2(Mat.M41, Mat.M42);
-			Mouse1.SetMPosition(matrixPosition);
 		}
 		public static void GoToLevel(int level){
 			if(level != LevelNumber){

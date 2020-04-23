@@ -10,7 +10,7 @@ using static GameBuilder.GameBase;
 namespace VirtusPecto.Desktop{
 	public class Card{
 		public Texture2D SpriteIndex;
-		public Rectangle Hitbox;
+		public Rectangle Hitbox{get => new Rectangle((int)(Position.X-SpriteIndex.Width/2), (int)(Position.Y-SpriteIndex.Height/2), SpriteIndex.Width, SpriteIndex.Height);}
 		public Vector2 Position;
 		public CardContent Content;
 		private int number;
@@ -18,20 +18,17 @@ namespace VirtusPecto.Desktop{
 		private Color cardColor, color;
 
 		public Card(int n, Color c){
-			cardColor = c;
+			cardColor = Color.DarkSlateGray;
 			number = n;
 			Content = Level1.Player1.Slot[n];
 			addedY = 128;
 			SpriteIndex = Game1.Sprite1;
 			Position = new Vector2(0,0);
-			Hitbox = new Rectangle((int)Position.X, (int)Position.Y, SpriteIndex.Width, SpriteIndex.Height);
 		}
 		public void Update() {
-			Hitbox = new Rectangle((int)(Position.X-SpriteIndex.Width/2), (int)(Position.Y-SpriteIndex.Height/2), SpriteIndex.Width, SpriteIndex.Height);
-			Position.Y = Height + addedY  - 64*(1-Math.Abs(number-1)) - 32;
+			Position.Y = Height + addedY  - 64*(1-Math.Abs(number-1)) - 96;
 			Position.X = Width / 2 + SpriteIndex.Width * (number-1);
-			//Position.X = Width * (number+1) / 4;
-			if (!Mouse1.IsCreating && /*Level1.Creature1 == null */Level1.Player1.Mana >= 50){
+			if (Level1.Player1.Mana >= 50){
 				if (Hitbox.Contains(Mouse1.Position)){
 					if(addedY > 0){
 						addedY -= 16;
@@ -49,17 +46,21 @@ namespace VirtusPecto.Desktop{
 			}else{
 				addedY = 128;
 			}
+			if(Mouse1.IsCreating){
+				Position.Y += 64;
+			}
 		}
 		public void Draw(SpriteBatch batch){
-			//if (!Mouse1.IsCreating && Level1.Creature1 == null){
-				color = cardColor;
-			/*}
+			if (!Mouse1.IsCreating){
+				color = new Color(cardColor, 255);
+			}
 			else {
-				color = Color.DarkGray;
-			}*/
+				color = new Color(cardColor.R/2, cardColor.G/2, cardColor.B/2, 128);
+			}
 			float rot = ((float)addedY)/256f * (number-1);
 			batch.Draw(SpriteIndex, Position, null, color, rot, SpriteIndex.Bounds.Size.ToVector2()/2, 1,SpriteEffects.None, 1);
-			batch.Draw(Content.Sprite, new Vector2(Position.X, Position.Y), new Rectangle(2 * 128, 0, 128, 128), Color.White, rot, new Vector2(64,160), 1, SpriteEffects.None, 0);
+			if (!Mouse1.IsCreating)
+			batch.Draw(Content.Sprite, new Vector2(Position.X, Position.Y), new Rectangle(2 * 128, 0, 128, 128), new Color(255,255,255, (int)color.A), rot, new Vector2(64,160), 1, SpriteEffects.None, 0);
 			if (Hitbox.Contains(Mouse1.Position) && !Mouse1.IsCreating){
 				if(IsDescriptionOn){
 					string description = Content.Name + "*Atk: " + Content.Atk+"*HP: "+Content.HP+"*Speed: "+ Content.Spd;

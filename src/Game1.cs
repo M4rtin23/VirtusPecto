@@ -8,9 +8,8 @@ namespace VirtusPecto.Desktop{
 		//System.
 		private SpriteBatch spriteBatch;
 		public static GameMouse Mouse1;
-		private static Vector2 matrixPosition;
+		public static Vector2 MatrixPosition{get => Camera.pos-new Vector2(Width, Height)/2;}
 		public static GameControl Joystick;
-		public static Matrix Mat;
 		public static GameTime GT;
 		public static Keys[] TheKeys = {Keys.W, Keys.A, Keys.S, Keys.D, Keys.Space, Keys.Escape, Keys.D1, Keys.D2, Keys.D3};
 		public static Buttons[] TheButtons = {Buttons.DPadUp, Buttons.DPadLeft, Buttons.DPadDown, Buttons.DPadRight, Buttons.RightShoulder, Buttons.Start, Buttons.X, Buttons.Y, Buttons.B};
@@ -80,7 +79,6 @@ namespace VirtusPecto.Desktop{
 		}
 		protected override void Update(GameTime gameTime){
 			GT = gameTime;
-			matrix();
 			joystick();
 			pause();
 			Mouse1.Update();
@@ -110,8 +108,7 @@ namespace VirtusPecto.Desktop{
 		protected override void Draw(GameTime gameTime){
 			GraphicsDevice.Clear(Color.Black);
 			if(LevelNumber == 1){
-				Mat = Camera.LimitedFollow(Level1.Player1.Position);
-				spriteBatch.Begin(transformMatrix: Mat, samplerState:  SamplerState.PointClamp, sortMode: SpriteSortMode.BackToFront);
+				spriteBatch.Begin(transformMatrix: Camera.LimitedFollow(Level1.Player1.Position), samplerState:  SamplerState.PointClamp, sortMode: SpriteSortMode.BackToFront);
 				Level1?.Draw(spriteBatch);
 				spriteBatch.End();
 			}
