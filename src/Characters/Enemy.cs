@@ -23,7 +23,6 @@ namespace VirtusPecto.Desktop{
 		}
 		public override void Draw(SpriteBatch batch){
 			base.Draw(batch);
-			batch.DrawString(Font, ""+target, new Vector2(0,512), Color.White);
 		}
 	}
 }

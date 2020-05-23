@@ -7,15 +7,15 @@ using static GameBuilder.Builder;
 
 namespace VirtusPecto.Desktop{
 	public class Player : GameBuilder.ObjectBuilder{
-		public float Health = 100, Mana = 100;
+		public float Health = 100, Mana = 50;
 		public CardContent[] Slot;
-		private int powerIndex = 1;
+		private int powerIndex = 2;
 		public Player(){
 			SpriteIndex = Sprite0;
 			Position = new Vector2(64, 64);
 			Slot = new CardContent[3];
 			for(int i = 0; i < 3; i++){
-				Slot[i] = CreatureDatabase.GetData(i);
+				Slot[i] = CreatureDatabase.GetData(i*2+1);
 			}
 		}
 		private void gameControl(){
@@ -77,7 +77,6 @@ namespace VirtusPecto.Desktop{
 			}
 		}
 		public override void Update(){
-			Console.WriteLine(Level1.Particles.Length);
 			animationImage(4);
 			gameControl();
 
@@ -157,6 +156,14 @@ namespace VirtusPecto.Desktop{
 					break;
 				case 2:
 					Vector2 pos = 32*GameBuilder.Motion.VectorSpeed(1, MathHelper.ToRadians((float)CalculateAngle(Position, Mouse1.MPosition)))+Position - Vector2.One*32;
+					for(int i = 0; i < Level1.Enemy1.Length; i++){
+						if(Level1.Enemy1[i] != null){
+							if(new GameBuilder.RectangleF(pos, 90.51f).Intersects(Level1.Enemy1[i].Hitbox)){
+								Level1.Enemy1?[i].AddHealth(-10);
+							}
+							
+						}
+					}
 					Level1.CreateParticle(pos, 0.5f, 1);
 					break;
 			}

@@ -8,7 +8,14 @@ namespace VirtusPecto.Desktop{
 			string[] l;
 			l = File.ReadAllLines("src/Database/Creatures.csv");
 			l = l[i+1].Split(';');
-			return new CardContent(CreatureSprite[i],l[1],(float)Convert.ToDecimal(l[2]),(float)Convert.ToDecimal(l[3]),(float)Convert.ToDecimal(l[4]),(float)Convert.ToDecimal(l[5]));
+			return new CardContent(
+				CreatureSprite[i],l[1],
+				(float)Convert.ToDecimal(l[2]),
+				(float)Convert.ToDecimal(l[3]),
+				(float)Convert.ToDecimal(l[4]),
+				(float)Convert.ToDecimal(l[5]),
+				Convert.ToInt16(l[6])
+			);
 		}
 	}   
 }

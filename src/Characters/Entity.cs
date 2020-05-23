@@ -7,7 +7,7 @@ using GameBuilder;
 namespace VirtusPecto.Desktop{
 	public abstract class Entity : GameBuilder.ObjectBuilder{
 		protected Vector2 target, startingPoint;
-		protected int health = 100;
+		protected float health = 100, maxHealth = 100;
 		protected float dist;
 		protected int targetDefined = -1;
 		protected bool isAttacking;
@@ -30,7 +30,7 @@ namespace VirtusPecto.Desktop{
 			base.Update();
 			if(isAttacking){
 				followTarget();
-				if(speed == Vector2.Zero && dist > 0 && /*dist > CalculateDistance(Position, target)/2 &&*/ (GT.TotalGameTime.Milliseconds % 1000 == 0)){
+				if(speed == Vector2.Zero && /*dist > 0 && /*dist > CalculateDistance(Position, target)/2 &&*/ (GT.TotalGameTime.Milliseconds % 1000 == 0)){
 					attack((float)CalculateAngle(Position, target));
 				}
 				CheckTarget(enemy);
@@ -45,9 +45,9 @@ namespace VirtusPecto.Desktop{
 			center(4);
 			stripSprite(4);
 			base.Draw(batch);
-			if(health < 100){
+			if(health < maxHealth){
 				batch.Draw(Sprite2, Position - new Vector2(64, 80), null, new Color(64, 64, 64, 150), 0, new Vector2(0, 0), new Vector2(1, 1/4f), SpriteEffects.None, 0.1f);
-				batch.Draw(Sprite2, Position - new Vector2(64, 80), null, new Color(color1, 115), 0, new Vector2(0, 0), new Vector2((float)health/100, 1/4f), SpriteEffects.None, 0);
+				batch.Draw(Sprite2, Position - new Vector2(64, 80), null, new Color(color1, 115), 0, new Vector2(0, 0), new Vector2((float)health/maxHealth, 1/4f), SpriteEffects.None, 0);
 			}
 		}
 		public void SetTarget(ObjectBuilder[] entities){
@@ -94,7 +94,7 @@ namespace VirtusPecto.Desktop{
 		public void AddHealth(int number){
 			health += number;
 		}
-		public int GetHealth(){
+		public float GetHealth(){
 			return health;
 		}
 		public Vector2 GetStartingPoint(){

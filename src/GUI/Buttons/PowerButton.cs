@@ -13,7 +13,7 @@ namespace VirtusPecto.Desktop{
 		public PowerButton(){
 		}
 		public void Update(){
-			Position = new Vector2(64, Game1.Height-192);
+			Position = new Vector2(0, Game1.Height-128);
 			if(timer <= 0){
 				if(hitbox.Contains(Game1.Mouse1.Position)){
 					if(Game1.IsClicking){
@@ -39,7 +39,7 @@ namespace VirtusPecto.Desktop{
 //            batch.Draw(Game1.Power, Position, new Rectangle(0, 0, 128,128), new Color(255/alpha,255/alpha,255/alpha,255/alpha));
 //            batch.Draw(Game1.Power, Position, new Rectangle(128, 0, 128,128), new Color(255/alpha,255/alpha,255/alpha,255/alpha));
 			batch.Draw(Game1.Power, Position, new Rectangle(0, 0, 128,128), new Color(16,16,16,a/2));
-			batch.Draw(Game1.Power, Position, new Rectangle(128*(Level1.Player1.GetPowerIndex()+1), 0, 128,128), new Color(a1,a1,a1,a1));
+			batch.Draw(Game1.Power, Position, new Rectangle(128*(Level1.Player1.GetPowerIndex()+1)*0+128*3, 0, 128,128), new Color(a1,a1,a1,a1));
 		}
 		/*public float GetTimer(){
 			return timer;

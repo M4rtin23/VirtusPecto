@@ -8,14 +8,16 @@ namespace VirtusPecto.Desktop{
 		public Texture2D Sprite;
 		public string Name;
 		public float Spd, Atk, HP, Dist;
+		public int PowerIndex;
 
-		public CardContent(Texture2D sprite, string name, float speed, float attack, float hp, float distance){
+		public CardContent(Texture2D sprite, string name, float speed, float attack, float hp, float distance, int powerIndex){
 			Sprite = sprite;
 			Name = name;
 			Spd = speed;
 			Atk = attack;
 			HP = hp;
 			Dist = distance;
+			PowerIndex = powerIndex;
 		}
 	}
 }

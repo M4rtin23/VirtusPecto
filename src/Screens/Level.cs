@@ -78,11 +78,6 @@ namespace VirtusPecto.Desktop{
 		}
 		public void DrawScreen(SpriteBatch batch){
 			button.Draw(batch);
-			if(Creature1.Length > 0 && Creature1[0] != null){
-				batch.DrawString(Font, ""+Creature1[0].Position, new Vector2(32, 32), Color.White);
-				batch.DrawString(Font, ""+Creature1.GetHashCode(), new Vector2(32, 64), Color.White);
-				batch.DrawString(Font, ""+Player1.Position, new Vector2(32, 96), Color.White);
-			}
 			for(int i = 0; i < 3; i++){
 				Cards[i].Draw(batch);
 			}

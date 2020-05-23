@@ -12,6 +12,9 @@ namespace VirtusPecto.Desktop{
 			startingPoint = pos;
 			SetTarget(enemy);
 			color1 = Color.DeepSkyBlue;
+			powerIndex = content.PowerIndex;
+			health = content.HP;
+			maxHealth = health;
 		}
 		public override void Update() {
 			if(GT.TotalGameTime.Minutes - time > 1){

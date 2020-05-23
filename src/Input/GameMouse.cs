@@ -25,13 +25,21 @@ namespace VirtusPecto.Desktop{
 			}
 			if (IsCreating && IsClicking && !Game1.IsPaused && Game1.Level1 != null){
 				OnCreation(Number);
-				IsCreating = false;
 			}if(Level1 != null){
-			if(Level1.Cards[0].Hitbox.Contains(Position) || Level1.Cards[1].Hitbox.Contains(Position) || Level1.Cards[2].Hitbox.Contains(Position)){
-				IsAble = false;
-			}else{
-				IsAble = true;
-			}}
+				if(Level1.Cards[0].Hitbox.Contains(Position) || Level1.Cards[1].Hitbox.Contains(Position) || Level1.Cards[2].Hitbox.Contains(Position)){
+					IsAble = false;
+				}else{
+					IsAble = true;
+				}
+				for(int i = 0; i<Level1.Creature1.Length; i++){
+					if(Level1.Creature1[i] != null && Level1.Creature1[i].Hitbox.Intersects(new GameBuilder.RectangleF(Mouse1.MPosition-Vector2.One*64, 128))){
+						IsAble = false;
+						break;
+					}else{
+						IsAble = true;
+					}
+				}
+			}
 		}
 		public void OnCreation(int Number){
 			if(IsClicking && IsAble){
@@ -41,6 +49,7 @@ namespace VirtusPecto.Desktop{
 					}
 				}
 				Number = -1;
+				IsCreating = false;
 			}
 		}
 	}
