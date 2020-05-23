@@ -15,7 +15,7 @@ namespace VirtusPecto.Desktop{
 			Position = new Vector2(64, 64);
 			Slot = new CardContent[3];
 			for(int i = 0; i < 3; i++){
-				Slot[i] = CreatureDatabase.GetData(i*2+1);
+				Slot[i] = CreatureDatabase.GetData(i*2);
 			}
 		}
 		private void gameControl(){
