@@ -12,7 +12,7 @@ namespace VirtusPecto.Desktop{
 		public AspectBox SetAspectRatio;
 		public Joystick SetJoystick;
 		public CardDescription ShowDescription;
-		private Rectangle Back = new Rectangle(0, 0, Sprite3.Width/2, Sprite3.Height);
+		private Rectangle Back = new Rectangle(0, 0, SpriteTick.Width/2, SpriteTick.Height);
 		public Vector2 AspectRatio{get => SetAspectRatio.Options[SetAspectRatio.Option];}
 		public SettingsMenu(){
 			ShowDescription = new CardDescription();
@@ -38,7 +38,7 @@ namespace VirtusPecto.Desktop{
 			}
 		}
 		public void Draw(SpriteBatch batch){
-			batch.Draw(Sprite3, new Vector2(0, 0), Color.White);
+			batch.Draw(SpriteTick, new Vector2(0, 0), Color.White);
 			ShowDescription.Draw(batch);
 			SetAspectRatio.Draw(batch);
 			ResolutionBox.Draw(batch);

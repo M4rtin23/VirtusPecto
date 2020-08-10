@@ -11,7 +11,7 @@ namespace VirtusPecto.Desktop{
 		private bool isAlive = true;
 		//True = emited by the enemy && False = emited by de user
 		public Fireball(bool emiter, Vector2 initialPosition, Vector2 speed){
-			SpriteIndex = Sprite5;
+			SpriteIndex = SpriteFireball;
 			isDangerous = emiter;
 			Position = initialPosition;
 			this.speed = speed;

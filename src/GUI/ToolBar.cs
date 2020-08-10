@@ -15,8 +15,8 @@ namespace VirtusPecto.Desktop{
 			new RectangleF(8, 8, 128 * Level1.Player1.Health/100, 24, Color.Red).Draw(batch);
 			new RectangleF(164, 8, 128 * Level1.Player1.Mana/50, 24, Color.DeepSkyBlue).Draw(batch);
 
-			batch.DrawString(Font, Convert.ToString(Level1.Player1.Health) + "/100", new Vector2(32, 2), Color.White);
-			batch.DrawString(Font, Convert.ToString(Level1.Player1.Mana) + "/50", new Vector2(196, 2), Color.White);
+			batch.DrawString(FontNormal, Convert.ToString(Level1.Player1.Health) + "/100", new Vector2(32, 2), Color.White);
+			batch.DrawString(FontNormal, Convert.ToString(Level1.Player1.Mana) + "/50", new Vector2(196, 2), Color.White);
 		}
 	}
 }

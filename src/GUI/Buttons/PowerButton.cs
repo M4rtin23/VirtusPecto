@@ -36,8 +36,8 @@ namespace VirtusPecto.Desktop{
 		public void Draw(SpriteBatch batch){
 			int a = (int)((60-timer)/60*155+100);
 			int a1 = (60-(int)timer)/60*128+128;
-			batch.Draw(Game1.Power, Position, new Rectangle(0, 0, 128,128), new Color(16,16,16,a/2));
-			batch.Draw(Game1.Power, Position, new Rectangle(128*(Level1.Player1.GetPowerIndex()+1)*0+128*3, 0, 128,128), new Color(a1,a1,a1,a1));
+			batch.Draw(Game1.SpritePowers, Position, new Rectangle(0, 0, 128,128), new Color(16,16,16,a/2));
+			batch.Draw(Game1.SpritePowers, Position, new Rectangle(128*(Level1.Player1.GetPowerIndex()+1)*0+128*3, 0, 128,128), new Color(a1,a1,a1,a1));
 		}
 	
 		public static bool IsCharged(){

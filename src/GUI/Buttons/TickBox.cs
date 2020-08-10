@@ -27,8 +27,8 @@ namespace VirtusPecto.Desktop{
 		}
 		
 		public void Draw(SpriteBatch batch) {
-			batch.Draw(Sprite3, position, new Rectangle(Convert.ToInt16(state) * 32,0,32,32), Color.White, 0, new Vector2(0, 0), 1f, SpriteEffects.None, 1);
-			batch.DrawString(Font, name, position + new Vector2(0,-32), Color.White);
+			batch.Draw(SpriteTick, position, new Rectangle(Convert.ToInt16(state) * 32,0,32,32), Color.White, 0, new Vector2(0, 0), 1f, SpriteEffects.None, 1);
+			batch.DrawString(FontNormal, name, position + new Vector2(0,-32), Color.White);
 		}
 	}
 }

@@ -39,7 +39,7 @@ namespace VirtusPecto.Desktop{
 		}
 		public void Draw(SpriteBatch batch){
 			GameBuilder.Builder.DrawRectangle(batch, Hitbox, new Color(transparency,transparency,transparency,transparency));
-			batch.DrawString(Font, "Settings", position, Color.White);
+			batch.DrawString(FontNormal, "Settings", position, Color.White);
 		}
 	}
 }

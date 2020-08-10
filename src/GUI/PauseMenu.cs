@@ -55,15 +55,15 @@ namespace VirtusPecto.Desktop{
 			#endregion
 		}
 		public void Draw(SpriteBatch batch) {
-			batch.Draw(Sprite1, new Vector2((Width / 2), Height / 2), null, new Color(0,0,0,128), 0, new Vector2(128, 160), new Vector2(1, 1), SpriteEffects.None, 0);
+			batch.Draw(SpriteCard, new Vector2((Width / 2), Height / 2), null, new Color(0,0,0,128), 0, new Vector2(128, 160), new Vector2(1, 1), SpriteEffects.None, 0);
 			GameBuilder.Builder.DrawRectangle(batch, ContinueRectangle, new Color(continueAlpha,continueAlpha, continueAlpha, continueAlpha));
-			batch.DrawString(Font, "Continue", new Vector2((Width / 2)-48, (Height / 2)-48*2), Color.White);
+			batch.DrawString(FontNormal, "Continue", new Vector2((Width / 2)-48, (Height / 2)-48*2), Color.White);
 			GameBuilder.Builder.DrawRectangle(batch, MainMenuRectangle, new Color(mainmenuAlpha,mainmenuAlpha, mainmenuAlpha, mainmenuAlpha));
-			batch.DrawString(Font, "Main Menu", new Vector2((Width / 2) - 48, (Height / 2) - 48), Color.White);
+			batch.DrawString(FontNormal, "Main Menu", new Vector2((Width / 2) - 48, (Height / 2) - 48), Color.White);
 			settings.SetPosition((Width/2)-48,Height/2);
 			settings.Draw(batch);
 			GameBuilder.Builder.DrawRectangle(batch, ExitRectangle, new Color(exitAlpha,exitAlpha, exitAlpha, exitAlpha));
-			batch.DrawString(Font, "Exit", new Vector2((Width / 2)-48, (Height / 2)+48), Color.White);
+			batch.DrawString(FontNormal, "Exit", new Vector2((Width / 2)-48, (Height / 2)+48), Color.White);
 		}
 	}
 }

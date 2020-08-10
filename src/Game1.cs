@@ -16,16 +16,16 @@ namespace VirtusPecto.Desktop{
 		public static Buttons[] TheButtons = {Buttons.DPadUp, Buttons.DPadLeft, Buttons.DPadDown, Buttons.DPadRight, Buttons.RightShoulder, Buttons.Start, Buttons.X, Buttons.Y, Buttons.B};
 
 		//Textures.
-		public static Texture2D Logo;
-		public static Texture2D Sprite0; //Player Texture.
-		public static Texture2D Sprite1; //Card Texture.
-		public static Texture2D Sprite3; //Tick Texture.
-		public static Texture2D Sprite4; //Placing Card Texture
-		public static Texture2D Sprite5; //Fireball Texture.
-		public static Texture2D Power;
-		public static Texture2D[] CreatureSprite;
-		public static Texture2D Back; //Background Texture.
-		public static SpriteFont Font, Font2;
+		public static Texture2D SpriteLogo;
+		public static Texture2D SpritePlayer;
+		public static Texture2D SpriteCard;
+		public static Texture2D SpriteTick;
+		public static Texture2D SpritePlacing;
+		public static Texture2D SpriteFireball;
+		public static Texture2D SpritePowers;
+		public static Texture2D[] SpriteCreatures;
+		public static Texture2D SpriteBackground;
+		public static SpriteFont FontNormal, FontBig;
 
 		//States.
 		public static bool IsPaused;
@@ -49,7 +49,7 @@ namespace VirtusPecto.Desktop{
 			Content.RootDirectory = "Content";
 			IsMouseVisible = true;
 			Mouse1 = new GameMouse();
-			CreatureSprite = new Texture2D[6];
+			SpriteCreatures = new Texture2D[6];
 		}
 
 		protected override void Initialize(){
@@ -58,21 +58,25 @@ namespace VirtusPecto.Desktop{
 		}
   
 		protected override void LoadContent(){
-			base.LoadContent();
-			Back = Content.Load<Texture2D>("BG");
-			spriteBatch = new SpriteBatch(GraphicsDevice);
-			Logo = Content.Load<Texture2D>("Logo");
-			Sprite0 = Content.Load<Texture2D>("Sprite0");
-			Sprite1 = Content.Load<Texture2D>("Sprite1");
-			Sprite3 = Content.Load<Texture2D>("Sprite3");
-			Sprite4 = Content.Load<Texture2D>("Sprite4");
-			Sprite5 = Content.Load<Texture2D>("Sprite5");
-			Power = Content.Load<Texture2D>("Power");
-			Font = Content.Load<SpriteFont>("SpriteFontTemPlate");
-			Font2 = Content.Load<SpriteFont>("SpriteFont");
-			for (int i = 0; i < CreatureSprite.Length; i++){
-				CreatureSprite[i] = Content.Load<Texture2D>("Creatures/Creature"+ Convert.ToString(i));
+			//GUI.			
+			SpriteLogo = Content.Load<Texture2D>("Sprite_Logo");
+			SpriteTick = Content.Load<Texture2D>("Sprite_Tick");
+			SpritePowers = Content.Load<Texture2D>("Sprite_Powers");
+			SpriteCard = Content.Load<Texture2D>("Sprite_Card");
+			SpritePlacing = Content.Load<Texture2D>("Sprite_Placing");
+
+			SpriteBackground = Content.Load<Texture2D>("Sprite_Background");
+
+			SpritePlayer = Content.Load<Texture2D>("Sprite_Player");			
+			SpriteFireball = Content.Load<Texture2D>("Sprite_Fireball");
+			for (int i = 0; i < SpriteCreatures.Length; i++){
+				SpriteCreatures[i] = Content.Load<Texture2D>("Creatures/Creature"+ Convert.ToString(i));
 			}
+
+			FontNormal = Content.Load<SpriteFont>("Font_Normal");
+			FontBig = Content.Load<SpriteFont>("Font_Big");
+
+			spriteBatch = new SpriteBatch(GraphicsDevice);
 		}
 		protected override void Update(GameTime gameTime){
 			GT = gameTime;

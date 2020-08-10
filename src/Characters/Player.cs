@@ -11,7 +11,7 @@ namespace VirtusPecto.Desktop{
 		public CardContent[] Slot;
 		private int powerIndex = 2;
 		public Player(){
-			SpriteIndex = Sprite0;
+			SpriteIndex = SpritePlayer;
 			Position = new Vector2(64, 64);
 			Slot = new CardContent[3];
 			for(int i = 0; i < 3; i++){

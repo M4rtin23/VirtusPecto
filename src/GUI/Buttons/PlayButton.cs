@@ -59,11 +59,11 @@ namespace VirtusPecto.Desktop{
 		}
 		public void Draw(SpriteBatch batch) {
 			GameBuilder.Builder.DrawRectangle(batch, Hitbox, new Color(transparency, transparency, transparency, transparency));
-			batch.DrawString(Font, "Start", position, Color.White);
+			batch.DrawString(FontNormal, "Start", position, Color.White);
 			if (isActivated) {
 				difficultyBox.Draw(batch);
 				GameBuilder.Builder.DrawRectangle(batch, PlayRectangle, new Color(playAlpha, playAlpha, playAlpha, playAlpha));
-				batch.DrawString(Font, "Play", PlayPosition, Color.White);
+				batch.DrawString(FontNormal, "Play", PlayPosition, Color.White);
 			}
 		}
 	}

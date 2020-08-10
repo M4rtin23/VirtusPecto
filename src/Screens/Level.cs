@@ -18,7 +18,7 @@ namespace VirtusPecto.Desktop{
 		private PowerButton button;
 		public Level(int EnemyQuantity){
 			button = new PowerButton();
-			Background = new BackGround(Back);
+			Background = new BackGround(SpriteBackground);
 			Fireballs = new Fireball[0];
 			Particles = new Particle[0];
 			Enemy1 = new Enemy[EnemyQuantity];
@@ -81,7 +81,7 @@ namespace VirtusPecto.Desktop{
 				Cards[i].Draw(batch);
 			}
 			if (Mouse1.IsCreating && !Game1.IsPaused) {
-				batch.Draw(Sprite4, Mouse1.Position, new Rectangle(0, 0, 252, 252), Color.White, 0, new Vector2(64+60, 96+60), new Vector2(1, 1), SpriteEffects.None, 0);
+				batch.Draw(SpritePlacing, Mouse1.Position, new Rectangle(0, 0, 252, 252), Color.White, 0, new Vector2(64+60, 96+60), new Vector2(1, 1), SpriteEffects.None, 0);
 				batch.Draw(Cards[Mouse1.Number].Content.Sprite, Mouse1.Position, new Rectangle(256, 0, 128, 128), Color.White, 0, new Vector2(64, 96), new Vector2(1, 1), SpriteEffects.None, 0);
 			}
 			toolBar.Draw(batch);
