@@ -2,13 +2,14 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using GameBuilder;
 
 namespace VirtusPecto.Desktop{
 	public partial class Game1 : GameBuilder.GameBase{
 		//System.
 		private SpriteBatch spriteBatch;
 		public static GameMouse Mouse1;
-		public static Vector2 MatrixPosition{get => Camera.pos-new Vector2(Width, Height)/2;}
+		public static Vector2 MatrixPosition{get => Camera.Position-new Vector2(Width, Height)/2;}
 		public static GameControl Joystick;
 		public static GameTime GT;
 		public static Keys[] TheKeys = {Keys.W, Keys.A, Keys.S, Keys.D, Keys.Space, Keys.Escape, Keys.D1, Keys.D2, Keys.D3};
@@ -16,16 +17,14 @@ namespace VirtusPecto.Desktop{
 
 		//Textures.
 		public static Texture2D Logo;
-		public static Texture2D Sprite0;
-		public static Texture2D Sprite1;
-		public static Texture2D Sprite2;
-		public static Texture2D Sprite3;
-		public static Texture2D Sprite4;
-		public static Texture2D Sprite5;
-		public static Texture2D Menu;
+		public static Texture2D Sprite0; //Player Texture.
+		public static Texture2D Sprite1; //Card Texture.
+		public static Texture2D Sprite3; //Tick Texture.
+		public static Texture2D Sprite4; //Placing Card Texture
+		public static Texture2D Sprite5; //Fireball Texture.
 		public static Texture2D Power;
 		public static Texture2D[] CreatureSprite;
-		public static Texture2D Back;
+		public static Texture2D Back; //Background Texture.
 		public static SpriteFont Font, Font2;
 
 		//States.
@@ -65,11 +64,9 @@ namespace VirtusPecto.Desktop{
 			Logo = Content.Load<Texture2D>("Logo");
 			Sprite0 = Content.Load<Texture2D>("Sprite0");
 			Sprite1 = Content.Load<Texture2D>("Sprite1");
-			Sprite2 = Content.Load<Texture2D>("Sprite2");
 			Sprite3 = Content.Load<Texture2D>("Sprite3");
 			Sprite4 = Content.Load<Texture2D>("Sprite4");
 			Sprite5 = Content.Load<Texture2D>("Sprite5");
-			Menu = Content.Load<Texture2D>("menu0");
 			Power = Content.Load<Texture2D>("Power");
 			Font = Content.Load<SpriteFont>("SpriteFontTemPlate");
 			Font2 = Content.Load<SpriteFont>("SpriteFont");

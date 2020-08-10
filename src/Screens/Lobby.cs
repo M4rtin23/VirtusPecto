@@ -40,8 +40,6 @@ namespace VirtusPecto.Desktop{
 			}else {
 				exitAlpha = 0;
 			}
-//            Button1.SetPosition(Width/4, (float)Height/2.4f);
-//            Button2.SetPosition(Width/4, (float)Height/2.1f);
 			switch(g % 2){
 				case 0:
 					Button1.SetPosition(Width/4, (float)Height/2.4f);

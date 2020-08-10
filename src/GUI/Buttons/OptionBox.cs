@@ -56,14 +56,14 @@ namespace VirtusPecto.Desktop{
 			}
 		}
 		public void Draw(SpriteBatch batch) {
-			batch.Draw(Sprite2, position, color);
+			new GameBuilder.RectangleF(position, new Vector2(128,32), color).Draw(batch);
 			batch.DrawString(Font, currentOption(), position, Color.White);
 			batch.DrawString(Font, name, new Vector2(position.X, position.Y - 32), Color.White);
 
 			if (isActivated) {
 				color = Color.LightGray;
 				for (int i = 0; i < optionsNumber; i++){
-					batch.Draw(Sprite2, new Vector2(position.X, position.Y+(1+i)*32), colors[i]);
+					new GameBuilder.RectangleF(new Vector2(position.X, position.Y+(1+i)*32), new Vector2(128,32), colors[i]).Draw(batch);
 					batch.DrawString(Font, drawOptions(i), new Vector2(position.X, position.Y + (i+1) * 32), Color.White);
 				}
 			}else{

@@ -72,7 +72,7 @@ namespace VirtusPecto.Desktop{
 				if (shortestDistance == -1) {
 					shortestDistance = enemyDistance;               
 				}
-				//Determines the closest.
+				//Defines the closest.
 				if (enemyDistance <= shortestDistance){
 					shortestDistance = enemyDistance;
 					targetDefiner = i;

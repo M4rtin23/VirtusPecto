@@ -90,25 +90,8 @@ namespace VirtusPecto.Desktop{
 			}
 		}
 		public override void Draw(SpriteBatch batch){
-			//Hitbox.Draw(batch);
-			//DrawRectangle(batch, Hitbox, Color.White);
-			//DrawTriangle(batch, new Vector2(0, 0),new Vector2(500, 0),new Vector2(250,250));
-			//DrawRectangle(spriteBatch, Sprite2, Hitbox, Color.White);
-//            spriteBatch.DrawString(Font,  ""+GetData(0).Atk , new Vector2(0, 72), Color.White);
-			//DrawRectangle(spriteBatch, Sprite2, new Rectangle(Hitbox.Location-(Hitbox.Size.ToVector2()).ToPoint(), (Hitbox.Size.ToVector2()*2).ToPoint()), Color.White);
-			//DrawLine(Position-new Vector2(0, Height), GetClosest(Level1.Enemy1, Mouse1.MPosition).Item1, 5,Color.Blue, batch);
-//            DrawRectangle(batch, new Rectangle(GetClosest(Level1.Enemy1, Mouse1.MPosition).Item1.ToPoint()-new Point(64), new Point(128)), Color.Blue);
 			Vector2 a0 = GetClosest(Level1.Enemy1, Mouse1.MPosition).Item1;
 			
-			/*DrawRectangle(batch, new Rectangle(pos.ToPoint()+new Point(-64), new Point(8, 16)), Color.Blue);
-			DrawRectangle(batch, new Rectangle(pos.ToPoint()+new Point(-64), new Point(16, 8)), Color.Blue);
-			DrawRectangle(batch, new Rectangle(pos.ToPoint()+new Point(64, -64), new Point(8, 16)), Color.Blue);
-			DrawRectangle(batch, new Rectangle(pos.ToPoint()+new Point(64-8, -64), new Point(16, 8)), Color.Blue);
-			DrawRectangle(batch, new Rectangle(pos.ToPoint()+new Point(-64, 48), new Point(8, 16)), Color.Blue);
-			DrawRectangle(batch, new Rectangle(pos.ToPoint()+new Point(-64, 48+8), new Point(16, 8)), Color.Blue);
-			DrawRectangle(batch, new Rectangle(pos.ToPoint()+new Point(64, 48), new Point(8, 16)), Color.Blue);
-			DrawRectangle(batch, new Rectangle(pos.ToPoint()+new Point(64-8, 48+8), new Point(16, 8)), Color.Blue);
-			*/
 			for(int i = 0; i < 8; i++){
 				int a = ((i/2) % 2) * 2 -1;
 				int b = ((i/4) % 2)*7;
@@ -131,16 +114,13 @@ namespace VirtusPecto.Desktop{
 
 
 		public void Lightning(Vector2 pos, Vector2 otherPos, float s, SpriteBatch batch){
-			//float s = (float)(CalculateDistance(pos, otherPos))/128;
 			s = s/128;
 			float r = (float)(-CalculateAngle(pos, otherPos) * Math.PI/180);
-			batch.Draw(Sprite2, pos, null, Color.White, r, new Vector2(0 ,16), new Vector2(s, 1), SpriteEffects.None, 0);
 		}
 
 		public void DrawLine(Vector2 pos, Vector2 otherPos, float size, Color color, SpriteBatch batch){
 			float s = (float)(CalculateDistance(pos, otherPos))/128;
 			float r = (float)(-CalculateAngle(pos, otherPos) * Math.PI/180);
-			batch.Draw(Sprite2, pos, null, color, r, new Vector2(0 ,16), new Vector2(s, 1/32f*size), SpriteEffects.None, 0);
 		}
 		public void UsePower(int powerIndex){
 			switch(powerIndex){

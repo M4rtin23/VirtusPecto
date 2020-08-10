@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using static GameBuilder.Builder;
 using static VirtusPecto.Desktop.Game1;
+using GameBuilder;
 
 namespace VirtusPecto.Desktop{
 	public class Level{
@@ -36,9 +37,7 @@ namespace VirtusPecto.Desktop{
 		public void Update() {
 			button.Update();
 			for (int i = 0; i < Fireballs.Length; i++) {
-//				if (Fireballs[i] != null){
-					Fireballs[i]?.Update();
-//				}
+				Fireballs[i]?.Update();
 			}
 			for (int i = 0; i < Particles.Length; i++) {
 				Particles[i]?.Update();
@@ -59,7 +58,7 @@ namespace VirtusPecto.Desktop{
 			}
 		}
 		public void Draw(SpriteBatch batch) {
-			Background.Draw(batch, Camera.pos);
+			Background.Draw(batch, Camera.Position);
 			for (int i = 0; i < Fireballs.Length;i++){
 				Fireballs[i]?.Draw(batch);
 			}

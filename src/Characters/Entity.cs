@@ -30,24 +30,22 @@ namespace VirtusPecto.Desktop{
 			base.Update();
 			if(isAttacking){
 				followTarget();
-				if(speed == Vector2.Zero && /*dist > 0 && /*dist > CalculateDistance(Position, target)/2 &&*/ (GT.TotalGameTime.Milliseconds % 1000 == 0)){
+				if(speed == Vector2.Zero && (GT.TotalGameTime.Milliseconds % 1000 == 0)){
 					attack((float)CalculateAngle(Position, target));
 				}
 				CheckTarget(enemy);
 			}else{
-				speed = Follow(startingPoint, Position, 0, maxSpeed);
+				speed = Follow(startingPoint, Position, 32, maxSpeed);
 				SetTarget(enemy);
 			}
 		}
 		public override void Draw(SpriteBatch batch) {
-			//DrawRectangle(batch, Hitbox, Color.White);
-			//Hitbox.Draw(batch);
 			center(4);
 			stripSprite(4);
 			base.Draw(batch);
 			if(health < maxHealth){
-				batch.Draw(Sprite2, Position - new Vector2(64, 80), null, new Color(64, 64, 64, 150), 0, new Vector2(0, 0), new Vector2(1, 1/4f), SpriteEffects.None, 0.1f);
-				batch.Draw(Sprite2, Position - new Vector2(64, 80), null, new Color(color1, 115), 0, new Vector2(0, 0), new Vector2((float)health/maxHealth, 1/4f), SpriteEffects.None, 0);
+				new RectangleF(Position - new Vector2(64, 80), new Vector2(128, 8), new Color(64, 64, 64, 150)).Draw(batch, 0.1f);
+				new RectangleF(Position - new Vector2(64, 80), new Vector2(128*(float)health/maxHealth, 8), new Color(color1, 115)).Draw(batch);
 			}
 		}
 		public void SetTarget(ObjectBuilder[] entities){

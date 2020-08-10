@@ -55,7 +55,6 @@ namespace VirtusPecto.Desktop{
 			#endregion
 		}
 		public void Draw(SpriteBatch batch) {
-			//batch.Draw(Sprite2, new Vector2((Width / 2), Height / 2), new Rectangle(0, 0, 128, 32), new Color(0,0,0,128), 0, new Vector2(64, 16), new Vector2(2, 8), SpriteEffects.None, 0);
 			batch.Draw(Sprite1, new Vector2((Width / 2), Height / 2), null, new Color(0,0,0,128), 0, new Vector2(128, 160), new Vector2(1, 1), SpriteEffects.None, 0);
 			GameBuilder.Builder.DrawRectangle(batch, ContinueRectangle, new Color(continueAlpha,continueAlpha, continueAlpha, continueAlpha));
 			batch.DrawString(Font, "Continue", new Vector2((Width / 2)-48, (Height / 2)-48*2), Color.White);

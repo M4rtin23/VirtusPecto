@@ -18,8 +18,7 @@ namespace VirtusPecto.Desktop{
 
 		public Card(int n, Color c){
 			cardColor = Color.DarkSlateGray;
-			Console.WriteLine(cardColor);
-			cardColor = c;//Color.DarkSlateGray;
+			cardColor = c;
 			cardColor = new Color(79,79,79);
 			number = n;
 			Content = Level1.Player1.Slot[n];
@@ -68,7 +67,6 @@ namespace VirtusPecto.Desktop{
 				if(IsDescriptionOn){
 					string description = "*Atk: " + Content.Atk+"*HP: "+Content.HP+"*Speed: "+ Content.Spd;
 					description = description.Replace("*", System.Environment.NewLine);
-					//batch.DrawString(Font, description, Position - new Vector2(100, 48), Color.White);
 					batch.DrawString(Font, description, Position, Color.White, rot, new Vector2(100, 48), 1, SpriteEffects.None, 0); 
 				}
 			}

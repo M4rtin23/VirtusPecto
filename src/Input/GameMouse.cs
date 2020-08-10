@@ -6,10 +6,8 @@ using static VirtusPecto.Desktop.Game1;
 
 namespace VirtusPecto.Desktop{
 	public class GameMouse{
-		//public MouseState GetMouseState;
 		public Vector2 Position;
 		public Vector2 MPosition{get => Position + MatrixPosition;}
-		//public Rectangle Hitbox;
 		public bool IsCreating;
 		public int Number;
 		public bool IsAble;
@@ -18,7 +16,6 @@ namespace VirtusPecto.Desktop{
 			if (Keyboard.GetState().IsKeyDown(Keys.Q)){
 				Mouse.SetPosition((int)Level1.Player1.Position.X,(int) Level1.Player1.Position.Y);
 			}
-			//Position = new Vector2(GetMouseState.X, GetMouseState.Y);
 			Position = Mouse.GetState().Position.ToVector2();
 			if(Game1.Level1 == null){
 				IsCreating = false;
