@@ -6,10 +6,10 @@ using static VirtusPecto.Desktop.Game1;
 using static GameBuilder.GameBase;
 
 namespace VirtusPecto.Desktop{
-	public class Fullscreen : TickBox{
-		protected override bool state{get => IsFullscreen; set => IsFullscreen = value;}
-		public Fullscreen(){
-			name = "Fullscreen";
+	public class Direction : TickBox{
+		protected override bool state{get => ShowDirection; set => ShowDirection = value;}
+		public Direction(){
+			name = "Show Mouse Direction";
 		}
 	}
 }

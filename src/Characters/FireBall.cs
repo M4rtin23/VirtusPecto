@@ -52,7 +52,7 @@ namespace VirtusPecto.Desktop{
 			if (isAlive && Hitbox.Intersects(Level1.Player1.Hitbox)) {
 				isAlive = false;
 				Level1.DestroyFireball();
-				Level1.Player1.Health -= 10;
+				Level1.Player1.AddHealth(-10);
 			}
 		}
 		public override void Draw(SpriteBatch batch) {

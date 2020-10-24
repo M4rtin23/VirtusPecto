@@ -16,6 +16,7 @@ namespace VirtusPecto.Desktop{
 		public Fireball[] Fireballs;
 		public Particle[] Particles;
 		private PowerButton button;
+		private float cardRotation{get => -(Mouse1.Position.Y/Game1.Height-1)*(Mouse1.Position.Y/Game1.Height+1.2f);}
 		public Level(int EnemyQuantity){
 			button = new PowerButton();
 			Background = new BackGround(SpriteBackground);
@@ -58,7 +59,6 @@ namespace VirtusPecto.Desktop{
 			}
 		}
 		public void Draw(SpriteBatch batch) {
-			Background.Draw(batch, Camera.Position);
 			for (int i = 0; i < Fireballs.Length;i++){
 				Fireballs[i]?.Draw(batch);
 			}
@@ -74,17 +74,16 @@ namespace VirtusPecto.Desktop{
 					Enemy1[i].Draw(batch);
 				}
 			}
+			if (Mouse1.IsCreating && !Game1.IsPaused) {
+				new ObjectBuilder(Cards[Mouse1.Number].Content.Sprite, Mouse1.CardPosition+MatrixPosition-new Vector2(0, 96-100*(cardRotation)+100), new RectangleF(256, 0, 128, 128), new Vector2(64, 64)).Draw(batch);
+			}
 		}
 		public void DrawScreen(SpriteBatch batch){
+			toolBar.Draw(batch);
 			button.Draw(batch);
 			for(int i = 0; i < 3; i++){
 				Cards[i].Draw(batch);
-			}
-			if (Mouse1.IsCreating && !Game1.IsPaused) {
-				batch.Draw(SpritePlacing, Mouse1.Position, new Rectangle(0, 0, 252, 252), Color.White, 0, new Vector2(64+60, 96+60), new Vector2(1, 1), SpriteEffects.None, 0);
-				batch.Draw(Cards[Mouse1.Number].Content.Sprite, Mouse1.Position, new Rectangle(256, 0, 128, 128), Color.White, 0, new Vector2(64, 96), new Vector2(1, 1), SpriteEffects.None, 0);
-			}
-			toolBar.Draw(batch);
+			}			
 		}
 		public void FitFireball(){
 			Fireball[] a;
@@ -190,6 +189,23 @@ namespace VirtusPecto.Desktop{
 		public void CreateParticle(Vector2 position, float seconds, int type){
 			Array.Resize(ref Level1.Particles, Level1.Particles.Length+1);
 			Particles[Level1.Particles.Length-1] = new Particle(position, 1, seconds, type);
+		}
+		public void DrawCard(GraphicsDevice graphicsDevice){
+			Vector2[] Vertices = {new Vector2(30*cardRotation, 200*cardRotation), new Vector2(0, SpriteCard.Height), new Vector2(SpriteCard.Width, SpriteCard.Height), new Vector2(SpriteCard.Width-30*cardRotation, 200*cardRotation)};
+			Vector2[] OtherVert = {new Vector2(0,0), new Vector2(0, 1), new Vector2(1, 1), new Vector2(1, 0)};
+
+			VertexPositionColorTexture[] _vertexPositionColors = new VertexPositionColorTexture[8];
+			BasicEffect _basicEffect;
+			for(int i = 0; i < 8; i++){
+				_vertexPositionColors[i] = new VertexPositionColorTexture(new Vector3(Vertices[(i%4)]+Mouse1.CardPosition-new Vector2(64+60, 96+60+150), 0), new Color(79,79,79),OtherVert[i%4]);
+			}
+			_basicEffect = new BasicEffect(graphicsDevice);
+			_basicEffect.Texture = SpriteCard;
+			_basicEffect.TextureEnabled = true;
+			_basicEffect.VertexColorEnabled = true;
+			_basicEffect.World = Matrix.CreateOrthographicOffCenter(0, graphicsDevice.Viewport.Width, graphicsDevice.Viewport.Height, 0, 0, 1);
+			_basicEffect.CurrentTechnique.Passes[0].Apply();
+		    graphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleStrip, _vertexPositionColors, 0, 5);
 		}
 	}
 }

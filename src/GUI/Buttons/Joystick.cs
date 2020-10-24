@@ -7,7 +7,7 @@ using static VirtusPecto.Desktop.Game1;
 namespace VirtusPecto.Desktop{
 	public class Joystick : TickBox{
 		protected override bool state{get => IsJoystick; set {if(GamePad.GetState(PlayerIndex.One).Buttons.BigButton == ButtonState.Pressed){IsJoystick = true;}}}
-		public Joystick(float x, float y){
+		public Joystick(){
 			name = "Joystick";
 		}
 	}

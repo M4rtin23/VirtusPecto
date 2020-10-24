@@ -21,7 +21,7 @@ namespace VirtusPecto.Desktop{
 				SetTarget(enemy);
 			}
 			base.Update();
-			collision0(Level1.Creature1);
+			entityCollision(Level1.Creature1);
 		}
 		public void Follow2(Vector2 target, Vector2 Position, float hitboxSize){
 			if (target.X - hitboxSize/2 > Position.X){

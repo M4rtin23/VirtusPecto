@@ -10,7 +10,9 @@ namespace VirtusPecto.Desktop{
 		protected Vector2 position;
 		protected virtual bool state{get; set;}
 		bool checker;
-		public void Collision() {
+		
+		public void SetPosition(float x, float y){
+			position = new Vector2(x, y);
 			if(new Rectangle((int)position.X,(int) position.Y, 32, 32).Contains(Mouse1.Position)){
 				if(IsClicking){
 					checker = true;
@@ -21,9 +23,6 @@ namespace VirtusPecto.Desktop{
 			}else{
 				checker = false;
 			}
-		}
-		public void SetPosition(float x, float y){
-			position = new Vector2(x, y);
 		}
 		
 		public void Draw(SpriteBatch batch) {

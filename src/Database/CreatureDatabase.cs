@@ -14,7 +14,8 @@ namespace VirtusPecto.Desktop{
 				(float)Convert.ToDecimal(l[3]),
 				(float)Convert.ToDecimal(l[4]),
 				(float)Convert.ToDecimal(l[5]),
-				Convert.ToInt16(l[6])
+				Convert.ToInt16(l[6]),
+				Convert.ToInt16(l[7])
 			);
 		}
 	}   

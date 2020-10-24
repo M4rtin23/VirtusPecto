@@ -6,10 +6,10 @@ using static VirtusPecto.Desktop.Game1;
 using static GameBuilder.GameBase;
 
 namespace VirtusPecto.Desktop{
-	public class Fullscreen : TickBox{
-		protected override bool state{get => IsFullscreen; set => IsFullscreen = value;}
-		public Fullscreen(){
-			name = "Fullscreen";
+	public class Nearest : TickBox{
+		protected override bool state{get => ShowNearest; set => ShowNearest = value;}
+		public Nearest(){
+			name = "Show Nearest Enemy";
 		}
 	}
 }

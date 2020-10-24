@@ -21,7 +21,10 @@ namespace VirtusPecto.Desktop{
 			Options[7].Y = 720;
 		}
 		protected override void action(int i){
+			bool fullscreen = IsFullscreen;
+			IsFullscreen = false;
 			SetWindowSize(realOption);
+			IsFullscreen = fullscreen;
 		}
 		protected override string drawOptions(int i){
 			return " "+ (int)(Options[i].Y * Settings.AspectRatio.X/Settings.AspectRatio.Y) + " X " + Options[i].Y;

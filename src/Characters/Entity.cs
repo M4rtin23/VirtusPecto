@@ -5,16 +5,15 @@ using static GameBuilder.Builder;
 using GameBuilder;
 
 namespace VirtusPecto.Desktop{
-	public abstract class Entity : GameBuilder.ObjectBuilder{
+	public abstract class Entity : Characters{
 		protected Vector2 target, startingPoint;
-		protected float health = 100, maxHealth = 100;
+		protected float maxHealth = 100;
 		protected float dist;
 		protected int targetDefined = -1;
 		protected bool isAttacking;
 		protected int time;
 		protected Color color1 = Color.Green;
-		protected Entity[] enemy;
-		protected int powerIndex = 0;
+		protected Characters[] enemy;
 		public override void Update() {
 			if(health <= 0){
 				Level1.DestroyEntities();
@@ -89,12 +88,7 @@ namespace VirtusPecto.Desktop{
 		protected void followTarget(){
 			speed = Motion.Follow(Position, target, 32 + dist, maxSpeed);
 		}  
-		public void AddHealth(int number){
-			health += number;
-		}
-		public float GetHealth(){
-			return health;
-		}
+		
 		public Vector2 GetStartingPoint(){
 			return startingPoint;
 		}
@@ -113,7 +107,7 @@ namespace VirtusPecto.Desktop{
 					Vector2 pos = 32*GameBuilder.Motion.VectorSpeed(1, MathHelper.ToRadians((float)CalculateAngle(Position, target)))+Position - Vector2.One*32;
 					if(new GameBuilder.RectangleF(pos, 64).Contains(target)){
 						Level1.CreateParticle(pos, 0.5f, 1);
-						enemy[targetDefined].AddHealth(-10);
+						enemy?[targetDefined].AddHealth(-10);
 					}
 					break;
 			}

@@ -1,7 +1,7 @@
-Number;Name;Speed;Attack;HP;Distance of attack;Power
-0;Elf;4;2;100;32;2
-1;Wizard;1,5;5;100;300;0
-2;Witch;2;4;100;32;2
-3;Piggy;1,5;4;200;32;2
-4;Spidot;5;1;100;32;2
-5;FireTree;0;5;500;500;0
+Number;Name;Speed;Attack;HP;Distance of attack;Power;Cost
+0;Elf;4;2;100;32;2;20
+1;Wizard;1,5;5;100;300;0;20
+2;Witch;2;4;100;32;2;20
+3;Piggy;1,5;4;200;32;2;50
+4;Spidot;5;1;100;32;2;20
+5;FireTree;0;5;500;500;0;50

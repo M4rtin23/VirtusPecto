@@ -20,8 +20,8 @@ namespace VirtusPecto.Desktop{
 			//This is for allowing the movement of the cursor with the mouse.
 			Mouse.SetPosition((int)Mouse.GetState().X + (int)speed.X,(int)Mouse.GetState().Y + (int)speed.Y);
 	
-			speed.X = GamePad.GetState(PlayerIndex.One).ThumbSticks.Right.X * (8);
-			speed.Y = GamePad.GetState(PlayerIndex.One).ThumbSticks.Right.Y * (-8);
+			speed.X = GamePad.GetState(PlayerIndex.One).ThumbSticks.Right.X * (Game1.Height/70f);
+			speed.Y = GamePad.GetState(PlayerIndex.One).ThumbSticks.Right.Y * (-Game1.Height/70f);
 		}
 	}
 }

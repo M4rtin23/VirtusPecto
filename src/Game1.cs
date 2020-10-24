@@ -34,6 +34,8 @@ namespace VirtusPecto.Desktop{
 		public static bool WannaExit;
 		public static bool IsJoystick;
 		public static bool IsDescriptionOn = true;
+		public static bool ShowNearest = false;
+		public static bool ShowDirection = false;
 		private bool checker;
 
 		//Rooms.
@@ -108,12 +110,20 @@ namespace VirtusPecto.Desktop{
 
 		protected override void Draw(GameTime gameTime){
 			GraphicsDevice.Clear(Color.Black);
+			Vector2 a;
+			if(Level1 == null) a = Vector2.Zero; else a = Level1.Player1.Position;
+			spriteBatch.Begin(transformMatrix: Camera.LimitedFollow(a), samplerState:  SamplerState.PointClamp);
+			new BackGround(SpriteBackground).Draw(spriteBatch, Camera.Position);
+			spriteBatch.End();
 			if(LevelNumber == 1){
+				if (Mouse1.IsCreating && !Game1.IsPaused) {
+					Level1?.DrawCard(GraphicsDevice);
+				}
 				spriteBatch.Begin(transformMatrix: Camera.LimitedFollow(Level1.Player1.Position), samplerState:  SamplerState.PointClamp, sortMode: SpriteSortMode.BackToFront);
 				Level1?.Draw(spriteBatch);
 				spriteBatch.End();
 			}
-
+			
 			spriteBatch.Begin(samplerState:  SamplerState.PointClamp);
 			switch(LevelNumber){
 				case 0:

@@ -9,6 +9,8 @@ namespace VirtusPecto.Desktop{
 	public class SettingsMenu{
 		public WindowBox ResolutionBox;
 		public Fullscreen SetFullscreen;
+		public Nearest ShowNearest;
+		public Direction ShowDirection;
 		public AspectBox SetAspectRatio;
 		public Joystick SetJoystick;
 		public CardDescription ShowDescription;
@@ -16,22 +18,24 @@ namespace VirtusPecto.Desktop{
 		public Vector2 AspectRatio{get => SetAspectRatio.Options[SetAspectRatio.Option];}
 		public SettingsMenu(){
 			ShowDescription = new CardDescription();
-			SetJoystick = new Joystick(0, 0);
+			ShowNearest = new Nearest();
+			ShowDirection = new Direction();
+			SetJoystick = new Joystick();
 			SetAspectRatio = new AspectBox();
-			SetFullscreen = new Fullscreen(0, 0);
+			SetFullscreen = new Fullscreen();
 			ResolutionBox = new WindowBox();
 		}
+
 		public void Update(){
-			SetAspectRatio.SetPosition(Width / 4 - 64,  Height / 2);
-			ShowDescription.SetPosition(Width * 2/4 - 64,  Height / 3 * 2);
-			SetFullscreen.SetPosition(Width * 3/4 - 64,  Height / 2);
-			SetJoystick.SetPosition(Width * 3/4 - 64,  Height / 3 * 2);
-			ResolutionBox.SetPosition(Width * 2/4 - 64, Height / 2);
-			ShowDescription.Collision();
+			ShowDirection.SetPosition(Width * 3/4 - 64, 2*Height / 3);
+			ShowNearest.SetPosition(Width * 2/4 - 64, 2*Height / 3);
+			SetAspectRatio.SetPosition(Width / 4 - 64,  Height / 3);
+			ShowDescription.SetPosition(Width * 2/4 - 64,  Height / 2);
+			SetFullscreen.SetPosition(Width * 3/4 - 64,  Height / 3);
+			SetJoystick.SetPosition(Width * 3/4 - 64,  Height / 2);
+			ResolutionBox.SetPosition(Width * 2/4 - 64, Height / 3);
 			SetAspectRatio.Collision();
 			ResolutionBox.Collision();
-			SetFullscreen.Collision();
-			SetJoystick.Collision();
 			if(Back.Contains(Mouse1.Position) && IsClicking){
 				GoToPrevious();
 				Settings = null;
@@ -39,6 +43,8 @@ namespace VirtusPecto.Desktop{
 		}
 		public void Draw(SpriteBatch batch){
 			batch.Draw(SpriteTick, new Vector2(0, 0), Color.White);
+			ShowDirection.Draw(batch);
+			ShowNearest.Draw(batch);
 			ShowDescription.Draw(batch);
 			SetAspectRatio.Draw(batch);
 			ResolutionBox.Draw(batch);

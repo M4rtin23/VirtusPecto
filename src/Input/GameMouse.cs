@@ -7,10 +7,13 @@ using static VirtusPecto.Desktop.Game1;
 namespace VirtusPecto.Desktop{
 	public class GameMouse{
 		public Vector2 Position;
+		private Vector2 relativePosition;
+		public Vector2 CardPosition{get => Position - new Vector2(relativePosition.X*0.9f, relativePosition.Y/2); set => relativePosition = value;}
 		public Vector2 MPosition{get => Position + MatrixPosition;}
 		public bool IsCreating;
 		public int Number;
 		public bool IsAble;
+		public bool IsInside{get => (Position.Y < Game1.Height-288);}
 
 		public void Update(){
 			if (Keyboard.GetState().IsKeyDown(Keys.Q)){
@@ -23,11 +26,7 @@ namespace VirtusPecto.Desktop{
 			if (IsCreating && IsClicking && !Game1.IsPaused && Game1.Level1 != null){
 				OnCreation(Number);
 			}if(Level1 != null){
-				if(Level1.Cards[0].Hitbox.Contains(Position) || Level1.Cards[1].Hitbox.Contains(Position) || Level1.Cards[2].Hitbox.Contains(Position)){
-					IsAble = false;
-				}else{
-					IsAble = true;
-				}
+				IsAble = true;
 				for(int i = 0; i<Level1.Creature1.Length; i++){
 					if(Level1.Creature1[i] != null && Level1.Creature1[i].Hitbox.Intersects(new GameBuilder.RectangleF(Mouse1.MPosition-Vector2.One*64, 128))){
 						IsAble = false;
@@ -39,10 +38,11 @@ namespace VirtusPecto.Desktop{
 			}
 		}
 		public void OnCreation(int Number){
-			if(IsClicking && IsAble){
+			if(IsClicking && IsAble && IsInside){
 				for(int i = 0; i < 3; i++){
 					if (Number == i && !Level1.Cards[i].Hitbox.Contains(Mouse1.Position)){
-						Level1.CreateCreature(Level1.Cards[i].Content, MPosition - new Vector2(0, 32));
+						Level1.CreateCreature(Level1.Cards[i].Content, CardPosition + MatrixPosition- new Vector2(0, 32+64));
+						Level1.Player1.Mana -= Level1.Cards[i].Content.Cost;
 					}
 				}
 				Number = -1;

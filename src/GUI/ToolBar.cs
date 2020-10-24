@@ -11,12 +11,13 @@ namespace VirtusPecto.Desktop{
 	public class ToolBar{
 		public void Draw(SpriteBatch batch) {
 
-			new RectangleF(0, 0, Width, 40, Color.Black).Draw(batch);
-			new RectangleF(8, 8, 128 * Level1.Player1.Health/100, 24, Color.Red).Draw(batch);
-			new RectangleF(164, 8, 128 * Level1.Player1.Mana/50, 24, Color.DeepSkyBlue).Draw(batch);
+			new RectangleF(128, Height-96, Width, 96, new Color(0,0,0,128)).Draw(batch);
+			new RectangleF(Width-8-128 * Level1.Player1.Health/100, 8+Height-32-32, 128 * Level1.Player1.Health/100, 8, Color.Red).Draw(batch);
+			new RectangleF(Width-8-128 * Level1.Player1.Mana/50, Height-16, 128 * Level1.Player1.Mana/50, 8, Color.DeepSkyBlue).Draw(batch);
 
-			batch.DrawString(FontNormal, Convert.ToString(Level1.Player1.Health) + "/100", new Vector2(32, 2), Color.White);
-			batch.DrawString(FontNormal, Convert.ToString(Level1.Player1.Mana) + "/50", new Vector2(196, 2), Color.White);
+			batch.DrawString(FontBig, ""+(60 - GT.TotalGameTime.Seconds), new Vector2(132, Height - 118), Color.White);
+			batch.DrawString(FontNormal, Level1.Player1.Health + "/100", new Vector2(Width-128, Height-64-24), Color.White);
+			batch.DrawString(FontNormal, Level1.Player1.Mana + "/50", new Vector2(Width-128, Height-24-24), Color.White);
 		}
 	}
 }
