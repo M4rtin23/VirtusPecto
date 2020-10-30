@@ -19,7 +19,7 @@ namespace VirtusPecto.Desktop{
 			Position = new Vector2(64, 64);
 			Slot = new CardContent[3];
 			for(int i = 0; i < 3; i++){
-				Slot[i] = CreatureDatabase.GetData(i*2);
+				Slot[i] = CardContent.GetData(i*2);
 			}
 		}
 		private void gameControl(){
@@ -30,7 +30,7 @@ namespace VirtusPecto.Desktop{
 			if(IsJoystick){
 				gameStick();
 			}
-			if (IsPressing(4) && PowerButton.IsCharged()) {
+			if (IsPressing(4) && PowerIndicator.IsCharged()) {
 				UsePower(powerIndex);
 			}
 			for(int i = 0; i < 3; i++){
@@ -141,7 +141,7 @@ namespace VirtusPecto.Desktop{
 						break;
 				}
 				Mana -= ManaCost[powerIndex];
-				PowerButton.CanShoot();
+				PowerIndicator.CanShoot();
 			}
 		}
 		private void Punch(){

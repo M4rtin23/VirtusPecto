@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using static VirtusPecto.Desktop.Game1;
 
 namespace VirtusPecto.Desktop{
-	public class PowerButton{
+	public class PowerIndicator{
 		private Vector2 position;
 		private static float timer;
 

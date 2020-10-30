@@ -14,10 +14,10 @@ namespace VirtusPecto.Desktop{
 		public ToolBar toolBar;
 		public Fireball[] Fireballs;
 		public Particle[] Particles;
-		private PowerButton button;
+		private PowerIndicator button;
 		private float cardRotation{get => -(Mouse1.Position.Y/Game1.Height-1)*(Mouse1.Position.Y/Game1.Height+1.2f);}
 		public Level(int EnemyQuantity){
-			button = new PowerButton();
+			button = new PowerIndicator();
 			Background = new BackGround(SpriteBackground);
 			Fireballs = new Fireball[0];
 			Particles = new Particle[0];
