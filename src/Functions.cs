@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using static GameBuilder.Builder;
+using GameBuilder;
 
 namespace VirtusPecto.Desktop{
 	public partial class Game1{
@@ -55,7 +55,7 @@ namespace VirtusPecto.Desktop{
 					continue;               
 				}
 				//Calculates a distance.
-				int enemyDistance = (int)CalculateDistance(entities[i].Position, pos);
+				int enemyDistance = (int)Motion.Distance(entities[i].Position, pos);
 				//Compares  
 				if (shortestDistance == -1) {
 					shortestDistance = enemyDistance;               

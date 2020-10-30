@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using static VirtusPecto.Desktop.Game1;
-using static GameBuilder.Builder;
+using GameBuilder;
 
 namespace VirtusPecto.Desktop{
 	public class Enemy : Entity{
@@ -29,7 +29,7 @@ namespace VirtusPecto.Desktop{
 			
 			float r = new GameBuilder.Motion(speed).Radians;
 			Vector2 v = new Vector2(-(float)System.Math.Cos(r), (float)System.Math.Sin(r));
-			DrawLine(batch, Position + v*32, Position + v*64, 6, Color.Red);
+			Line.Draw(batch, Position + v*32, Position + v*64, 6, Color.Red);
 			base.Draw(batch);
 		}
 	}

@@ -3,8 +3,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using static VirtusPecto.Desktop.Game1;
-using static GameBuilder.Builder;
 using static VirtusPecto.Desktop.InputKeys;
+using GameBuilder;
 
 namespace VirtusPecto.Desktop{
 	public class Player : Characters{
@@ -104,7 +104,7 @@ namespace VirtusPecto.Desktop{
 						pos = new Vector2(-a*(float)Math.Cos(MathHelper.ToRadians((GT.TotalGameTime.Milliseconds) % 360))*10,a*(float)Math.Cos(MathHelper.ToRadians((GT.TotalGameTime.Milliseconds) % 360))*10)+a0;
 
 					}
-					DrawRectangle(batch, new Rectangle(pos.ToPoint()+new Point(64*a - 8*d, -64*(b-3)/4-e*8), new Point(8*c0, 8*c1)), Color.Blue);
+					RectangleF.Draw(batch, pos+new Vector2(64*a - 8*d, -64*(b-3)/4-e*8), new Vector2(8*c0, 8*c1), Color.Blue);
 				}
 			}
 			if(ShowDirection){
@@ -119,12 +119,12 @@ namespace VirtusPecto.Desktop{
 
 		public void Lightning(Vector2 pos, Vector2 otherPos, float s, SpriteBatch batch){
 			s = s/128;
-			float r = (float)(-CalculateAngle(pos, otherPos) * Math.PI/180);
+			float r = (float)(-Motion.Angle(pos, otherPos) * Math.PI/180);
 		}
 		public void Direction(SpriteBatch batch){
-			float r = (float)(-CalculateAngle(Position, Mouse1.Position+MatrixPosition)/180*Math.PI);
+			float r = (float)(-Motion.Angle(Position, Mouse1.Position+MatrixPosition)/180*Math.PI);
 			Vector2 v = new Vector2((float)Math.Cos(r), (float)Math.Sin(r));
-			DrawLine(batch, Position + v*32, Position + v*64, 6, Color.Red);
+			Line.Draw(batch, Position + v*32, Position + v*64, 6, Color.Red);
 		}
 
 		public void UsePower(int powerIndex){
@@ -134,7 +134,7 @@ namespace VirtusPecto.Desktop{
 						Punch();
 						break;
 					case 0:
-						Level1.CreateFireball(false, Position,(float) CalculateAngle(Position, Game1.Mouse1.MPosition));
+						Level1.CreateFireball(false, Position,(float) Motion.Angle(Position, Game1.Mouse1.MPosition));
 						break;
 					case 1:
 						Lightning();
@@ -145,7 +145,7 @@ namespace VirtusPecto.Desktop{
 			}
 		}
 		private void Punch(){
-			Vector2 pos = 32*GameBuilder.Motion.VectorSpeed(1, MathHelper.ToRadians((float)CalculateAngle(Position, Mouse1.MPosition)))+Position - Vector2.One*32;
+			Vector2 pos = 32*GameBuilder.Motion.VectorSpeed(1, MathHelper.ToRadians((float)Motion.Angle(Position, Mouse1.MPosition)))+Position - Vector2.One*32;
 			for(int i = 0; i < Level1.Enemy1.Length; i++){
 				if(Level1.Enemy1[i] != null){
 					if(new GameBuilder.RectangleF(pos, 90.51f).Intersects(Level1.Enemy1[i].Hitbox)){
@@ -165,7 +165,7 @@ namespace VirtusPecto.Desktop{
 		}
 
 		public float Dir(){
-			return (float)CalculateDirection(-speed.X, -speed.Y);
+			return (float)Motion.Direction(-speed);
 		}
 		public int GetPowerIndex(){
 			return powerIndex;

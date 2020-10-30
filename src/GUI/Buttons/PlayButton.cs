@@ -1,19 +1,17 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using static VirtusPecto.Desktop.Game1;
-using static VirtusPecto.Desktop.Lobby;
+using GameBuilder;
 
 namespace VirtusPecto.Desktop{
 	public class PlayButton{
-		public Rectangle Hitbox{get => new Rectangle((int)position.X,(int)position.Y,128,32);}
+		public RectangleF Hitbox{get => new RectangleF(position.X, position.Y,128,32);}
 		private Vector2 position;
 		public bool isActivated;
 		private int transparency;
 		private DifficultyBox difficultyBox;
 		public Vector2 PlayPosition;
-		public Rectangle PlayRectangle{get => new Rectangle((int)PlayPosition.X,(int) PlayPosition.Y, 128, 32);}
+		public RectangleF PlayRectangle{get => new RectangleF(PlayPosition.X, PlayPosition.Y, 128, 32);}
 		private int playAlpha;
 		bool checker;
 
@@ -53,11 +51,11 @@ namespace VirtusPecto.Desktop{
 			}
 		}
 		public void Draw(SpriteBatch batch) {
-			GameBuilder.Builder.DrawRectangle(batch, Hitbox, new Color(transparency, transparency, transparency, transparency));
+			Hitbox.Draw(batch, new Color(transparency, transparency, transparency, transparency));
 			batch.DrawString(FontNormal, "Start", position, Color.White);
 			if (isActivated) {
 				difficultyBox.Draw(batch);
-				GameBuilder.Builder.DrawRectangle(batch, PlayRectangle, new Color(playAlpha, playAlpha, playAlpha, playAlpha));
+				PlayRectangle.Draw(batch, new Color(playAlpha, playAlpha, playAlpha, playAlpha));
 				batch.DrawString(FontNormal, "Play", PlayPosition, Color.White);
 			}
 		}

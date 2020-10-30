@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using static VirtusPecto.Desktop.Game1;
-using static GameBuilder.Builder;
 using GameBuilder;
 
 namespace VirtusPecto.Desktop{
@@ -30,11 +29,11 @@ namespace VirtusPecto.Desktop{
 			if(isAttacking){
 				followTarget();
 				if(speed == Vector2.Zero && (GT.TotalGameTime.Milliseconds % 1000 == 0)){
-					attack((float)CalculateAngle(Position, target));
+					attack((float)Motion.Angle(Position, target));
 				}
 				CheckTarget(enemy);
 			}else{
-				speed = Follow(startingPoint, Position, 32, maxSpeed);
+				speed = Motion.Follow(startingPoint, Position, 32, maxSpeed);
 				SetTarget(enemy);
 			}
 		}
@@ -104,7 +103,7 @@ namespace VirtusPecto.Desktop{
 					Level1.CreateFireball((color1 == Color.Red), Position,(float)angle);
 					break;
 				case 2:
-					Vector2 pos = 32*GameBuilder.Motion.VectorSpeed(1, MathHelper.ToRadians((float)CalculateAngle(Position, target)))+Position - Vector2.One*32;
+					Vector2 pos = 32*GameBuilder.Motion.VectorSpeed(1, MathHelper.ToRadians((float)Motion.Angle(Position, target)))+Position - Vector2.One*32;
 					if(new GameBuilder.RectangleF(pos, 64).Contains(target)){
 						Level1.CreateParticle(pos, 0.5f, 1);
 						enemy?[targetDefined].AddHealth(-10);

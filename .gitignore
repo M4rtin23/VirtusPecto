@@ -5,3 +5,4 @@ Content/bin
 Content/obj
 **/bin/
 **/obj/
+**.user

@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using static GameBuilder.Builder;
 using static VirtusPecto.Desktop.Game1;
 using GameBuilder;
 
@@ -180,7 +179,7 @@ namespace VirtusPecto.Desktop{
 		}
 		public void CreateFireball(bool isEnemy, Vector2 Position, float dir){
 			Array.Resize(ref Level1.Fireballs, Level1.Fireballs.Length+1);
-			Fireballs[Level1.Fireballs.Length-1] = new Fireball(isEnemy, Position, CalculateVectorSpeed(6, dir));
+			Fireballs[Level1.Fireballs.Length-1] = new Fireball(isEnemy, Position, Motion.VectorSpeed(6, dir));
 		}
 		public void CreateCreature(CardContent content, Vector2 pos){
 			Array.Resize(ref Level1.Creature1, Level1.Creature1.Length+1);

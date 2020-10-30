@@ -5,18 +5,16 @@ using Microsoft.Xna.Framework.Input;
 using static VirtusPecto.Desktop.Level;
 using static VirtusPecto.Desktop.Game1;
 using static GameBuilder.GameBase;
+using GameBuilder;
 
 namespace VirtusPecto.Desktop{
 	public class PauseMenu{
-		public SettingsButton settings;
-		public Rectangle ContinueRectangle, MainMenuRectangle, ExitRectangle;
+		public SettingsButton settings = new SettingsButton();
+		public RectangleF ContinueRectangle{get => new RectangleF((Width / 2) - 48, (Height / 2) - 48 * 2, 128, 32);}
+		public RectangleF MainMenuRectangle{get => new RectangleF((Width / 2) - 48, (Height / 2) - 48, 128, 32);}
+		public RectangleF ExitRectangle{get => new RectangleF((Width / 2) - 48, (Height / 2) + 48, 128, 32);}
+
 		private int continueAlpha, mainmenuAlpha, exitAlpha;
-		public PauseMenu(){
-			settings = new SettingsButton((Width/2)-48,Height/2);
-			ContinueRectangle = new Rectangle((Width / 2) - 48, (Height / 2) - 48 * 2, 128, 32);
-			MainMenuRectangle = new Rectangle((Width / 2) - 48, (Height / 2) - 48, 128, 32);
-			ExitRectangle = new Rectangle((Width / 2) - 48, (Height / 2) + 48, 128, 32);
-		}
 		public void Update() {
 			settings.Collision();
 			#region continue
@@ -56,14 +54,17 @@ namespace VirtusPecto.Desktop{
 		}
 		public void Draw(SpriteBatch batch) {
 			batch.Draw(SpriteCard, new Vector2((Width / 2), Height / 2), null, new Color(0,0,0,128), 0, new Vector2(128, 160), new Vector2(1, 1), SpriteEffects.None, 0);
-			GameBuilder.Builder.DrawRectangle(batch, ContinueRectangle, new Color(continueAlpha,continueAlpha, continueAlpha, continueAlpha));
+
+			ContinueRectangle.Draw(batch,new Color(continueAlpha,continueAlpha, continueAlpha, continueAlpha));
+			MainMenuRectangle.Draw(batch,  new Color(mainmenuAlpha,mainmenuAlpha, mainmenuAlpha, mainmenuAlpha));
+			ExitRectangle.Draw(batch, new Color(exitAlpha,exitAlpha, exitAlpha, exitAlpha));
+
 			batch.DrawString(FontNormal, "Continue", new Vector2((Width / 2)-48, (Height / 2)-48*2), Color.White);
-			GameBuilder.Builder.DrawRectangle(batch, MainMenuRectangle, new Color(mainmenuAlpha,mainmenuAlpha, mainmenuAlpha, mainmenuAlpha));
 			batch.DrawString(FontNormal, "Main Menu", new Vector2((Width / 2) - 48, (Height / 2) - 48), Color.White);
-			settings.SetPosition((Width/2)-48,Height/2);
-			settings.Draw(batch);
-			GameBuilder.Builder.DrawRectangle(batch, ExitRectangle, new Color(exitAlpha,exitAlpha, exitAlpha, exitAlpha));
-			batch.DrawString(FontNormal, "Exit", new Vector2((Width / 2)-48, (Height / 2)+48), Color.White);
+			batch.DrawString(FontNormal, "Exit", new Vector2((Width / 2)-48, (Height / 2)+48), Color.White);			
+
+			settings.Draw((Width/2)-48, Height/2,batch);
+
 		}
 	}
 }
