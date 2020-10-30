@@ -23,13 +23,7 @@ namespace VirtusPecto.Desktop{
 			SpriteLogoPosition = new Vector2(Width/4f, 128);
 		}
 		public void Update() {
-			if(Keyboard.GetState().IsKeyDown(Keys.Enter)){
-				checker = true;
-			}
-			if(Keyboard.GetState().IsKeyUp(Keys.Enter) && checker){
-				g++;
-				checker = false;
-			}
+			InputKeys.Press(Keys.Enter, () => {g++;}, ref checker);
 			Button1.Collision();
 			Button2.Collision();
 			if (ExitRectangle.Contains(Mouse1.Position)){

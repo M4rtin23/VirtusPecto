@@ -12,8 +12,6 @@ namespace VirtusPecto.Desktop{
 		public static Vector2 MatrixPosition{get => Camera.Position-new Vector2(Width, Height)/2;}
 		public static GameControl Joystick;
 		public static GameTime GT;
-		public static Keys[] TheKeys = {Keys.W, Keys.A, Keys.S, Keys.D, Keys.Space, Keys.Escape, Keys.D1, Keys.D2, Keys.D3};
-		public static Buttons[] TheButtons = {Buttons.DPadUp, Buttons.DPadLeft, Buttons.DPadDown, Buttons.DPadRight, Buttons.RightShoulder, Buttons.Start, Buttons.X, Buttons.Y, Buttons.B};
 
 		//Textures.
 		public static Texture2D SpriteLogo;
@@ -46,8 +44,8 @@ namespace VirtusPecto.Desktop{
 
 		public Game1(){
 			graphics = new GraphicsDeviceManager(this);
-			graphics.PreferredBackBufferWidth = 1366;
-			graphics.PreferredBackBufferHeight = 768;
+			Width = 1366;
+			Height = 768;
 			Content.RootDirectory = "Content";
 			IsMouseVisible = true;
 			Mouse1 = new GameMouse();

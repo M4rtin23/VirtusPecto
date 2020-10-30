@@ -49,5 +49,14 @@ namespace VirtusPecto.Desktop{
 				IsCreating = false;
 			}
 		}
+		public static void Click(Action action, ref bool check){
+			if (IsClicking && !check){
+				action();
+				check = true;
+			}
+			if (!IsClicking){
+				check = false;
+			}
+		}
 	}
 }

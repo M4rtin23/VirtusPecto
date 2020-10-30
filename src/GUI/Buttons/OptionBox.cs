@@ -30,12 +30,7 @@ namespace VirtusPecto.Desktop{
 		}
 		public void Collision() {
 			if (hitbox.Contains(Mouse1.Position)){
-				if(IsClicking){
-					checker = true;
-				}else if(checker){
-					isActivated = !isActivated;
-					checker = false;
-				}
+				GameMouse.Click(() => {isActivated = !isActivated;}, ref checker);
 			}else{
 				checker = false;
 			}

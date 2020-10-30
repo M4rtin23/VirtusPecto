@@ -28,12 +28,7 @@ namespace VirtusPecto.Desktop{
 			PlayPosition = new Vector2(position.X + 256, position.Y);
 			if (Hitbox.Contains(Mouse1.Position)){
 				transparency = 64;
-				if(IsClicking){
-					checker = true;
-				}else if(checker) {
-					isActivated = !isActivated;
-					checker = false;
-				}
+				GameMouse.Click(() => {isActivated = !isActivated;}, ref checker);
 			}
 			else {
 				transparency = 0;

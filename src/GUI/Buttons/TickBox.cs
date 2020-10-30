@@ -14,12 +14,7 @@ namespace VirtusPecto.Desktop{
 		public void SetPosition(float x, float y){
 			position = new Vector2(x, y);
 			if(new Rectangle((int)position.X,(int) position.Y, 32, 32).Contains(Mouse1.Position)){
-				if(IsClicking){
-					checker = true;
-				}else if(checker) {
-					state = !state;
-					checker = false;
-				}
+				GameMouse.Click(() => {state = !state;;}, ref checker);
 			}else{
 				checker = false;
 			}

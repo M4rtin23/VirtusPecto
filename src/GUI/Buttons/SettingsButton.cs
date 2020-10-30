@@ -23,15 +23,11 @@ namespace VirtusPecto.Desktop{
 		public void Collision(){
 			if (Hitbox.Contains(Mouse1.Position)){
 				transparency = 64;
-				if(IsClicking){
-					checker = true;
-				}else if(checker){
-					Settings = new SettingsMenu();
+				GameMouse.Click(() => {Settings = new SettingsMenu();
 					IsPaused = false;
 					GoToLevel(2);
 					Button1.isActivated = false;
-					checker = false;
-				}
+				}, ref checker);
 			}
 			else{
 				transparency = 0;

@@ -11,13 +11,6 @@ namespace VirtusPecto.Desktop{
 			Height = (int)size.Y;
 			graphics.ApplyChanges();
 		}
-		public static bool IsPressing(int index){
-			if(!IsJoystick){
-				return Keyboard.GetState().IsKeyDown(TheKeys[index]);
-			}else{
-				return GamePad.GetState(PlayerIndex.One).IsButtonDown(TheButtons[index]);
-			}
-		}
 		private void joystick(){
 			if(GamePad.GetState(PlayerIndex.One).Buttons.BigButton == ButtonState.Pressed){
 				IsJoystick = true;
@@ -32,13 +25,8 @@ namespace VirtusPecto.Desktop{
 			Joystick?.Update();
 		}
 		private void pause(){
-			if (IsPressing(5)){
-				checker = true;
-			}
-			if (!IsPressing(5) && checker){
-				IsPaused = !IsPaused;
-				checker = false;
-			}
+			InputKeys.Press(5, () => {IsPaused = !IsPaused;}, ref checker);
+
 			if (!IsPaused) {
 				Pause = null;
 			}
