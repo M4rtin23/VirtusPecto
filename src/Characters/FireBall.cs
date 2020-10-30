@@ -14,7 +14,7 @@ namespace VirtusPecto.Desktop{
 			isDangerous = emiter;
 			Position = initialPosition;
 			this.speed = speed;
-			rot = MathHelper.ToRadians(180 - (float)Motion.Direction(speed));
+			rot = MathHelper.Pi - (float)Motion.Direction(speed);
 		}
 		public override void Update() {
 			animationSpeed = 0.25f;

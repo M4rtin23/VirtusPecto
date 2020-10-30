@@ -19,16 +19,14 @@ namespace VirtusPecto.Desktop{
 
 		protected virtual void action(int i){}
 
-		public void SetPosition(float x, float y){
-			position = new Vector2(x, y);
-		}
 		protected virtual string drawOptions(int i){
 			return null;
 		}
 		protected virtual string currentOption(){
 			return drawOptions(Option);
 		}
-		public void Collision() {
+		public void Update(float x, float y){
+			position = new Vector2(x, y);
 			if (hitbox.Contains(Mouse1.Position)){
 				GameMouse.Click(() => {isActivated = !isActivated;}, ref checker);
 			}else{

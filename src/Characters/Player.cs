@@ -13,7 +13,7 @@ namespace VirtusPecto.Desktop{
 		public CardContent[] Slot;
 		public int[] ManaCost = {3, 15, 0};
 		public Player(){
-			powerIndex = 0;
+			powerIndex = 1;
 			health = 100;
 			SpriteIndex = SpritePlayer;
 			Position = new Vector2(64, 64);
@@ -119,10 +119,10 @@ namespace VirtusPecto.Desktop{
 
 		public void Lightning(Vector2 pos, Vector2 otherPos, float s, SpriteBatch batch){
 			s = s/128;
-			float r = (float)(-Motion.Angle(pos, otherPos) * Math.PI/180);
+			float r = (float)(-Motion.Angle(pos, otherPos));
 		}
 		public void Direction(SpriteBatch batch){
-			float r = (float)(-Motion.Angle(Position, Mouse1.Position+MatrixPosition)/180*Math.PI);
+			float r = (float)(-Motion.Angle(Position, Mouse1.Position+MatrixPosition));
 			Vector2 v = new Vector2((float)Math.Cos(r), (float)Math.Sin(r));
 			Line.Draw(batch, Position + v*32, Position + v*64, 6, Color.Red);
 		}
@@ -145,7 +145,7 @@ namespace VirtusPecto.Desktop{
 			}
 		}
 		private void Punch(){
-			Vector2 pos = 32*GameBuilder.Motion.VectorSpeed(1, MathHelper.ToRadians((float)Motion.Angle(Position, Mouse1.MPosition)))+Position - Vector2.One*32;
+			Vector2 pos = 32*GameBuilder.Motion.VectorSpeed(1, (float)Motion.Angle(Position, Mouse1.MPosition))+Position - Vector2.One*32;
 			for(int i = 0; i < Level1.Enemy1.Length; i++){
 				if(Level1.Enemy1[i] != null){
 					if(new GameBuilder.RectangleF(pos, 90.51f).Intersects(Level1.Enemy1[i].Hitbox)){

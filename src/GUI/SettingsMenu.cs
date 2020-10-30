@@ -14,7 +14,7 @@ namespace VirtusPecto.Desktop{
 		public AspectBox SetAspectRatio;
 		public Joystick SetJoystick;
 		public CardDescription ShowDescription;
-		private Rectangle Back = new Rectangle(0, 0, SpriteTick.Width/2, SpriteTick.Height);
+		private Button Back = new Button("Go Back", () => {GoToPrevious(); Settings = null;});
 		public Vector2 AspectRatio{get => SetAspectRatio.Options[SetAspectRatio.Option];}
 		public SettingsMenu(){
 			ShowDescription = new CardDescription();
@@ -27,22 +27,17 @@ namespace VirtusPecto.Desktop{
 		}
 
 		public void Update(){
-			ShowDirection.SetPosition(Width * 3/4 - 64, 2*Height / 3);
-			ShowNearest.SetPosition(Width * 2/4 - 64, 2*Height / 3);
-			SetAspectRatio.SetPosition(Width / 4 - 64,  Height / 3);
-			ShowDescription.SetPosition(Width * 2/4 - 64,  Height / 2);
-			SetFullscreen.SetPosition(Width * 3/4 - 64,  Height / 3);
-			SetJoystick.SetPosition(Width * 3/4 - 64,  Height / 2);
-			ResolutionBox.SetPosition(Width * 2/4 - 64, Height / 3);
-			SetAspectRatio.Collision();
-			ResolutionBox.Collision();
-			if(Back.Contains(Mouse1.Position) && IsClicking){
-				GoToPrevious();
-				Settings = null;
-			}
+			ShowDirection.Update(Width * 3/4 - 64, 2*Height / 3);
+			ShowNearest.Update(Width * 2/4 - 64, 2*Height / 3);
+			SetAspectRatio.Update(Width / 4 - 64,  Height / 3);
+			ShowDescription.Update(Width * 2/4 - 64,  Height / 2);
+			SetFullscreen.Update(Width * 3/4 - 64,  Height / 3);
+			SetJoystick.Update(Width * 3/4 - 64,  Height / 2);
+			ResolutionBox.Update(Width * 2/4 - 64, Height / 3);
+			Back.Update(0, 0);
 		}
 		public void Draw(SpriteBatch batch){
-			batch.Draw(SpriteTick, new Vector2(0, 0), Color.White);
+			Back.Draw(batch);			
 			ShowDirection.Draw(batch);
 			ShowNearest.Draw(batch);
 			ShowDescription.Draw(batch);

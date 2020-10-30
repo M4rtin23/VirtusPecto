@@ -103,7 +103,7 @@ namespace VirtusPecto.Desktop{
 					Level1.CreateFireball((color1 == Color.Red), Position,(float)angle);
 					break;
 				case 2:
-					Vector2 pos = 32*GameBuilder.Motion.VectorSpeed(1, MathHelper.ToRadians((float)Motion.Angle(Position, target)))+Position - Vector2.One*32;
+					Vector2 pos = 32*Motion.VectorSpeed(1, (float)Motion.Angle(Position, target))+Position - Vector2.One*32;
 					if(new GameBuilder.RectangleF(pos, 64).Contains(target)){
 						Level1.CreateParticle(pos, 0.5f, 1);
 						enemy?[targetDefined].AddHealth(-10);

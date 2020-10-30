@@ -4,60 +4,39 @@ using static VirtusPecto.Desktop.Game1;
 using GameBuilder;
 
 namespace VirtusPecto.Desktop{
-	public class PlayButton{
-		public RectangleF Hitbox{get => new RectangleF(position.X, position.Y,128,32);}
-		private Vector2 position;
+	public class PlayButton : Button{
 		public bool isActivated;
-		private int transparency;
 		private DifficultyBox difficultyBox;
-		public Vector2 PlayPosition;
-		public RectangleF PlayRectangle{get => new RectangleF(PlayPosition.X, PlayPosition.Y, 128, 32);}
-		private int playAlpha;
-		bool checker;
+		Button Play;
+		
+		public PlayButton():base("Start", () => {}){
+			action = () => {
+				isActivated = !isActivated;
+			};
+			Play = new Button("Play", ()=>{
+					Game1.GoToLevel(1);
+					Level1 = new Level((int)difficultyBox.Options[difficultyBox.Option].X);
+					Level1.Creation();
+					StartMenu = null;}
+			);
+		}
 
-		public PlayButton(int x, int y){
-			PlayPosition = new Vector2(0, 0);
-		}
-		public void SetPosition(float x, float y){
-			position.X = x;
-			position.Y = y;
-		}
-		public void Collision() {
-			PlayPosition = new Vector2(position.X + 256, position.Y);
-			if (Hitbox.Contains(Mouse1.Position)){
-				transparency = 64;
-				GameMouse.Click(() => {isActivated = !isActivated;}, ref checker);
-			}
-			else {
-				transparency = 0;
-			}
+		public override void Update(float x, float y) {
+			base.Update(x, y);
 			if (isActivated) {
 				if(difficultyBox == null){
 					difficultyBox = new DifficultyBox((int)position.X+128,(int)position.Y);
 				}
-				difficultyBox.SetPosition(position.X + 128, position.Y);
-				difficultyBox.Collision();
-				if (PlayRectangle.Contains(Mouse1.Position)) {
-					playAlpha = 64;
-					if (IsClicking) {
-						Game1.GoToLevel(1);
-						Level1 = new Level((int)difficultyBox.Options[difficultyBox.Option].X);
-						Level1.Creation();
-						StartMenu = null;
-					}
-				}else{
-					playAlpha = 0;
-				}
+				difficultyBox.Update(position.X + 128, position.Y);
+				Play.Update(position.X + 256, position.Y);
 			}
 		}
-		public void Draw(SpriteBatch batch) {
-			Hitbox.Draw(batch, new Color(transparency, transparency, transparency, transparency));
-			batch.DrawString(FontNormal, "Start", position, Color.White);
+		public override void Draw(SpriteBatch batch) {
 			if (isActivated) {
 				difficultyBox.Draw(batch);
-				PlayRectangle.Draw(batch, new Color(playAlpha, playAlpha, playAlpha, playAlpha));
-				batch.DrawString(FontNormal, "Play", PlayPosition, Color.White);
+				Play.Draw(batch);
 			}
+			base.Draw(batch);
 		}
 	}
 }
