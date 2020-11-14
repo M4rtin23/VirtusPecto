@@ -8,7 +8,7 @@ namespace VirtusPecto.Desktop{
 	public class InputKeys{
 		public static Keys[] TheKeys = {Keys.W, Keys.A, Keys.S, Keys.D, Keys.Space, Keys.Escape, Keys.D1, Keys.D2, Keys.D3};
 		public static Buttons[] TheButtons = {Buttons.DPadUp, Buttons.DPadLeft, Buttons.DPadDown, Buttons.DPadRight, Buttons.RightShoulder, Buttons.Start, Buttons.X, Buttons.Y, Buttons.B};
-
+		bool checker;
 		public static void Press(Keys key, Action action, ref bool check){
 			if (Keyboard.GetState().IsKeyDown(key) && !check){
 				action();
@@ -18,6 +18,16 @@ namespace VirtusPecto.Desktop{
 				check = false;
 			}
 		}
+		public void Press(Keys key, Action action){
+			if (Keyboard.GetState().IsKeyDown(key) && !checker){
+				action();
+				checker = true;
+			}
+			if (!Keyboard.GetState().IsKeyDown(key)){
+				checker = false;
+			}
+		}
+
 		public static void Press(int index, Action action, ref bool check){
 			if (IsPressing(index) && !check){
 				action();

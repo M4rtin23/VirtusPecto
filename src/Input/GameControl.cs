@@ -8,11 +8,7 @@ namespace VirtusPecto.Desktop{
 	public class GameControl{
 		private Vector2 position, speed;
 
-		public GameControl(){
-			position = new Vector2(500,500);
-		}
-		public void Update(){
-			
+		public void Update(){			
 			//This is used for a fixed position of the cursor, just to avoid the cursor moving with the mouse. 
 			//Mouse.SetPosition(position.X, position.Y);
 			//position += speed;

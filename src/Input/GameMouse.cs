@@ -6,20 +6,20 @@ using static VirtusPecto.Desktop.Game1;
 
 namespace VirtusPecto.Desktop{
 	public class GameMouse{
-		public Vector2 Position;
+		public Vector2 Position{get => Mouse.GetState().Position.ToVector2();}
 		private Vector2 relativePosition;
 		public Vector2 CardPosition{get => Position - new Vector2(relativePosition.X*0.9f, relativePosition.Y/2); set => relativePosition = value;}
 		public Vector2 MPosition{get => Position + MatrixPosition;}
 		public bool IsCreating;
 		public int Number;
 		public bool IsAble;
+		private bool checker;
 		public bool IsInside{get => (Position.Y < Game1.Height-288);}
 
 		public void Update(){
 			if (Keyboard.GetState().IsKeyDown(Keys.Q)){
 				Mouse.SetPosition((int)Level1.Player1.Position.X,(int) Level1.Player1.Position.Y);
 			}
-			Position = Mouse.GetState().Position.ToVector2();
 			if(Game1.Level1 == null){
 				IsCreating = false;
 			}
@@ -49,6 +49,25 @@ namespace VirtusPecto.Desktop{
 				IsCreating = false;
 			}
 		}
+		public void Click(Action action){
+			if (IsClicking && !checker){
+				action();
+				checker = true;
+			}
+			if (!IsClicking){
+				checker = false;
+			}
+		}
+		public void Click(GameBuilder.RectangleF rectangle, Action action){
+			if (IsClicking && !checker && rectangle.Contains(Position)){
+				action();
+				checker = true;
+			}
+			if (!IsClicking){
+				checker = false;
+			}
+		}
+
 		public static void Click(Action action, ref bool check){
 			if (IsClicking && !check){
 				action();
