@@ -4,26 +4,14 @@ using GameBuilder;
 
 namespace VirtusPecto.Desktop{
 	public partial class Game1{
-		public static bool IsClicking {get => (Mouse.GetState().LeftButton == ButtonState.Pressed) || (GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed && Game1.Joystick != null);}
+		public static bool IsClicking {get => (Mouse.GetState().LeftButton == ButtonState.Pressed) || (GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed && IsJoystick);}
 		
 		public static void SetWindowSize(Vector2 size){
 			Width = (int)size.X;
 			Height = (int)size.Y;
 			graphics.ApplyChanges();
 		}
-		private void joystick(){
-			if(GamePad.GetState(PlayerIndex.One).Buttons.BigButton == ButtonState.Pressed){
-				IsJoystick = true;
-			}
-			if(IsJoystick){
-				if(Joystick == null){
-					Joystick = new GameControl();
-				}
-			}else{
-				Joystick = null;
-			}
-			Joystick?.Update();
-		}
+
 		private void pause(){
 			InputKeys.Press(5, () => {IsPaused = !IsPaused;}, ref checker);
 

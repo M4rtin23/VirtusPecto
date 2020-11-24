@@ -7,7 +7,7 @@ using static VirtusPecto.Desktop.Game1;
 namespace VirtusPecto.Desktop{
 	public class GameMouse{
 		public Vector2 Position{get => Mouse.GetState().Position.ToVector2();}
-		private Vector2 relativePosition;
+		private Vector2 relativePosition, speed;
 		public Vector2 CardPosition{get => Position - new Vector2(relativePosition.X*0.9f, relativePosition.Y/2); set => relativePosition = value;}
 		public Vector2 MPosition{get => Position + MatrixPosition;}
 		public bool IsCreating;
@@ -17,6 +17,21 @@ namespace VirtusPecto.Desktop{
 		public bool IsInside{get => (Position.Y < Game1.Height-288);}
 
 		public void Update(){
+			if(GamePad.GetState(PlayerIndex.One).Buttons.BigButton == ButtonState.Pressed){
+				IsJoystick = true;
+			}
+			if(IsJoystick){
+				//This is used for a fixed position of the cursor, just to avoid the cursor moving with the mouse. 
+				//Mouse.SetPosition(position.X, position.Y);
+				//position += speed;
+
+				//This is for allowing the movement of the cursor with the mouse.
+				Mouse.SetPosition((int)Mouse.GetState().X + (int)speed.X,(int)Mouse.GetState().Y + (int)speed.Y);
+				speed.X = GamePad.GetState(PlayerIndex.One).ThumbSticks.Right.X * (Game1.Height/70f);
+				speed.Y = GamePad.GetState(PlayerIndex.One).ThumbSticks.Right.Y * (-Game1.Height/70f);
+		
+			}
+
 			if (Keyboard.GetState().IsKeyDown(Keys.Q)){
 				Mouse.SetPosition((int)Level1.Player1.Position.X,(int) Level1.Player1.Position.Y);
 			}

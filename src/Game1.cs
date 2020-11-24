@@ -10,7 +10,6 @@ namespace VirtusPecto.Desktop{
 		private SpriteBatch spriteBatch;
 		public static GameMouse Mouse1;
 		public static Vector2 MatrixPosition{get => Camera.Position-new Vector2(Width, Height)/2;}
-		public static GameControl Joystick;
 		public static GameTime GT;
 
 		//Textures.
@@ -80,7 +79,6 @@ namespace VirtusPecto.Desktop{
 		}
 		protected override void Update(GameTime gameTime){
 			GT = gameTime;
-			joystick();
 			pause();
 			Mouse1.Update();
 
