@@ -14,10 +14,11 @@ namespace VirtusPecto.Desktop{
 
 		//Textures.
 		public static Texture2D SpriteLogo;
+		public static Texture2D SpriteTitle;
+
 		public static Texture2D SpritePlayer;
 		public static Texture2D SpriteCard;
 		public static Texture2D SpriteTick;
-		public static Texture2D SpritePlacing;
 		public static Texture2D SpriteFireball;
 		public static Texture2D SpritePowers;
 		public static Texture2D[] SpriteCreatures;
@@ -62,7 +63,7 @@ namespace VirtusPecto.Desktop{
 			SpriteTick = Content.Load<Texture2D>("Sprite_Tick");
 			SpritePowers = Content.Load<Texture2D>("Sprite_Powers");
 			SpriteCard = Content.Load<Texture2D>("Sprite_Card");
-			SpritePlacing = Content.Load<Texture2D>("Sprite_Placing");
+			SpriteTitle = Content.Load<Texture2D>("Sprite_Title");
 
 			SpriteBackground = Content.Load<Texture2D>("Sprite_Background");
 
