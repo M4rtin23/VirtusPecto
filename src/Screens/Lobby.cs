@@ -29,8 +29,9 @@ namespace VirtusPecto.Desktop{
 		}
 		public void Draw(SpriteBatch batch) {
 			Background.Draw(batch, new Vector2(Width/2, Height/2));
-			batch.Draw(SpriteLogo, new Vector2(Width/2 - 352, Height/4 - 64), Color.White);
-			batch.Draw(SpriteTitle, new Vector2(Width/2 + 64, Height/4), null,Color.White, 0, new Vector2(SpriteTitle.Width, SpriteTitle.Height)/2, 8, SpriteEffects.None, 1);
+//			batch.Draw(SpriteCard, new Vector2(Width/2, Height/4), null, new Color(79,79,79), 0, new Vector2(SpriteCard.Width, SpriteCard.Height/4)/2, 4, SpriteEffects.None, 1);
+			batch.Draw(SpriteLogo, new Vector2(Width/2 - 480, Height/4 - 64*2), null, new Color(79,79,79), 0, Vector2.Zero, 2, SpriteEffects.None, 1);
+			batch.Draw(SpriteTitle, new Vector2(Width/2+64, Height/4), null,Color.White, 0, new Vector2(SpriteTitle.Width, SpriteTitle.Height)/2, 8, SpriteEffects.None, 1);
 //			batch.DrawString(FontBig, "Virtus Pecto", new Vector2(Width / 2f - 220, Height/4 - 64), Color.White);
 
 			Button1.Draw(batch);
