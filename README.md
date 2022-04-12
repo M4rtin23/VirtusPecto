@@ -6,6 +6,6 @@ It uses [GameBuilder](https://github.com/M4rtin23/GameBuilder), the engine I've 
 
 ## The project's history
 This is a project started on June 2018. It was the first graphical game I started programming when I switched to Linux.
-Despite not being able to finish or even make a playable game out of it, I've learnt many things during it's development and had a lot of fun. And now I'm making it publicly available as it's been a long time since I did anything related to this project and I don't want it to die.
+Despite not being able to finish or even make a playable game out of it, I've learnt many things during it's development. And now I'm making it publicly available as it's been a long time since I did anything related to this project and I don't want it to die.
 
 I hope that, if you are interested in it, can help you learn something.
