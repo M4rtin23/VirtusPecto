@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using static VirtusPecto.Desktop.Game1;
 using GameBuilder;
+using GameBuilder.InGame;
+using GameBuilder.Shapes;
 
 namespace VirtusPecto.Desktop{
 	public class Level{

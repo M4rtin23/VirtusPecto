@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using static VirtusPecto.Desktop.Game1;
-using static GameBuilder.GameBase;
+using static GameBuilder.GameType.FixedView;
 using GameBuilder;
 
 namespace VirtusPecto.Desktop{

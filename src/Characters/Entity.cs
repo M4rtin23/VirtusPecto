@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework.Graphics;
 using static VirtusPecto.Desktop.Game1;
 using GameBuilder;
+using GameBuilder.Shapes;
+using GameBuilder.InGame;
 
 namespace VirtusPecto.Desktop{
 	public abstract class Entity : Characters{
@@ -104,7 +106,7 @@ namespace VirtusPecto.Desktop{
 					break;
 				case 2:
 					Vector2 pos = 32*Motion.VectorSpeed(1, (float)Motion.Angle(Position, target))+Position - Vector2.One*32;
-					if(new GameBuilder.RectangleF(pos, 64).Contains(target)){
+					if(new GameBuilder.Shapes.RectangleF(pos, 64).Contains(target)){
 						Level1.CreateParticle(pos, 0.5f, 1);
 						enemy?[targetDefined].AddHealth(-10);
 					}

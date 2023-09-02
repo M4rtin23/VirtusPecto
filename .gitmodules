@@ -1,0 +1,3 @@
+[submodule "GameBuilder"]
+	path = GameBuilder
+	url = https://github.com/M4rtin23/GameBuilder

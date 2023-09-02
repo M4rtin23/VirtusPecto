@@ -2,10 +2,10 @@
 using Microsoft.Xna.Framework.Graphics;
 using static VirtusPecto.Desktop.Game1;
 using GameBuilder;
-
+using GameBuilder.Shapes;
 
 namespace VirtusPecto.Desktop{    
-	public class Fireball : GameBuilder.ObjectBuilder{
+	public class Fireball : GameBuilder.InGame.ObjectBuilder{
 		private bool isDangerous;
 		private bool isAlive = true;
 		//True = emited by the enemy && False = emited by de user

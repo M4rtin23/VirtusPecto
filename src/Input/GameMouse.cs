@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using static VirtusPecto.Desktop.Game1;
+using GameBuilder.Shapes;
 
 namespace VirtusPecto.Desktop{
 	public class GameMouse{
@@ -43,7 +44,7 @@ namespace VirtusPecto.Desktop{
 			}if(Level1 != null){
 				IsAble = true;
 				for(int i = 0; i<Level1.Creature1.Length; i++){
-					if(Level1.Creature1[i] != null && Level1.Creature1[i].Hitbox.Intersects(new GameBuilder.RectangleF(Mouse1.MPosition-Vector2.One*64, 128))){
+					if(Level1.Creature1[i] != null && Level1.Creature1[i].Hitbox.Intersects(new RectangleF(Mouse1.MPosition-Vector2.One*64, 128))){
 						IsAble = false;
 						break;
 					}else{
@@ -73,7 +74,7 @@ namespace VirtusPecto.Desktop{
 				checker = false;
 			}
 		}
-		public void Click(GameBuilder.RectangleF rectangle, Action action){
+		public void Click(RectangleF rectangle, Action action){
 			if (IsClicking && !checker && rectangle.Contains(Position)){
 				action();
 				checker = true;

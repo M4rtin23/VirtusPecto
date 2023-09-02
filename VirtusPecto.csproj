@@ -2,16 +2,11 @@
 
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<TargetFramework>netcoreapp3.0</TargetFramework>
+		<TargetFramework>net7.0</TargetFramework>
 	</PropertyGroup>
-
 	<ItemGroup>
-		<MonoGameContentReference Include="**\*.mgcb" />
-	</ItemGroup>
-	<ItemGroup>
-		<PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.0.1641" />
-		<PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641" />
-		<Reference Include = "GameBuilder.dll"/>
+		<PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1.303" />
+		<PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303" />
 	</ItemGroup>
 
 </Project>

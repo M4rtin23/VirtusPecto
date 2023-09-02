@@ -3,8 +3,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using static VirtusPecto.Desktop.Game1;
-using GameBuilder;
-using static GameBuilder.GameBase;
+using GameBuilder.Shapes;
+using static GameBuilder.GameType.FixedView;
 
 namespace VirtusPecto.Desktop{
 	public class Card{

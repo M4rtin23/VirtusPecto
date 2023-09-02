@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using GameBuilder;
+using GameBuilder.Shapes;
 
 
 namespace VirtusPecto.Desktop{

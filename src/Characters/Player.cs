@@ -5,6 +5,8 @@ using Microsoft.Xna.Framework.Input;
 using static VirtusPecto.Desktop.Game1;
 using static VirtusPecto.Desktop.InputKeys;
 using GameBuilder;
+using GameBuilder.InGame;
+using GameBuilder.Shapes;
 
 namespace VirtusPecto.Desktop{
 	public class Player : Characters{
@@ -80,12 +82,12 @@ namespace VirtusPecto.Desktop{
 			animationImage(4);
 			gameControl();
 
-			Hitbox = new GameBuilder.RectangleF((int) Position.X - 32, (int) Position.Y + 32, 128-64, 32);
+			Hitbox = new RectangleF((int) Position.X - 32, (int) Position.Y + 32, 128-64, 32);
 			userCollision(Level1.Enemy1);
 			if(speed == Vector2.Zero){
 				imageIndex = 0;
 			}
-			if(GameBuilder.GameBase.IsInside(Position + speed)){
+			if(GameBuilder.GameType.FixedView.IsInside(Position + speed)){
 				base.Update();
 			}
 		}
@@ -148,7 +150,7 @@ namespace VirtusPecto.Desktop{
 			Vector2 pos = 32*GameBuilder.Motion.VectorSpeed(1, (float)Motion.Angle(Position, Mouse1.MPosition))+Position - Vector2.One*32;
 			for(int i = 0; i < Level1.Enemy1.Length; i++){
 				if(Level1.Enemy1[i] != null){
-					if(new GameBuilder.RectangleF(pos, 90.51f).Intersects(Level1.Enemy1[i].Hitbox)){
+					if(new RectangleF(pos, 90.51f).Intersects(Level1.Enemy1[i].Hitbox)){
 						Level1.Enemy1?[i].AddHealth(-10);
 					}
 				}

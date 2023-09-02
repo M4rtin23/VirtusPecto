@@ -34,7 +34,7 @@ namespace VirtusPecto.Desktop{
 		public static void GoToPrevious(){
 			GoToLevel(PreviousLevel);
 		}
-		public static (Vector2, int) GetClosest(GameBuilder.ObjectBuilder[] entities, Vector2 pos){
+		public static (Vector2, int) GetClosest(GameBuilder.InGame.ObjectBuilder[] entities, Vector2 pos){
 			float shortestDistance = -1;
 			int targetDefiner = -1;
 			for (int i = 0; i < entities.Length; i++) {

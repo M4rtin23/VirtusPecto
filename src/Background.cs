@@ -2,7 +2,7 @@ using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using static VirtusPecto.Desktop.Game1;
-using static GameBuilder.GameBase;
+using static GameBuilder.GameType.FixedView;
 
 namespace VirtusPecto.Desktop{
 	public class BackGround{

@@ -5,11 +5,11 @@ using Microsoft.Xna.Framework.Input;
 using GameBuilder;
 
 namespace VirtusPecto.Desktop{
-	public partial class Game1 : GameBuilder.GameBase{
+	public partial class Game1 : GameBuilder.GameType.FixedView{
 		//System.
 		private SpriteBatch spriteBatch;
 		public static GameMouse Mouse1;
-		public static Vector2 MatrixPosition{get => Camera.Position-new Vector2(Width, Height)/2;}
+		public static Vector2 MatrixPosition{get => GameBuilder.InGame.Camera.Position-new Vector2(Width, Height)/2;}
 		public static GameTime GT;
 
 		//Textures.
@@ -109,14 +109,14 @@ namespace VirtusPecto.Desktop{
 			GraphicsDevice.Clear(Color.Black);
 			Vector2 a;
 			if(Level1 == null) a = Vector2.Zero; else a = Level1.Player1.Position;
-			spriteBatch.Begin(transformMatrix: Camera.LimitedFollow(a), samplerState:  SamplerState.PointClamp);
-			new BackGround(SpriteBackground).Draw(spriteBatch, Camera.Position);
+			spriteBatch.Begin(transformMatrix: GameBuilder.InGame.Camera.LimitedFollow(a), samplerState:  SamplerState.PointClamp);
+			new BackGround(SpriteBackground).Draw(spriteBatch, GameBuilder.InGame.Camera.Position);
 			spriteBatch.End();
 			if(LevelNumber == 1){
 				if (Mouse1.IsCreating && !Game1.IsPaused) {
 					Level1?.DrawCard(GraphicsDevice);
 				}
-				spriteBatch.Begin(transformMatrix: Camera.LimitedFollow(Level1.Player1.Position), samplerState:  SamplerState.PointClamp, sortMode: SpriteSortMode.BackToFront);
+				spriteBatch.Begin(transformMatrix: GameBuilder.InGame.Camera.LimitedFollow(Level1.Player1.Position), samplerState:  SamplerState.PointClamp, sortMode: SpriteSortMode.BackToFront);
 				Level1?.Draw(spriteBatch);
 				spriteBatch.End();
 			}
