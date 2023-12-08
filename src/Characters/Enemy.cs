@@ -5,6 +5,7 @@ using GameBuilder;
 
 namespace VirtusPecto.Desktop{
 	public class Enemy : Entity{
+		public static bool ShowDirection = false;
 		public Enemy(Vector2 pos){
 			powerIndex = 2;
 			SpriteIndex = SpriteEnemy;
@@ -29,7 +30,7 @@ namespace VirtusPecto.Desktop{
 			
 			float r = new GameBuilder.Motion(speed).Radians;
 			Vector2 v = new Vector2(-(float)System.Math.Cos(r), (float)System.Math.Sin(r));
-			if(false){
+			if(ShowDirection){
 				GameBuilder.Shapes.Line.Draw(batch, Position + v*32, Position + v*64, 6, Color.Red);
 			}
 			base.Draw(batch);

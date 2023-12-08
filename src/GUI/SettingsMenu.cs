@@ -14,6 +14,8 @@ namespace VirtusPecto.Desktop{
 		public AspectBox SetAspectRatio;
 		public TickBox SetJoystick;
 		public TickBox ShowDescription;
+		public TickBox ShowEnemyDir;
+
 		private Button Back = new Button("Go Back", () => {GoToPrevious(); Settings = null;});
 		public Vector2 AspectRatio{get => SetAspectRatio.Options[SetAspectRatio.Option];}
 
@@ -25,6 +27,7 @@ namespace VirtusPecto.Desktop{
 			SetAspectRatio = new AspectBox();
 			SetFullscreen = new TickBox("Fullscreen");
 			ResolutionBox = new WindowBox();
+			ShowEnemyDir = new TickBox("Show Enemy Direction");
 		}
 
 		public void Update(){
@@ -36,6 +39,7 @@ namespace VirtusPecto.Desktop{
 			SetFullscreen.Update(Width * 3/4 - 64,  Height / 3, ref temp);
 			SetJoystick.Update(Width * 3/4 - 64,  Height / 2,  ref IsJoystick);
 			ResolutionBox.Update(Width * 2/4 - 64, Height / 3);
+			ShowEnemyDir.Update(Width / 4 - 64, Height / 2, ref Enemy.ShowDirection);
 			Back.Update(0, 0);
 			IsFullscreen = temp;
 		}
@@ -46,6 +50,7 @@ namespace VirtusPecto.Desktop{
 			ShowDescription.Draw(batch);
 			SetAspectRatio.Draw(batch);
 			ResolutionBox.Draw(batch);
+			ShowEnemyDir.Draw(batch);
 			SetFullscreen.Draw(batch);
 			SetJoystick.Draw(batch);
 		}
