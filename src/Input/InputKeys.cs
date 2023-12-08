@@ -6,8 +6,8 @@ using static VirtusPecto.Desktop.Game1;
 
 namespace VirtusPecto.Desktop{
 	public class InputKeys{
-		public static Keys[] TheKeys = {Keys.W, Keys.A, Keys.S, Keys.D, Keys.Space, Keys.Escape, Keys.D1, Keys.D2, Keys.D3};
-		public static Buttons[] TheButtons = {Buttons.DPadUp, Buttons.DPadLeft, Buttons.DPadDown, Buttons.DPadRight, Buttons.RightShoulder, Buttons.Start, Buttons.X, Buttons.Y, Buttons.B};
+		public static Keys[] TheKeys = {Keys.W, Keys.A, Keys.S, Keys.D, Keys.Space, Keys.Escape, Keys.D1, Keys.D2, Keys.D3, Keys.E};
+		public static Buttons[] TheButtons = {Buttons.DPadUp, Buttons.DPadLeft, Buttons.DPadDown, Buttons.DPadRight, Buttons.RightShoulder, Buttons.Start, Buttons.X, Buttons.Y, Buttons.B, Buttons.RightShoulder};
 		bool checker;
 		public static void Press(Keys key, Action action, ref bool check){
 			if (Keyboard.GetState().IsKeyDown(key) && !check){

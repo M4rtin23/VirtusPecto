@@ -29,7 +29,9 @@ namespace VirtusPecto.Desktop{
 			
 			float r = new GameBuilder.Motion(speed).Radians;
 			Vector2 v = new Vector2(-(float)System.Math.Cos(r), (float)System.Math.Sin(r));
-			GameBuilder.Shapes.Line.Draw(batch, Position + v*32, Position + v*64, 6, Color.Red);
+			if(false){
+				GameBuilder.Shapes.Line.Draw(batch, Position + v*32, Position + v*64, 6, Color.Red);
+			}
 			base.Draw(batch);
 		}
 	}

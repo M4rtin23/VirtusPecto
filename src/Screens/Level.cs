@@ -183,6 +183,15 @@ namespace VirtusPecto.Desktop{
 			Array.Resize(ref Level1.Fireballs, Level1.Fireballs.Length+1);
 			Fireballs[Level1.Fireballs.Length-1] = new Fireball(isEnemy, Position, Motion.VectorSpeed(6, dir));
 		}
+		public int CountEnemies(){
+			int result = 0; 
+			for(int i = 0; i < Enemy1.Length; i++){
+				if(Enemy1[i] !=null){
+					result++;
+				}
+			}
+			return result;
+		}
 		public void CreateCreature(CardContent content, Vector2 pos){
 			Array.Resize(ref Level1.Creature1, Level1.Creature1.Length+1);
 			Creature1[Level1.Creature1.Length-1] = new Creature(content, pos);

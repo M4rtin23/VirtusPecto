@@ -33,9 +33,9 @@ namespace VirtusPecto.Desktop{
 		
 			}
 
-			if (Keyboard.GetState().IsKeyDown(Keys.Q)){
+			/*if (Keyboard.GetState().IsKeyDown(Keys.Q)){
 				Mouse.SetPosition((int)Level1.Player1.Position.X,(int) Level1.Player1.Position.Y);
-			}
+			}*/
 			if(Game1.Level1 == null){
 				IsCreating = false;
 			}

@@ -12,6 +12,7 @@ namespace VirtusPecto.Desktop{
 	public class Player : Characters{
 		public float Mana = 50;
 		public int Health{get => (int)health;}
+		public bool keyCheck = false;
 		public CardContent[] Slot;
 		public int[] ManaCost = {1, 3, 0};
 		public Player(){
@@ -25,10 +26,11 @@ namespace VirtusPecto.Desktop{
 			}
 		}
 		private void gameControl(){
-			if (Keyboard.GetState().IsKeyDown(Keys.L)) {
+/*			if (Keyboard.GetState().IsKeyDown(Keys.L)) {
 				Level1.CreateFireball(true, Level1.Enemy1[1].Position, 0);
-			}
+			}*/
 			gameArrow();
+			Press(9, ()=>{powerIndex = (powerIndex+1)%3;}, ref keyCheck);
 			if(IsJoystick){
 				gameStick();
 			}
