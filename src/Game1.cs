@@ -17,6 +17,8 @@ namespace VirtusPecto.Desktop{
 		public static Texture2D SpriteTitle;
 
 		public static Texture2D SpritePlayer;
+		public static Texture2D SpriteEnemy;
+
 		public static Texture2D SpriteCard;
 		public static Texture2D SpriteTick;
 		public static Texture2D SpriteFireball;
@@ -67,7 +69,8 @@ namespace VirtusPecto.Desktop{
 
 			SpriteBackground = Content.Load<Texture2D>("Sprite_Background");
 
-			SpritePlayer = Content.Load<Texture2D>("Sprite_Player");			
+			SpritePlayer = Content.Load<Texture2D>("Sprite_Player");
+			SpriteEnemy = Content.Load<Texture2D>("Sprite_Enemy");
 			SpriteFireball = Content.Load<Texture2D>("Sprite_Fireball");
 			for (int i = 0; i < SpriteCreatures.Length; i++){
 				SpriteCreatures[i] = Content.Load<Texture2D>("Creatures/Creature"+ Convert.ToString(i));

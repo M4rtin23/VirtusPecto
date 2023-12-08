@@ -7,7 +7,7 @@ namespace VirtusPecto.Desktop{
 	public class Enemy : Entity{
 		public Enemy(Vector2 pos){
 			powerIndex = 2;
-			SpriteIndex = SpritePlayer;
+			SpriteIndex = SpriteEnemy;
 			Position = pos;
 			maxSpeed = 3;
 			startingPoint = pos;
