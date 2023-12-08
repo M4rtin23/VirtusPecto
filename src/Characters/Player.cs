@@ -13,7 +13,7 @@ namespace VirtusPecto.Desktop{
 		public float Mana = 50;
 		public int Health{get => (int)health;}
 		public CardContent[] Slot;
-		public int[] ManaCost = {3, 15, 0};
+		public int[] ManaCost = {1, 3, 0};
 		public Player(){
 			powerIndex = 1;
 			health = 100;
