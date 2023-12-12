@@ -92,6 +92,9 @@ namespace VirtusPecto.Desktop{
 			if(GameBuilder.GameType.FixedView.IsInside(Position + speed)){
 				base.Update();
 			}
+			if(health == 0){
+				WannaExit = true;
+			}
 		}
 		public override void Draw(SpriteBatch batch){
 			Vector2 a0 = GetClosest(Level1.Enemy1, Mouse1.MPosition).Item1;

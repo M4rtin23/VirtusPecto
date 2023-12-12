@@ -58,6 +58,9 @@ namespace VirtusPecto.Desktop{
 			if(GT.TotalGameTime.Milliseconds % 1000 == 0){
 				FitFireball();
 			}
+			if(CountEnemies() == 0){
+				WannaExit = true;
+			}
 		}
 		public void Draw(SpriteBatch batch) {
 			for (int i = 0; i < Fireballs.Length;i++){
