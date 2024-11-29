@@ -8,10 +8,6 @@
 /profile:Reach
 /compress:False
 
-#-------------------------------- References --------------------------------#
-
-/reference:../GameBuilder.dll
-
 #---------------------------------- Content ---------------------------------#
 
 #begin Creatures/Creature0.png
