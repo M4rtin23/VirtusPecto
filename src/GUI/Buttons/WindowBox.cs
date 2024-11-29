@@ -9,7 +9,7 @@ namespace VirtusPecto.Desktop{
 	public class WindowBox : OptionBox{
 		Vector2 realOption{get => new Vector2(Options[Option].Y * Settings.AspectRatio.X/Settings.AspectRatio.Y, Options[Option].Y);}
 		public WindowBox(){
-			optionsNumber = 8;
+			optionsNumber = 9;
 			name = "Window Size";
 			Options[0].Y = 1200;
 			Options[1].Y = 1080;
@@ -18,7 +18,8 @@ namespace VirtusPecto.Desktop{
 			Options[4].Y = 900;
 			Options[5].Y = 800;
 			Options[6].Y = 768;
-			Options[7].Y = 720;
+			Options[7].Y = 765;
+			Options[8].Y = 720;
 		}
 		protected override void action(int i){
 			bool fullscreen = IsFullscreen;
