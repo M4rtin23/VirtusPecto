@@ -36,7 +36,7 @@ namespace VirtusPecto.Desktop{
 				for (int i = 0; i < optionsNumber; i++){
 					Rectangle r = new Rectangle((int)position.X, (int)position.Y + (1 + i)*32, 128, 32);
 					if (r.Contains(Mouse1.Position)){
-						if (IsClicking){
+						if (GameMouse.IsClicking){
 							Option = i;
 							action(i);
 							isActivated = false;

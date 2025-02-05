@@ -4,8 +4,6 @@ using GameBuilder;
 
 namespace VirtusPecto.Desktop{
 	public partial class Game1{
-		public static bool IsClicking {get => (Mouse.GetState().LeftButton == ButtonState.Pressed) || (GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed && IsJoystick);}
-
 		public static (Vector2, int) GetClosest(GameBuilder.InGame.ObjectBuilder[] entities, Vector2 pos){
 			float shortestDistance = -1;
 			int targetDefiner = -1;

@@ -16,6 +16,7 @@ namespace VirtusPecto.Desktop{
 		public bool IsAble;
 		private bool checker;
 		public bool IsInside{get => (Position.Y < Game1.Height-288);}
+		public static bool IsClicking {get => (Mouse.GetState().LeftButton == ButtonState.Pressed) || (GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed && IsJoystick);}
 
 		public void Update(){
 			if(GamePad.GetState(PlayerIndex.One).Buttons.BigButton == ButtonState.Pressed){
