@@ -5,16 +5,11 @@ using static VirtusPecto.Desktop.Game1;
 using static GameBuilder.GameType.FixedView;
 
 namespace VirtusPecto.Desktop{
-	public class BackGround{
-		private Texture2D backGround;
-		private Vector2 position;
-		public BackGround(Texture2D texture){
-			backGround = texture;
-			position = new Vector2(0, 0);
-		}
-		public void Draw(SpriteBatch batch, Vector2 center){
+	public static class BackGround{
+		public static void Draw(SpriteBatch batch, Vector2 center){
 			Vector2 windowSize = new Vector2(Width,Height);
-			int width = backGround.Width/4, height = backGround.Height;
+			Vector2 position;
+			int width = SpriteBackground.Width/4, height = SpriteBackground.Height;
 			int x1 = (int)Math.Ceiling((decimal)Width/width);
 			int y1 = (int)Math.Ceiling((decimal)Height/height);
 			for(int x = -1; x < x1+1; x++){
@@ -28,7 +23,7 @@ namespace VirtusPecto.Desktop{
 					}else{
 						i = 0;
 					}
-					batch.Draw(backGround, position - windowSize/2, new Rectangle(i*128, 0, 128, 128), Color.White, 0, new Vector2(0, 0), new Vector2(1, 1), SpriteEffects.None, 1);
+					batch.Draw(SpriteBackground, position - windowSize/2, new Rectangle(i*128, 0, 128, 128), Color.White, 0, new Vector2(0, 0), new Vector2(1, 1), SpriteEffects.None, 1);
 				}
 			}
 		}
