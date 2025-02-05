@@ -12,19 +12,6 @@ namespace VirtusPecto.Desktop{
 			graphics.ApplyChanges();
 		}
 
-		private void pause(){
-			InputKeys.Press(5, () => {IsPaused = !IsPaused;}, ref checker);
-
-			if (!IsPaused) {
-				Pause = null;
-			}
-			if (IsPaused) {
-				if (Pause == null) {
-					Pause = new PauseMenu();
-				}
-				Pause?.Update();    
-			}
-		}
 		public static (Vector2, int) GetClosest(GameBuilder.InGame.ObjectBuilder[] entities, Vector2 pos){
 			float shortestDistance = -1;
 			int targetDefiner = -1;

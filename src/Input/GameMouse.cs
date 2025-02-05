@@ -39,7 +39,7 @@ namespace VirtusPecto.Desktop{
 			if(Game1.Level1 == null){
 				IsCreating = false;
 			}
-			if (IsCreating && IsClicking && !Game1.IsPaused && Game1.Level1 != null){
+			if (IsCreating && IsClicking && Pause == null && Game1.Level1 != null){
 				OnCreation(Number);
 			}if(Level1 != null){
 				IsAble = true;

@@ -15,7 +15,7 @@ namespace VirtusPecto.Desktop{
 		public Lobby(){
 			Button1 = new PlayButton();
 			Button2 = new Button("Settings", () => {Settings = new SettingsMenu();
-					IsPaused = false;
+					Pause = null;
 					Game1.Screen = Settings;
 				});
 			Button3 = new Button("Exit", () => {WannaExit = true;});

@@ -9,15 +9,15 @@ using GameBuilder;
 
 namespace VirtusPecto.Desktop{
 	public class PauseMenu{
-		private Button resume = new Button("Continue", () => {IsPaused = false;});
+		private Button resume = new Button("Continue", () => {Pause = null;});
 		private Button exit = new Button("Exit", () => {WannaExit = true;});
 		private Button mainMenu = new Button("Main Menu", () => {Level1 = null;
-			IsPaused = false;
+			Pause = null;
 			StartMenu = new Lobby();
 			Game1.Screen = StartMenu;
 		});
 		public Button settings = new Button("Settings", () => {Settings = new SettingsMenu();
-			IsPaused = false;
+			Pause = null;
 			Game1.Screen = Settings;
 		});
 

@@ -17,6 +17,7 @@ namespace VirtusPecto.Desktop{
 		public Particle[] Particles;
 		private PowerIndicator button;
 		private float cardRotation{get => -(Mouse1.Position.Y/Game1.Height-1)*(Mouse1.Position.Y/Game1.Height+1.2f);}
+		private bool checker;
 		public Level(int EnemyQuantity){
 			button = new PowerIndicator();
 			Fireballs = new Fireball[0];
@@ -36,6 +37,7 @@ namespace VirtusPecto.Desktop{
 		}
 		public override void Update() {
 			button.Update();
+			InputKeys.Press(5, () => {if(Pause == null) Pause = new PauseMenu(); else Pause = null;}, ref checker);
 			for (int i = 0; i < Fireballs.Length; i++) {
 				Fireballs[i]?.Update();
 			}
@@ -76,7 +78,7 @@ namespace VirtusPecto.Desktop{
 					Enemy1[i].Draw(batch);
 				}
 			}
-			if (Mouse1.IsCreating && !Game1.IsPaused) {
+			if (Mouse1.IsCreating && Pause == null) {
 				new ObjectBuilder(Cards[Mouse1.Number].Content.Sprite, Mouse1.CardPosition+MatrixPosition-new Vector2(0, 96-100*(cardRotation)+100), new RectangleF(256, 0, 128, 128), new Vector2(64, 64)).Draw(batch);
 			}
 		}

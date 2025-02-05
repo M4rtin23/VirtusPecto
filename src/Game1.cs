@@ -28,13 +28,11 @@ namespace VirtusPecto.Desktop{
 		public static SpriteFont FontNormal, FontBig;
 
 		//States.
-		public static bool IsPaused;
 		public static bool WannaExit;
 		public static bool IsJoystick;
 		public static bool IsDescriptionOn = true;
 		public static bool ShowNearest = false;
 		public static bool ShowDirection = false;
-		private bool checker;
 
 		//Rooms.
 		public static Screen Screen;
@@ -83,16 +81,13 @@ namespace VirtusPecto.Desktop{
 		}
 		protected override void Update(GameTime gameTime){
 			GT = gameTime;
-			pause();
+			Pause?.Update();
 			Mouse1.Update();
 
 			if(WannaExit){
 				Exit();
 			}
-			if(Screen != Level1){
-				IsPaused = false;
-			}
-			if(!IsPaused){
+			if(Pause == null){
 				Screen.Update();
 			}
 			base.Update(gameTime);
@@ -101,16 +96,14 @@ namespace VirtusPecto.Desktop{
 		protected override void Draw(GameTime gameTime){
 			spriteBatch.Begin(transformMatrix: GameBuilder.InGame.Camera.LimitedFollow(Level1?.Player1.Position ?? Vector2.Zero), samplerState:  SamplerState.PointClamp, sortMode: SpriteSortMode.BackToFront);
 			new BackGround(SpriteBackground).Draw(spriteBatch, GameBuilder.InGame.Camera.Position);
-			if (Mouse1.IsCreating && !Game1.IsPaused) {
+			if (Mouse1.IsCreating && Pause == null) {
 				Level1?.DrawCard(GraphicsDevice);
 			}
 			Level1?.DrawGame(spriteBatch);
 			spriteBatch.End();
 
 			spriteBatch.Begin(samplerState:  SamplerState.PointClamp);
-			if (IsPaused){
-				Pause?.Draw(spriteBatch);
-			}
+			Pause?.Draw(spriteBatch);
 			Screen.Draw(spriteBatch);
 			spriteBatch.End();
 			base.Draw(gameTime);
