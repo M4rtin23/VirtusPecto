@@ -29,8 +29,6 @@ namespace VirtusPecto.Desktop{
 
 		//States.
 		public static bool IsPaused;
-		public static int LevelNumber;
-		public static int PreviousLevel;
 		public static bool WannaExit;
 		public static bool IsJoystick;
 		public static bool IsDescriptionOn = true;
@@ -39,6 +37,7 @@ namespace VirtusPecto.Desktop{
 		private bool checker;
 
 		//Rooms.
+		public static Screen Screen;
 		public static Lobby StartMenu;
 		public static Level Level1;
 		public static SettingsMenu Settings;
@@ -57,6 +56,7 @@ namespace VirtusPecto.Desktop{
 		protected override void Initialize(){
 			base.Initialize();
 			StartMenu = new Lobby();
+			Screen = StartMenu;
 		}
   
 		protected override void LoadContent(){
@@ -89,56 +89,29 @@ namespace VirtusPecto.Desktop{
 			if(WannaExit){
 				Exit();
 			}
-			switch(LevelNumber){
-				case 0:
-					StartMenu?.Update();
-					IsPaused = false;
-					break;
-				case 1:
-					if(!IsPaused){
-						Level1?.Update();
-					}
-					break;
-				case 2:
-					Settings?.Update();
-					IsPaused = false;
-					break;
+			if(Screen != Level1){
+				IsPaused = false;
 			}
-			
+			if(!IsPaused){
+				Screen.Update();
+			}
 			base.Update(gameTime);
 		}
 
 		protected override void Draw(GameTime gameTime){
-			GraphicsDevice.Clear(Color.Black);
-			Vector2 a;
-			if(Level1 == null) a = Vector2.Zero; else a = Level1.Player1.Position;
-			spriteBatch.Begin(transformMatrix: GameBuilder.InGame.Camera.LimitedFollow(a), samplerState:  SamplerState.PointClamp);
+			spriteBatch.Begin(transformMatrix: GameBuilder.InGame.Camera.LimitedFollow(Level1?.Player1.Position ?? Vector2.Zero), samplerState:  SamplerState.PointClamp, sortMode: SpriteSortMode.BackToFront);
 			new BackGround(SpriteBackground).Draw(spriteBatch, GameBuilder.InGame.Camera.Position);
+			if (Mouse1.IsCreating && !Game1.IsPaused) {
+				Level1?.DrawCard(GraphicsDevice);
+			}
+			Level1?.DrawGame(spriteBatch);
 			spriteBatch.End();
-			if(LevelNumber == 1){
-				if (Mouse1.IsCreating && !Game1.IsPaused) {
-					Level1?.DrawCard(GraphicsDevice);
-				}
-				spriteBatch.Begin(transformMatrix: GameBuilder.InGame.Camera.LimitedFollow(Level1.Player1.Position), samplerState:  SamplerState.PointClamp, sortMode: SpriteSortMode.BackToFront);
-				Level1?.Draw(spriteBatch);
-				spriteBatch.End();
-			}
-			
+
 			spriteBatch.Begin(samplerState:  SamplerState.PointClamp);
-			switch(LevelNumber){
-				case 0:
-					StartMenu?.Draw(spriteBatch);
-					break;
-				case 1:
-					Level1.DrawScreen(spriteBatch);
-					break;
-				case 2:
-					Settings?.Draw(spriteBatch);
-					break;
-			}
 			if (IsPaused){
 				Pause?.Draw(spriteBatch);
 			}
+			Screen.Draw(spriteBatch);
 			spriteBatch.End();
 			base.Draw(gameTime);
 		}

@@ -6,7 +6,7 @@ using static VirtusPecto.Desktop.Game1;
 using static GameBuilder.GameType.FixedView;
 
 namespace VirtusPecto.Desktop{
-	public class SettingsMenu{
+	public class SettingsMenu: Screen{
 		public WindowBox ResolutionBox;
 		public TickBox SetFullscreen;
 		public TickBox ShowNearest;
@@ -16,7 +16,7 @@ namespace VirtusPecto.Desktop{
 		public TickBox ShowDescription;
 		public TickBox ShowEnemyDir;
 
-		private Button Back = new Button("Go Back", () => {GoToPrevious(); Settings = null;});
+		private Button Back = new Button("Go Back", () => {if(Level1 != null) Game1.Screen = Level1; else Game1.Screen = StartMenu; Settings = null;});
 		public Vector2 AspectRatio{get => SetAspectRatio.Options[SetAspectRatio.Option];}
 
 		public SettingsMenu(){
@@ -30,7 +30,7 @@ namespace VirtusPecto.Desktop{
 			ShowEnemyDir = new TickBox("Show Enemy Direction");
 		}
 
-		public void Update(){
+		public override void Update(){
 			bool temp = IsFullscreen;
 			ShowDirection.Update(Width * 3/4 - 64, 2*Height / 3, ref Game1.ShowDirection);
 			ShowNearest.Update(Width * 2/4 - 64, 2*Height / 3, ref Game1.ShowNearest);
@@ -43,7 +43,7 @@ namespace VirtusPecto.Desktop{
 			Back.Update(0, 0);
 			IsFullscreen = temp;
 		}
-		public void Draw(SpriteBatch batch){
+		public override void Draw(SpriteBatch batch){
 			Back.Draw(batch);			
 			ShowDirection.Draw(batch);
 			ShowNearest.Draw(batch);

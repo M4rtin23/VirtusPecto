@@ -14,10 +14,11 @@ namespace VirtusPecto.Desktop{
 				isActivated = !isActivated;
 			};
 			Play = new Button("Play", ()=>{
-					Game1.GoToLevel(1);
 					Level1 = new Level((int)difficultyBox.Options[difficultyBox.Option].X);
 					Level1.Creation();
-					StartMenu = null;}
+					StartMenu = null;
+					Game1.Screen = Level1;
+				}
 			);
 		}
 

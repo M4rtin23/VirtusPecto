@@ -7,8 +7,7 @@ using GameBuilder.InGame;
 using GameBuilder.Shapes;
 
 namespace VirtusPecto.Desktop{
-	public class Level{
-		public BackGround Background;
+	public class Level : Screen{
 		public Player Player1;
 		public Enemy[] Enemy1;
 		public Card[] Cards;
@@ -20,7 +19,6 @@ namespace VirtusPecto.Desktop{
 		private float cardRotation{get => -(Mouse1.Position.Y/Game1.Height-1)*(Mouse1.Position.Y/Game1.Height+1.2f);}
 		public Level(int EnemyQuantity){
 			button = new PowerIndicator();
-			Background = new BackGround(SpriteBackground);
 			Fireballs = new Fireball[0];
 			Particles = new Particle[0];
 			Enemy1 = new Enemy[EnemyQuantity];
@@ -36,7 +34,7 @@ namespace VirtusPecto.Desktop{
 			Cards[1] = new Card(1, Color.Green);
 			Cards[2] = new Card(2, Color.DarkBlue);
 		}
-		public void Update() {
+		public override void Update() {
 			button.Update();
 			for (int i = 0; i < Fireballs.Length; i++) {
 				Fireballs[i]?.Update();
@@ -62,7 +60,7 @@ namespace VirtusPecto.Desktop{
 				WannaExit = true;
 			}
 		}
-		public void Draw(SpriteBatch batch) {
+		public void DrawGame(SpriteBatch batch) {
 			for (int i = 0; i < Fireballs.Length;i++){
 				Fireballs[i]?.Draw(batch);
 			}
@@ -82,7 +80,7 @@ namespace VirtusPecto.Desktop{
 				new ObjectBuilder(Cards[Mouse1.Number].Content.Sprite, Mouse1.CardPosition+MatrixPosition-new Vector2(0, 96-100*(cardRotation)+100), new RectangleF(256, 0, 128, 128), new Vector2(64, 64)).Draw(batch);
 			}
 		}
-		public void DrawScreen(SpriteBatch batch){
+		public override void Draw(SpriteBatch batch){
 			toolBar.Draw(batch);
 			button.Draw(batch);
 			for(int i = 0; i < 3; i++){

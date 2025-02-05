@@ -14,11 +14,11 @@ namespace VirtusPecto.Desktop{
 		private Button mainMenu = new Button("Main Menu", () => {Level1 = null;
 			IsPaused = false;
 			StartMenu = new Lobby();
-			GoToLevel(0);
+			Game1.Screen = StartMenu;
 		});
 		public Button settings = new Button("Settings", () => {Settings = new SettingsMenu();
 			IsPaused = false;
-			GoToLevel(2);
+			Game1.Screen = Settings;
 		});
 
 
