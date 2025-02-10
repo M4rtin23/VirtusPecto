@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using GameBuilder;
 
 namespace VirtusPecto.Desktop{
-	public partial class Game1 : GameBuilder.GameType.FixedView{
+	public class Game1 : GameBuilder.GameType.FixedView{
 		//System.
 		private SpriteBatch spriteBatch;
 		public static GameMouse Mouse1 = new GameMouse();
