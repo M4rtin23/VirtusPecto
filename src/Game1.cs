@@ -91,8 +91,8 @@ namespace VirtusPecto.Desktop{
 			BackGround.Draw(spriteBatch, GameBuilder.InGame.Camera.Position);
 			spriteBatch.End();
 			
-			if (Mouse1.IsCreating && Pause == null) {
-				Level1?.DrawCard(GraphicsDevice);
+			if (Pause == null) {
+				Level1?.CreationManager?.Draw(GraphicsDevice);
 			}
 
 			spriteBatch.Begin(transformMatrix: GameBuilder.InGame.Camera.LimitedFollow(Level1?.Player1.Position ?? Vector2.Zero), samplerState:  SamplerState.PointClamp, sortMode: SpriteSortMode.BackToFront);

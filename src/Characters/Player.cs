@@ -40,8 +40,7 @@ namespace VirtusPecto.Desktop{
 			for(int i = 0; i < 3; i++){
 				if (IsPressing(6+i)) {
 					if(Level1.Cards[i].Content.Cost <= Mana){
-						Mouse1.Number = i;
-						Mouse1.IsCreating = true;
+						Level1.CreationManager = new CreationManager(i);
 					}
 				}
 			}

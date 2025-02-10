@@ -33,9 +33,8 @@ namespace VirtusPecto.Desktop{
 					}
 					if (GameMouse.IsClicking){
 						addedY = 128;
-						Mouse1.Number = number;
-						Mouse1.IsCreating = true;
-						Mouse1.CardPosition = Mouse1.Position-Position;
+						Level1.CreationManager = new CreationManager(number);
+						Level1.CreationManager.CardPosition = Mouse1.Position-Position;
 					}
 				}else{
 					if(addedY < 128){
@@ -59,8 +58,8 @@ namespace VirtusPecto.Desktop{
 		}
 		public void Draw(SpriteBatch batch){
 			Vector2 Position2 = Position - new Vector2(0, addvalue);
-			if(!(Mouse1.Number == number && Mouse1.IsCreating)){
-			if (!Mouse1.IsCreating){
+			if(!(Level1.CreationManager?.CardNumber == number)){
+			if (Level1.CreationManager == null){
 				color = new Color(cardColor, 255);
 			}
 			else {
