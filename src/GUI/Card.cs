@@ -27,14 +27,14 @@ namespace VirtusPecto.Desktop{
 		}
 		public void Update() {
 			if (Level1.Player1.Mana >= Content.Cost){
-				if (Hitbox.Contains(Mouse1.Position)){
+				if (Hitbox.Contains(GameMouse.Position)){
 					if(addedY > 64*(1-Math.Abs(number-1))){
 						addedY -= 16;
 					}
 					if (GameMouse.IsClicking){
 						addedY = 128;
 						Level1.CreationManager = new CreationManager(number);
-						Level1.CreationManager.CardPosition = Mouse1.Position-Position;
+						Level1.CreationManager.CardPosition = GameMouse.Position-Position;
 					}
 				}else{
 					if(addedY < 128){
@@ -44,7 +44,7 @@ namespace VirtusPecto.Desktop{
 			}else{
 				addedY = 128;
 			}
-			if(Mouse1.IsInside){
+			if(GameMouse.IsInside){
 				addvalue -= 8;
 			}else{
 				addvalue += 8;
@@ -72,7 +72,7 @@ namespace VirtusPecto.Desktop{
 			batch.Draw(SpriteIndex, Position2, null, color, rot, SpriteIndex.Bounds.Size.ToVector2()/2, 1,SpriteEffects.None, 1);
 			batch.Draw(Content.Sprite, new Vector2(Position2.X, Position2.Y), new Rectangle(2 * 128, 0, 128, 128), new Color(255,255,255, (int)color.A), rot, new Vector2(64,160), 1, SpriteEffects.None, 0);
 
-			if (Hitbox.Contains(Mouse1.Position)){
+			if (Hitbox.Contains(GameMouse.Position)){
 				batch.DrawString(FontNormal, Content.Name, Position2, Color.White, rot, new Vector2(112, 204), 1, SpriteEffects.None, 0); 
 				if(IsDescriptionOn){
 					string description = "*Atk: " + Content.Atk+"*HP: "+Content.HP+"*Speed: "+ Content.Spd;

@@ -5,17 +5,17 @@ using static VirtusPecto.Desktop.Game1;
 namespace VirtusPecto.Desktop{
 	public class CreationManager{
         private Vector2 relativePosition;
-        public Vector2 CardPosition{get => Mouse1.Position - new Vector2(relativePosition.X*0.9f, relativePosition.Y/2); set => relativePosition = value;}
-		private float cardRotation{get => -(Mouse1.Position.Y/Game1.Height-1)*(Mouse1.Position.Y/Game1.Height+1.2f);}
+        public Vector2 CardPosition{get => GameMouse.Position - new Vector2(relativePosition.X*0.9f, relativePosition.Y/2); set => relativePosition = value;}
+		private float cardRotation{get => -(GameMouse.Position.Y/Game1.Height-1)*(GameMouse.Position.Y/Game1.Height+1.2f);}
         public int CardNumber;
 
         public CreationManager(int number){
             CardNumber = number;
         }
 		public void OnCreation(){
-			if(GameMouse.IsClicking && Mouse1.IsInside){
+			if(GameMouse.IsClicking && GameMouse.IsInside){
 				for(int i = 0; i < 3; i++){
-					if (CardNumber == i && !Level1.Cards[i].Hitbox.Contains(Mouse1.Position)){
+					if (CardNumber == i && !Level1.Cards[i].Hitbox.Contains(GameMouse.Position)){
 						Level1.CreateCreature(Level1.Cards[i].Content, CardPosition + MatrixPosition- new Vector2(0, 32+64));
 						Level1.Player1.Mana -= Level1.Cards[i].Content.Cost;
 					}

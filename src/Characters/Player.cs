@@ -96,7 +96,7 @@ namespace VirtusPecto.Desktop{
 			}
 		}
 		public override void Draw(SpriteBatch batch){
-			Vector2 a0 = GetClosest(Level1.Enemy1, Mouse1.MPosition).Item1;
+			Vector2 a0 = GetClosest(Level1.Enemy1, GameMouse.MPosition).Item1;
 			if(ShowNearest){
 				for(int i = 0; i < 8; i++){
 					int a = ((i/2) % 2) * 2 -1;
@@ -128,7 +128,7 @@ namespace VirtusPecto.Desktop{
 			float r = (float)(-Motion.Angle(pos, otherPos));
 		}
 		public void Direction(SpriteBatch batch){
-			float r = (float)(-Motion.Angle(Position, Mouse1.Position+MatrixPosition));
+			float r = (float)(-Motion.Angle(Position, GameMouse.Position+MatrixPosition));
 			Vector2 v = new Vector2((float)Math.Cos(r), (float)Math.Sin(r));
 			Line.Draw(batch, Position + v*32, Position + v*64, 6, Color.Red);
 		}
@@ -140,7 +140,7 @@ namespace VirtusPecto.Desktop{
 						Punch();
 						break;
 					case 0:
-						Level1.CreateFireball(false, Position,(float) Motion.Angle(Position, Game1.Mouse1.MPosition));
+						Level1.CreateFireball(false, Position,(float) Motion.Angle(Position, GameMouse.MPosition));
 						break;
 					case 1:
 						Lightning();
@@ -151,7 +151,7 @@ namespace VirtusPecto.Desktop{
 			}
 		}
 		private void Punch(){
-			Vector2 pos = 32*GameBuilder.Motion.VectorSpeed(1, (float)Motion.Angle(Position, Mouse1.MPosition))+Position - Vector2.One*32;
+			Vector2 pos = 32*GameBuilder.Motion.VectorSpeed(1, (float)Motion.Angle(Position, GameMouse.MPosition))+Position - Vector2.One*32;
 			for(int i = 0; i < Level1.Enemy1.Length; i++){
 				if(Level1.Enemy1[i] != null){
 					if(new RectangleF(pos, 90.51f).Intersects(Level1.Enemy1[i].Hitbox)){
@@ -164,7 +164,7 @@ namespace VirtusPecto.Desktop{
 
 		private void Lightning(){
 			try{
-				int target = GetClosest(Level1.Enemy1, Mouse1.MPosition).Item2;
+				int target = GetClosest(Level1.Enemy1, GameMouse.MPosition).Item2;
 				Level1.Enemy1?[target].AddHealth(-50);
 				Level1.CreateParticle(Level1.Enemy1[target].Position, 0.4f, 0);
 			}catch{}

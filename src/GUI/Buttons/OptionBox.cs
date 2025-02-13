@@ -15,7 +15,6 @@ namespace VirtusPecto.Desktop{
 		private bool isActivated;
 		protected int optionsNumber {get => Options.Length; set {Options = new Vector2[value]; colors = new Color[optionsNumber];}}
 		public int Option;
-		bool checker;
 
 		protected virtual void action(int i){}
 
@@ -27,15 +26,13 @@ namespace VirtusPecto.Desktop{
 		}
 		public void Update(float x, float y){
 			position = new Vector2(x, y);
-			if (hitbox.Contains(Mouse1.Position)){
-				GameMouse.Click(() => {isActivated = !isActivated;}, ref checker);
-			}else{
-				checker = false;
+			if (hitbox.Contains(GameMouse.Position)){
+				Mouse1.Click(() => {isActivated = !isActivated;});
 			}
 			if (isActivated){
 				for (int i = 0; i < optionsNumber; i++){
 					Rectangle r = new Rectangle((int)position.X, (int)position.Y + (1 + i)*32, 128, 32);
-					if (r.Contains(Mouse1.Position)){
+					if (r.Contains(GameMouse.Position)){
 						if (GameMouse.IsClicking){
 							Option = i;
 							action(i);

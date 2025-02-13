@@ -9,7 +9,6 @@ namespace VirtusPecto.Desktop{
 		protected string name;
 		protected Vector2 position;
 		protected bool state = false;
-		bool checker;
 		
 		public TickBox(string name){
 			this.name = name;
@@ -18,10 +17,8 @@ namespace VirtusPecto.Desktop{
 		public void Update(float x, float y, ref bool state){
 			this.state = state;
 			position = new Vector2(x, y);
-			if(new Rectangle((int)position.X,(int) position.Y, 32, 32).Contains(Mouse1.Position)){
-				GameMouse.Click(() => {this.state = !this.state;}, ref checker);
-			}else{
-				checker = false;
+			if(new Rectangle((int)position.X,(int) position.Y, 32, 32).Contains(GameMouse.Position)){
+				Mouse1.Click(() => {this.state = !this.state;});
 			}
 			state = this.state;
 		}

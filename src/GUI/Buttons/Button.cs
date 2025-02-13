@@ -11,7 +11,6 @@ namespace VirtusPecto.Desktop{
 		public RectangleF Hitbox{get => new RectangleF(position.X, position.Y,128,32);}
 		public Vector2 position = Vector2.Zero;
 		protected int transparency = 0;
-		protected bool checker;
         protected Action action;
         protected string name;
 
@@ -22,9 +21,9 @@ namespace VirtusPecto.Desktop{
 
 		public virtual void Update(float x, float y){
 			position = new Vector2(x, y);
-			if (Hitbox.Contains(Mouse1.Position)){
+			if (Hitbox.Contains(GameMouse.Position)){
 				transparency = 64;
-				GameMouse.Click(action, ref checker);
+				Mouse1.Click(action);
 			}
 			else{
 				transparency = 0;
