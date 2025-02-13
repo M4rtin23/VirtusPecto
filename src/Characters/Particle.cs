@@ -24,7 +24,7 @@ namespace VirtusPecto.Desktop{
             this.maxTimer = timer;
             this.angle = angle;
             this.type = type;
-            x = new System.Random(Game1.GT.TotalGameTime.Milliseconds).Next(-128,128);
+            x = new System.Random(Game1.GlobalGameTime.TotalGameTime.Milliseconds).Next(-128,128);
         }
         public void Update(){
             timer--;

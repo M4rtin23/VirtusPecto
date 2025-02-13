@@ -105,9 +105,9 @@ namespace VirtusPecto.Desktop{
 					int c1 = ((i+1) % 2) + 1;
 					int d = ((i % 4)/3);        
 					int e = ((6-i+1) % 2)*(int)Math.Floor((6-i)/4d); 
-					Vector2 pos = new Vector2(-a*(float)Math.Cos(MathHelper.ToRadians((GT.TotalGameTime.Milliseconds) % 360))*10,-a*(float)Math.Cos(MathHelper.ToRadians((GT.TotalGameTime.Milliseconds) % 360))*10)+a0;
+					Vector2 pos = new Vector2(-a*(float)Math.Cos(MathHelper.ToRadians((GlobalGameTime.TotalGameTime.Milliseconds) % 360))*10,-a*(float)Math.Cos(MathHelper.ToRadians((GlobalGameTime.TotalGameTime.Milliseconds) % 360))*10)+a0;
 					if(i < 2 || i > 5){
-						pos = new Vector2(-a*(float)Math.Cos(MathHelper.ToRadians((GT.TotalGameTime.Milliseconds) % 360))*10,a*(float)Math.Cos(MathHelper.ToRadians((GT.TotalGameTime.Milliseconds) % 360))*10)+a0;
+						pos = new Vector2(-a*(float)Math.Cos(MathHelper.ToRadians((GlobalGameTime.TotalGameTime.Milliseconds) % 360))*10,a*(float)Math.Cos(MathHelper.ToRadians((GlobalGameTime.TotalGameTime.Milliseconds) % 360))*10)+a0;
 
 					}
 					RectangleF.Draw(batch, pos+new Vector2(64*a - 8*d, -64*(b-3)/4-e*8), new Vector2(8*c0, 8*c1), Color.Blue);

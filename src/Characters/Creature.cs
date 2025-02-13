@@ -17,7 +17,7 @@ namespace VirtusPecto.Desktop{
 			maxHealth = health;
 		}
 		public override void Update() {
-			if(GT.TotalGameTime.Minutes - time > 1){
+			if(GlobalGameTime.TotalGameTime.Minutes - time > 1){
 				SetTarget(enemy);
 			}
 			base.Update();

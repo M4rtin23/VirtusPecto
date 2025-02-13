@@ -56,7 +56,7 @@ namespace VirtusPecto.Desktop{
 				for(int i = 0; i < Creature1.Length; i++){
 					Creature1[i]?.Update();
 				}
-				if(GT.TotalGameTime.Milliseconds % 1000 == 0){
+				if(GlobalGameTime.TotalGameTime.Milliseconds % 1000 == 0){
 					FitFireball();
 				}
 				if(CountEnemies() == 0){

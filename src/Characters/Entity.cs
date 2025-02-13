@@ -30,7 +30,7 @@ namespace VirtusPecto.Desktop{
 			base.Update();
 			if(isAttacking){
 				followTarget();
-				if(speed == Vector2.Zero && (GT.TotalGameTime.Milliseconds % 1000 == 0)){
+				if(speed == Vector2.Zero && (GlobalGameTime.TotalGameTime.Milliseconds % 1000 == 0)){
 					attack((float)Motion.Angle(Position, target));
 				}
 				CheckTarget(enemy);
@@ -51,7 +51,7 @@ namespace VirtusPecto.Desktop{
 		public void SetTarget(ObjectBuilder[] entities){
 			(Vector2, int) test = GetClosest(entities, Position);
 			if (test.Item2 != -1){
-				time = GT.TotalGameTime.Minutes;
+				time = GlobalGameTime.TotalGameTime.Minutes;
 				targetDefined = test.Item2;
 				target = entities[targetDefined].Position;
 				isAttacking = true;

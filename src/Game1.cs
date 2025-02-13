@@ -10,7 +10,7 @@ namespace VirtusPecto.Desktop{
 		private SpriteBatch spriteBatch;
 		public static GameMouse Mouse1 = new GameMouse();
 		public static Vector2 MatrixPosition{get => GameBuilder.InGame.Camera.Position-new Vector2(Width, Height)/2;}
-		public static GameTime GT;
+		public static GameTime GlobalGameTime;
 
 		//Textures.
 		public static Texture2D SpriteLogo;
@@ -73,7 +73,7 @@ namespace VirtusPecto.Desktop{
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 		}
 		protected override void Update(GameTime gameTime){
-			GT = gameTime;
+			GlobalGameTime = gameTime;
 			Mouse1.Update();
 
 			if(WannaExit){

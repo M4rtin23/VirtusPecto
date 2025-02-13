@@ -18,7 +18,7 @@ namespace VirtusPecto.Desktop{
 					position.Y = (height*((int)(center.Y/height))) + height * y;
 					int i;
 					if((position.X * position.Y) % 7 == 1){
-						i = (int)((Math.Sin(position.X + position.Y) + 1) * GT.TotalGameTime.Milliseconds) % 1200;
+						i = (int)((Math.Sin(position.X + position.Y) + 1) * GlobalGameTime.TotalGameTime.Milliseconds) % 1200;
 						i = i/400+1;
 					}else{
 						i = 0;
