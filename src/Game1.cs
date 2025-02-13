@@ -74,15 +74,12 @@ namespace VirtusPecto.Desktop{
 		}
 		protected override void Update(GameTime gameTime){
 			GT = gameTime;
-			Pause?.Update();
 			Mouse1.Update();
 
 			if(WannaExit){
 				Exit();
 			}
-			if(Pause == null){
-				Screen.Update();
-			}
+			Screen.Update();
 			base.Update(gameTime);
 		}
 
@@ -91,16 +88,9 @@ namespace VirtusPecto.Desktop{
 			BackGround.Draw(spriteBatch, GameBuilder.InGame.Camera.Position);
 			spriteBatch.End();
 			
-			if (Pause == null) {
-				Level1?.CreationManager?.Draw(GraphicsDevice);
-			}
-
-			spriteBatch.Begin(transformMatrix: GameBuilder.InGame.Camera.LimitedFollow(Level1?.Player1.Position ?? Vector2.Zero), samplerState:  SamplerState.PointClamp, sortMode: SpriteSortMode.BackToFront);
 			Level1?.DrawGame(spriteBatch);
-			spriteBatch.End();
 
 			spriteBatch.Begin(samplerState:  SamplerState.PointClamp);
-			Pause?.Draw(spriteBatch);
 			Screen.Draw(spriteBatch);
 			spriteBatch.End();
 			base.Draw(gameTime);

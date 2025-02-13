@@ -36,36 +36,41 @@ namespace VirtusPecto.Desktop{
 			Cards[2] = new Card(2, Color.DarkBlue);
 		}
 		public override void Update() {
-			button.Update();
-			InputKeys.Press(5, () => {if(Pause == null) Pause = new PauseMenu(); else Pause = null;}, ref checker);
-			for (int i = 0; i < Fireballs.Length; i++) {
-				Fireballs[i]?.Update();
-			}
-			for (int i = 0; i < Particles.Length; i++) {
-				Particles[i]?.Update();
-			}
+			if(Pause == null){
+				button.Update();
+				InputKeys.Press(5, () => {if(Pause == null){Pause = new PauseMenu(); Level1.CreationManager = null;}else Pause = null;}, ref checker);
+				for (int i = 0; i < Fireballs.Length; i++) {
+					Fireballs[i]?.Update();
+				}
+				for (int i = 0; i < Particles.Length; i++) {
+					Particles[i]?.Update();
+				}
 
-			for(int i = 0; i < 3; i++){
-				Cards[i].Update();
+				for(int i = 0; i < 3; i++){
+					Cards[i].Update();
+				}
+				for (int i = 0; i < Enemy1.Length; i++){
+					Enemy1[i]?.Update();
+				}
+				Player1.Update();
+				for(int i = 0; i < Creature1.Length; i++){
+					Creature1[i]?.Update();
+				}
+				if(GT.TotalGameTime.Milliseconds % 1000 == 0){
+					FitFireball();
+				}
+				if(CountEnemies() == 0){
+					WannaExit = true;
+				}
+				if(GameMouse.IsClicking){
+					CreationManager?.OnCreation();
+				}
 			}
-			for (int i = 0; i < Enemy1.Length; i++){
-				Enemy1[i]?.Update();
-			}
-			Player1.Update();
-			for(int i = 0; i < Creature1.Length; i++){
-				Creature1[i]?.Update();
-			}
-			if(GT.TotalGameTime.Milliseconds % 1000 == 0){
-				FitFireball();
-			}
-			if(CountEnemies() == 0){
-				WannaExit = true;
-			}
-			if(GameMouse.IsClicking){
-				CreationManager?.OnCreation();
-			}
+			Pause?.Update();
        }
         public void DrawGame(SpriteBatch batch) {
+			CreationManager?.Draw(batch.GraphicsDevice);
+			batch.Begin(transformMatrix: Camera.LimitedFollow(Player1.Position), samplerState:  SamplerState.PointClamp, sortMode: SpriteSortMode.BackToFront);
 			for (int i = 0; i < Fireballs.Length;i++){
 				Fireballs[i]?.Draw(batch);
 			}
@@ -84,13 +89,15 @@ namespace VirtusPecto.Desktop{
 			if (Pause == null){
 				CreationManager?.Draw(batch);
 			}
+			batch.End();
 		}
 		public override void Draw(SpriteBatch batch){
 			toolBar.Draw(batch);
 			button.Draw(batch);
 			for(int i = 0; i < 3; i++){
 				Cards[i].Draw(batch);
-			}			
+			}
+			Pause?.Draw(batch);
 		}
 		public void FitFireball(){
 			Fireball[] a;
