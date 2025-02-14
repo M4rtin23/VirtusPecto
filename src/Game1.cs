@@ -38,7 +38,6 @@ namespace VirtusPecto.Desktop{
 		public static Lobby StartMenu = new Lobby();
 		public static Level Level1;
 		public static SettingsMenu Settings;
-		public static PauseMenu Pause;
 		public static Screen Screen = StartMenu;
 
 		public Game1(){

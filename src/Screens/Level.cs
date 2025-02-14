@@ -17,6 +17,7 @@ namespace VirtusPecto.Desktop{
 		public Particle[] Particles;
 		private PowerIndicator button;
 		public CreationManager CreationManager;
+		public static PauseMenu Pause;
 		private bool checker;
 		public Level(int EnemyQuantity){
 			button = new PowerIndicator();
@@ -38,7 +39,7 @@ namespace VirtusPecto.Desktop{
 		public override void Update() {
 			if(Pause == null){
 				button.Update();
-				InputKeys.Press(5, () => {if(Pause == null){Pause = new PauseMenu(); Level1.CreationManager = null;}else Pause = null;}, ref checker);
+				InputKeys.Press(5, () => {Pause = new PauseMenu(); Level1.CreationManager = null;}, ref checker);
 				for (int i = 0; i < Fireballs.Length; i++) {
 					Fireballs[i]?.Update();
 				}
