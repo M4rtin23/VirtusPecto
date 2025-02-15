@@ -16,10 +16,15 @@ namespace VirtusPecto.Desktop{
 		protected int optionsNumber {get => Options.Length; set {Options = new Vector2[value]; colors = new Color[optionsNumber];}}
 		public int Option;
 
+		public OptionBox(string name, int optionNumber, Vector2[] options){
+			this.name = name;
+			this.optionsNumber = optionNumber;
+			Options = options;
+		}
 		protected virtual void action(int i){}
 
 		protected virtual string drawOptions(int i){
-			return null;
+			return " "+ Options[i].X + ":" + Options[i].Y;
 		}
 		protected virtual string currentOption(){
 			return drawOptions(Option);

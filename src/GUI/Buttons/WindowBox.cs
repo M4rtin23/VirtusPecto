@@ -5,27 +5,15 @@ using Microsoft.Xna.Framework.Input;
 using static VirtusPecto.Desktop.Game1;
 using static GameBuilder.GameType.FixedView;
 
-namespace VirtusPecto.Desktop{
-	public class WindowBox : OptionBox{
-		Vector2 realOption{get => new Vector2(Options[Option].Y * Settings.AspectRatio.X/Settings.AspectRatio.Y, Options[Option].Y);}
-		public WindowBox(){
-			optionsNumber = 9;
-			name = "Window Size";
-			Options[0].Y = 1200;
-			Options[1].Y = 1080;
-			Options[2].Y = 1050;
-			Options[3].Y = 1024;
-			Options[4].Y = 900;
-			Options[5].Y = 800;
-			Options[6].Y = 768;
-			Options[7].Y = 765;
-			Options[8].Y = 720;
-		}
+
+namespace VirtusPecto.Desktop{	
+	public class WindowBox : OptionBox{	
+		public WindowBox():base("Window Size", 9, new Vector2[]{Vector2.One*1200,Vector2.One*1080,Vector2.One*1050,Vector2.One*1024,Vector2.One*900,Vector2.One*800,Vector2.One*768,Vector2.One*765,Vector2.One*720}){}
 		protected override void action(int i){
 			bool fullscreen = IsFullscreen;
 			IsFullscreen = false;
-			Width = (int)realOption.X;
-			Height = (int)realOption.Y;
+			Width = (int)(Options[Option].Y * Settings.AspectRatio.X/Settings.AspectRatio.Y);
+			Height = (int)Options[Option].Y;
 			IsFullscreen = fullscreen;
 		}
 		protected override string drawOptions(int i){
@@ -34,6 +22,6 @@ namespace VirtusPecto.Desktop{
 		protected override string currentOption(){
 			return " "+ Width + " X " + Height;	
 		}
-
+		
 	}
 }

@@ -11,7 +11,7 @@ namespace VirtusPecto.Desktop{
 		public TickBox SetFullscreen;
 		public TickBox ShowNearest;
 		public TickBox ShowDirection;
-		public AspectBox SetAspectRatio;
+		public OptionBox SetAspectRatio;
 		public TickBox SetJoystick;
 		public TickBox ShowDescription;
 		public TickBox ShowEnemyDir;
@@ -24,7 +24,7 @@ namespace VirtusPecto.Desktop{
 			ShowNearest = new TickBox("Mark Nearest Enemy");
 			ShowDirection = new TickBox("Show Mouse Direction");
 			SetJoystick = new TickBox("Joystick");
-			SetAspectRatio = new AspectBox();
+			SetAspectRatio = new OptionBox("Aspect Ratio", 6, new Vector2[]{new Vector2(16f, 9f),new Vector2(16f, 10f),new Vector2(21f, 9f),new Vector2(4f, 3f),new Vector2(5f, 4f),new Vector2(1f, 1f)});
 			SetFullscreen = new TickBox("Fullscreen");
 			ResolutionBox = new WindowBox();
 			ShowEnemyDir = new TickBox("Show Enemy Direction");

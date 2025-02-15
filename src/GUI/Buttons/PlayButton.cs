@@ -1,12 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using static VirtusPecto.Desktop.Game1;
-using GameBuilder;
+using System.Linq;
 
 namespace VirtusPecto.Desktop{
 	public class PlayButton : Button{
 		public bool isActivated;
-		private DifficultyBox difficultyBox;
+		OptionBox difficultyBox;
 		Button Play;
 		
 		public PlayButton():base("Start", () => {}){
@@ -26,7 +26,7 @@ namespace VirtusPecto.Desktop{
 			base.Update(x, y);
 			if (isActivated) {
 				if(difficultyBox == null){
-					difficultyBox = new DifficultyBox((int)position.X+128,(int)position.Y);
+					difficultyBox = new OptionBox("Enemies", 10, Enumerable.Range(0, 10).Select(i => new Vector2((i + 1)*5, 1)).ToArray());
 				}
 				difficultyBox.Update(position.X + 128, position.Y);
 				Play.Update(position.X + 256, position.Y);
