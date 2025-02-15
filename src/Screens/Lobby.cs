@@ -28,7 +28,7 @@ namespace VirtusPecto.Desktop{
 				Game1.Screen = Settings;
 			});
 
-			exit = new Button("Exit", () => {WannaExit = true;});
+			exit = new Button("Exit", () => {Environment.Exit(0);});
 
 			play = new Button("Play", ()=>{
 					Level1 = new Level((int)difficultyBox.Options[difficultyBox.Option].X);

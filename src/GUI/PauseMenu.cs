@@ -11,7 +11,7 @@ namespace VirtusPecto.Desktop{
 	public class PauseMenu{
 		bool checker = true;
 		private Button resume = new Button("Continue", () => {Pause = null;});
-		private Button exit = new Button("Exit", () => {WannaExit = true;});
+		private Button exit = new Button("Exit", () => {Environment.Exit(0);});
 		private Button mainMenu = new Button("Main Menu", () => {Level1 = null;
 			Pause = null;
 			StartMenu = new Lobby();

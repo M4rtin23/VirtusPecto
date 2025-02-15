@@ -28,7 +28,6 @@ namespace VirtusPecto.Desktop{
 		public static SpriteFont FontNormal, FontBig;
 
 		//States.
-		public static bool WannaExit;
 		public static bool IsJoystick;
 		public static bool IsDescriptionOn = true;
 		public static bool ShowNearest = false;
@@ -75,9 +74,6 @@ namespace VirtusPecto.Desktop{
 			GlobalGameTime = gameTime;
 			Mouse1.Update();
 
-			if(WannaExit){
-				Exit();
-			}
 			Screen.Update();
 			base.Update(gameTime);
 		}

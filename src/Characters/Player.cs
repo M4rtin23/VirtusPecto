@@ -92,7 +92,7 @@ namespace VirtusPecto.Desktop{
 				base.Update();
 			}
 			if(health == 0){
-				WannaExit = true;
+				Environment.Exit(0);
 			}
 		}
 		public override void Draw(SpriteBatch batch){

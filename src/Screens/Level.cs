@@ -61,7 +61,7 @@ namespace VirtusPecto.Desktop{
 					FitFireball();
 				}
 				if(CountEnemies() == 0){
-					WannaExit = true;
+					Environment.Exit(0);
 				}
 				if(GameMouse.IsClicking){
 					CreationManager?.OnCreation();
