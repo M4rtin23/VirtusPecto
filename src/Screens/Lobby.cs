@@ -4,35 +4,62 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using static VirtusPecto.Desktop.Game1;
 using static GameBuilder.GameType.FixedView;
-using GameBuilder;
+using System.Linq;
 
 namespace VirtusPecto.Desktop{
 	public class Lobby : Screen{
-		public static Button Button1;
-		public static Button Button2;
-		public static Button Button3;
+		OptionBox difficultyBox;
+		Button start;
+		Button settings;
+		Button exit;
+		Button play;
 
 		public Lobby(){
-			Button1 = new PlayButton();
-			Button2 = new Button("Settings", () => {Settings = new SettingsMenu();
-					Game1.Screen = Settings;
-				});
-			Button3 = new Button("Exit", () => {WannaExit = true;});
+			start = new Button("Start", () => {
+				if(difficultyBox == null){
+					difficultyBox = new OptionBox("Enemies", 10, Enumerable.Range(0, 10).Select(i => new Vector2((i + 1)*5, 1)).ToArray());
+				}else{
+					difficultyBox = null;
+				}
+			});
+
+			settings = new Button("Settings", () => {
+				Settings = new SettingsMenu();
+				Game1.Screen = Settings;
+			});
+
+			exit = new Button("Exit", () => {WannaExit = true;});
+
+			play = new Button("Play", ()=>{
+					Level1 = new Level((int)difficultyBox.Options[difficultyBox.Option].X);
+					Level1.Creation();
+					StartMenu = null;
+					Game1.Screen = Level1;
+				}
+			);
 		}
 		public override void Update() {
-			Button1.Update(Width/4, (float)Height/2.4f);
-			Button2.Update(Width/4, (float)Height/2.1f);
-			Button3.Update((Width / 4), Height / 1.85f);
+			start.Update(Width/4, Height/2.4f);
+			settings.Update(Width/4, Height/2.1f);
+			exit.Update(Width / 4, Height / 1.85f);
+
+			if (difficultyBox != null) {
+				difficultyBox.Update(start.position.X + 128, start.position.Y);
+				play.Update(start.position.X + 256, start.position.Y);
+			}
 		}
 		public override void Draw(SpriteBatch batch) {
-//			batch.Draw(SpriteCard, new Vector2(Width/2, Height/4), null, new Color(79,79,79), 0, new Vector2(SpriteCard.Width, SpriteCard.Height/4)/2, 4, SpriteEffects.None, 1);
 			batch.Draw(SpriteLogo, new Vector2(Width/2 - 480, Height/4 - 64*2), null, new Color(79,79,79), 0, Vector2.Zero, 2, SpriteEffects.None, 1);
 			batch.Draw(SpriteTitle, new Vector2(Width/2+64, Height/4), null,Color.White, 0, new Vector2(SpriteTitle.Width, SpriteTitle.Height)/2, 8, SpriteEffects.None, 1);
-//			batch.DrawString(FontBig, "Virtus Pecto", new Vector2(Width / 2f - 220, Height/4 - 64), Color.White);
 
-			Button1.Draw(batch);
-			Button2.Draw(batch);
-			Button3.Draw(batch);
+			start.Draw(batch);
+			settings.Draw(batch);
+			exit.Draw(batch);
+
+			if (difficultyBox != null) {
+				difficultyBox.Draw(batch);
+				play.Draw(batch);
+			}
 		}
 	}
 }
