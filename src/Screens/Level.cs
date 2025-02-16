@@ -15,12 +15,10 @@ namespace VirtusPecto.Desktop{
 		public ToolBar toolBar;
 		public Fireball[] Fireballs;
 		public Particle[] Particles;
-		private PowerIndicator button;
 		public CreationManager CreationManager;
 		public static PauseMenu Pause;
 		private bool checker;
 		public Level(int EnemyQuantity){
-			button = new PowerIndicator();
 			Fireballs = new Fireball[0];
 			Particles = new Particle[0];
 			Enemy1 = new Enemy[EnemyQuantity];
@@ -38,7 +36,6 @@ namespace VirtusPecto.Desktop{
 		}
 		public override void Update() {
 			if(Pause == null){
-				button.Update();
 				InputKeys.Press(5, () => {Pause = new PauseMenu(); Level1.CreationManager = null;}, ref checker);
 				for (int i = 0; i < Fireballs.Length; i++) {
 					Fireballs[i]?.Update();
@@ -94,7 +91,6 @@ namespace VirtusPecto.Desktop{
 		}
 		public override void Draw(SpriteBatch batch){
 			toolBar.Draw(batch);
-			button.Draw(batch);
 			for(int i = 0; i < 3; i++){
 				Cards[i].Draw(batch);
 			}

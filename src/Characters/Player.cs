@@ -14,7 +14,7 @@ namespace VirtusPecto.Desktop{
 		public int Health{get => (int)health;}
 		public bool keyCheck = false;
 		public CardContent[] Slot;
-		public int[] ManaCost = {1, 3, 0};
+		public Power Power;
 		public Player(){
 			powerIndex = 1;
 			health = 100;
@@ -24,18 +24,20 @@ namespace VirtusPecto.Desktop{
 			for(int i = 0; i < 3; i++){
 				Slot[i] = CardContent.GetData(i*2);
 			}
+			Power = Power.GetPower(powerIndex);
 		}
 		private void gameControl(){
 /*			if (Keyboard.GetState().IsKeyDown(Keys.L)) {
 				Level1.CreateFireball(true, Level1.Enemy1[1].Position, 0);
 			}*/
 			gameArrow();
-			Press(9, ()=>{powerIndex = (powerIndex+1)%3;}, ref keyCheck);
+			Press(9, ()=>{powerIndex = (powerIndex+1)%3; Power = Power.GetPower(powerIndex);}, ref keyCheck);
 			if(IsJoystick){
 				gameStick();
 			}
-			if (IsPressing(4) && PowerIndicator.IsCharged()) {
-				UsePower(powerIndex);
+			if (IsPressing(4) && Power.IsCharged && Power.Cost <= Mana){
+				Power.UsePower(Position, GameMouse.MPosition, Level1.Enemy1);
+				Mana -= Power.Cost;
 			}
 			for(int i = 0; i < 3; i++){
 				if (IsPressing(6+i)) {
@@ -80,6 +82,7 @@ namespace VirtusPecto.Desktop{
 			}
 		}
 		public override void Update(){
+			Power.Update();
 			animationImage(4);
 			gameControl();
 
@@ -121,60 +124,10 @@ namespace VirtusPecto.Desktop{
 			center(4);
 			base.Draw(batch);
 		}
-
-
-		public void Lightning(Vector2 pos, Vector2 otherPos, float s, SpriteBatch batch){
-			s = s/128;
-			float r = (float)(-Motion.Angle(pos, otherPos));
-		}
 		public void Direction(SpriteBatch batch){
 			float r = (float)(-Motion.Angle(Position, GameMouse.Position+MatrixPosition));
 			Vector2 v = new Vector2((float)Math.Cos(r), (float)Math.Sin(r));
 			Line.Draw(batch, Position + v*32, Position + v*64, 6, Color.Red);
-		}
-
-		public void UsePower(int powerIndex){
-			if(ManaCost[powerIndex] <= Mana){
-				switch(powerIndex){
-					case 2:
-						Punch();
-						break;
-					case 0:
-						Level1.CreateFireball(false, Position,(float) Motion.Angle(Position, GameMouse.MPosition));
-						break;
-					case 1:
-						Lightning();
-						break;
-				}
-				Mana -= ManaCost[powerIndex];
-				PowerIndicator.CanShoot();
-			}
-		}
-		private void Punch(){
-			Vector2 pos = 32*GameBuilder.Motion.VectorSpeed(1, (float)Motion.Angle(Position, GameMouse.MPosition))+Position - Vector2.One*32;
-			for(int i = 0; i < Level1.Enemy1.Length; i++){
-				if(Level1.Enemy1[i] != null){
-					if(new RectangleF(pos, 90.51f).Intersects(Level1.Enemy1[i].Hitbox)){
-						Level1.Enemy1?[i].AddHealth(-10);
-					}
-				}
-			}
-			Level1.CreateParticle(pos, 0.5f, 1);
-		}
-
-		private void Lightning(){
-			try{
-				int target = GetClosest(Level1.Enemy1, GameMouse.MPosition).Item2;
-				Level1.Enemy1?[target].AddHealth(-50);
-				Level1.CreateParticle(Level1.Enemy1[target].Position, 0.4f, 0);
-			}catch{}
-		}
-
-		public float Dir(){
-			return (float)Motion.Direction(-speed);
-		}
-		public int GetPowerIndex(){
-			return powerIndex;
 		}
 
 	}
