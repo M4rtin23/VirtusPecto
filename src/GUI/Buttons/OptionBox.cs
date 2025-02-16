@@ -6,7 +6,7 @@ using static VirtusPecto.Desktop.Game1;
 
 namespace VirtusPecto.Desktop{
 	public class OptionBox{
-		protected string name;
+		protected string name, option, separator;
 		protected Rectangle hitbox{get => new Rectangle((int)position.X,(int)position.Y,128,32);}
 		protected Vector2 position;
 		private Color color;
@@ -15,19 +15,20 @@ namespace VirtusPecto.Desktop{
 		private bool isActivated;
 		protected int optionsNumber {get => Options.Length; set {Options = new Vector2[value]; colors = new Color[optionsNumber];}}
 		public int Option;
+		Action action;
 
-		public OptionBox(string name, int optionNumber, Vector2[] options){
+
+		public OptionBox(string name, int optionNumber, string separator, Vector2[] options, Action action){
 			this.name = name;
 			this.optionsNumber = optionNumber;
+			this.separator = separator;
 			Options = options;
+			this.action = action;
+			option = " "+ (int)Options[Option].X + separator + (int)Options[Option].Y;
+			option = option.Split("\0")[0];
 		}
-		protected virtual void action(int i){}
-
-		protected virtual string drawOptions(int i){
-			return " "+ Options[i].X + ":" + Options[i].Y;
-		}
-		protected virtual string currentOption(){
-			return drawOptions(Option);
+		public void SetDefaultOption(string str){
+			option = str;
 		}
 		public void Update(float x, float y){
 			position = new Vector2(x, y);
@@ -40,8 +41,9 @@ namespace VirtusPecto.Desktop{
 					if (r.Contains(GameMouse.Position)){
 						if (GameMouse.IsClicking){
 							Option = i;
-							action(i);
+							action();
 							isActivated = false;
+							option = (" "+ (int)Options[Option].X + separator + (int)Options[Option].Y).Split("\0")[0];
 						}
 						colors[i] = Color.LightBlue;
 					}else{
@@ -52,14 +54,14 @@ namespace VirtusPecto.Desktop{
 		}
 		public void Draw(SpriteBatch batch) {
 			new GameBuilder.Shapes.RectangleF(position, new Vector2(128,32), color).Draw(batch);
-			batch.DrawString(FontNormal, currentOption(), position, Color.White);
+			batch.DrawString(FontNormal, option, position, Color.White);
 			batch.DrawString(FontNormal, name, new Vector2(position.X, position.Y - 32), Color.White);
 
 			if (isActivated) {
 				color = Color.LightGray;
 				for (int i = 0; i < optionsNumber; i++){
 					new GameBuilder.Shapes.RectangleF(new Vector2(position.X, position.Y+(1+i)*32), new Vector2(128,32), colors[i]).Draw(batch);
-					batch.DrawString(FontNormal, drawOptions(i), new Vector2(position.X, position.Y + (i+1) * 32), Color.White);
+					batch.DrawString(FontNormal, (" "+ (int)Options[i].X + separator + (int)Options[i].Y).Split("\0")[0], new Vector2(position.X, position.Y + (i+1) * 32), Color.White);
 				}
 			}else{
 				color = Color.DarkGray;

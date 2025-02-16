@@ -17,7 +17,7 @@ namespace VirtusPecto.Desktop{
 		public Lobby(){
 			start = new Button("Start", () => {
 				if(difficultyBox == null){
-					difficultyBox = new OptionBox("Enemies", 10, Enumerable.Range(0, 10).Select(i => new Vector2((i + 1)*5, 1)).ToArray());
+					difficultyBox = new OptionBox("Enemies", 10, "\0", Enumerable.Range(0, 10).Select(i => new Vector2((i + 1)*5, 1)).ToArray(), ()=>{});
 				}else{
 					difficultyBox = null;
 				}
