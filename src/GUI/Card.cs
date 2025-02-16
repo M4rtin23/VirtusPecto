@@ -73,14 +73,14 @@ namespace VirtusPecto.Desktop{
 			batch.Draw(Content.Sprite, new Vector2(Position2.X, Position2.Y), new Rectangle(2 * 128, 0, 128, 128), new Color(255,255,255, (int)color.A), rot, new Vector2(64,160), 1, SpriteEffects.None, 0);
 
 			if (Hitbox.Contains(GameMouse.Position)){
-				batch.DrawString(FontNormal, Content.Name, Position2, Color.White, rot, new Vector2(112, 204), 1, SpriteEffects.None, 0); 
+				batch.DrawString(FontNormal, Content.Name, Position2, Color.White, rot, new Vector2(112, 204), 1, SpriteEffects.None, 0);
 				if(IsDescriptionOn){
 					string description = "*Atk: " + Content.Atk+"*HP: "+Content.HP+"*Speed: "+ Content.Spd;
 					description = description.Replace("*", System.Environment.NewLine);
-					batch.DrawString(FontNormal, description, Position2, Color.White, rot, new Vector2(100, 48), 1, SpriteEffects.None, 0); 
+					batch.DrawString(FontNormal, description, Position2, Color.White, rot, new Vector2(100, 48), 1, SpriteEffects.None, 0);
 				}
 			}
-			batch.DrawString(FontNormal, ""+Content.Cost, Position2, Color.White, rot, new Vector2(-92, 188), 1, SpriteEffects.None, 0); 
+			batch.DrawString(FontNormal, ""+Content.Cost, Position2, Color.White, rot, new Vector2(-92, 188), 1, SpriteEffects.None, 0);
 		}}
 	}
 }

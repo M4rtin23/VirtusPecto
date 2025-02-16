@@ -27,7 +27,6 @@ namespace VirtusPecto.Desktop{
 			entityCollision(Level1.Enemy1);
 		}
 		public override void Draw(SpriteBatch batch){
-			
 			float r = new GameBuilder.Motion(speed).Radians;
 			Vector2 v = new Vector2(-(float)System.Math.Cos(r), (float)System.Math.Sin(r));
 			if(ShowDirection){

@@ -198,7 +198,7 @@ namespace VirtusPecto.Desktop{
 			Fireballs[Level1.Fireballs.Length-1] = new Fireball(isEnemy, Position, Motion.VectorSpeed(6, dir));
 		}
 		public int CountEnemies(){
-			int result = 0; 
+			int result = 0;
 			for(int i = 0; i < Enemy1.Length; i++){
 				if(Enemy1[i] !=null){
 					result++;

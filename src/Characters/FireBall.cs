@@ -4,7 +4,7 @@ using static VirtusPecto.Desktop.Game1;
 using GameBuilder;
 using GameBuilder.Shapes;
 
-namespace VirtusPecto.Desktop{    
+namespace VirtusPecto.Desktop{
 	public class Fireball : GameBuilder.InGame.ObjectBuilder{
 		private bool isDangerous;
 		private bool isAlive = true;
@@ -19,7 +19,7 @@ namespace VirtusPecto.Desktop{
 		public override void Update() {
 			animationSpeed = 0.25f;
 			animationImage(3);
-			Hitbox = new RectangleF((int)Position.X - 32,(int) Position.Y - 32, 96, 96);         
+			Hitbox = new RectangleF((int)Position.X - 32,(int) Position.Y - 32, 96, 96);
 			if (isDangerous) {
 				PlayerCollision();
 				CreatureCollision();

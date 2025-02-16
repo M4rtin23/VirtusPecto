@@ -55,7 +55,7 @@ namespace VirtusPecto.Desktop{
 				animationSpeed = 0.125f;
 			}else{
 				speed.Y = 0;
-			}	
+			}
 			if (IsPressing(3)){
 				speed.X = 4;
 				animationSpeed = 0.125f;
@@ -103,8 +103,8 @@ namespace VirtusPecto.Desktop{
 					int b = ((i/4) % 2)*7;
 					int c0 = (i % 2) + 1;
 					int c1 = ((i+1) % 2) + 1;
-					int d = ((i % 4)/3);        
-					int e = ((6-i+1) % 2)*(int)Math.Floor((6-i)/4d); 
+					int d = ((i % 4)/3);
+					int e = ((6-i+1) % 2)*(int)Math.Floor((6-i)/4d);
 					Vector2 pos = new Vector2(-a*(float)Math.Cos(MathHelper.ToRadians((GlobalGameTime.TotalGameTime.Milliseconds) % 360))*10,-a*(float)Math.Cos(MathHelper.ToRadians((GlobalGameTime.TotalGameTime.Milliseconds) % 360))*10)+a0;
 					if(i < 2 || i > 5){
 						pos = new Vector2(-a*(float)Math.Cos(MathHelper.ToRadians((GlobalGameTime.TotalGameTime.Milliseconds) % 360))*10,a*(float)Math.Cos(MathHelper.ToRadians((GlobalGameTime.TotalGameTime.Milliseconds) % 360))*10)+a0;
@@ -176,6 +176,6 @@ namespace VirtusPecto.Desktop{
 		public int GetPowerIndex(){
 			return powerIndex;
 		}
-		
+
 	}
 }

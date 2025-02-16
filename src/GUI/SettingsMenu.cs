@@ -56,7 +56,7 @@ namespace VirtusPecto.Desktop{
 			IsFullscreen = temp;
 		}
 		public override void Draw(SpriteBatch batch){
-			Back.Draw(batch);			
+			Back.Draw(batch);
 			ShowDirection.Draw(batch);
 			ShowNearest.Draw(batch);
 			ShowDescription.Draw(batch);

@@ -88,8 +88,8 @@ namespace VirtusPecto.Desktop{
 		}
 		protected void followTarget(){
 			speed = Motion.Follow(Position, target, 32 + dist, maxSpeed);
-		}  
-		
+		}
+
 		public Vector2 GetStartingPoint(){
 			return startingPoint;
 		}

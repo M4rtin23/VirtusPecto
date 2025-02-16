@@ -9,7 +9,7 @@ namespace VirtusPecto.Desktop{
 		protected string name;
 		protected Vector2 position;
 		protected bool state = false;
-		
+
 		public TickBox(string name){
 			this.name = name;
 		}
@@ -22,7 +22,7 @@ namespace VirtusPecto.Desktop{
 			}
 			state = this.state;
 		}
-		
+
 		public void Draw(SpriteBatch batch) {
 			batch.Draw(SpriteTick, position, new Rectangle(Convert.ToInt16(state) * 32,0,32,32), Color.White, 0, new Vector2(0, 0), 1f, SpriteEffects.None, 1);
 			batch.DrawString(FontNormal, name, position + new Vector2(0,-32), Color.White);

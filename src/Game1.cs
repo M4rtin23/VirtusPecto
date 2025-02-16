@@ -49,7 +49,7 @@ namespace VirtusPecto.Desktop{
 		}
 
 		protected override void LoadContent(){
-			//GUI.			
+			//GUI.
 			SpriteLogo = Content.Load<Texture2D>("Sprite_Logo");
 			SpriteTick = Content.Load<Texture2D>("Sprite_Tick");
 			SpritePowers = Content.Load<Texture2D>("Sprite_Powers");
@@ -82,7 +82,7 @@ namespace VirtusPecto.Desktop{
 			spriteBatch.Begin(transformMatrix: GameBuilder.InGame.Camera.LimitedFollow(Level1?.Player1.Position ?? Vector2.Zero), samplerState:  SamplerState.PointClamp);
 			BackGround.Draw(spriteBatch, GameBuilder.InGame.Camera.Position);
 			spriteBatch.End();
-			
+
 			Level1?.DrawGame(spriteBatch);
 
 			spriteBatch.Begin(samplerState:  SamplerState.PointClamp);
