@@ -12,7 +12,6 @@ namespace VirtusPecto.Desktop{
 		public Enemy[] Enemy1;
 		public Card[] Cards;
 		public Creature[] Creature1 = new Creature[0];
-		public ToolBar toolBar;
 		public Fireball[] Fireballs;
 		public Particle[] Particles;
 		public CreationManager CreationManager;
@@ -25,7 +24,6 @@ namespace VirtusPecto.Desktop{
 			for (int i = 0; i < Enemy1.Length; i++){
 				Enemy1[i] = new Enemy(new Vector2(i*400,new Random(i).Next(-500, 500)));
 			}
-			toolBar = new ToolBar();
 			Player1 = new Player();
 			Cards = new Card[3];
 		}
@@ -90,7 +88,7 @@ namespace VirtusPecto.Desktop{
 			batch.End();
 		}
 		public override void Draw(SpriteBatch batch){
-			toolBar.Draw(batch);
+			ToolBar.Draw(batch);
 			for(int i = 0; i < 3; i++){
 				Cards[i].Draw(batch);
 			}
