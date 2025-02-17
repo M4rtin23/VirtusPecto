@@ -187,9 +187,9 @@ namespace VirtusPecto.Desktop{
 			//Copies the second array to the original.
 			Particles = a;
 		}
-		public void CreateFireball(bool isEnemy, Vector2 Position, float dir){
+		public void CreateFireball(Characters[] entities, Vector2 Position, float dir){
 			Array.Resize(ref Level1.Fireballs, Level1.Fireballs.Length+1);
-			Fireballs[Level1.Fireballs.Length-1] = new Fireball(isEnemy, Position, Motion.VectorSpeed(6, dir));
+			Fireballs[Level1.Fireballs.Length-1] = new Fireball(entities, Position, Motion.VectorSpeed(6, dir));
 		}
 		public int CountEnemies(){
 			int result = 0;

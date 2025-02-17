@@ -31,7 +31,8 @@ namespace VirtusPecto.Desktop{
 			if(isAttacking){
 				followTarget();
 				if(speed == Vector2.Zero && (GlobalGameTime.TotalGameTime.Milliseconds % 1000 == 0)){
-					attack((float)Motion.Angle(Position, target));
+					Power.GetPower(powerIndex).UsePower(Position, target, enemy);
+
 				}
 				CheckTarget(enemy);
 			}else{
@@ -92,26 +93,6 @@ namespace VirtusPecto.Desktop{
 
 		public Vector2 GetStartingPoint(){
 			return startingPoint;
-		}
-		protected virtual void attack(float angle){
-			switch(powerIndex){
-				case 1:
-				try{
-					enemy?[targetDefined].AddHealth(-50);
-					Level1.CreateParticle(target, 0.4f, 0);
-				}catch{}
-					break;
-				case 0:
-					Level1.CreateFireball((color1 == Color.Red), Position,(float)angle);
-					break;
-				case 2:
-					Vector2 pos = 32*Motion.VectorSpeed(1, (float)Motion.Angle(Position, target))+Position - Vector2.One*32;
-					if(new GameBuilder.Shapes.RectangleF(pos, 64).Contains(target)){
-						Level1.CreateParticle(pos, 0.5f, 1);
-						enemy?[targetDefined].AddHealth(-10);
-					}
-					break;
-			}
 		}
 	}
 }
