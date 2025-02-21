@@ -50,10 +50,10 @@ namespace VirtusPecto.Desktop{
 			}
 		}
 		public void SetTarget(ObjectBuilder[] entities){
-			(Vector2, int) test = GetClosest(entities, Position);
-			if (test.Item2 != -1){
+			int test = GetClosest(entities, Position);
+			if (test != -1){
 				time = GlobalGameTime.TotalGameTime.Minutes;
-				targetDefined = test.Item2;
+				targetDefined = test;
 				target = entities[targetDefined].Position;
 				isAttacking = true;
 			}else{

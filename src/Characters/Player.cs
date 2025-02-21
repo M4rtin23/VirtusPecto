@@ -99,7 +99,7 @@ namespace VirtusPecto.Desktop{
 			}
 		}
 		public override void Draw(SpriteBatch batch){
-			Vector2 a0 = GetClosest(Level1.Enemy1, GameMouse.MPosition).Item1;
+			Vector2 a0 = Level1.Enemy1[GetClosest(Level1.Enemy1, GameMouse.MPosition)].Position;
 			if(ShowNearest){
 				for(int i = 0; i < 8; i++){
 					int a = ((i/2) % 2) * 2 -1;

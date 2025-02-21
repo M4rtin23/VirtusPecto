@@ -49,7 +49,7 @@ namespace VirtusPecto.Desktop{
 			Level1.CreateParticle(position, 0.5f, 1);
 		});
 		private static Power lightning = new Power(2, 3, (Vector2 self, Vector2 other, Characters[] entities) => {
-			int target = ObjectBuilder.GetClosest(entities, other).Item2;
+			int target = ObjectBuilder.GetClosest(entities, other);
 			entities?[target].AddHealth(-50);
 			Level1.CreateParticle(entities[target].Position, 0.4f, 0);
 		});
