@@ -99,35 +99,33 @@ namespace VirtusPecto.Desktop{
 			}
 		}
 		public override void Draw(SpriteBatch batch){
-			Vector2 a0 = Level1.Enemy1[GetClosest(Level1.Enemy1, GameMouse.MPosition)].Position;
 			if(ShowNearest){
-				for(int i = 0; i < 8; i++){
-					int a = ((i/2) % 2) * 2 -1;
-					int b = ((i/4) % 2)*7;
-					int c0 = (i % 2) + 1;
-					int c1 = ((i+1) % 2) + 1;
-					int d = ((i % 4)/3);
-					int e = ((6-i+1) % 2)*(int)Math.Floor((6-i)/4d);
-					Vector2 pos = new Vector2(-a*(float)Math.Cos(MathHelper.ToRadians((GlobalGameTime.TotalGameTime.Milliseconds) % 360))*10,-a*(float)Math.Cos(MathHelper.ToRadians((GlobalGameTime.TotalGameTime.Milliseconds) % 360))*10)+a0;
-					if(i < 2 || i > 5){
-						pos = new Vector2(-a*(float)Math.Cos(MathHelper.ToRadians((GlobalGameTime.TotalGameTime.Milliseconds) % 360))*10,a*(float)Math.Cos(MathHelper.ToRadians((GlobalGameTime.TotalGameTime.Milliseconds) % 360))*10)+a0;
-
-					}
-					RectangleF.Draw(batch, pos+new Vector2(64*a - 8*d, -64*(b-3)/4-e*8), new Vector2(8*c0, 8*c1), Color.Blue);
-				}
+				SelectionBox(Level1.Enemy1[GetClosest(Level1.Enemy1, GameMouse.MPosition)].Position, batch);
 			}
 			if(ShowDirection){
-				Direction(batch);
+				Direction(Position, GameMouse.Position+MatrixPosition, batch);
 			}
 
 			stripSprite(4);
 			center(4);
 			base.Draw(batch);
 		}
-		public void Direction(SpriteBatch batch){
-			float r = (float)(-Motion.Angle(Position, GameMouse.Position+MatrixPosition));
-			Vector2 v = new Vector2((float)Math.Cos(r), (float)Math.Sin(r));
-			Line.Draw(batch, Position + v*32, Position + v*64, 6, Color.Red);
+		public static void Direction(Vector2 self, Vector2 other, SpriteBatch batch){
+			Vector2 v = (other-self)/(other-self).Length();
+			Line.Draw(batch, self + v*32, self + v*64, 6, Color.Red);
+		}
+		public static void SelectionBox(Vector2 position, SpriteBatch batch){
+			int trace = 10, thickness = 8, size = 24;
+			float trajectory = (float)Math.Cos(MathHelper.ToRadians(GlobalGameTime.TotalGameTime.Milliseconds) % 360);
+
+			for(int i = 0; i < 8; i++){
+				Vector2 CornerPosition = new Vector2(4*((i/2 % 2) * 2 - 1), -(i/4 % 2) * 7 + 3);
+				Vector2 Shape = new Vector2((i % 2) + 1, (i + 1) % 2 + 1);
+				Vector2 Correction = new Vector2((i % 4)/3, ((5 - i) % 2)*(int)((6-i)/4d));
+
+				Vector2 osilation = new Vector2(-1, i < 2 || i > 5 ? 1:-1)*trajectory*trace*CornerPosition.X/4;
+				RectangleF.Draw(batch, osilation+position + CornerPosition*size/3-Correction*thickness, Shape*thickness, Color.Blue);
+			}
 		}
 
 	}
