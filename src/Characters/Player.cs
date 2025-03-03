@@ -117,15 +117,13 @@ namespace VirtusPecto.Desktop{
 		public static void SelectionBox(Vector2 position, SpriteBatch batch){
 			int trace = 10, thickness = 8, size = 24;
 			float trajectory = (float)Math.Cos(MathHelper.ToRadians(GlobalGameTime.TotalGameTime.Milliseconds) % 360);
+			Texture2D texture = new Texture2D(batch.GraphicsDevice, 2, 2);
+			texture.SetData(new Color[]{Color.White, Color.White, Color.White, new Color(0,0,0,0)});
 
-			for(int i = 0; i < 8; i++){
-				Vector2 CornerPosition = new Vector2(4*((i/2 % 2) * 2 - 1), -(i/4 % 2) * 7 + 3);
-				Vector2 Shape = new Vector2((i % 2) + 1, (i + 1) % 2 + 1);
-				Vector2 Correction = new Vector2((i % 4)/3, ((5 - i) % 2)*(int)((6-i)/4d));
-
-				Vector2 osilation = new Vector2(-1, i < 2 || i > 5 ? 1:-1)*trajectory*trace*CornerPosition.X/4;
-				RectangleF.Draw(batch, osilation+position + CornerPosition*size/3-Correction*thickness, Shape*thickness, Color.Blue);
-			}
+			batch.Draw(texture, position + Vector2.One*trajectory*trace-Vector2.One*size, null, Color.Blue, 0, new Vector2(1,1), thickness, SpriteEffects.None, 0);
+			batch.Draw(texture, position + new Vector2(1,-1)*trajectory*trace-new Vector2(1,-1)*size, null, Color.Blue, (float)-Math.PI/2, new Vector2(1,1), thickness, SpriteEffects.None, 0);
+			batch.Draw(texture, position - new Vector2(1,-1)*trajectory*trace+new Vector2(1,-1)*size, null, Color.Blue, (float)Math.PI/2, new Vector2(1, 2), thickness, SpriteEffects.None, 0);
+			batch.Draw(texture, position - Vector2.One*trajectory*trace+Vector2.One*size, null, Color.Blue, (float)Math.PI, new Vector2(2, 1), thickness, SpriteEffects.None, 0);
 		}
 
 	}
