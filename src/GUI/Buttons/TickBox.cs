@@ -6,7 +6,6 @@ using static VirtusPecto.Desktop.Game1;
 
 namespace VirtusPecto.Desktop{
 	public class TickBox : Box{
-		protected string name;
 		protected Vector2 position;
 
 		public TickBox(string name, bool state){

@@ -6,7 +6,7 @@ using static VirtusPecto.Desktop.Game1;
 
 namespace VirtusPecto.Desktop{
 	public class OptionBox : Box{
-		protected string name, option, separator;
+		protected string option, separator;
 		protected Rectangle hitbox{get => new Rectangle((int)position.X,(int)position.Y,128,32);}
 		protected Vector2 position;
 		private Color color;
