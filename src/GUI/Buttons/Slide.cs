@@ -40,7 +40,10 @@ namespace VirtusPecto.Desktop{
         public override void Draw(SpriteBatch spriteBatch){
 			point.Draw(spriteBatch);
 			line.Draw(spriteBatch);
-			spriteBatch.DrawString(FontNormal, name+": "+(int)((point.X-line.Min.X)/(line.Max.X - line.Min.X)*100), position - new Vector2(0, 48), Color.White);
+			spriteBatch.DrawString(FontNormal, name+": "+GetValue(), position - new Vector2(0, 48), Color.White);
+        }
+		public int GetValue(){
+			return (int)((point.X-line.Min.X)/(line.Max.X - line.Min.X)*100);
         }
     }
 }
