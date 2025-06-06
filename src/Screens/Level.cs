@@ -53,7 +53,7 @@ namespace VirtusPecto.Desktop{
 					Creature1[i]?.Update();
 				}
 				if(GlobalGameTime.TotalGameTime.Milliseconds % 1000 == 0){
-					FitFireball();
+					Fit(ref Fireballs);
 				}
 				if(CountEnemies() == 0){
 					Environment.Exit(0);
@@ -94,31 +94,8 @@ namespace VirtusPecto.Desktop{
 			}
 			Pause?.Draw(batch);
 		}
-		public void FitFireball(){
-			Fireball[] a;
-			int o = 0;
-			//Search Number of non-null elements.
-			for(int i = 0;i < Fireballs.Length; i++){
-				if(Fireballs[i] != null){
-					o++;
-				}
-			}
-			//Set a second array.
-			a = new Fireball[o];
-			//Reuses it.
-			o = 0;
-			//Copies elements for one array to the other.
-			for(int i = 0; i < Fireballs.Length; i++){
-				if(Fireballs[i] != null){
-					a[o] = Fireballs[i];
-					o++;
-				}
-			}
-			//Copies the second array to the original.
-			Fireballs = a;
-		}
-		public object Fit(object[] obj){
-			object[] a;
+		public void Fit<Type>(ref Type[] obj){
+			Type[] a;
 			int o = 0;
 			//Search Number of non-null elements.
 			for(int i = 0;i < obj.Length; i++){
@@ -127,7 +104,7 @@ namespace VirtusPecto.Desktop{
 				}
 			}
 			//Set a second array.
-			a = new object[o];
+			a = new Type[o];
 			//Reuses it.
 			o = 0;
 			//Copies elements for one array to the other.
@@ -138,7 +115,7 @@ namespace VirtusPecto.Desktop{
 				}
 			}
 			//Copies the second array to the original.
-			return a;
+			obj = a;
 		}
 		public void DestroyEntities(){
 			for(int i = 0; i < Enemy1.Length; i++){
@@ -165,27 +142,7 @@ namespace VirtusPecto.Desktop{
 					Particles[i] = null;
 				}
 			}
-			Particle[] a;
-			int o = 0;
-			//Search Number of non-null elements.
-			for(int i = 0;i < Particles.Length; i++){
-				if(Particles[i] != null){
-					o++;
-				}
-			}
-			//Set a second array.
-			a = new Particle[o];
-			//Reuses it.
-			o = 0;
-			//Copies elements for one array to the other.
-			for(int i = 0; i < Particles.Length; i++){
-				if(Particles[i] != null){
-					a[o] = Particles[i];
-					o++;
-				}
-			}
-			//Copies the second array to the original.
-			Particles = a;
+			Fit(ref Particles);
 		}
 		public void CreateFireball(Characters[] entities, Vector2 Position, float dir){
 			Array.Resize(ref Level1.Fireballs, Level1.Fireballs.Length+1);
