@@ -144,10 +144,6 @@ namespace VirtusPecto.Desktop{
 			}
 			Fit(ref Particles);
 		}
-		public void CreateFireball(Characters[] entities, Vector2 Position, float dir){
-			Array.Resize(ref Level1.Fireballs, Level1.Fireballs.Length+1);
-			Fireballs[Level1.Fireballs.Length-1] = new Fireball(entities, Position, Motion.VectorSpeed(6, dir));
-		}
 		public int CountEnemies(){
 			int result = 0;
 			for(int i = 0; i < Enemy1.Length; i++){
@@ -157,13 +153,9 @@ namespace VirtusPecto.Desktop{
 			}
 			return result;
 		}
-		public void CreateCreature(CardContent content, Vector2 pos){
-			Array.Resize(ref Level1.Creature1, Level1.Creature1.Length+1);
-			Creature1[Level1.Creature1.Length-1] = new Creature(content, pos);
-		}
-		public void CreateParticle(Vector2 position, float seconds, int type){
-			Array.Resize(ref Level1.Particles, Level1.Particles.Length+1);
-			Particles[Level1.Particles.Length-1] = new Particle(position, 1, seconds, type);
+		public void CreateObject<Type>(Type obj, ref Type[] array){
+			Array.Resize(ref array, array.Length+1);
+			array[array.Length-1] = obj;
 		}
 	}
 }

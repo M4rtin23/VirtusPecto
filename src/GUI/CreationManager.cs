@@ -16,7 +16,7 @@ namespace VirtusPecto.Desktop{
 			if(GameMouse.IsClicking && GameMouse.IsInside){
 				for(int i = 0; i < 3; i++){
 					if (CardNumber == i && !Level1.Cards[i].Hitbox.Contains(GameMouse.Position)){
-						Level1.CreateCreature(Level1.Cards[i].Content, CardPosition + MatrixPosition- new Vector2(0, 32+64));
+						Level1.CreateObject(new Creature(Level1.Cards[i].Content, CardPosition + MatrixPosition- new Vector2(0, 32+64)), ref Level1.Creature1);
 						Level1.Player1.Mana -= Level1.Cards[i].Content.Cost;
 					}
 				}
