@@ -1,5 +1,5 @@
 namespace VirtusPecto.Desktop{
-    public class Characters : GameBuilder.InGame.ObjectBuilder{
+    public class Characters : GameBuilder.InGame.ObjectBuilder, INullable{
         protected float health;
         protected int powerIndex;
         public void AddHealth(int number){
@@ -7,6 +7,9 @@ namespace VirtusPecto.Desktop{
 		}
 		public float GetHealth(){
 			return health;
+		}
+		public bool GetState(){
+			return health > 0;
 		}
     }
 }

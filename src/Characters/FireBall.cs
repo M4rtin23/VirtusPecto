@@ -6,7 +6,7 @@ using GameBuilder;
 using GameBuilder.Shapes;
 
 namespace VirtusPecto.Desktop{
-	public class Fireball : GameBuilder.InGame.ObjectBuilder{
+	public class Fireball : GameBuilder.InGame.ObjectBuilder, INullable{
 		Characters[] entities;
 		bool isAlive = true;
 		public Fireball(Characters[] entities, Vector2 initialPosition, Vector2 speed){
@@ -23,7 +23,7 @@ namespace VirtusPecto.Desktop{
 			for (int i = 0; i < entities.Length; i++) {
 				if (entities[i] != null && entities[i].Hitbox.Intersects(Hitbox)){
 					isAlive = false;
-					Level1.DestroyFireball();
+					Level1.Destroy(Level1.Fireballs);
 					entities[i].AddHealth(-10);
 				}
 			}

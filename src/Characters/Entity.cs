@@ -16,7 +16,8 @@ namespace VirtusPecto.Desktop{
 		protected Characters[] enemy;
 		public override void Update() {
 			if(health <= 0){
-				Level1.DestroyEntities();
+				Level1.Destroy(Level1.Enemy1);
+				Level1.Destroy(Level1.Creature1);
 			}
 			Hitbox = new RectangleF((int) Position.X - 32, (int) Position.Y + 32, 128-64, 32);
 			animationImage(4);

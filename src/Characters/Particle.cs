@@ -4,7 +4,7 @@ using GameBuilder.Shapes;
 
 
 namespace VirtusPecto.Desktop{
-    public class Particle{
+    public class Particle : INullable{
         private Vector2 position;
         private Texture2D spriteIndex;
         private float angle;
@@ -29,7 +29,8 @@ namespace VirtusPecto.Desktop{
         public void Update(){
             timer--;
             if(timer < 0){
-                Game1.Level1.DestroyParticle();
+                Game1.Level1.Destroy(Game1.Level1.Particles);
+                Game1.Level1.Fit(ref Game1.Level1.Particles);
             }
         }
         public bool GetState(){

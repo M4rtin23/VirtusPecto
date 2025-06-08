@@ -117,32 +117,12 @@ namespace VirtusPecto.Desktop{
 			//Copies the second array to the original.
 			obj = a;
 		}
-		public void DestroyEntities(){
-			for(int i = 0; i < Enemy1.Length; i++){
-				if(Enemy1[i]?.GetHealth() <= 0){
-					Enemy1[i] = null;
+		public void Destroy<Type>(Type[] obj) where Type : class, INullable{
+			for(int i = 0; i < obj.Length; i++){
+				if(obj[i] != null && !obj[i].GetState()){
+					obj[i] = null;
 				}
 			}
-			for(int i = 0; i < Creature1.Length; i++){
-				if(Creature1[i]?.GetHealth() <= 0){
-					Creature1[i] = null;
-				}
-			}
-		}
-		public void DestroyFireball(){
-			for(int i = 0; i < Fireballs.Length; i++){
-				if(Fireballs[i] != null && !Fireballs[i].GetState()){
-					Fireballs[i] = null;
-				}
-			}
-		}
-		public void DestroyParticle(){
-			for(int i = 0; i < Particles.Length; i++){
-				if(Particles[i] != null && !Particles[i].GetState()){
-					Particles[i] = null;
-				}
-			}
-			Fit(ref Particles);
 		}
 		public int CountEnemies(){
 			int result = 0;
