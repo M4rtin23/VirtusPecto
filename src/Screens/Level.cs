@@ -55,7 +55,7 @@ namespace VirtusPecto.Desktop{
 				if(GlobalGameTime.TotalGameTime.Milliseconds % 1000 == 0){
 					Fit(ref Fireballs);
 				}
-				if(CountEnemies() == 0){
+				if(Count(Enemy1) == 0){
 					Environment.Exit(0);
 				}
 				if(GameMouse.IsClicking){
@@ -124,10 +124,10 @@ namespace VirtusPecto.Desktop{
 				}
 			}
 		}
-		public int CountEnemies(){
+		public int Count<Type>(Type[] obj){
 			int result = 0;
-			for(int i = 0; i < Enemy1.Length; i++){
-				if(Enemy1[i] !=null){
+			for(int i = 0; i < obj.Length; i++){
+				if(obj[i] !=null){
 					result++;
 				}
 			}
