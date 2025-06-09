@@ -8,24 +8,20 @@ using GameBuilder.Shapes;
 
 namespace VirtusPecto.Desktop{
 	public class Level : Screen{
-		public Player Player1;
+		public Player Player1 = new Player();
 		public Enemy[] Enemy1;
-		public Card[] Cards;
-		public Creature[] Creature1 = new Creature[0];
-		public Fireball[] Fireballs;
-		public Particle[] Particles;
+		public Card[] Cards = new Card[3];
+		public Creature[] Creature1 = [];
+		public Fireball[] Fireballs = [];
+		public Particle[] Particles = [];
 		public CreationManager CreationManager;
 		public static PauseMenu Pause;
 		private bool checker;
 		public Level(int EnemyQuantity){
-			Fireballs = new Fireball[0];
-			Particles = new Particle[0];
 			Enemy1 = new Enemy[EnemyQuantity];
 			for (int i = 0; i < Enemy1.Length; i++){
 				Enemy1[i] = new Enemy(new Vector2(i*400,new Random(i).Next(-500, 500)));
 			}
-			Player1 = new Player();
-			Cards = new Card[3];
 		}
 		public void Creation() {
 			Cards[0] = new Card(0, Color.Red);
