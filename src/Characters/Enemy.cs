@@ -19,8 +19,7 @@ namespace VirtusPecto.Desktop{
 		}
 		public override void Update() {
 			enemy = Level1.Creature1;
-			System.Array.Resize(ref enemy, enemy.Length+1);
-			enemy[enemy.Length-1] = Level1.Player1;
+			Level1.CreateObject(Level1.Player1, ref enemy);
 			SetTarget(enemy);
 			base.Update();
 			entityCollision(new Player[]{Level1.Player1});
