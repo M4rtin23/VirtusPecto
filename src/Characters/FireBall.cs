@@ -7,9 +7,9 @@ using GameBuilder.Shapes;
 
 namespace VirtusPecto.Desktop{
 	public class Fireball : GameBuilder.InGame.ObjectBuilder, INullable{
-		Characters[] entities;
+		Entity[] entities;
 		bool isAlive = true;
-		public Fireball(Characters[] entities, Vector2 initialPosition, Vector2 speed){
+		public Fireball(Entity[] entities, Vector2 initialPosition, Vector2 speed){
 			SpriteIndex = SpriteFireball;
 			this.entities = entities;
 			Position = initialPosition;

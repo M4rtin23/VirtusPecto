@@ -4,7 +4,7 @@ using static VirtusPecto.Desktop.Game1;
 using GameBuilder;
 
 namespace VirtusPecto.Desktop{
-	public class Enemy : Entity{
+	public class Enemy : Agent{
 		public static bool ShowDirection = false;
 		public Enemy(Vector2 pos){
 			powerIndex = 2;

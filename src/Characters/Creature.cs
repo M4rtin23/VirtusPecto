@@ -2,7 +2,7 @@
 using static VirtusPecto.Desktop.Game1;
 
 namespace VirtusPecto.Desktop{
-	public class Creature : Entity{
+	public class Creature : Agent{
 		public Creature(CardContent content,Vector2 pos){
 			enemy = Level1.Enemy1;
 			SpriteIndex = content.Sprite;

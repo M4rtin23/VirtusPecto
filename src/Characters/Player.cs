@@ -9,7 +9,7 @@ using GameBuilder.InGame;
 using GameBuilder.Shapes;
 
 namespace VirtusPecto.Desktop{
-	public class Player : Characters{
+	public class Player : Entity{
 		public float Mana = 50;
 		public int Health{get => (int)health;}
 		public bool keyCheck = false;
