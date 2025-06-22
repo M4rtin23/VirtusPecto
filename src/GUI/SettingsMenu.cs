@@ -41,12 +41,12 @@ namespace VirtusPecto.Desktop{
 				setting[i].Update(Width/4 * (i % 3 + 1) - 64, Height/6 * (i / 3 + 2));
 			}
 			Back.Update(0, 0);
-			IsDescriptionOn = setting[0].State;
-			ShowNearest = setting[1].State;
-			ShowDirection = setting[2].State;
-			IsJoystick = setting[3].State;
-			IsFullscreen = setting[5].State;
-			Enemy.ShowDirection = setting[7].State;
+			IsDescriptionOn = setting[4].State;
+			ShowNearest = setting[7].State;
+			ShowDirection = setting[6].State;
+			IsJoystick = setting[5].State;
+			IsFullscreen = setting[2].State;
+			Enemy.ShowDirection = setting[3].State;
 		}
 		public override void Draw(SpriteBatch batch){
 			Back.Draw(batch);
