@@ -20,7 +20,6 @@ namespace VirtusPecto.Desktop{
 				Level1.Destroy(Level1.Creature1);
 			}
 			Hitbox = new RectangleF((int) Position.X - 32, (int) Position.Y + 32, 128-64, 32);
-			animationImage(4);
 			lookAtTarget();
 			if(speed == Vector2.Zero){
 				imageIndex = 2;
@@ -35,8 +34,6 @@ namespace VirtusPecto.Desktop{
 			SetTarget(enemy);
 		}
 		public override void Draw(SpriteBatch batch) {
-			center(4);
-			stripSprite(4);
 			base.Draw(batch);
 			if(health < maxHealth){
 				new RectangleF(Position - new Vector2(64, 80), new Vector2(128, 8), new Color(64, 64, 64, 150)).Draw(batch, 0.1f);

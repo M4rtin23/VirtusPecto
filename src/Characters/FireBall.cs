@@ -18,7 +18,6 @@ namespace VirtusPecto.Desktop{
 		}
 		public override void Update() {
 			animationSpeed = 0.25f;
-			animationImage(3);
 			Hitbox = new RectangleF((int)Position.X - 32,(int) Position.Y - 32, 96, 96);
 			for (int i = 0; i < entities.Length; i++) {
 				if (entities[i] != null && entities[i].Hitbox.Intersects(Hitbox)){
@@ -28,11 +27,6 @@ namespace VirtusPecto.Desktop{
 				}
 			}
 			base.Update();
-		}
-		public override void Draw(SpriteBatch batch) {
-			center(4);
-			stripSprite(4);
-			base.Draw(batch);
 		}
 		public bool GetState(){
 			return isAlive;

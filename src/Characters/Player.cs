@@ -83,7 +83,6 @@ namespace VirtusPecto.Desktop{
 		}
 		public override void Update(){
 			Power.Update();
-			animationImage(4);
 			gameControl();
 
 			Hitbox = new RectangleF((int) Position.X - 32, (int) Position.Y + 32, 128-64, 32);
@@ -106,8 +105,6 @@ namespace VirtusPecto.Desktop{
 				Direction(Position, GameMouse.Position+MatrixPosition, batch);
 			}
 
-			stripSprite(4);
-			center(4);
 			base.Draw(batch);
 		}
 		public static void Direction(Vector2 self, Vector2 other, SpriteBatch batch){
