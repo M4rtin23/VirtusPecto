@@ -25,13 +25,13 @@ namespace VirtusPecto.Desktop{
 			}
 		}
 		public void Draw(GraphicsDevice graphicsDevice){
-			Vector2[] Vertices = {new Vector2(30*cardRotation, 200*cardRotation), new Vector2(0, SpriteCard.Height), new Vector2(SpriteCard.Width, SpriteCard.Height), new Vector2(SpriteCard.Width-30*cardRotation, 200*cardRotation)};
-			Vector2[] OtherVert = {new Vector2(0,0), new Vector2(0, 1), new Vector2(1, 1), new Vector2(1, 0)};
+			Vector2[] Vertices = {new Vector2(30*cardRotation, 200*cardRotation), new Vector2(SpriteCard.Width-30*cardRotation, 200*cardRotation), new Vector2(0, SpriteCard.Height), new Vector2(SpriteCard.Width, SpriteCard.Height)};
+			Vector2[] OtherVert = {new Vector2(0,0), new Vector2(1, 0), new Vector2(0, 1), new Vector2(1, 1)};
 
-			VertexPositionColorTexture[] vertexPositionColors = new VertexPositionColorTexture[8];
+			VertexPositionColorTexture[] vertexPositionColors = new VertexPositionColorTexture[4];
 			BasicEffect basicEffect;
-			for(int i = 0; i < 8; i++){
-				vertexPositionColors[i] = new VertexPositionColorTexture(new Vector3(Vertices[(i%4)]+CardPosition-new Vector2(64+60, 96+60+150), 0), new Color(79,79,79),OtherVert[i%4]);
+			for(int i = 0; i < 4; i++){
+				vertexPositionColors[i] = new VertexPositionColorTexture(new Vector3(Vertices[(i)]+CardPosition-new Vector2(64+60, 96+60+150), 0), new Color(79,79,79),OtherVert[i]);
 			}
 			basicEffect = new BasicEffect(graphicsDevice);
 			basicEffect.Texture = SpriteCard;
@@ -39,7 +39,7 @@ namespace VirtusPecto.Desktop{
 			basicEffect.VertexColorEnabled = true;
 			basicEffect.World = Matrix.CreateOrthographicOffCenter(0, graphicsDevice.Viewport.Width, graphicsDevice.Viewport.Height, 0, 0, 1);
 			basicEffect.CurrentTechnique.Passes[0].Apply();
-		    graphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleStrip, vertexPositionColors, 0, 5);
+		    graphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleStrip, vertexPositionColors, 0, 2);
 		}
 		public void Draw(SpriteBatch batch){
             Vector2 position = CardPosition+MatrixPosition-new Vector2(0, 96-100*(cardRotation)+100);
