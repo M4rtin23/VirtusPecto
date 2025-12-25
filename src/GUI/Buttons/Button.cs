@@ -11,19 +11,19 @@ namespace VirtusPecto.Desktop{
 		public RectangleF Hitbox{get => new RectangleF(position.X, position.Y,128,32);}
 		public Vector2 position = Vector2.Zero;
 		protected int transparency = 0;
-        protected Action action;
-        protected string name;
+		public Action Action;
+		protected string name;
 
-        public Button(string name, Action action){
-            this.action = action;
-            this.name = name;
-        }
+		public Button(string name, Action action){
+			this.Action = action;
+			this.name = name;
+		}
 
 		public virtual void Update(float x, float y){
 			position = new Vector2(x, y);
 			if (Hitbox.Contains(GameMouse.Position)){
 				transparency = 64;
-				Mouse1.Click(action);
+				Mouse1.Click(Action);
 			}
 			else{
 				transparency = 0;

@@ -9,7 +9,7 @@ namespace VirtusPecto.Desktop{
 	public class SettingsMenu: Screen{
 		Box[] setting = new Box[8];
 		OptionBox aspectRatio, resolution;
-
+		bool check;
 		private Button Back = new Button("Go Back", () => {if(Level1 != null) Game1.Screen = Level1; else Game1.Screen = StartMenu; Settings = null;});
 		Vector2 aR{get => aspectRatio.Options[aspectRatio.Option]/aspectRatio.Options[aspectRatio.Option].Y;}
 
@@ -41,6 +41,7 @@ namespace VirtusPecto.Desktop{
 				setting[i].Update(Width/4 * (i % 3 + 1) - 64, Height/6 * (i / 3 + 2));
 			}
 			Back.Update(0, 0);
+			InputKeys.Press(5, Back.Action, ref check);
 			IsDescriptionOn = setting[4].State;
 			ShowNearest = setting[7].State;
 			ShowDirection = setting[6].State;
