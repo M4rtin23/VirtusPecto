@@ -29,8 +29,8 @@ namespace VirtusPecto.Desktop{
         public void Update(){
             timer--;
             if(timer < 0){
-                Game1.Level1.Destroy(Game1.Level1.Particles);
-                Game1.Level1.Fit(ref Game1.Level1.Particles);
+                Level.Destroy(Game1.Level1.Particles);
+                Level.Fit(ref Game1.Level1.Particles);
             }
         }
         public bool GetState(){

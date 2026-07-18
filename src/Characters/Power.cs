@@ -46,15 +46,15 @@ namespace VirtusPecto.Desktop{
 					entities[i].AddHealth(-10);
 				}				
 			}
-			Level1.CreateObject(new Particle(position, 1, 0.5f, 1), ref Level1.Particles);
+			Level.CreateObject(new Particle(position, 1, 0.5f, 1), ref Level1.Particles);
 		});
 		private static Power lightning = new Power(2, 3, (Vector2 self, Vector2 other, Entity[] entities) => {
 			int target = ObjectBuilder.GetClosest(entities, other);
 			entities?[target].AddHealth(-50);
-			Level1.CreateObject(new Particle(entities[target].Position, 1, 0.4f, 0), ref Level1.Particles);
+			Level.CreateObject(new Particle(entities[target].Position, 1, 0.4f, 0), ref Level1.Particles);
 		});
 		private static Power fireball = new Power(1, 1,(Vector2 self, Vector2 other, Entity[] entities) => {
-			Level1.CreateObject(new Fireball(entities, self, -Vector2.Normalize(self-other)*6), ref Level1.Fireballs);
+			Level.CreateObject(new Fireball(entities, self, -Vector2.Normalize(self-other)*6), ref Level1.Fireballs);
 		});
 	}
 }

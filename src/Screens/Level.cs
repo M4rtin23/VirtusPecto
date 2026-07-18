@@ -90,7 +90,7 @@ namespace VirtusPecto.Desktop{
 			}
 			Pause?.Draw(batch);
 		}
-		public void Fit<Type>(ref Type[] obj){
+		public static  void Fit<Type>(ref Type[] obj){
 			Type[] a;
 			int o = 0;
 			//Search Number of non-null elements.
@@ -113,14 +113,14 @@ namespace VirtusPecto.Desktop{
 			//Copies the second array to the original.
 			obj = a;
 		}
-		public void Destroy<Type>(Type[] obj) where Type : class, INullable{
+		public static void Destroy<Type>(Type[] obj) where Type : class, INullable{
 			for(int i = 0; i < obj.Length; i++){
 				if(obj[i] != null && !obj[i].GetState()){
 					obj[i] = null;
 				}
 			}
 		}
-		public int Count<Type>(Type[] obj){
+		public static int Count<Type>(Type[] obj){
 			int result = 0;
 			for(int i = 0; i < obj.Length; i++){
 				if(obj[i] !=null){
@@ -129,7 +129,7 @@ namespace VirtusPecto.Desktop{
 			}
 			return result;
 		}
-		public void CreateObject<Type>(Type obj, ref Type[] array){
+		public static void CreateObject<Type>(Type obj, ref Type[] array){
 			Array.Resize(ref array, array.Length+1);
 			array[array.Length-1] = obj;
 		}
