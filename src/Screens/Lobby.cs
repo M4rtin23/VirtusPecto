@@ -32,7 +32,6 @@ namespace VirtusPecto.Desktop{
 
 			play = new Button("Play", ()=>{
 					Level1 = new Level((int)difficultyBox.Options[difficultyBox.Option].X);
-					Level1.Creation();
 					StartMenu = null;
 					Game1.Screen = Level1;
 				}

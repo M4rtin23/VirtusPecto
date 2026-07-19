@@ -22,11 +22,9 @@ namespace VirtusPecto.Desktop{
 			for (int i = 0; i < Enemy1.Length; i++){
 				Enemy1[i] = new Enemy(new Vector2(i*400,new Random(i).Next(-500, 500)));
 			}
-		}
-		public void Creation() {
-			Cards[0] = new Card(0, Color.Red);
-			Cards[1] = new Card(1, Color.Green);
-			Cards[2] = new Card(2, Color.DarkBlue);
+			Cards[0] = new Card(0);
+			Cards[1] = new Card(1);
+			Cards[2] = new Card(2);
 		}
 		public override void Update() {
 			if(Pause == null){
