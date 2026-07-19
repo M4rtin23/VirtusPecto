@@ -26,35 +26,38 @@ namespace VirtusPecto.Desktop{
 			Cards[1] = new Card(1);
 			Cards[2] = new Card(2);
 		}
+		private void UpdatePausable(){
+			InputKeys.Press(5, () => {Pause = new PauseMenu(); Level1.CreationManager = null;}, ref checker);
+			for (int i = 0; i < Fireballs.Length; i++) {
+				Fireballs[i]?.Update();
+			}
+			for (int i = 0; i < Particles.Length; i++) {
+				Particles[i]?.Update();
+			}
+
+			for(int i = 0; i < 3; i++){
+				Cards[i].Update();
+			}
+			for (int i = 0; i < Enemy1.Length; i++){
+				Enemy1[i]?.Update();
+			}
+			Player1.Update();
+			for(int i = 0; i < Creature1.Length; i++){
+				Creature1[i]?.Update();
+			}
+			if(GlobalGameTime.TotalGameTime.Milliseconds % 1000 == 0){
+				Level.Fit(ref Fireballs);
+			}
+			if(Level.Count(Enemy1) == 0){
+				Environment.Exit(0);
+			}
+			if(GameMouse.IsClicking){
+				CreationManager?.OnCreation();
+			}
+		}
 		public override void Update() {
 			if(Pause == null){
-				InputKeys.Press(5, () => {Pause = new PauseMenu(); Level1.CreationManager = null;}, ref checker);
-				for (int i = 0; i < Fireballs.Length; i++) {
-					Fireballs[i]?.Update();
-				}
-				for (int i = 0; i < Particles.Length; i++) {
-					Particles[i]?.Update();
-				}
-
-				for(int i = 0; i < 3; i++){
-					Cards[i].Update();
-				}
-				for (int i = 0; i < Enemy1.Length; i++){
-					Enemy1[i]?.Update();
-				}
-				Player1.Update();
-				for(int i = 0; i < Creature1.Length; i++){
-					Creature1[i]?.Update();
-				}
-				if(GlobalGameTime.TotalGameTime.Milliseconds % 1000 == 0){
-					Fit(ref Fireballs);
-				}
-				if(Count(Enemy1) == 0){
-					Environment.Exit(0);
-				}
-				if(GameMouse.IsClicking){
-					CreationManager?.OnCreation();
-				}
+				UpdatePausable();
 			}
 			Pause?.Update();
        }
