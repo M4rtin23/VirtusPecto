@@ -11,16 +11,17 @@ namespace VirtusPecto.Desktop{
 		public Player Player1 = new Player();
 		public Enemy[] Enemy1;
 		public Card[] Cards = new Card[3];
-		public Creature[] Creature1 = [];
+		public Entity[] Creature1;
 		public Fireball[] Fireballs = [];
 		public Particle[] Particles = [];
 		public CreationManager CreationManager;
 		public static PauseMenu Pause;
 		private bool checker;
 		public Level(int EnemyQuantity){
+			Creature1 = new Entity[]{Player1};
 			Enemy1 = new Enemy[EnemyQuantity];
 			for (int i = 0; i < Enemy1.Length; i++){
-				Enemy1[i] = new Enemy(new Vector2(i*400,new Random(i).Next(-500, 500)));
+				Enemy1[i] = new Enemy(new Vector2(i*400,new Random(i).Next(-500, 500)), ref Creature1);
 			}
 			Cards[0] = new Card(0);
 			Cards[1] = new Card(1);
@@ -41,7 +42,6 @@ namespace VirtusPecto.Desktop{
 			for (int i = 0; i < Enemy1.Length; i++){
 				Enemy1[i]?.Update();
 			}
-			Player1.Update();
 			for(int i = 0; i < Creature1.Length; i++){
 				Creature1[i]?.Update();
 			}
@@ -73,7 +73,6 @@ namespace VirtusPecto.Desktop{
 			for(int i = 0; i < Creature1.Length; i++){
 				Creature1[i]?.Draw(batch);
 			}
-			Player1.Draw(batch);
 			for (int i = 0; i < Enemy1.Length; i++){
 				if (Enemy1[i] != null){
 					Enemy1[i].Draw(batch);

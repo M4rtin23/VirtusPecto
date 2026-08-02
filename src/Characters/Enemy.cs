@@ -6,7 +6,7 @@ using GameBuilder;
 namespace VirtusPecto.Desktop{
 	public class Enemy : Agent{
 		public static bool ShowDirection = false;
-		public Enemy(Vector2 pos){
+		public Enemy(Vector2 pos, ref Entity[] enemy){
 			powerIndex = 2;
 			SpriteIndex = SpriteEnemy;
 			Position = pos;
@@ -16,10 +16,9 @@ namespace VirtusPecto.Desktop{
 			color1 = Color.Red;
 			health = 100;
 			maxHealth = 100;
+			this.enemy = enemy;
 		}
 		public override void Update() {
-			enemy = Level1.Creature1;
-			Level.CreateObject(Level1.Player1, ref enemy);
 			SetTarget(enemy);
 			base.Update();
 			entityCollision(new Player[]{Level1.Player1});
