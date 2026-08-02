@@ -22,7 +22,7 @@ namespace VirtusPecto.Desktop{
 			for (int i = 0; i < entities.Length; i++) {
 				if (entities[i] != null && entities[i].Hitbox.Intersects(Hitbox)){
 					isAlive = false;
-					Level.Destroy(Level1.Fireballs);
+					ArrayUtils.Destroy(Level1.Fireballs);
 					entities[i].AddHealth(-10);
 				}
 			}

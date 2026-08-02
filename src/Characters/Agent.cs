@@ -34,7 +34,7 @@ namespace VirtusPecto.Desktop{
 				SetTarget(enemy);
 			}
 			if(health <= 0){
-				Level.Destroy(ally);
+				ArrayUtils.Destroy(ally);
 			}
 			Hitbox = new RectangleF((int) Position.X - 32, (int) Position.Y + 32, 128-64, 32);
 			lookAtTarget();
