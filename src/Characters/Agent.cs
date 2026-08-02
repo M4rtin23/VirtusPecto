@@ -6,18 +6,35 @@ using GameBuilder.Shapes;
 using GameBuilder.InGame;
 
 namespace VirtusPecto.Desktop{
-	public abstract class Agent : Entity{
+	public class Agent : Entity{
+		public static bool ShowDirection = false;
 		protected Vector2 target, startingPoint;
 		protected float maxHealth = 100;
 		protected float dist;
 		protected int targetDefined = -1;
 		protected int time;
 		protected Color color1 = Color.Green;
-		protected Entity[] enemy;
+		public Entity[] enemy;
+		protected Entity[] ally;
+		public Agent(CardContent content,Vector2 pos, Color color, ref Entity[] enemy, ref Entity[] ally){
+			this.enemy = enemy;
+			this.ally = ally;
+			SpriteIndex = content.Sprite;
+			Position = pos;
+			maxSpeed = content.Spd;
+			dist = content.Dist;
+			startingPoint = pos;
+			color1 = color;
+			powerIndex = content.PowerIndex;
+			health = content.HP;
+			maxHealth = health;
+		}
 		public override void Update() {
+			if(GlobalGameTime.TotalGameTime.Minutes - time > 1){
+				SetTarget(enemy);
+			}
 			if(health <= 0){
-				Level.Destroy(Level1.Enemy1);
-				Level.Destroy(Level1.Creature1);
+				Level.Destroy(ally);
 			}
 			Hitbox = new RectangleF((int) Position.X - 32, (int) Position.Y + 32, 128-64, 32);
 			lookAtTarget();
@@ -32,8 +49,15 @@ namespace VirtusPecto.Desktop{
 				Power.GetPower(powerIndex).UsePower(Position, target, enemy);
 			}
 			SetTarget(enemy);
+			entityCollision(ally);
 		}
 		public override void Draw(SpriteBatch batch) {
+			float r = new GameBuilder.Motion(speed).Radians;
+			Vector2 v = new Vector2(-(float)System.Math.Cos(r), (float)System.Math.Sin(r));
+			if(ShowDirection){
+				GameBuilder.Shapes.Line.Draw(batch, Position + v*32, Position + v*64, 6, Color.Red);
+			}
+
 			base.Draw(batch);
 			if(health < maxHealth){
 				new RectangleF(Position - new Vector2(64, 80), new Vector2(128, 8), new Color(64, 64, 64, 150)).Draw(batch, 0.1f);

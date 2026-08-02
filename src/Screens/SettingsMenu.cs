@@ -33,7 +33,7 @@ namespace VirtusPecto.Desktop{
 				}
 			);
 			resolution.SetDefaultOption(" "+ Width + " X " + Height);
-			setting[3] = new TickBox("Show Enemy Direction", Enemy.ShowDirection);
+			setting[3] = new TickBox("Show Enemy Direction", Agent.ShowDirection);
 		}
 
 		public override void Update(){
@@ -47,7 +47,7 @@ namespace VirtusPecto.Desktop{
 			ShowDirection = setting[6].State;
 			IsJoystick = setting[5].State;
 			IsFullscreen = setting[2].State;
-			Enemy.ShowDirection = setting[3].State;
+			Agent.ShowDirection = setting[3].State;
 		}
 		public override void Draw(SpriteBatch batch){
 			Back.Draw(batch);

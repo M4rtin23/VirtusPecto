@@ -9,7 +9,7 @@ using GameBuilder.Shapes;
 namespace VirtusPecto.Desktop{
 	public class Level : Screen{
 		public Player Player1 = new Player();
-		public Enemy[] Enemy1;
+		public Entity[] Enemy1;
 		public Card[] Cards = new Card[3];
 		public Entity[] Creature1;
 		public Fireball[] Fireballs = [];
@@ -19,9 +19,9 @@ namespace VirtusPecto.Desktop{
 		private bool checker;
 		public Level(int EnemyQuantity){
 			Creature1 = new Entity[]{Player1};
-			Enemy1 = new Enemy[EnemyQuantity];
+			Enemy1 = new Agent[EnemyQuantity];
 			for (int i = 0; i < Enemy1.Length; i++){
-				Enemy1[i] = new Enemy(new Vector2(i*400,new Random(i).Next(-500, 500)), ref Creature1);
+				Enemy1[i] = new Agent(CardContent.Enemy, new Vector2(i*400,new Random(i).Next(-500, 500)), Color.Red, ref Creature1, ref Enemy1);
 			}
 			Cards[0] = new Card(0);
 			Cards[1] = new Card(1);
@@ -35,7 +35,6 @@ namespace VirtusPecto.Desktop{
 			for (int i = 0; i < Particles.Length; i++) {
 				Particles[i]?.Update();
 			}
-
 			for(int i = 0; i < 3; i++){
 				Cards[i].Update();
 			}

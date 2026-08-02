@@ -12,6 +12,7 @@ namespace VirtusPecto.Desktop{
 		public string Name;
 		public float Spd, Atk, HP, Dist;
 		public int PowerIndex, Cost;
+		public static CardContent Enemy{get => new CardContent(SpriteEnemy, "", 3, 0, 100, 33, 2, 0);}
 
 		public CardContent(Texture2D sprite, string name, float speed, float attack, float hp, float distance, int powerIndex, int cost){
 			Sprite = sprite;
