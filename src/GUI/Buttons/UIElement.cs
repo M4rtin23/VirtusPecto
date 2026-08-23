@@ -1,5 +1,5 @@
 namespace VirtusPecto.Desktop{
-	public abstract class Box{
+	public abstract class UIElement{
 		public bool State;
 		protected string name;
 		public abstract void Update(float x, float y);

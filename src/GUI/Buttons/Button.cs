@@ -7,19 +7,18 @@ using static VirtusPecto.Desktop.Lobby;
 using GameBuilder.Shapes;
 
 namespace VirtusPecto.Desktop{
-	public class Button{
+	public class Button:UIElement{
 		public RectangleF Hitbox{get => new RectangleF(position.X, position.Y,128,32);}
 		public Vector2 position = Vector2.Zero;
 		protected int transparency = 0;
 		public Action Action;
-		protected string name;
 
 		public Button(string name, Action action){
 			this.Action = action;
 			this.name = name;
 		}
 
-		public virtual void Update(float x, float y){
+		public override void Update(float x, float y){
 			position = new Vector2(x, y);
 			if (Hitbox.Contains(GameMouse.Position)){
 				transparency = 64;
@@ -29,7 +28,7 @@ namespace VirtusPecto.Desktop{
 				transparency = 0;
 			}
 		}
-		public virtual void Draw(SpriteBatch batch){
+		public override void Draw(SpriteBatch batch){
 			Hitbox.Draw(batch, new Color(transparency, transparency, transparency, transparency));
 			batch.DrawString(FontNormal, name, position, Color.White);
 		}

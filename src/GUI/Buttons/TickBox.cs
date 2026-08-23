@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using static VirtusPecto.Desktop.Game1;
 
 namespace VirtusPecto.Desktop{
-	public class TickBox : Box{
+	public class TickBox : UIElement{
 		protected Vector2 position;
 
 		public TickBox(string name, bool state){

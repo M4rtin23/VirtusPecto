@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using static VirtusPecto.Desktop.Game1;
 
 namespace VirtusPecto.Desktop{
-	public class OptionBox : Box{
+	public class OptionBox : UIElement{
 		protected string option, separator;
 		protected Rectangle hitbox{get => new Rectangle((int)position.X,(int)position.Y,128,32);}
 		protected Vector2 position;
@@ -15,7 +15,7 @@ namespace VirtusPecto.Desktop{
 		protected int optionsNumber {get => Options.Length; set {Options = new Vector2[value]; colors = new Color[optionsNumber];}}
 		public int Option;
 		Action action;
-
+		
 
 		public OptionBox(string name, int optionNumber, string separator, Vector2[] options, Action action){
 			this.name = name;

@@ -7,7 +7,7 @@ using static GameBuilder.GameType.FixedView;
 
 namespace VirtusPecto.Desktop{
 	public class SettingsMenu: Screen{
-		Box[] setting = new Box[8];
+		UIElement[] setting = new UIElement[8];
 		OptionBox aspectRatio, resolution;
 		bool check;
 		private Button Back = new Button("Go Back", () => {if(Level1 != null) Game1.Screen = Level1; else Game1.Screen = StartMenu; Settings = null;});
