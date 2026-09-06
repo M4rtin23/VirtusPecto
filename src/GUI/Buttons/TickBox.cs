@@ -6,8 +6,6 @@ using static VirtusPecto.Desktop.Game1;
 
 namespace VirtusPecto.Desktop{
 	public class TickBox : UIElement{
-		protected Vector2 position;
-
 		public TickBox(string name, bool state){
 			this.name = name;
 			State = state;

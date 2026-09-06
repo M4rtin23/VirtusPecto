@@ -5,7 +5,6 @@ using GameBuilder.Shapes;
 
 namespace VirtusPecto.Desktop{
 	public class Slide : UIElement{
-		Vector2 position;
 		RectangleF point = new RectangleF(Vector2.Zero, 16);
 		Line line = new Line(Vector2.Zero, Vector2.One);
 		float rel, relativePosition, length = 128;

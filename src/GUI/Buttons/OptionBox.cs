@@ -8,7 +8,6 @@ namespace VirtusPecto.Desktop{
 	public class OptionBox : UIElement{
 		protected string option, separator;
 		protected Rectangle hitbox{get => new Rectangle((int)position.X,(int)position.Y,128,32);}
-		protected Vector2 position;
 		private Color color;
 		public Vector2[] Options;
 		private Color[] colors;

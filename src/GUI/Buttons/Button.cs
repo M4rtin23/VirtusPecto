@@ -9,7 +9,6 @@ using GameBuilder.Shapes;
 namespace VirtusPecto.Desktop{
 	public class Button:UIElement{
 		public RectangleF Hitbox{get => new RectangleF(position.X, position.Y,128,32);}
-		public Vector2 position = Vector2.Zero;
 		protected int transparency = 0;
 		public Action Action;
 
