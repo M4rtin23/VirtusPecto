@@ -6,7 +6,7 @@ using static VirtusPecto.Desktop.Game1;
 using static GameBuilder.GameType.FixedView;
 
 namespace VirtusPecto.Desktop{
-	public class SettingsMenu: Screen{
+	public class SettingsMenu: GameBuilder.Screens.Screen{
 		UIElement[] setting = new UIElement[8];
 		OptionBox aspectRatio, resolution;
 		bool check;

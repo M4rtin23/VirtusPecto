@@ -7,7 +7,7 @@ using static GameBuilder.GameType.FixedView;
 using System.Linq;
 
 namespace VirtusPecto.Desktop{
-	public class Lobby : Screen{
+	public class Lobby : GameBuilder.Screens.Screen{
 		OptionBox difficultyBox;
 		Button start;
 		Button settings;

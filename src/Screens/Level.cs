@@ -7,7 +7,7 @@ using GameBuilder.InGame;
 using GameBuilder.Shapes;
 
 namespace VirtusPecto.Desktop{
-	public class Level : Screen{
+	public class Level : GameBuilder.Screens.Screen{
 		public Player Player1 = new Player();
 		public Entity[] Enemy1;
 		public Card[] Cards = new Card[3];
