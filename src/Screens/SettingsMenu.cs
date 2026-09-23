@@ -8,8 +8,6 @@ using static GameBuilder.GameType.FixedView;
 namespace VirtusPecto.Desktop{
 	public class SettingsMenu: SettingsScreen{
 		OptionBox aspectRatio, resolution;
-		bool check;
-		private Button Back = new Button("Go Back", () => {if(Level1 != null) Game1.Screen = Level1; else Game1.Screen = StartMenu; Settings = null;});
 		Vector2 aR{get => aspectRatio.Options[aspectRatio.Option]/aspectRatio.Options[aspectRatio.Option].Y;}
 
 		public SettingsMenu():base(new UIElement[8], 3){
@@ -37,18 +35,12 @@ namespace VirtusPecto.Desktop{
 
 		public override void Update(){
 			base.Update();
-			Back.Update(0, 0);
-			InputKeys.Press(5, Back.Action, ref check);
 			IsDescriptionOn = settings[4].State;
 			ShowNearest = settings[7].State;
 			ShowDirection = settings[6].State;
 			IsJoystick = settings[5].State;
 			IsFullscreen = settings[2].State;
 			Agent.ShowDirection = settings[3].State;
-		}
-		public override void Draw(SpriteBatch batch){
-			Back.Draw(batch);
-			base.Draw(batch);
 		}
 	}
 }
