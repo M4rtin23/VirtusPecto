@@ -5,6 +5,7 @@ using static VirtusPecto.Desktop.Game1;
 using GameBuilder;
 using GameBuilder.InGame;
 using GameBuilder.Shapes;
+using System.Collections.Generic;
 
 namespace VirtusPecto.Desktop{
 	public class Level : GameBuilder.Screens.Screen{
@@ -17,6 +18,8 @@ namespace VirtusPecto.Desktop{
 		public CreationManager CreationManager;
 		public static PauseMenu Pause;
 		private bool checker;
+		IEnumerable<IEntity>[] entities;
+
 		public Level(int EnemyQuantity){
 			Creature1 = new Entity[]{Player1};
 			Enemy1 = new Agent[EnemyQuantity];
@@ -29,29 +32,17 @@ namespace VirtusPecto.Desktop{
 		}
 		private void UpdatePausable(){
 			InputKeys.Press(5, () => {Pause = new PauseMenu(); Level1.CreationManager = null;}, ref checker);
-			for (int i = 0; i < Fireballs.Length; i++) {
-				Fireballs[i]?.Update();
-			}
-			for (int i = 0; i < Particles.Length; i++) {
-				Particles[i]?.Update();
-			}
-			for(int i = 0; i < 3; i++){
-				Cards[i].Update();
-			}
-			for (int i = 0; i < Enemy1.Length; i++){
-				Enemy1[i]?.Update();
-			}
-			for(int i = 0; i < Creature1.Length; i++){
-				Creature1[i]?.Update();
+			entities = [Enemy1, Creature1, Fireballs, Particles, Cards, new IEntity[]{CreationManager}];
+			foreach (IEnumerable<IEntity> group in entities){
+				foreach (IEntity entity in group){
+					entity?.Update();
+				}
 			}
 			if(GlobalGameTime.TotalGameTime.Milliseconds % 1000 == 0){
 				ArrayUtils.Fit(ref Fireballs);
 			}
 			if(ArrayUtils.Count(Enemy1) == 0){
 				Environment.Exit(0);
-			}
-			if(GameMouse.IsClicking){
-				CreationManager?.OnCreation();
 			}
 		}
 		public override void Update() {
@@ -63,22 +54,11 @@ namespace VirtusPecto.Desktop{
         public void DrawGame(SpriteBatch batch) {
 			CreationManager?.Draw(batch.GraphicsDevice);
 			batch.Begin(transformMatrix: Camera.LimitedFollow(Player1.Position), samplerState:  SamplerState.PointClamp, sortMode: SpriteSortMode.BackToFront);
-			for (int i = 0; i < Fireballs.Length;i++){
-				Fireballs[i]?.Draw(batch);
-			}
-			for (int i = 0; i < Particles.Length; i++) {
-				Particles[i]?.Draw(batch);
-			}
-			for(int i = 0; i < Creature1.Length; i++){
-				Creature1[i]?.Draw(batch);
-			}
-			for (int i = 0; i < Enemy1.Length; i++){
-				if (Enemy1[i] != null){
-					Enemy1[i].Draw(batch);
+			entities = [Enemy1, Creature1, Fireballs, Particles, Cards, new IEntity[]{CreationManager}];
+			foreach (IEnumerable<IEntity> group in entities){
+				foreach (IEntity entity in group){
+					entity?.Draw(batch);
 				}
-			}
-			if (Pause == null){
-				CreationManager?.Draw(batch);
 			}
 			batch.End();
 		}

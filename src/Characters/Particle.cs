@@ -4,7 +4,7 @@ using GameBuilder.Shapes;
 
 
 namespace VirtusPecto.Desktop{
-    public class Particle : INullable{
+    public class Particle : INullable, IEntity{
         private Vector2 position;
         private Texture2D spriteIndex;
         private float angle;

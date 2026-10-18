@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using static VirtusPecto.Desktop.Game1;
 
 namespace VirtusPecto.Desktop{
-	public class CreationManager{
+	public class CreationManager: IEntity{
         private Vector2 relativePosition;
         public Vector2 CardPosition{get => GameMouse.Position - new Vector2(relativePosition.X*0.9f, relativePosition.Y/2); set => relativePosition = value;}
 		private float cardRotation{get => -(GameMouse.Position.Y/Game1.Height-1)*(GameMouse.Position.Y/Game1.Height+1.2f);}
@@ -12,7 +12,7 @@ namespace VirtusPecto.Desktop{
         public CreationManager(int number){
             CardNumber = number;
         }
-		public void OnCreation(){
+		public void Update(){
 			if(GameMouse.IsClicking && GameMouse.IsInside){
 				for(int i = 0; i < 3; i++){
 					if (CardNumber == i && !Level1.Cards[i].Hitbox.Contains(GameMouse.Position)){
@@ -42,9 +42,11 @@ namespace VirtusPecto.Desktop{
 		    graphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleStrip, vertexPositionColors, 0, 2);
 		}
 		public void Draw(SpriteBatch batch){
-            Vector2 position = CardPosition+MatrixPosition-new Vector2(0, 96-100*(cardRotation)+100);
-            float depth = (-position.Y / (Game1.MapLimit+1)) + 0.5f;
-			batch.Draw(Level1.Cards[CardNumber].Content.Sprite, position, new Rectangle(256, 0, 128, 128), Color.White, 0, Vector2.One*64, 1, SpriteEffects.None, depth);
+			if(Level.Pause == null){
+	            Vector2 position = CardPosition+MatrixPosition-new Vector2(0, 96-100*(cardRotation)+100);
+    	        float depth = (-position.Y / (Game1.MapLimit+1)) + 0.5f;
+				batch.Draw(Level1.Cards[CardNumber].Content.Sprite, position, new Rectangle(256, 0, 128, 128), Color.White, 0, Vector2.One*64, 1, SpriteEffects.None, depth);
+			}
     	}
 	}
 }
