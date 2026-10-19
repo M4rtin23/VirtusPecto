@@ -6,9 +6,11 @@ using static VirtusPecto.Desktop.Game1;
 
 namespace VirtusPecto.Desktop{
 	public class TickBox : UIElement{
-		public TickBox(string name, bool state){
+		Action action;
+		public TickBox(string name, bool state, Action action){
 			this.name = name;
 			State = state;
+			this.action = action;
 		}
 
 		public override void Update(float x, float y){
@@ -16,6 +18,7 @@ namespace VirtusPecto.Desktop{
 			if(new Rectangle((int)position.X,(int) position.Y, 32, 32).Contains(GameMouse.Position)){
 				Mouse1.Click(() => {State = !State;});
 			}
+			action();
 		}
 
 		public override void Draw(SpriteBatch batch) {
