@@ -8,7 +8,7 @@ using static GameBuilder.GameType.FixedView;
 
 namespace VirtusPecto.Desktop{
 	public class Card: IEntity{
-		public Texture2D SpriteIndex = SpriteCard;
+		public Texture2D SpriteIndex = Sprites["Card"];
 		public RectangleF Hitbox{get => new RectangleF((Position.X-SpriteIndex.Width/2), (Height + addedY  - 64*(1-Math.Abs(number-1)) - 96-SpriteIndex.Height/2), SpriteIndex.Width, SpriteIndex.Height);}
 		public Vector2 Position{get => new Vector2(Width / 2 + SpriteIndex.Width * (number-1), Height + addedY  - 64*(1-Math.Abs(number-1)) - 96);}
 		public CardContent Content;

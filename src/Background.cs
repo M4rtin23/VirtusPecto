@@ -7,6 +7,7 @@ using static GameBuilder.GameType.FixedView;
 namespace VirtusPecto.Desktop{
 	public static class BackGround{
 		public static void Draw(SpriteBatch batch, Vector2 center){
+			Texture2D SpriteBackground = Sprites["Background"];
 			Vector2 windowSize = new Vector2(Width,Height);
 			Vector2 position;
 			int width = SpriteBackground.Width/4, height = SpriteBackground.Height;

@@ -25,7 +25,7 @@ namespace VirtusPecto.Desktop{
 			}
 		}
 		public void Draw(GraphicsDevice graphicsDevice){
-			Vector2[] Vertices = {new Vector2(30*cardRotation, 200*cardRotation), new Vector2(SpriteCard.Width-30*cardRotation, 200*cardRotation), new Vector2(0, SpriteCard.Height), new Vector2(SpriteCard.Width, SpriteCard.Height)};
+			Vector2[] Vertices = {new Vector2(30*cardRotation, 200*cardRotation), new Vector2(Sprites["Card"].Width-30*cardRotation, 200*cardRotation), new Vector2(0, Sprites["Card"].Height), new Vector2(Sprites["Card"].Width, Sprites["Card"].Height)};
 			Vector2[] OtherVert = {new Vector2(0,0), new Vector2(1, 0), new Vector2(0, 1), new Vector2(1, 1)};
 
 			VertexPositionColorTexture[] vertexPositionColors = new VertexPositionColorTexture[4];
@@ -34,7 +34,7 @@ namespace VirtusPecto.Desktop{
 				vertexPositionColors[i] = new VertexPositionColorTexture(new Vector3(Vertices[(i)]+CardPosition-new Vector2(64+60, 96+60+150), 0), new Color(79,79,79),OtherVert[i]);
 			}
 			basicEffect = new BasicEffect(graphicsDevice);
-			basicEffect.Texture = SpriteCard;
+			basicEffect.Texture = Sprites["Card"];
 			basicEffect.TextureEnabled = true;
 			basicEffect.VertexColorEnabled = true;
 			basicEffect.World = Matrix.CreateOrthographicOffCenter(0, graphicsDevice.Viewport.Width, graphicsDevice.Viewport.Height, 0, 0, 1);

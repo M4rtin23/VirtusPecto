@@ -48,8 +48,8 @@ namespace VirtusPecto.Desktop{
 			}
 		}
 		public override void Draw(SpriteBatch batch) {
-			batch.Draw(SpriteLogo, new Vector2(Width/2 - 480, Height/4 - 64*2), null, new Color(79,79,79), 0, Vector2.Zero, 2, SpriteEffects.None, 1);
-			batch.Draw(SpriteTitle, new Vector2(Width/2+64, Height/4), null,Color.White, 0, new Vector2(SpriteTitle.Width, SpriteTitle.Height)/2, 8, SpriteEffects.None, 1);
+			batch.Draw(Sprites["Logo"], new Vector2(Width/2 - 480, Height/4 - 64*2), null, new Color(79,79,79), 0, Vector2.Zero, 2, SpriteEffects.None, 1);
+			batch.Draw(Sprites["Title"], new Vector2(Width/2+64, Height/4), null,Color.White, 0, new Vector2(Sprites["Title"].Width, Sprites["Title"].Height)/2, 8, SpriteEffects.None, 1);
 
 			start.Draw(batch);
 			settings.Draw(batch);

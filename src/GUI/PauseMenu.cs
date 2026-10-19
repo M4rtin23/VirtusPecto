@@ -30,7 +30,7 @@ namespace VirtusPecto.Desktop{
 			InputKeys.Press(5, () => {Pause = null;}, ref checker);
 		}
 		public void Draw(SpriteBatch batch) {
-			batch.Draw(SpriteCard, new Vector2((Width / 2), Height / 2), null, new Color(0,0,0,128), 0, new Vector2(128, 160), new Vector2(1, 1), SpriteEffects.None, 0);
+			batch.Draw(Sprites["Card"], new Vector2((Width / 2), Height / 2), null, new Color(0,0,0,128), 0, new Vector2(128, 160), new Vector2(1, 1), SpriteEffects.None, 0);
 
 			resume.Draw(batch);
 			settings.Draw(batch);

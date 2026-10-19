@@ -10,7 +10,7 @@ namespace VirtusPecto.Desktop{
 		Entity[] entities;
 		bool isAlive = true;
 		public Fireball(Entity[] entities, Vector2 initialPosition, Vector2 speed){
-			SpriteIndex = SpriteFireball;
+			SpriteIndex = Sprites["Fireball"];
 			this.entities = entities;
 			Position = initialPosition;
 			this.speed = speed;
