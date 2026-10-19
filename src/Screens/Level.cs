@@ -54,7 +54,7 @@ namespace VirtusPecto.Desktop{
         public void DrawGame(SpriteBatch batch) {
 			CreationManager?.Draw(batch.GraphicsDevice);
 			batch.Begin(transformMatrix: Camera.LimitedFollow(Player1.Position), samplerState:  SamplerState.PointClamp, sortMode: SpriteSortMode.BackToFront);
-			entities = [Enemy1, Creature1, Fireballs, Particles, Cards, new IEntity[]{CreationManager}];
+			entities = [Enemy1, Creature1, Fireballs, Particles, new IEntity[]{CreationManager}];
 			foreach (IEnumerable<IEntity> group in entities){
 				foreach (IEntity entity in group){
 					entity?.Draw(batch);
