@@ -31,7 +31,7 @@ namespace VirtusPecto.Desktop{
 		public override void Update(float x, float y){
 			position = new Vector2(x, y);
 			if (hitbox.Contains(GameMouse.Position)){
-				Mouse1.Click(() => {State = !State;});
+				MouseHandler.Click(() => {State = !State;});
 			}
 			if(State){
 				for (int i = 0; i < optionsNumber; i++){

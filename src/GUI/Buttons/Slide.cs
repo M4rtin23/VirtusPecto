@@ -19,7 +19,7 @@ namespace VirtusPecto.Desktop{
 			position = new Vector2(x, y + 16);
 			point.Location = position - Vector2.UnitY*point.Size/2 + Vector2.UnitX*relativePosition;
 			line = new Line(position, position + Vector2.UnitX*length, 8, Color.White);
-			Mouse1.Click(point, () => {rel = GameMouse.Position.X-relativePosition-line.Min.X; check = true;});
+			MouseHandler.Click(point, () => {rel = GameMouse.Position.X-relativePosition-line.Min.X; check = true;});
 
 			if(GameMouse.IsClicking && check){
 				relativePosition = GameMouse.Position.X-rel-position.X;

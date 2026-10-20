@@ -15,9 +15,7 @@ namespace VirtusPecto.Desktop{
 
 		public override void Update(float x, float y){
 			position = new Vector2(x, y);
-			if(new Rectangle((int)position.X,(int) position.Y, 32, 32).Contains(GameMouse.Position)){
-				Mouse1.Click(() => {State = !State;});
-			}
+			MouseHandler.Click(new GameBuilder.Shapes.RectangleF(position, 32),() => {State = !State;});
 			action();
 		}
 

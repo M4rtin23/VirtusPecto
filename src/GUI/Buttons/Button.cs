@@ -21,7 +21,7 @@ namespace VirtusPecto.Desktop{
 			position = new Vector2(x, y);
 			if (Hitbox.Contains(GameMouse.Position)){
 				transparency = 64;
-				Mouse1.Click(Action);
+				MouseHandler.Click(Action);
 			}
 			else{
 				transparency = 0;
