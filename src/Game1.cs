@@ -38,7 +38,8 @@ namespace VirtusPecto.Desktop{
 			for (int i = 0; i < SpriteCreatures.Length; i++){
 				SpriteCreatures[i] = Content.Load<Texture2D>("Creatures/Creature"+ Convert.ToString(i));
 			}
-			FontNormal = Content.Load<SpriteFont>("Font_Normal");
+			GameResources.Sprites.Add("Tick", Sprites["Tick"]);
+			GameResources.Font = FontNormal = Content.Load<SpriteFont>("Font_Normal");
 			FontBig = Content.Load<SpriteFont>("Font_Big");
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 		}

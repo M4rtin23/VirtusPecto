@@ -29,7 +29,7 @@ namespace VirtusPecto.Desktop{
 		}
 		public override void Draw(SpriteBatch batch){
 			Hitbox.Draw(batch, new Color(transparency, transparency, transparency, transparency));
-			batch.DrawString(FontNormal, name, position, Color.White);
+			batch.DrawString(GameResources.Font, name, position, Color.White);
 		}
 	}
 }

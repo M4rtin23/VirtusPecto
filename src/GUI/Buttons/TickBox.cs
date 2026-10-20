@@ -20,8 +20,8 @@ namespace VirtusPecto.Desktop{
 		}
 
 		public override void Draw(SpriteBatch batch) {
-			batch.Draw(Sprites["Tick"], position, new Rectangle(Convert.ToInt16(State) * 32,0,32,32), Color.White, 0, new Vector2(0, 0), 1f, SpriteEffects.None, 1);
-			batch.DrawString(FontNormal, name, position + new Vector2(0,-32), Color.White);
+			batch.Draw(GameResources.Sprites["Tick"], position, new Rectangle(Convert.ToInt16(State) * 32,0,32,32), Color.White, 0, new Vector2(0, 0), 1f, SpriteEffects.None, 1);
+			batch.DrawString(GameResources.Font, name, position + new Vector2(0,-32), Color.White);
 		}
 	}
 }

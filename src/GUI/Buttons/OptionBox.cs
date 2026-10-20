@@ -52,8 +52,8 @@ namespace VirtusPecto.Desktop{
 		}
 		public override void Draw(SpriteBatch batch) {
 			new GameBuilder.Shapes.RectangleF(position, new Vector2(128,32), color).Draw(batch);
-			batch.DrawString(FontNormal, option, position, Color.White);
-			batch.DrawString(FontNormal, name, new Vector2(position.X, position.Y - 32), Color.White);
+			batch.DrawString(GameResources.Font, option, position, Color.White);
+			batch.DrawString(GameResources.Font, name, new Vector2(position.X, position.Y - 32), Color.White);
 
 			if(State) {
 				color = Color.LightGray;
