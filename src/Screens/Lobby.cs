@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using static VirtusPecto.Desktop.Game1;
 using static GameBuilder.GameType.FixedView;
+using GameBuilder.UI;
 using System.Linq;
 
 namespace VirtusPecto.Desktop{

@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using static VirtusPecto.Desktop.Level;
 using static VirtusPecto.Desktop.Game1;
 using static GameBuilder.GameType.FixedView;
-using GameBuilder;
+using GameBuilder.UI;
 
 namespace VirtusPecto.Desktop{
 	public class PauseMenu{

@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;﻿
+using Microsoft.Xna.Framework.Graphics;
 using static GameBuilder.GameType.FixedView;
+using GameBuilder.UI;
 namespace VirtusPecto.Desktop{
 	public class SettingsScreen : GameBuilder.Screens.Screen{
 		protected Button Back = new Button("Go Back", () => {Game1.Screen = Game1.Screen.PreviousScreen;});
