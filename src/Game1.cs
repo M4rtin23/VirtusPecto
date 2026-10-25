@@ -22,7 +22,6 @@ namespace VirtusPecto.Desktop{
 		public static Lobby StartMenu = new Lobby();
 		public static Level Level1;
 		public static SettingsMenu Settings;
-		public static GameBuilder.Screens.Screen Screen = StartMenu;
 
 		public Game1(){
 			graphics = new GraphicsDeviceManager(this);
@@ -30,6 +29,7 @@ namespace VirtusPecto.Desktop{
 			Height = 768;
 			Content.RootDirectory = "Content";
 			IsMouseVisible = true;
+			Screen = StartMenu;
 		}
 		protected override void LoadContent(){
 			foreach(string element in new string[9]{"Logo", "Tick", "Powers", "Card", "Title", "Background", "Player", "Enemy", "Fireball"}){

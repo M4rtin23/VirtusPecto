@@ -1,14 +1,10 @@
-using System;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using static VirtusPecto.Desktop.Game1;
 using static GameBuilder.GameType.FixedView;
 using GameBuilder.UI;
-using GameBuilder;
 
 namespace VirtusPecto.Desktop{
-	public class SettingsMenu: SettingsScreen{
+	public class SettingsMenu: GameBuilder.Screens.SettingsScreen{
 		OptionBox aspectRatio, resolution;
 		Vector2 aR{get => aspectRatio.Options[aspectRatio.Option]/aspectRatio.Options[aspectRatio.Option].Y;}
 
