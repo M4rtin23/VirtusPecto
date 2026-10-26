@@ -90,7 +90,7 @@ namespace VirtusPecto.Desktop{
 			if(speed == Vector2.Zero){
 				imageIndex = 0;
 			}
-			if(GameBuilder.GameType.FixedView.IsInside(Position + speed)){
+			if(new RectangleF(Level.MapLimit).Contains(Position + speed)){
 				base.Update();
 			}
 			if(health == 0){

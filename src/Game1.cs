@@ -51,7 +51,7 @@ namespace VirtusPecto.Desktop{
 			base.Update(gameTime);
 		}
 		protected override void Draw(GameTime gameTime){
-			spriteBatch.Begin(transformMatrix: GameBuilder.InGame.Camera.LimitedFollow(Level1?.Player1.Position ?? Vector2.Zero), samplerState:  SamplerState.PointClamp);
+			spriteBatch.Begin(transformMatrix: GameBuilder.InGame.Camera.LimitedFollow(Level1?.Player1.Position ?? Vector2.Zero, Level.MapLimit), samplerState:  SamplerState.PointClamp);
 			BackGround.Draw(spriteBatch, GameBuilder.InGame.Camera.Position);
 			spriteBatch.End();
 

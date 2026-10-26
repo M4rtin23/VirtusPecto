@@ -16,6 +16,7 @@ namespace VirtusPecto.Desktop{
 		public Fireball[] Fireballs = [];
 		public Particle[] Particles = [];
 		public CreationManager CreationManager;
+		public static int MapLimit = 5000;
 		public static PauseMenu Pause;
 		private bool checker;
 		IEnumerable<IEntity>[] entities;
@@ -53,7 +54,7 @@ namespace VirtusPecto.Desktop{
        }
         public void DrawGame(SpriteBatch batch) {
 			CreationManager?.Draw(batch.GraphicsDevice);
-			batch.Begin(transformMatrix: Camera.LimitedFollow(Player1.Position), samplerState:  SamplerState.PointClamp, sortMode: SpriteSortMode.BackToFront);
+			batch.Begin(transformMatrix: Camera.LimitedFollow(Player1.Position, Level.MapLimit), samplerState:  SamplerState.PointClamp, sortMode: SpriteSortMode.BackToFront);
 			entities = [Enemy1, Creature1, Fireballs, Particles, new IEntity[]{CreationManager}];
 			foreach (IEnumerable<IEntity> group in entities){
 				foreach (IEntity entity in group){

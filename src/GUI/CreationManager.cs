@@ -44,7 +44,7 @@ namespace VirtusPecto.Desktop{
 		public void Draw(SpriteBatch batch){
 			if(Level.Pause == null){
 	            Vector2 position = CardPosition+MatrixPosition-new Vector2(0, 96-100*(cardRotation)+100);
-    	        float depth = (-position.Y / (Game1.MapLimit+1)) + 0.5f;
+    	        float depth = (-position.Y / (Level.MapLimit+1)) + 0.5f;
 				batch.Draw(Level1.Cards[CardNumber].Content.Sprite, position, new Rectangle(256, 0, 128, 128), Color.White, 0, Vector2.One*64, 1, SpriteEffects.None, depth);
 			}
     	}
