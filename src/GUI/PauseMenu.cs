@@ -9,7 +9,6 @@ using GameBuilder.UI;
 
 namespace VirtusPecto.Desktop{
 	public class PauseMenu{
-		bool checker = true;
 		private Button resume = new Button("Continue", () => {Pause = null;});
 		private Button exit = new Button("Exit", () => {Environment.Exit(0);});
 		private Button mainMenu = new Button("Main Menu", () => {Level1 = null;
@@ -27,7 +26,7 @@ namespace VirtusPecto.Desktop{
 			resume.Update((Width / 2) - 48, (Height / 2) - 48*2);
 			mainMenu.Update((Width / 2) - 48, (Height / 2) - 48);
 			exit.Update((Width / 2) - 48, (Height / 2) + 48);
-			InputKeys.Press(5, () => {Pause = null;}, ref checker);
+			InputKeys.Press(5, () => {Pause = null;});
 		}
 		public void Draw(SpriteBatch batch) {
 			batch.Draw(Sprites["Card"], new Vector2((Width / 2), Height / 2), null, new Color(0,0,0,128), 0, new Vector2(128, 160), new Vector2(1, 1), SpriteEffects.None, 0);

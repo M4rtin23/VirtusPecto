@@ -12,7 +12,6 @@ namespace VirtusPecto.Desktop{
 	public class Player : Entity{
 		public float Mana = 50;
 		public int Health{get => (int)health;}
-		public bool keyCheck = false;
 		public CardContent[] Slot;
 		public Power Power;
 		public Player(){
@@ -31,7 +30,7 @@ namespace VirtusPecto.Desktop{
 				Level1.CreateFireball(true, Level1.Enemy1[1].Position, 0);
 			}*/
 			gameArrow();
-			Press(9, ()=>{powerIndex = (powerIndex+1)%3; Power = Power.GetPower(powerIndex);}, ref keyCheck);
+			Press(9, ()=>{powerIndex = (powerIndex+1)%3; Power = Power.GetPower(powerIndex);});
 			if(IsJoystick){
 				gameStick();
 			}

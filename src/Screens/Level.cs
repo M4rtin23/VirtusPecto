@@ -18,7 +18,6 @@ namespace VirtusPecto.Desktop{
 		public CreationManager CreationManager;
 		public static int MapLimit = 5000;
 		public static PauseMenu Pause;
-		private bool checker;
 		IEnumerable<IEntity>[] entities;
 
 		public Level(int EnemyQuantity){
@@ -32,7 +31,7 @@ namespace VirtusPecto.Desktop{
 			Cards[2] = new Card(2);
 		}
 		private void UpdatePausable(){
-			InputKeys.Press(5, () => {Pause = new PauseMenu(); Level1.CreationManager = null;}, ref checker);
+			InputKeys.Press(5, () => {Pause = new PauseMenu(); Level1.CreationManager = null;});
 			entities = [Enemy1, Creature1, Fireballs, Particles, Cards, new IEntity[]{CreationManager}];
 			foreach (IEnumerable<IEntity> group in entities){
 				foreach (IEntity entity in group){
