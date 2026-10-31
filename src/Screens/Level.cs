@@ -10,9 +10,9 @@ using System.Collections.Generic;
 namespace VirtusPecto.Desktop{
 	public class Level : GameBuilder.Screens.Screen{
 		public Player Player1 = new Player();
-		public Entity[] Enemy1;
+		public ArrayHolder<Entity> Enemy1 = new ArrayHolder<Entity>();
 		public Card[] Cards = new Card[3];
-		public Entity[] Creature1;
+		public ArrayHolder<Entity> Creature1 = new ArrayHolder<Entity>();
 		public Fireball[] Fireballs = [];
 		public Particle[] Particles = [];
 		public CreationManager CreationManager;
@@ -21,10 +21,10 @@ namespace VirtusPecto.Desktop{
 		IEnumerable<IEntity>[] entities;
 
 		public Level(int EnemyQuantity){
-			Creature1 = new Entity[]{Player1};
-			Enemy1 = new Agent[EnemyQuantity];
-			for (int i = 0; i < Enemy1.Length; i++){
-				Enemy1[i] = new Agent(CardContent.Enemy, new Vector2(i*400,new Random(i).Next(-500, 500)), Color.Red, ref Creature1, ref Enemy1);
+			Creature1.Current = new Entity[]{Player1};
+			Enemy1.Current = new Agent[EnemyQuantity];
+			for (int i = 0; i < Enemy1.Current.Length; i++){
+				Enemy1.Current[i] = new Agent(CardContent.Enemy, new Vector2(i*400,new Random(i).Next(-500, 500)), Color.Red, Creature1, Enemy1);
 			}
 			Cards[0] = new Card(0);
 			Cards[1] = new Card(1);
@@ -32,7 +32,7 @@ namespace VirtusPecto.Desktop{
 		}
 		private void UpdatePausable(){
 			InputKeys.Press(5, () => {Pause = new PauseMenu(); Level1.CreationManager = null;});
-			entities = [Enemy1, Creature1, Fireballs, Particles, Cards, new IEntity[]{CreationManager}];
+			entities = [Enemy1.Current, Creature1.Current, Fireballs, Particles, Cards, new IEntity[]{CreationManager}];
 			foreach (IEnumerable<IEntity> group in entities){
 				foreach (IEntity entity in group){
 					entity?.Update();
@@ -41,7 +41,7 @@ namespace VirtusPecto.Desktop{
 			if(GlobalGameTime.TotalGameTime.Milliseconds % 1000 == 0){
 				ArrayUtils.Fit(ref Fireballs);
 			}
-			if(ArrayUtils.Count(Enemy1) == 0){
+			if(ArrayUtils.Count(Enemy1.Current) == 0){
 				Environment.Exit(0);
 			}
 		}
@@ -54,7 +54,7 @@ namespace VirtusPecto.Desktop{
         public void DrawGame(SpriteBatch batch) {
 			CreationManager?.Draw(batch.GraphicsDevice);
 			batch.Begin(transformMatrix: Camera.LimitedFollow(Player1.Position, Level.MapLimit), samplerState:  SamplerState.PointClamp, sortMode: SpriteSortMode.BackToFront);
-			entities = [Enemy1, Creature1, Fireballs, Particles, new IEntity[]{CreationManager}];
+			entities = [Enemy1.Current, Creature1.Current, Fireballs, Particles, new IEntity[]{CreationManager}];
 			foreach (IEnumerable<IEntity> group in entities){
 				foreach (IEntity entity in group){
 					entity?.Draw(batch);

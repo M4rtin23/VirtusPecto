@@ -1,6 +1,9 @@
 using System;
 namespace VirtusPecto.Desktop{
-		public static class ArrayUtils{
+	public class ArrayHolder<Type>{
+		public Type[] Current;
+	}
+	public static class ArrayUtils{
 		public static void Fit<Type>(ref Type[] obj){
 			Type[] a;
 			int o = 0;

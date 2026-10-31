@@ -35,7 +35,7 @@ namespace VirtusPecto.Desktop{
 				gameStick();
 			}
 			if (IsPressing(4) && Power.IsCharged && Power.Cost <= Mana){
-				Power.UsePower(Position, GameMouse.MPosition, Level1.Enemy1);
+				Power.UsePower(Position, GameMouse.MPosition, Level1.Enemy1.Current);
 				Mana -= Power.Cost;
 			}
 			for(int i = 0; i < 3; i++){
@@ -85,7 +85,7 @@ namespace VirtusPecto.Desktop{
 			gameControl();
 
 			Hitbox = new RectangleF((int) Position.X - 32, (int) Position.Y + 32, 128-64, 32);
-			userCollision(Level1.Enemy1);
+			userCollision(Level1.Enemy1.Current);
 			if(speed == Vector2.Zero){
 				imageIndex = 0;
 			}
@@ -98,7 +98,7 @@ namespace VirtusPecto.Desktop{
 		}
 		public override void Draw(SpriteBatch batch){
 			if(ShowNearest){
-				SelectionBox(Level1.Enemy1[GetClosest(Level1.Enemy1, GameMouse.MPosition)].Position, batch);
+				SelectionBox(Level1.Enemy1.Current[GetClosest(Level1.Enemy1.Current, GameMouse.MPosition)].Position, batch);
 			}
 			if(ShowDirection){
 				Direction(Position, GameMouse.Position+MatrixPosition, batch);

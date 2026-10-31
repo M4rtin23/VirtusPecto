@@ -4,6 +4,7 @@ using static VirtusPecto.Desktop.Game1;
 using GameBuilder;
 using GameBuilder.Shapes;
 using GameBuilder.InGame;
+using System;
 
 namespace VirtusPecto.Desktop{
 	public class Agent : Entity{
@@ -14,11 +15,13 @@ namespace VirtusPecto.Desktop{
 		protected int targetDefined = -1;
 		protected int time;
 		protected Color color1 = Color.Green;
-		public Entity[] enemy;
-		protected Entity[] ally;
-		public Agent(CardContent content,Vector2 pos, Color color, ref Entity[] enemy, ref Entity[] ally){
-			this.enemy = enemy;
-			this.ally = ally;
+	    private ArrayHolder<Entity> allyHolder = new ArrayHolder<Entity>();
+	    private ArrayHolder<Entity> enemyHolder = new ArrayHolder<Entity>();
+		public Entity[] enemy{get => enemyHolder.Current;}
+		protected Entity[] ally{get => allyHolder.Current;}
+		public Agent(CardContent content,Vector2 pos, Color color, ArrayHolder<Entity> enemy, ArrayHolder<Entity> ally){
+			enemyHolder = enemy;
+			allyHolder= ally;
 			SpriteIndex = content.Sprite;
 			Position = pos;
 			maxSpeed = content.Spd;
@@ -30,9 +33,6 @@ namespace VirtusPecto.Desktop{
 			maxHealth = health;
 		}
 		public override void Update() {
-			if(GlobalGameTime.TotalGameTime.Minutes - time > 1){
-				SetTarget(enemy);
-			}
 			if(health <= 0){
 				ArrayUtils.Destroy(ally);
 			}
@@ -48,8 +48,9 @@ namespace VirtusPecto.Desktop{
 			if(speed == Vector2.Zero && (GlobalGameTime.TotalGameTime.Milliseconds % 1000 == 0) && targetDefined != -1){
 				Power.GetPower(powerIndex).UsePower(Position, target, enemy);
 			}
-			SetTarget(enemy);
+			SetTarget();
 			entityCollision(ally);
+			entityCollision(enemy);
 		}
 		public override void Draw(SpriteBatch batch) {
 			float r = new GameBuilder.Motion(speed).Radians;
@@ -64,17 +65,9 @@ namespace VirtusPecto.Desktop{
 				new RectangleF(Position - new Vector2(64, 80), new Vector2(128*(float)health/maxHealth, 8), new Color(color1, 115)).Draw(batch);
 			}
 		}
-		public void SetTarget(ObjectBuilder[] entities){
-			if(targetDefined == -1){
-				targetDefined = GetClosest(entities, Position);
-			}else{
-				if(entities[targetDefined] == null){
-					targetDefined = -1;
-					target = startingPoint;
-				}else{
-					target = entities[targetDefined].Position;
-				}
-			}
+		public void SetTarget(){
+			targetDefined = GetClosest(enemy, Position);
+			target = enemy[targetDefined].Position;
 		}
 		protected void lookAtTarget(){
 			if (target.X > Position.X){
